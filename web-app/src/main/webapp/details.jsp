@@ -82,6 +82,7 @@ Error occurred while fetching device info.
 
 <html lang="en">
 
+
 <head>
     <meta charset="utf-8" />
     <link rel="apple-touch-icon" sizes="76x76" href="images/apple-icon.png" />
@@ -110,7 +111,7 @@ Error occurred while fetching device info.
                         <img class="img" src="images/weatherstationicon.jpg" />
                     </a>
                 </div>
-                <div class="content"> <div class="card-header" data-background-color="purple">
+                <div class="content"> <div class="card-header" data-background-color="blue">
                     <h6 class="category text-gray">ID: <%=device.getString("deviceIdentifier")%>
                     </h6>
                     <h4 class="card-title"><%=device.getString("name")%>
@@ -858,24 +859,25 @@ Error occurred while fetching device info.
 </div>
 </div>
 </body>
+<!--   Core JS Files   -->
 <script src="js/jquery-3.2.1.min.js" type="text/javascript"></script>
 <script src="js/bootstrap.min.js" type="text/javascript"></script>
+<script src="js/material.min.js" type="text/javascript"></script>
 <script src="js/bootstrap-datepicker.js" type="text/javascript"></script>
 <script src="js/moment.min.js" type="text/javascript"></script>
 <script src="js/daterangepicker.js" type="text/javascript"></script>
-<script src="js/material.min.js" type="text/javascript"></script>
 <!--  Charts Plugin -->
 <script src="js/chartist.min.js"></script>
 <!--  Dynamic Elements plugin -->
 <script src="js/arrive.min.js"></script>
-<!--  PerfectScrollbar Library -->
-<script src="js/perfect-scrollbar.jquery.min.js"></script>
+
 <!--  Notifications Plugin    -->
 <script src="js/bootstrap-notify.js"></script>
 <!-- Material Dashboard javascript methods -->
 <script src="js/material-dashboard.js?v=1.2.0"></script>
 <script src="js/historical-analytics.js"></script>
 <script src="js/realtime-analytics.js"></script>
+
 <script type="text/javascript">
     function datePickerCallback(startD, endD) {
         var eventsSuccess = function (data) {

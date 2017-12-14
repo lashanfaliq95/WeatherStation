@@ -5,9 +5,9 @@ realtimeAnalytics = {
         var realtimeTempLabel = ['0s'];
         var realtimeTempSeries = [0];
 
-        realtimeAnalytics.createLiFo(realtimeTempLabelRef, 10);
-        realtimeAnalytics.createLiFo(realtimeTempLabel, 10);
-        realtimeAnalytics.createLiFo(realtimeTempSeries, 10);
+         realtimeAnalytics.createLiFo(realtimeTempLabelRef, 10);
+         realtimeAnalytics.createLiFo(realtimeTempLabel, 10);
+         realtimeAnalytics.createLiFo(realtimeTempSeries, 10);
 
         dataRealtimeTempChart = {
             labels: realtimeTempLabel,
@@ -21,6 +21,8 @@ realtimeAnalytics = {
                 tension: 0
             }),
             showArea: true,
+            responsive:false,
+            maintainAspectRatio : false,
             low: 0,
             high: 50, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
             chartPadding: {
@@ -28,7 +30,10 @@ realtimeAnalytics = {
                 right: 0,
                 bottom: 0,
                 left: 0
-            }
+            },
+
+
+
         };
 
         var realtimeTemp = new Chartist.Line('#RealTimeTempChart', dataRealtimeTempChart, optionsRealtimeTempChart);

@@ -6,7 +6,7 @@
 
  * Product Page: http://www.creative-tim.com/product/material-dashboard
  * Copyright 2017 Creative Tim (http://www.creative-tim.com)
- * Licensed under MIT (https://github.com/creativetimofficial/material-dashboard/blob/master/LICENSE.md)
+ * Licensesed under MIT (https://github.com/creativetimofficial/material-dashboard/blob/master/LICENSE.md)
 
  =========================================================
 
@@ -929,8 +929,8 @@ h2.title {
 
 .main-panel {
     position: relative;
-    float: right;
-    width: calc(100% - 260px);
+    float: none;
+    width: 100%;
     -webkit-transition: all 0.33s cubic-bezier(0.685, 0.0473, 0.346, 1);
     -moz-transition: all 0.33s cubic-bezier(0.685, 0.0473, 0.346, 1);
     -o-transition: all 0.33s cubic-bezier(0.685, 0.0473, 0.346, 1);
@@ -940,7 +940,7 @@ h2.title {
 }
 
 .main-panel>.content {
-    margin-top: 70px;
+    margin-top: 300px;
     padding: 30px 15px;
     min-height: calc(100% - 123px);
 }
@@ -1173,7 +1173,8 @@ fieldset[disabled] .navbar .navbar-nav>li>a.btn.btn-default.active {
 
 .btn.btn-primary,
 .navbar .navbar-nav>li>a.btn.btn-primary {
-    box-shadow: 0 12px 20px -10px rgba(0, 188, 212, 0.28), 0 4px 20px 0px rgba(0, 0, 0, 0.12), 0 7px 8px -5px rgba(0, 188, 212, 0.2);}
+    box-shadow: 0 2px 2px 0 rgba(156, 39, 176, 0.14), 0 3px 1px -2px rgba(156, 39, 176, 0.2), 0 1px 5px 0 rgba(156, 39, 176, 0.12);
+}
 
 .btn.btn-primary,
 .btn.btn-primary:hover,
@@ -1199,7 +1200,7 @@ fieldset[disabled] .navbar .navbar-nav>li>a.btn.btn-default.active {
 .open>.navbar .navbar-nav>li>a.btn.btn-primary.dropdown-toggle,
 .open>.navbar .navbar-nav>li>a.btn.btn-primary.dropdown-toggle:focus,
 .open>.navbar .navbar-nav>li>a.btn.btn-primary.dropdown-toggle:hover {
-    background-color: #3b5998;
+    background-color: #9c27b0;
     color: #FFFFFF;
 }
 
@@ -1266,7 +1267,7 @@ fieldset[disabled] .navbar .navbar-nav>li>a.btn.btn-primary.active {
 .btn.btn-primary.btn-simple,
 .navbar .navbar-nav>li>a.btn.btn-primary.btn-simple {
     background-color: transparent;
-    color: #4a6fb0;
+    color: #9c27b0;
     box-shadow: none;
 }
 
@@ -1309,7 +1310,7 @@ fieldset[disabled] .navbar .navbar-nav>li>a.btn.btn-primary.active {
 .open>.navbar .navbar-nav>li>a.btn.btn-info.dropdown-toggle,
 .open>.navbar .navbar-nav>li>a.btn.btn-info.dropdown-toggle:focus,
 .open>.navbar .navbar-nav>li>a.btn.btn-info.dropdown-toggle:hover {
-    background-color: #1769ff;
+    background-color: #00bcd4;
     color: #FFFFFF;
 }
 
@@ -2451,12 +2452,12 @@ h6,
 }
 
 a {
-    color: #1593b0;
+    color: #9c27b0;
 }
 
 a:hover,
 a:focus {
-    color: #1a18c1;
+    color: #89229b;
     text-decoration: none;
 }
 
@@ -3651,17 +3652,17 @@ fieldset[disabled] .checkbox input[type=checkbox],
     transform: rotate(-45deg);
 }
 
-/*@keyframes checkbox-on {*/
-    /*0% {*/
-        /*box-shadow: 0 0 0 10px, 10px -10px 0 10px, 32px 0 0 20px, 0px 32px 0 20px, -5px 5px 0 10px, 15px 2px 0 11px;*/
-    /*}*/
-    /*50% {*/
-        /*box-shadow: 0 0 0 10px, 10px -10px 0 10px, 32px 0 0 20px, 0px 32px 0 20px, -5px 5px 0 10px, 20px 2px 0 11px;*/
-    /*}*/
-    /*100% {*/
-        /*box-shadow: 0 0 0 10px, 10px -10px 0 10px, 32px 0 0 20px, 0px 32px 0 20px, -5px 5px 0 10px, 20px -12px 0 11px;*/
-    /*}*/
-/*}*/
+@keyframes checkbox-on {
+    0% {
+        box-shadow: 0 0 0 10px, 10px -10px 0 10px, 32px 0 0 20px, 0px 32px 0 20px, -5px 5px 0 10px, 15px 2px 0 11px;
+    }
+    50% {
+        box-shadow: 0 0 0 10px, 10px -10px 0 10px, 32px 0 0 20px, 0px 32px 0 20px, -5px 5px 0 10px, 20px 2px 0 11px;
+    }
+    100% {
+        box-shadow: 0 0 0 10px, 10px -10px 0 10px, 32px 0 0 20px, 0px 32px 0 20px, -5px 5px 0 10px, 20px -12px 0 11px;
+    }
+}
 
 @keyframes rippleOn {
     0% {
@@ -5165,7 +5166,7 @@ footer .btn {
 
 .card .card-header.card-chart {
     padding: 0;
-    min-height: 160px;
+    max-height: 25%;
 }
 
 .card .card-header.card-chart+.content h4 {
@@ -5244,10 +5245,6 @@ footer .btn {
 }
 
 .card img {
-    width: 56px;
-    height: auto;
-}
-.card_item img {
     width: 100%;
     height: auto;
 }
@@ -5297,7 +5294,7 @@ footer .btn {
 }
 
 .card [data-background-color="blue"] {
-    background: linear-gradient(60deg, #78c1bc, #78c1bc);
+    background: linear-gradient(60deg, #26c6da, #00acc1);
     box-shadow: 0 12px 20px -10px rgba(0, 188, 212, 0.28), 0 4px 20px 0px rgba(0, 0, 0, 0.12), 0 7px 8px -5px rgba(0, 188, 212, 0.2);
 }
 
@@ -5316,6 +5313,11 @@ footer .btn {
     box-shadow: 0 12px 20px -10px rgba(244, 67, 54, 0.28), 0 4px 20px 0px rgba(0, 0, 0, 0.12), 0 7px 8px -5px rgba(244, 67, 54, 0.2);
 }
 
+.card [data-background-color="yellow"] {
+    background: linear-gradient(60deg, #ffed00, #ffed00);
+    box-shadow: 0 7px 8px -5px rgba(255, 237, 89, 0.71), 0 4px 20px 0px rgba(0, 0, 0, 0.12), 0 7px 8px -5px rgba(255, 237, 89, 0.71);
+}
+
 .card [data-background-color] {
     color: #FFFFFF;
 }
@@ -5331,6 +5333,7 @@ footer .btn {
 .card-stats .card-header {
     float: left;
     text-align: center;
+    width: 30%;
 }
 
 .card-stats .card-header i {
@@ -5428,7 +5431,7 @@ footer .btn {
 }
 
 .nav-tabs {
-    background: #9c27b0;
+    background: #27a4b0;
     border: 0;
     border-radius: 3px;
     padding: 0 15px;
@@ -6781,64 +6784,4 @@ footer .btn {
     .table-responsive {
         overflow: visible;
     }
-}
-
-.wrapper .sidebar .searchbox_1{
-    background-color: #fffbf8;
-    padding:13px;
-    width:220px;
-    margin: 50px auto;
-    -webkit-box-sizing:border-box;
-    -moz-box-sizing:border-box;
-    box-sizing:border-box;
-    border-radius:6px;
-    -webkit-box-shadow:
-            0 2px 4px 0 rgba(72, 72, 72, 0.83),
-            0 10px 15px 0 rgba(126, 126, 126, 0.12),
-            0 -2px 6px 1px rgba(199, 199, 199, 0.55) inset,
-            0 2px 4px 2px rgba(255, 255, 255, 0.83) inset;
-    -moz-box-shadow:
-            0 2px 4px 0 rgba(72, 72, 72, 0.83),
-            0 10px 15px 0 rgba(126, 126, 126, 0.12),
-            0 -2px 6px 1px rgba(199, 199, 199, 0.55) inset,
-            0 2px 4px 2px rgba(255, 255, 255, 0.83) inset;
-    box-shadow:
-            0 2px 4px 0 rgba(72, 72, 72, 0.83),
-            0 10px 15px 0 rgba(126, 126, 126, 0.12),
-            0 -2px 6px 1px rgba(199, 199, 199, 0.55) inset,
-            0 2px 4px 2px rgba(255, 255, 255, 0.83) inset;
-}
-.wrapper .sidebar .searchbox_1 .search_1{
-    width:200px;
-    height:30px;
-    padding-left:15px;
-    border-radius:6px;
-    border:none;
-    color:#0F0D0D;;
-    font-weight:500;
-    background-color:#E2EFF7;;
-    -webkit-box-shadow:
-            0 -2px 2px 0 rgba(199, 199, 199, 0.55),
-            0 1px 1px 0 #fff,
-            0 2px 2px 1px #fafafa,
-            0 2px 4px 0 #b2b2b2 inset,
-            0 -1px 1px 0 #f2f2f2 inset,
-            0 15px 15px 0 rgba(41, 41, 41, 0.09) inset;
-    -moz-box-shadow:
-            0 -2px 2px 0 rgba(199, 199, 199, 0.55),
-            0 1px 1px 0 #fff,
-            0 2px 2px 1px #fafafa,
-            0 2px 4px 0 #b2b2b2 inset,
-            0 -1px 1px 0 #f2f2f2 inset,
-            0 15px 15px 0 rgba(41, 41, 41, 0.09) inset;
-    box-shadow:
-            0 -2px 2px 0 rgba(199, 199, 199, 0.55),
-            0 1px 1px 0 #fff,
-            0 2px 2px 1px #fafafa,
-            0 2px 4px 0 #b2b2b2 inset,
-            0 -1px 1px 0 #f2f2f2 inset,
-            0 15px 15px 0 rgba(41, 41, 41, 0.09) inset;
-}
-.search_1:focus{
-    outline:0;
 }
