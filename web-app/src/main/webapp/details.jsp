@@ -152,6 +152,11 @@ Error occurred while fetching device info.
                             </li>
                         </ul>
                     </li>
+                    <li class="pull-right">
+                        <a href="./devices.jsp">
+                            <p style="font-weight: bold;"><i class="material-icons">list</i>Device List</p>
+                        </a>
+                    </li>
 
                 </ul>
 
