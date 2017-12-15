@@ -29,7 +29,7 @@
     <div class="header header-filter" style="background-image: url('images/windows_8_simple_background-wallpaper-2560x1600.jpg'); background-size: cover; background-position: top center;">
         <div class="container">
             <div class="row">
-                <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
+                <div class="col-sm-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
                     <div class="card card-signup">
                         <form class="form" method="post" action="login">
                             <div class="header header-primary text-center">
@@ -79,19 +79,20 @@
                     </div>
                 </div>
             </div>
+
         </div>
-        <footer class="footer">
-            <div class="container">
-                <p class="copyright pull-right">
-                    &copy;
-                    <script>
-                        document.write(new Date().getFullYear())
-                    </script>
-                    <a href="https://wso2.com/iot">WSO2 Inc.</a>
-                </p>
-            </div>
+        <footer class="footer" style="bottom: 0; position: relative; width: 10%;margin-right: 1%;float: right">
+            <p class="copyright pull-right">
+                &copy;
+                <script>
+                    document.write(new Date().getFullYear())
+                </script>
+                <a href="https://wso2.com/iot">WSO2 Inc.</a>
+            </p>
+
         </footer>
     </div>
+
 </div>
 </body>
 <script src="js/jquery.min.js" type="text/javascript"></script>

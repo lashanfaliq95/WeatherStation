@@ -9,12 +9,9 @@
     <link href="css/material-icons.css" rel="stylesheet" />
     <link href="css/material-dashboard.css" rel="stylesheet" />
     <link href="css/font-awesome.min.css" rel="stylesheet">
-    <link href="css/updates.css" rel="stylesheet">
-
 </head>
 <body>
 <div class="wrapper">
-    <%@include file="includes/nav-menu.jsp" %>
     <div class="sidebar" data-color="blue" data-image="images/login_bg2.jpg">
         <!--
     Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
@@ -33,8 +30,8 @@
             </form>
         </div>
     </div>
-    <div class="main-withoutSidebar">
-
+    <div class="main-panel">
+        <%@include file="includes/nav-menu.jsp" %>
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
@@ -266,7 +263,9 @@
                     </div>
                 </div>
             </div>
-            <footer class="footer" style="bottom: 0; position: relative; width: 10%;margin-right: 1%;float: right">
+        </div>
+        <footer class="footer" style="bottom: 0; position: fixed; width: 86%;">
+            <div class="container-fluid">
                 <p class="copyright pull-right">
                     &copy;
                     <script>
@@ -274,12 +273,10 @@
                     </script>
                     <a href="https://wso2.com/iot">WSO2 Inc.</a>
                 </p>
-
-            </footer>
-        </div>
-
+            </div>
+        </footer>
     </div>
-
+</div>
 </div>
 </body>
 <script src="js/jquery.min.js" type="text/javascript"></script>

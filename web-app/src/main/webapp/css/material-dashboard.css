@@ -1200,7 +1200,7 @@ fieldset[disabled] .navbar .navbar-nav>li>a.btn.btn-default.active {
 .open>.navbar .navbar-nav>li>a.btn.btn-primary.dropdown-toggle,
 .open>.navbar .navbar-nav>li>a.btn.btn-primary.dropdown-toggle:focus,
 .open>.navbar .navbar-nav>li>a.btn.btn-primary.dropdown-toggle:hover {
-    background-color: #9c27b0;
+    background-color: #2B46B0;
     color: #FFFFFF;
 }
 
@@ -2452,18 +2452,18 @@ h6,
 }
 
 a {
-    color: #9c27b0;
+    color: #1593b0;
 }
 
 a:hover,
 a:focus {
-    color: #89229b;
+    color: #1a18c1;
     text-decoration: none;
 }
 
 a.text-info:hover,
 a.text-info:focus {
-    color: #00a5bb;
+    color: #00097b;
 }
 
 a .material-icons {
@@ -5166,7 +5166,7 @@ footer .btn {
 
 .card .card-header.card-chart {
     padding: 0;
-    max-height: 25%;
+    max-height: 18%;
 }
 
 .card .card-header.card-chart+.content h4 {

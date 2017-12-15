@@ -85,8 +85,6 @@ Error occurred while fetching device info.
 
 <head>
     <meta charset="utf-8" />
-    <link rel="apple-touch-icon" sizes="76x76" href="images/apple-icon.png" />
-    <link rel="icon" type="image/png" href="images/favicon.png" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <title>Real time weather data</title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
@@ -116,7 +114,7 @@ Error occurred while fetching device info.
                     </h6>
                     <h4 class="card-title"><%=device.getString("name")%>
                     </h4>
-                    <p class="card-content">
+                    <p >
                         Owned by <%=enrolmentInfo.getString("owner")%>.
                         Installed on <%=new Date(enrolmentInfo.getLong("dateOfEnrolment")).toString()%>.
                         <%=device.getString("description")%>
@@ -141,7 +139,22 @@ Error occurred while fetching device info.
                             <div class="ripple-container"></div>
                         </a>
                     </li>
+
+                    <li class="dropdown pull-right">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="material-icons">person</i>
+                            <%--<span class="notification">5</span>--%>
+                            <p class="hidden-lg hidden-md">Profile</p>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="logout.jsp">Logout</a>
+                            </li>
+                        </ul>
+                    </li>
+
                 </ul>
+
             </div>
             <!--status cards-->
             <div class="row">
@@ -843,19 +856,18 @@ Error occurred while fetching device info.
                     </div>
                 </div>
             </div>
-        </div>
+            <footer class="footer" style="bottom: 0; position: relative; width: 10%;margin-right: 1%;float: right">
+                <p class="copyright pull-right">
+                    &copy;
+                    <script>
+                        document.write(new Date().getFullYear())
+                    </script>
+                    <a href="https://wso2.com/iot">WSO2 Inc.</a>
+                </p>
+
+            </footer>
     </div>
-    <footer class="footer">
-        <div class="container-fluid">
-            <p class="copyright pull-right">
-                &copy;
-                <script>
-                    document.write(new Date().getFullYear())
-                </script>
-                <a href="http://www.wso2.com">WSO2</a> Inc.
-            </p>
-        </div>
-    </footer>
+
 </div>
 </div>
 </body>
