@@ -5179,6 +5179,8 @@ footer .btn {
 }
 
 .card .card-header .ct-grid {
+    width:100%;
+    height: 100%;
     stroke: rgba(255, 255, 255, 0.2);
 }
 

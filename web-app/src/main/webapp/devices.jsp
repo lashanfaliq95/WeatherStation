@@ -126,154 +126,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                <%--Popup modal for editing share settings--%>
-                                <div class="modal fade" id="shareSettingsModal" tabindex="-1" role="dialog"
-                                     aria-labelledby="myModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal"
-                                                        aria-hidden="true">&times;
-                                                </button>
-                                                <h4 class="modal-title" id="myModalLabel2" style="color:purple;">Edit
-                                                    Share
-                                                    Settings</h4>
-                                            </div>
-                                            <%--<div class="modal-body" style="color:black;">--%>
-                                            <%--Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean. A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth. Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.--%>
-                                            <%--</div>--%>
-                                            <form>
-                                                <div class="form-group" style="padding-left: 10%; padding-right: 10%;">
-                                                    <input type="text" value="" placeholder="User ID"
-                                                           class="form-control" />
-                                                </div>
-                                                <%--<div class="form-group" style="padding-left: 10%; padding-right: 10%;">--%>
-                                                <%--<input type="text" value="" placeholder="Device Name" class="form-control" />--%>
-                                                <%--</div>--%>
-                                                <%--<div class="form-group" style="padding-left: 10%; padding-right: 10%;">--%>
-                                                <%--<input type="text" value="" placeholder="Device description" class="form-control" />--%>
-                                                <%--</div>--%>
-                                            </form>
-                                            <div style="margin-right: 10%; margin-left: 10%">
-                                                <table class="table" style="font-size: 15px">
-                                                    <thead>
-                                                    <tr>
-                                                        <th class="text-center">#</th>
-                                                        <th>Name</th>
-                                                        <th class="text-left">Actions</th>
-                                                    </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                    <tr>
-                                                        <td class="text-center">1</td>
-                                                        <td>Andrew Mike</td>
-                                                        <td class="td-actions text-right">
-                                                            <button type="button" rel="tooltip" title="View Profile"
-                                                                    class="btn btn-info btn-simple btn-xs">
-                                                                <i class="fa fa-user"></i>
-                                                            </button>
-                                                            <button type="button" rel="tooltip" title="Remove"
-                                                                    class="btn btn-danger btn-simple btn-xs">
-                                                                <i class="fa fa-times"></i>
-                                                            </button>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="text-center">2</td>
-                                                        <td>John Doe</td>
-                                                        <td class="td-actions text-right">
-                                                            <button type="button" rel="tooltip" title="View Profile"
-                                                                    class="btn btn-info btn-simple btn-xs">
-                                                                <i class="fa fa-user"></i>
-                                                            </button>
-                                                            <button type="button" rel="tooltip" title="Remove"
-                                                                    class="btn btn-danger btn-simple btn-xs">
-                                                                <i class="fa fa-times"></i>
-                                                            </button>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="text-center">3</td>
-                                                        <td>Alex Mike</td>
-                                                        <td class="td-actions text-right">
-                                                            <button type="button" rel="tooltip" title="View Profile"
-                                                                    class="btn btn-info btn-simple btn-xs">
-                                                                <i class="fa fa-user"></i>
-                                                            </button>
-                                                            <button type="button" rel="tooltip" title="Remove"
-                                                                    class="btn btn-danger btn-simple btn-xs">
-                                                                <i class="fa fa-times"></i>
-                                                            </button>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="text-center">3</td>
-                                                        <td>Alex Mike</td>
-                                                        <td class="td-actions text-right">
-                                                            <button type="button" rel="tooltip" title="View Profile"
-                                                                    class="btn btn-info btn-simple btn-xs">
-                                                                <i class="fa fa-user"></i>
-                                                            </button>
-                                                            <button type="button" rel="tooltip" title="Remove"
-                                                                    class="btn btn-danger btn-simple btn-xs">
-                                                                <i class="fa fa-times"></i>
-                                                            </button>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="text-center">3</td>
-                                                        <td>Alex Mike</td>
-                                                        <td class="td-actions text-right">
-                                                            <button type="button" rel="tooltip" title="View Profile"
-                                                                    class="btn btn-info btn-simple btn-xs">
-                                                                <i class="fa fa-user"></i>
-                                                            </button>
-                                                            <button type="button" rel="tooltip" title="Remove"
-                                                                    class="btn btn-danger btn-simple btn-xs">
-                                                                <i class="fa fa-times"></i>
-                                                            </button>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="text-center">3</td>
-                                                        <td>Alex Mike</td>
-                                                        <td class="td-actions text-right">
-                                                            <button type="button" rel="tooltip" title="View Profile"
-                                                                    class="btn btn-info btn-simple btn-xs">
-                                                                <i class="fa fa-user"></i>
-                                                            </button>
-                                                            <button type="button" rel="tooltip" title="Remove"
-                                                                    class="btn btn-danger btn-simple btn-xs">
-                                                                <i class="fa fa-times"></i>
-                                                            </button>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="text-center">3</td>
-                                                        <td>Alex Mike</td>
-                                                        <td class="td-actions text-right">
-                                                            <button type="button" rel="tooltip" title="View Profile"
-                                                                    class="btn btn-info btn-simple btn-xs">
-                                                                <i class="fa fa-user"></i>
-                                                            </button>
-                                                            <button type="button" rel="tooltip" title="Remove"
-                                                                    class="btn btn-danger btn-simple btn-xs">
-                                                                <i class="fa fa-times"></i>
-                                                            </button>
-                                                        </td>
-                                                    </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-default btn-simple"
-                                                        data-dismiss="modal">Close
-                                                </button>
-                                                <button type="button" class="btn btn-info btn-simple">Save</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                             <div class="card-content table-responsive">
                                 <table class="table table-hover" id="devices-listing">
@@ -325,18 +177,6 @@
 <script type="text/javascript">
 
  var devices=[];
- function firstFunction(_callback){
-     // do some asynchronous work
-     // and when the asynchronous stuff is complete
-     getAllDevices();
-     _callback();
- }
-
- function secondFunction(){
-     // call first function and pass in a callback function which
-     // first function runs when it has completed
-
- }
 
  function paginate(val){
 
@@ -362,6 +202,7 @@
          css('display','table-row').animate({opacity:1}, 300);
          console.log(endItem);
      });
+     $('#paginate').modal('hide');//hide popup after adding a device
  }
 
 function removeNav() {

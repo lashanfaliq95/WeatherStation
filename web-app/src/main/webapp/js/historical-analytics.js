@@ -648,10 +648,9 @@ analyticsHistory = {
             for (var i = 0; i < events.records.length; i++) {
 
                 var record= events.records[i];
-                console.log("record"+record);
+
                 var sinceText = analyticsHistory.timeDifference(currentTime, new Date(record.timestamp));
                 var dataPoint=record.values;
-                console.log("datapoint"+dataPoint);
                 var temperature = dataPoint.tempf;
                 var humidity = dataPoint.humidity;
                 var windDir=dataPoint.winddir;
@@ -744,25 +743,25 @@ analyticsHistory = {
                     var avgIndoorTemp=sumIndoorTemp/events.records.length;
                     var avgBaromin=sumBaromin/events.records.length;
                     var avgLowBatt=sumLowBatt/events.records.length;
-                    $("#historicalTempAlert").html("<span class=\"text-success\"><i class=\"fa fa-bolt\"></i> " + avgTemp.toFixed(2) + " </span>average Temperature.");
+                    $("#historicalTempChartLastUpdated").html("<span class=\"text-success\"><i class=\"fa fa-bolt\"></i> " + avgTemp.toFixed(2) + " </span>average Temperature.");
                     $("#historicalHumidAlert").html("<span class=\"text-success\"><i class=\"fa fa-bolt\"></i> " + avgHumid.toFixed(2) + " </span> average Humidity.");
-                    // $("#historicalWindDirAlert").html("<span class=\"text-success\"><i class=\"fa fa-bolt\"></i> " + avgWindDir.toFixed(2) + " </span> average wind Direction.");
-                    // $("#historicaldewptfLastUpdated").html("<span class=\"text-success\"><i class=\"fa fa-bolt\"></i> " + avgDewpltf.toFixed(2) + " </span>average Dew point forecast.");
-                    // $("#historicalwindspeedLastUpdated").html("<span class=\"text-success\"><i class=\"fa fa-bolt\"></i> " + avgWindSpeed.toFixed(2) + " </span>average Wind Speed.");
-                    // $("#historicalwindgustLastUpdated").html("<span class=\"text-success\"><i class=\"fa fa-bolt\"></i> " + avgWindGust.toFixed(2) + " </span>average Wind Gust.");
-                    // $("#historicalwindchillfLastUpdated").html("<span class=\"text-success\"><i class=\"fa fa-bolt\"></i> " + avgWindChill.toFixed(2) + " </span>average Wind Chill.");
-                    // $("#historicalrainingLastUpdated").html("<span class=\"text-success\"><i class=\"fa fa-bolt\"></i> " + avgRaining.toFixed(2) + " </span>average Raining.");
-                    // $("#historicaldailyrainingLastUpdated").html("<span class=\"text-success\"><i class=\"fa fa-bolt\"></i> " + avgDailyRaining.toFixed(2) + " </span>average Daily Raining.");
-                    // $("#historicalweeklyrainingLastUpdated").html("<span class=\"text-success\"><i class=\"fa fa-bolt\"></i> " + avgWeeklyRaining.toFixed(2) + " </span>average Weekly Raining.");
-                    // $("#historicalmonthlyrainingLastUpdated").html("<span class=\"text-success\"><i class=\"fa fa-bolt\"></i> " + avgMonthlyRaingin.toFixed(2) + " </span>average Monthly Raining");
-                    // $("#historicalyearlyrainingLastUpdated").html("<span class=\"text-success\"><i class=\"fa fa-bolt\"></i> " + avgYearlyRaining.toFixed(2) + " </span>average Yearly Raining.");
-                    // $("#historicaluvLastUpdated").html("<span class=\"text-success\"><i class=\"fa fa-bolt\"></i> " + avgUV.toFixed(2) + " </span>average UV.");
-                    // $("#historicalsolarradiationLastUpdated").html("<span class=\"text-success\"><i class=\"fa fa-bolt\"></i> " + avgSolarRadiation.toFixed(2) + " </span>average Solar Radiation.");
-                    // $("#historicalindoorhumidityLastUpdated").html("<span class=\"text-success\"><i class=\"fa fa-bolt\"></i> " + avgIndoorHumid.toFixed(2) + " </span>average Indoor humidity.");
-                    // $("#historicalindoortempfLastUpdated").html("<span class=\"text-success\"><i class=\"fa fa-bolt\"></i> " + avgIndoorTemp.toFixed(2) + " </span>average Indoor temperature.");
-                    // $("#historicalbarominLastUpdated").html("<span class=\"text-success\"><i class=\"fa fa-bolt\"></i> " + avgBaromin.toFixed(2) + " </span>average Baromin.");
-                    // $("#historicallowbattLastUpdated").html("<span class=\"text-success\"><i class=\"fa fa-bolt\"></i> " + avgLowBatt.toFixed(2) + " </span>average Low Batt.");
-                    //
+                     $("#historicalWindDirAlert").html("<span class=\"text-success\"><i class=\"fa fa-bolt\"></i> " + avgWindDir.toFixed(2) + " </span> average wind Direction.");
+                    $("#historicaldewptfLastUpdated").html("<span class=\"text-success\"><i class=\"fa fa-bolt\"></i> " + avgDewpltf.toFixed(2) + " </span>average Dew point forecast.");
+                     $("#historicalwindspeedLastUpdated").html("<span class=\"text-success\"><i class=\"fa fa-bolt\"></i> " + avgWindSpeed.toFixed(2) + " </span>average Wind Speed.");
+                     $("#historicalwindgustLastUpdated").html("<span class=\"text-success\"><i class=\"fa fa-bolt\"></i> " + avgWindGust.toFixed(2) + " </span>average Wind Gust.");
+                     $("#historicalwindchillfLastUpdated").html("<span class=\"text-success\"><i class=\"fa fa-bolt\"></i> " + avgWindChill.toFixed(2) + " </span>average Wind Chill.");
+                     $("#historicalrainingLastUpdated").html("<span class=\"text-success\"><i class=\"fa fa-bolt\"></i> " + avgRaining.toFixed(2) + " </span>average Raining.");
+                     $("#historicaldailyrainingLastUpdated").html("<span class=\"text-success\"><i class=\"fa fa-bolt\"></i> " + avgDailyRaining.toFixed(2) + " </span>average Daily Raining.");
+                     $("#historicalweeklyrainingLastUpdated").html("<span class=\"text-success\"><i class=\"fa fa-bolt\"></i> " + avgWeeklyRaining.toFixed(2) + " </span>average Weekly Raining.");
+                     $("#historicalmonthlyrainingLastUpdated").html("<span class=\"text-success\"><i class=\"fa fa-bolt\"></i> " + avgMonthlyRaingin.toFixed(2) + " </span>average Monthly Raining");
+                     $("#historicalyearlyrainingLastUpdated").html("<span class=\"text-success\"><i class=\"fa fa-bolt\"></i> " + avgYearlyRaining.toFixed(2) + " </span>average Yearly Raining.");
+                     $("#historicaluvLastUpdated").html("<span class=\"text-success\"><i class=\"fa fa-bolt\"></i> " + avgUV.toFixed(2) + " </span>average UV.");
+                     $("#historicalsolarradiationLastUpdated").html("<span class=\"text-success\"><i class=\"fa fa-bolt\"></i> " + avgSolarRadiation.toFixed(2) + " </span>average Solar Radiation.");
+                     $("#historicalindoorhumidityLastUpdated").html("<span class=\"text-success\"><i class=\"fa fa-bolt\"></i> " + avgIndoorHumid.toFixed(2) + " </span>average Indoor humidity.");
+                     $("#historicalindoortempfLastUpdated").html("<span class=\"text-success\"><i class=\"fa fa-bolt\"></i> " + avgIndoorTemp.toFixed(2) + " </span>average Indoor temperature.");
+                     $("#historicalbarominLastUpdated").html("<span class=\"text-success\"><i class=\"fa fa-bolt\"></i> " + avgBaromin.toFixed(2) + " </span>average Baromin.");
+                     $("#historicallowbattLastUpdated").html("<span class=\"text-success\"><i class=\"fa fa-bolt\"></i> " + avgLowBatt.toFixed(2) + " </span>average Low Batt.");
+
 
 
 

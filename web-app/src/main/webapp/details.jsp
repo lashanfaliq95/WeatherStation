@@ -232,8 +232,8 @@ Error occurred while fetching device info.
                                             <span class="text-success"><i class="fa fa-long-arrow-up"></i> 55% </span> increase in today sales.</p>
                                     </div>
                                     <div class="card-footer">
-                                        <div class="stats">
-                                            <i class="material-icons">access_time</i> updated 4 minutes ago
+                                        <div class="stats" id="realtimeTempLastUpdated">
+                                            <i class="material-icons">access_time</i> Yet to be updated
                                         </div>
                                     </div>
                                 </div>
@@ -249,8 +249,8 @@ Error occurred while fetching device info.
                                             <span class="text-success"><i class="fa fa-long-arrow-up"></i> 55% </span> increase in today sales.</p>
                                     </div>
                                     <div class="card-footer">
-                                        <div class="stats">
-                                            <i class="material-icons">access_time</i> updated 4 minutes ago
+                                        <div class="stats" id="realtimeHumidLastUpdated">
+                                            <i class="material-icons">access_time</i> Yet to be updated
                                         </div>
                                     </div>
                                 </div>
@@ -266,8 +266,8 @@ Error occurred while fetching device info.
                                             <span class="text-success"><i class="fa fa-long-arrow-up"></i> 55% </span> increase in today sales.</p>
                                     </div>
                                     <div class="card-footer">
-                                        <div class="stats">
-                                            <i class="material-icons">access_time</i> updated 4 minutes ago
+                                        <div class="stats" id="realtimeWindDirLastUpdated">
+                                            <i class="material-icons">access_time</i> Yet to be updated
                                         </div>
                                     </div>
                                 </div>
@@ -284,7 +284,7 @@ Error occurred while fetching device info.
                                     </div>
                                     <div class="card-footer">
                                         <div class="stats">
-                                            <i class="material-icons">access_time</i> updated 4 minutes ago
+                                            <i class="material-icons">access_time</i> Yet to be updated
                                         </div>
                                     </div>
                                 </div>
@@ -300,8 +300,8 @@ Error occurred while fetching device info.
                                             <span class="text-success"><i class="fa fa-long-arrow-up"></i> 55% </span> increase in today sales.</p>
                                     </div>
                                     <div class="card-footer">
-                                        <div class="stats">
-                                            <i class="material-icons">access_time</i> updated 4 minutes ago
+                                        <div class="stats" id="realtimedewptfLastUpdated">
+                                            <i class="material-icons">access_time</i> Yet to be updated
                                         </div>
                                     </div>
                                 </div>
@@ -317,8 +317,8 @@ Error occurred while fetching device info.
                                             <span class="text-success"><i class="fa fa-long-arrow-up"></i> 55% </span> increase in today sales.</p>
                                     </div>
                                     <div class="card-footer">
-                                        <div class="stats">
-                                            <i class="material-icons">access_time</i> updated 4 minutes ago
+                                        <div class="stats" id="realtimeindoorhumidLastUpdated">
+                                            <i class="material-icons">access_time</i> Yet to be updated
                                         </div>
                                     </div>
                                 </div>
@@ -336,8 +336,8 @@ Error occurred while fetching device info.
                                             <span class="text-success"><i class="fa fa-long-arrow-up"></i> 55% </span> increase in today sales.</p>
                                     </div>
                                     <div class="card-footer">
-                                        <div class="stats">
-                                            <i class="material-icons">access_time</i> updated 4 minutes ago
+                                        <div class="stats" id="realtimewindgustLastUpdated">
+                                            <i class="material-icons">access_time</i> Yet to be updated
                                         </div>
                                     </div>
                                 </div>
@@ -354,7 +354,7 @@ Error occurred while fetching device info.
                                     </div>
                                     <div class="card-footer">
                                         <div class="stats">
-                                            <i class="material-icons">access_time</i> updated 4 minutes ago
+                                            <i class="material-icons">access_time</i> Yet to be updated
                                         </div>
                                     </div>
                                 </div>
@@ -370,8 +370,8 @@ Error occurred while fetching device info.
                                             <span class="text-success"><i class="fa fa-long-arrow-up"></i> 55% </span> increase in today sales.</p>
                                     </div>
                                     <div class="card-footer">
-                                        <div class="stats">
-                                            <i class="material-icons">access_time</i> updated 4 minutes ago
+                                        <div class="stats" id="realtimewindchillfLastUpdated">
+                                            <i class="material-icons">access_time</i> Yet to be updated
                                         </div>
                                     </div>
                                 </div>
@@ -387,8 +387,8 @@ Error occurred while fetching device info.
                                             <span class="text-success"><i class="fa fa-long-arrow-up"></i> 55% </span> increase in today sales.</p>
                                     </div>
                                     <div class="card-footer">
-                                        <div class="stats">
-                                            <i class="material-icons">access_time</i> updated 4 minutes ago
+                                        <div class="stats" id="realtimerainingLastUpdated">
+                                            <i class="material-icons">access_time</i> Yet to be updated
                                         </div>
                                     </div>
                                 </div>
@@ -404,8 +404,8 @@ Error occurred while fetching device info.
                                             <span class="text-success"><i class="fa fa-long-arrow-up"></i> 55% </span> increase in today sales.</p>
                                     </div>
                                     <div class="card-footer">
-                                        <div class="stats">
-                                            <i class="material-icons">access_time</i> updated 4 minutes ago
+                                        <div class="stats" id="realtimebarominLastUpdated">
+                                            <i class="material-icons">access_time</i> Yet to be updated
                                         </div>
                                     </div>
                                 </div>
@@ -421,8 +421,8 @@ Error occurred while fetching device info.
                                             <span class="text-success"><i class="fa fa-long-arrow-up"></i> 55% </span> increase in today sales.</p>
                                     </div>
                                     <div class="card-footer">
-                                        <div class="stats">
-                                            <i class="material-icons">access_time</i> updated 4 minutes ago
+                                        <div class="stats" id="realtimelowbattLastUpdated">
+                                            <i class="material-icons">access_time</i> Yet to be updated
                                         </div>
                                     </div>
                                 </div>
@@ -441,8 +441,8 @@ Error occurred while fetching device info.
                                             <span class="text-success"><i class="fa fa-long-arrow-up"></i> 55% </span> increase in today sales.</p>
                                     </div>
                                     <div class="card-footer">
-                                        <div class="stats">
-                                            <i class="material-icons">access_time</i> updated 4 minutes ago
+                                        <div class="stats" id="realtimedailyrainingLastUpdated">
+                                            <i class="material-icons">access_time</i> Yet to be updated
                                         </div>
                                     </div>
                                 </div>
@@ -458,8 +458,8 @@ Error occurred while fetching device info.
                                             <span class="text-success"><i class="fa fa-long-arrow-up"></i> 55% </span> increase in today sales.</p>
                                     </div>
                                     <div class="card-footer">
-                                        <div class="stats">
-                                            <i class="material-icons">access_time</i> updated 4 minutes ago
+                                        <div class="stats" id="realtimeweeklyrainingLastUpdated">
+                                            <i class="material-icons">access_time</i> Yet to be updated
                                         </div>
                                     </div>
                                 </div>
@@ -475,8 +475,8 @@ Error occurred while fetching device info.
                                             <span class="text-success"><i class="fa fa-long-arrow-up"></i> 55% </span> increase in today sales.</p>
                                     </div>
                                     <div class="card-footer">
-                                        <div class="stats">
-                                            <i class="material-icons">access_time</i> updated 4 minutes ago
+                                        <div class="stats" id="realtimemonthlyrainingLastUpdated">
+                                            <i class="material-icons">access_time</i> Yet to be updated
                                         </div>
                                     </div>
                                 </div>
@@ -492,8 +492,8 @@ Error occurred while fetching device info.
                                             <span class="text-success"><i class="fa fa-long-arrow-up"></i> 55% </span> increase in today sales.</p>
                                     </div>
                                     <div class="card-footer">
-                                        <div class="stats">
-                                            <i class="material-icons">access_time</i> updated 4 minutes ago
+                                        <div class="stats" id="realtimeyearlyrainingLastUpdated">
+                                            <i class="material-icons">access_time</i> Yet to be updated
                                         </div>
                                     </div>
                                 </div>
@@ -509,8 +509,8 @@ Error occurred while fetching device info.
                                             <span class="text-success"><i class="fa fa-long-arrow-up"></i> 55% </span> increase in today sales.</p>
                                     </div>
                                     <div class="card-footer">
-                                        <div class="stats">
-                                            <i class="material-icons">access_time</i> updated 4 minutes ago
+                                        <div class="stats" id="realtimesolarradiationLastUpdated">
+                                            <i class="material-icons">access_time</i> Yet to be updated
                                         </div>
                                     </div>
                                 </div>
@@ -526,8 +526,8 @@ Error occurred while fetching device info.
                                             <span class="text-success"><i class="fa fa-long-arrow-up"></i> 55% </span> increase in today sales.</p>
                                     </div>
                                     <div class="card-footer">
-                                        <div class="stats">
-                                            <i class="material-icons">access_time</i> updated 4 minutes ago
+                                        <div class="stats" id="realtimeuvLastUpdated">
+                                            <i class="material-icons">access_time</i> Yet to be updated
                                         </div>
                                     </div>
                                 </div>
@@ -554,11 +554,6 @@ Error occurred while fetching device info.
                                             <span class="text-success"><i class="fa fa-long-arrow-down"></i> 10% </span>
                                             decrease in Temperature.</p>
                                     </div>
-                                    <div class="card-footer">
-                                        <div class="stats">
-                                            <i class="material-icons">access_time</i> updated 4 minutes ago
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -573,11 +568,6 @@ Error occurred while fetching device info.
                                                             class="fa fa-long-arrow-up"></i> 5% </span> increase in
                                             Temperature.</p>
                                     </div>
-                                    <div class="card-footer">
-                                        <div class="stats">
-                                            <i class="material-icons">access_time</i> updated 4 minutes ago
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -587,14 +577,10 @@ Error occurred while fetching device info.
                                     </div>
                                     <div class="card-content">
                                         <h4 class="title">Wind Direction</h4>
-                                        <p class="category">
+                                        <p class="category" id="historicalWindDirAlert">
                                             <span class="text-success"><i class="fa fa-long-arrow-up"></i> 55% </span> increase in today sales.</p>
                                     </div>
-                                    <div class="card-footer">
-                                        <div class="stats">
-                                            <i class="material-icons">access_time</i> updated 4 minutes ago
-                                        </div>
-                                    </div>
+
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -604,14 +590,10 @@ Error occurred while fetching device info.
                                     </div>
                                     <div class="card-content">
                                         <h4 class="title">Wind Speed</h4>
-                                        <p class="category">
+                                        <p class="category" id="historicalwindspeedLastUpdated">
                                             <span class="text-success"><i class="fa fa-long-arrow-up"></i> 55% </span> increase in today sales.</p>
                                     </div>
-                                    <div class="card-footer">
-                                        <div class="stats">
-                                            <i class="material-icons">access_time</i> updated 4 minutes ago
-                                        </div>
-                                    </div>
+
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -621,14 +603,10 @@ Error occurred while fetching device info.
                                     </div>
                                     <div class="card-content">
                                         <h4 class="title">Indoor Temperature</h4>
-                                        <p class="category">
+                                        <p class="category" id="historicalindoortempfLastUpdated">
                                             <span class="text-success"><i class="fa fa-long-arrow-up"></i> 55% </span> increase in today sales.</p>
                                     </div>
-                                    <div class="card-footer">
-                                        <div class="stats">
-                                            <i class="material-icons">access_time</i> updated 4 minutes ago
-                                        </div>
-                                    </div>
+
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -638,14 +616,10 @@ Error occurred while fetching device info.
                                     </div>
                                     <div class="card-content">
                                         <h4 class="title">Indoor Humidity</h4>
-                                        <p class="category">
+                                        <p class="category" id="historicalindoorhumidityLastUpdated">
                                             <span class="text-success"><i class="fa fa-long-arrow-up"></i> 55% </span> increase in today sales.</p>
                                     </div>
-                                    <div class="card-footer">
-                                        <div class="stats">
-                                            <i class="material-icons">access_time</i> updated 4 minutes ago
-                                        </div>
-                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -657,14 +631,10 @@ Error occurred while fetching device info.
                                     </div>
                                     <div class="card-content">
                                         <h4 class="title">Wind Gust</h4>
-                                        <p class="category">
+                                        <p class="category" id="historicalwindgustLastUpdated">
                                             <span class="text-success"><i class="fa fa-long-arrow-up"></i> 55% </span> increase in today sales.</p>
                                     </div>
-                                    <div class="card-footer">
-                                        <div class="stats">
-                                            <i class="material-icons">access_time</i> updated 4 minutes ago
-                                        </div>
-                                    </div>
+
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -674,14 +644,10 @@ Error occurred while fetching device info.
                                     </div>
                                     <div class="card-content">
                                         <h4 class="title">Dew Point</h4>
-                                        <p class="category">
+                                        <p class="category" id="historicaldewptfLastUpdated">
                                             <span class="text-success"><i class="fa fa-long-arrow-up"></i> 55% </span> increase in today sales.</p>
                                     </div>
-                                    <div class="card-footer">
-                                        <div class="stats">
-                                            <i class="material-icons">access_time</i> updated 4 minutes ago
-                                        </div>
-                                    </div>
+
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -691,14 +657,10 @@ Error occurred while fetching device info.
                                     </div>
                                     <div class="card-content">
                                         <h4 class="title">Wind Chill</h4>
-                                        <p class="category">
+                                        <p class="category" id="historicalwindchillfLastUpdated">
                                             <span class="text-success"><i class="fa fa-long-arrow-up"></i> 55% </span> increase in today sales.</p>
                                     </div>
-                                    <div class="card-footer">
-                                        <div class="stats">
-                                            <i class="material-icons">access_time</i> updated 4 minutes ago
-                                        </div>
-                                    </div>
+
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -708,14 +670,10 @@ Error occurred while fetching device info.
                                     </div>
                                     <div class="card-content">
                                         <h4 class="title">Raining</h4>
-                                        <p class="category">
+                                        <p class="category" id="historicalrainingLastUpdated">
                                             <span class="text-success"><i class="fa fa-long-arrow-up"></i> 55% </span> increase in today sales.</p>
                                     </div>
-                                    <div class="card-footer">
-                                        <div class="stats">
-                                            <i class="material-icons">access_time</i> updated 4 minutes ago
-                                        </div>
-                                    </div>
+
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -725,14 +683,10 @@ Error occurred while fetching device info.
                                     </div>
                                     <div class="card-content">
                                         <h4 class="title">Baromin</h4>
-                                        <p class="category">
+                                        <p class="category" id="historicalbarominLastUpdated">
                                             <span class="text-success"><i class="fa fa-long-arrow-up"></i> 55% </span> increase in today sales.</p>
                                     </div>
-                                    <div class="card-footer">
-                                        <div class="stats">
-                                            <i class="material-icons">access_time</i> updated 4 minutes ago
-                                        </div>
-                                    </div>
+
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -742,14 +696,10 @@ Error occurred while fetching device info.
                                     </div>
                                     <div class="card-content">
                                         <h4 class="title">Lowbatt</h4>
-                                        <p class="category">
+                                        <p class="category" id="historicallowbattLastUpdated">
                                             <span class="text-success"><i class="fa fa-long-arrow-up"></i> 55% </span> increase in today sales.</p>
                                     </div>
-                                    <div class="card-footer">
-                                        <div class="stats">
-                                            <i class="material-icons">access_time</i> updated 4 minutes ago
-                                        </div>
-                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -762,14 +712,10 @@ Error occurred while fetching device info.
                                     </div>
                                     <div class="card-content">
                                         <h4 class="title">Daily Raining</h4>
-                                        <p class="category">
+                                        <p class="category" id="historicaldailyrainingLastUpdated">
                                             <span class="text-success"><i class="fa fa-long-arrow-up"></i> 55% </span> increase in today sales.</p>
                                     </div>
-                                    <div class="card-footer">
-                                        <div class="stats">
-                                            <i class="material-icons">access_time</i> updated 4 minutes ago
-                                        </div>
-                                    </div>
+
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -779,14 +725,10 @@ Error occurred while fetching device info.
                                     </div>
                                     <div class="card-content">
                                         <h4 class="title">Weekly raining</h4>
-                                        <p class="category">
+                                        <p class="category" id="historicalweeklyrainingLastUpdated">
                                             <span class="text-success"><i class="fa fa-long-arrow-up"></i> 55% </span> increase in today sales.</p>
                                     </div>
-                                    <div class="card-footer">
-                                        <div class="stats">
-                                            <i class="material-icons">access_time</i> updated 4 minutes ago
-                                        </div>
-                                    </div>
+
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -796,14 +738,10 @@ Error occurred while fetching device info.
                                     </div>
                                     <div class="card-content">
                                         <h4 class="title">Monthly Raining</h4>
-                                        <p class="category">
+                                        <p class="category" id="historicalmonthlyrainingLastUpdated">
                                             <span class="text-success"><i class="fa fa-long-arrow-up"></i> 55% </span> increase in today sales.</p>
                                     </div>
-                                    <div class="card-footer">
-                                        <div class="stats">
-                                            <i class="material-icons">access_time</i> updated 4 minutes ago
-                                        </div>
-                                    </div>
+
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -813,14 +751,10 @@ Error occurred while fetching device info.
                                     </div>
                                     <div class="card-content">
                                         <h4 class="title">Yearly Raining</h4>
-                                        <p class="category">
+                                        <p class="category" id="historicalyearlyrainingLastUpdated">
                                             <span class="text-success"><i class="fa fa-long-arrow-up"></i> 55% </span> increase in today sales.</p>
                                     </div>
-                                    <div class="card-footer">
-                                        <div class="stats">
-                                            <i class="material-icons">access_time</i> updated 4 minutes ago
-                                        </div>
-                                    </div>
+
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -830,14 +764,10 @@ Error occurred while fetching device info.
                                     </div>
                                     <div class="card-content">
                                         <h4 class="title">Solar Radiation</h4>
-                                        <p class="category">
+                                        <p class="category" id="historicalsolarradiationLastUpdated">
                                             <span class="text-success"><i class="fa fa-long-arrow-up"></i> 55% </span> increase in today sales.</p>
                                     </div>
-                                    <div class="card-footer">
-                                        <div class="stats">
-                                            <i class="material-icons">access_time</i> updated 4 minutes ago
-                                        </div>
-                                    </div>
+
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -847,14 +777,10 @@ Error occurred while fetching device info.
                                     </div>
                                     <div class="card-content">
                                         <h4 class="title">Ultra Violet</h4>
-                                        <p class="category">
+                                        <p class="category" id="historicaluvLastUpdated">
                                             <span class="text-success"><i class="fa fa-long-arrow-up"></i> 55% </span> increase in today sales.</p>
                                     </div>
-                                    <div class="card-footer">
-                                        <div class="stats">
-                                            <i class="material-icons">access_time</i> updated 4 minutes ago
-                                        </div>
-                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -897,38 +823,15 @@ Error occurred while fetching device info.
 <script src="js/realtime-analytics.js"></script>
 
 <script type="text/javascript">
-//var prevId;
-//    function redirect(ele)
-//    {
-//
-//        var id = ele.id;
-//
-//        if ($(".tab-content").is(":visible")){
-//
-//            $('.tab-content').hide();
-//            $('.footer').hide();
-//            $('#'+id).clone().appendTo('.expanding-container');
-//            $('.footer').clone().appendTo('.expanding-container');
-//            prevId=id;
-//            console.log("found tab");
-//        }
-//        else{
-//            $('.tab-content').show();
-//            console.log("no tab");
-//
-//        }
-//
-//        $('.expanding-container #'+id).toggleClass('fullscreen');
-//        $('div.card-chart').toggleClass('maxHeight');
-//
-//
-//
-//    }
+
 function redirect(ele) {
 
         $('#'+ele.id).toggleClass('modal');
         $('div.card-chart').toggleClass('maxHeight');
         $('div.card').toggleClass('padzero');
+    historyGraphRefresh();
+    realtimeGraphRefresh();
+
 
 
 }
