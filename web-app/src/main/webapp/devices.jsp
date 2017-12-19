@@ -48,8 +48,10 @@
                                         <th><button class="btn btn-white" data-toggle="modal" data-target="#newDeviceModal">Add
                                             Weather station
                                         </button></th>
-                                        <th><button class="btn btn-primary btn-fab btn-fab-mini btn-round" onclick='getAllDevices()'>
-                                            <i class="material-icons">refresh</i>
+                                        <th><button class="btn btn-white pull-right"   data-toggle="modal" data-target="#paginate">Paginate
+                                        </button></th>
+                                        <th><button class="btn btn-white" onclick="getAllDevices(),removeNav();">
+                                            <i class="material-icons">refresh</i>Refresh Table
                                         </button></th>
                                     </tr>
                                 </table>
@@ -63,7 +65,7 @@
                                                 <button type="button" class="close" data-dismiss="modal"
                                                         aria-hidden="true">&times
                                                 </button>
-                                                <h4 class="modal-title" id="myModalLabel" style="color:purple;">Enter
+                                                <h4 class="modal-title" id="myModalLabel" style="color:cornflowerblue;">Enter
                                                     Weather station
                                                     Details</h4>
                                             </div>
@@ -90,6 +92,35 @@
                                                 </button>
                                                 <button type="button" class="btn btn-info btn-simple"
                                                         onclick="addNewDevice()">Add
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <%--Popup modal for paginating--%>
+                                <div class="modal fade" id="paginate" tabindex="-1" role="dialog"
+                                     aria-labelledby="myModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                        aria-hidden="true">&times
+                                                </button>
+                                                <h4 class="modal-title"  style="color:cornflowerblue;">Paginate Options</h4>
+                                            </div>
+                                            <form id="paginate-form" method="post">
+                                                <div class="form-group" style="padding-left: 10%; padding-right: 10%;">
+                                                    <input type="number" name="paginateNum" id="paginateNum" value=""
+                                                           placeholder="Paginate number"
+                                                           class="form-control" />
+                                                </div>
+                                            </form>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default btn-simple"
+                                                        data-dismiss="modal">Close
+                                                </button>
+                                                <button type="button" class="btn btn-info btn-simple"
+                                                        onclick="removeNav();paginate(document.getElementById('paginateNum').value)">Paginate
                                                 </button>
                                             </div>
                                         </div>
@@ -261,6 +292,7 @@
                                     </tr>
                                     </tbody>
                                 </table>
+                                <div id="nav"></div>
                             </div>
                         </div>
                     </div>
@@ -292,27 +324,53 @@
 <script src="js/material-dashboard.js" type="text/javascript"></script>
 <script type="text/javascript">
 
-    var devices = [];
-    //function to implement a regex search bar
+ var devices=[];
+ function firstFunction(_callback){
+     // do some asynchronous work
+     // and when the asynchronous stuff is complete
+     getAllDevices();
+     _callback();
+ }
 
+ function secondFunction(){
+     // call first function and pass in a callback function which
+     // first function runs when it has completed
 
+ }
 
+ function paginate(val){
 
-    //function filterColumn ( i ) {
-    //    $('#devices-listing').DataTable().column( i ).search(
-    //        $('#col'+i+'_filter').val(),
-    //        $('#col'+i+'_regex')
-    //    ).draw();
-    //}
-    //
-    //$(document).ready(function() {
-    //    $('#devices-listing').DataTable();
-    //
-    //
-    //    $('input.column_filter').on( 'keyup click', function () {
-    //        filterColumn( $(this).parents('tr').attr('data-column') );
-    //    } );
-    //} );
+     //$('#devices-listing tr').toggleClass('paginate');
+     var rowsShown = parseInt(val);
+     var rowsTotal = devices.length;
+
+     var numPages = rowsTotal/rowsShown;
+     for(i = 0;i < numPages;i++) {
+         var pageNum = i + 1;
+         $('#nav').append('<a href="#" rel="'+i+'">'+pageNum+'</a> ');
+     }
+     $('#devices-listing tbody tr').hide();
+     $('#devices-listing tbody tr').slice(0, rowsShown).show();
+     $('#nav a:first').addClass('active');
+     $('#nav a').bind('click', function(){
+         $('#nav a').removeClass('active');
+         $(this).addClass('active');
+         var currPage = $(this).attr('rel');
+         var startItem = currPage * rowsShown;
+         var endItem = startItem + rowsShown;
+         $('#devices-listing tbody tr').css('opacity','0.0').hide().slice(startItem, endItem).
+         css('display','table-row').animate({opacity:1}, 300);
+         console.log(endItem);
+     });
+ }
+
+function removeNav() {
+    var myNode = document.getElementById("nav");
+    while (myNode.firstChild) {
+        myNode.removeChild(myNode.firstChild);
+    }
+}
+
 
     $(document).ready(function () {
         // Javascript method's body can be found in assets/js/demos.js
@@ -320,18 +378,21 @@
         getAllDevices();
 
 
+
     });
 
     function getDevice(dev, index) {
         var devicesListing = $('#devices-listing');
+
         var lastKnownSuccess = function (data) {
-            var record = JSON.parse(data).records[0];
+            var record = JSON.parse(data).records[1];
             var temperature=null;
             var humidity=null;
             if (record) {
                 temperature = record.values.tempf;
                 humidity = record.values.humidity;
             }
+           //console.log(data);
             var myRow = "<tr><a href='#" + dev.deviceIdentifier + "'><td>" + dev.name
                 + "</td><td>"
                 + (temperature) + "</td><td>" + (humidity) + "</td><td>"
@@ -348,7 +409,7 @@
             //function to implement the regex search bar
             var $rows = $('#devices-listing tbody tr');
             $('#search').keyup(function() {
-
+                removeNav();
                 var val = '^(?=.*\\b' + $.trim($(this).val()).split(/\s+/).join('\\b)(?=.*\\b') + ').*$',
                     reg = RegExp(val, 'i'),
                     text;
@@ -367,12 +428,14 @@
                 "method": "get"
             },
             success: lastKnownSuccess
+
         });
     }
 
     function getAllDevices() {
         var success = function (data) {
             devices = JSON.parse(data).devices;
+            console.log(devices.length);
             var devicesListing = $('#devices-listing');
             if (devices && devices.length > 0) {
                 devicesListing.find('tbody').empty();
@@ -385,7 +448,7 @@
         $.ajax({
             type: "POST",
             url: "invoker/execute",
-            data: {"uri": "/devices/?type=weatherstation&requireDeviceInfo=true", "method": "get"},
+            data: {"uri": "/devices/?type=weatherstation&requireDeviceInfo=true&offset=0&limit=100", "method": "get"},
             success: success
         });
     }
