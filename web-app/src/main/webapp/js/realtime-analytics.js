@@ -786,6 +786,12 @@ realtimeAnalytics = {
                     realtimeAnalytics.calcTimeDiff(realtimelowbattLabel, realtimelowbattLabelRef);
                     realtimelowbattSeries.push(lowbatt);
                     $("#realtimelowbattLastUpdated").html(lastUpdatedText);
+
+                    realtimewindgustmphLabel.push('0s');
+                    realtimewindgustmphLabelRef.push(currentTime);
+                    realtimeAnalytics.calcTimeDiff(realtimewindgustmphLabel, realtimewindgustmphLabelRef);
+                    realtimewindgustmphSeries.push(windgustmph);
+                    $("#realtimewindgustLastUpdated").html(lastUpdatedText);
                     updateGraphs();
                 };
             }

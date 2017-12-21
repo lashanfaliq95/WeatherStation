@@ -206,7 +206,9 @@
  }
 
 function removeNav() {
-    var myNode = document.getElementById("nav");
+    $('#devices-listing tbody tr').show();
+    $('#devices-listing tbody tr').css('opacity','0.0').hide().slice(0, devices.length).css('display','table-row').animate({opacity:1}, 300);
+     var myNode = document.getElementById("nav");
     while (myNode.firstChild) {
         myNode.removeChild(myNode.firstChild);
     }
@@ -248,6 +250,7 @@ function removeNav() {
                 getDevice(devices[newIndex], newIndex);
             }
             //function to implement the regex search bar
+
             var $rows = $('#devices-listing tbody tr');
             $('#search').keyup(function() {
                 removeNav();

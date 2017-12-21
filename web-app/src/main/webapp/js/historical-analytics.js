@@ -743,7 +743,7 @@ analyticsHistory = {
                     var avgIndoorTemp=sumIndoorTemp/events.records.length;
                     var avgBaromin=sumBaromin/events.records.length;
                     var avgLowBatt=sumLowBatt/events.records.length;
-                    $("#historicalTempChartLastUpdated").html("<span class=\"text-success\"><i class=\"fa fa-bolt\"></i> " + avgTemp.toFixed(2) + " </span>average Temperature.");
+                    $("#historicalTempAlert").html("<span class=\"text-success\"><i class=\"fa fa-bolt\"></i> " + avgTemp.toFixed(2) + " </span>average Temperature.");
                     $("#historicalHumidAlert").html("<span class=\"text-success\"><i class=\"fa fa-bolt\"></i> " + avgHumid.toFixed(2) + " </span> average Humidity.");
                      $("#historicalWindDirAlert").html("<span class=\"text-success\"><i class=\"fa fa-bolt\"></i> " + avgWindDir.toFixed(2) + " </span> average wind Direction.");
                     $("#historicaldewptfLastUpdated").html("<span class=\"text-success\"><i class=\"fa fa-bolt\"></i> " + avgDewpltf.toFixed(2) + " </span>average Dew point forecast.");
@@ -826,43 +826,122 @@ analyticsHistory = {
 
 
 
+
+
             }
         } else {
+            //if there is no records in this period display no records
             analyticsHistory.historicalTempLabel = ['0s'];
             analyticsHistory.historicalTempSeries = [0];
-            analyticsHistory.historicalHumidLabel = ['0s'];
-            analyticsHistory.historicalHumidSeries = [0];
-            analyticsHistory.historicalWindDirLabel = ['0s'];
-            analyticsHistory.historicalWindDirSeries = [0];
-            analyticsHistory.historicalDewptfLabel= ['0s'];
-            analyticsHistory.historicalDewptfSeries= [0];
-            analyticsHistory.historicalWindChillLabel= ['0s'];
-            analyticsHistory.historicalWindChillSeries= [0];
-            analyticsHistory.historicalWindSpeedLabel= ['0s'];
-            analyticsHistory.historicalWindSpeedSeries= [0];
-            analyticsHistory.historicalWindGustLabel= ['0s'];
-            analyticsHistory.historicalWindGustSeries= [0];
-            analyticsHistory.historicalRainingLabel= ['0s'];
-            analyticsHistory.historicalRainingSeries= [0];
-            analyticsHistory.historicalDailyRainingLabel= ['0s'];
-            analyticsHistory.historicalDailyRainingSeries= [0];
-            analyticsHistory.historicalWeeklyRainingLabel= ['0s'];
-            analyticsHistory.historicalWeeklyRainingSeries= [0];
-            analyticsHistory.historicalMonthlyRainingLabel= ['0s'];
-            analyticsHistory.historicalMonthlyRainingSeries= [0];
-            analyticsHistory.historicalYearlyRainingLabel= ['0s'];
-            analyticsHistory.historicalYearlyRainingSeries= [0];
-            analyticsHistory.historicalSolarRadiationLabel= ['0s'];
-            analyticsHistory.historicalSolarRadiationSeries= [0];
-            analyticsHistory.historicalUVLabel= ['0s'];
-            analyticsHistory.historicalUVSeries= [0];
-            analyticsHistory.historicalIndoorTempLabel= ['0s'];
-            analyticsHistory.historicalIndoorTempSeries= [0];
-            analyticsHistory.historicalIndoorHumidLabel= ['0s'];
-            analyticsHistory.historicalIndoorHumidSeries= [0];
-            analyticsHistory.historicalBarominLabel= ['0s'];
-            analyticsHistory.historicalBarominSeries= [0];
-            analyticsHistory.historicalLowBattLabel= ['0s'];
+
+            analyticsHistory.historicalTemp.update({
+                labels: analyticsHistory.historicalTempLabel,
+                series: [
+                    analyticsHistory.historicalTempSeries
+                ]
+            });
+            analyticsHistory.historicalHumid.update({
+                labels: analyticsHistory.historicalTempLabel,
+                series: [
+                    analyticsHistory.historicalTempSeries
+                ]
+            });
+            analyticsHistory.historicalWindDir.update({
+                labels: analyticsHistory.historicalTempLabel,
+                series: [
+                    analyticsHistory.historicalTempSeries
+                ]
+            });
+            analyticsHistory.historicalDewptf.update({
+                labels: analyticsHistory.historicalTempLabel,
+                series: [
+                    analyticsHistory.historicalTempSeries
+                ]
+            });
+            analyticsHistory.historicalUV.update({
+                labels: analyticsHistory.historicalTempLabel,
+                series: [
+                    analyticsHistory.historicalTempSeries
+                ]
+            });
+            analyticsHistory.historicalWindChill.update({
+                labels: analyticsHistory.historicalTempLabel,
+                series: [
+                    analyticsHistory.historicalTempSeries
+                ]
+            });
+            analyticsHistory.historicalWindGust.update({
+                labels: analyticsHistory.historicalTempLabel,
+                series: [
+                    analyticsHistory.historicalTempSeries
+                ]
+            });
+            analyticsHistory.historicalWindSpeed.update({
+                labels: analyticsHistory.historicalTempLabel,
+                series: [
+                    analyticsHistory.historicalTempSeries
+                ]
+            });
+            analyticsHistory.historicalSolarRadiation.update({
+                labels: analyticsHistory.historicalTempLabel,
+                series: [
+                    analyticsHistory.historicalTempSeries
+                ]
+            });
+            analyticsHistory.historicalRaining.update({
+                labels: analyticsHistory.historicalTempLabel,
+                series: [
+                    analyticsHistory.historicalTempSeries
+                ]
+            });
+            analyticsHistory.historicalDailyRaining.update({
+                labels: analyticsHistory.historicalTempLabel,
+                series: [
+                    analyticsHistory.historicalTempSeries
+                ]
+            });
+            analyticsHistory.historicalWeeklyRaining.update({
+                labels: analyticsHistory.historicalTempLabel,
+                series: [
+                    analyticsHistory.historicalTempSeries
+                ]
+            });
+            analyticsHistory.historicalMonthlyRaining.update({
+                labels: analyticsHistory.historicalTempLabel,
+                series: [
+                    analyticsHistory.historicalTempSeries
+                ]
+            });
+            analyticsHistory.historicalYearlyRaining.update({
+                labels: analyticsHistory.historicalTempLabel,
+                series: [
+                    analyticsHistory.historicalTempSeries
+                ]
+            });
+            analyticsHistory.historicalBaromin.update({
+                labels: analyticsHistory.historicalTempLabel,
+                series: [
+                    analyticsHistory.historicalTempSeries
+                ]
+            });
+            analyticsHistory.historicalLowBatt.update({
+                labels: analyticsHistory.historicalTempLabel,
+                series: [
+                    analyticsHistory.historicalTempSeries
+                ]
+            });
+            analyticsHistory.historicalIndoorHumid.update({
+                labels: analyticsHistory.historicalTempLabel,
+                series: [
+                    analyticsHistory.historicalTempSeries
+                ]
+            });
+            analyticsHistory.historicalIndoorTemp.update({
+                labels: analyticsHistory.historicalTempLabel,
+                series: [
+                    analyticsHistory.historicalTempSeries
+                ]
+            });
 
         }
         analyticsHistory.historicalTemp.update();
@@ -883,6 +962,7 @@ analyticsHistory = {
         analyticsHistory.historicalLowBatt.update();
         analyticsHistory.historicalIndoorHumid.update();
         analyticsHistory.historicalIndoorTemp.update();
+
 
     }
 };
