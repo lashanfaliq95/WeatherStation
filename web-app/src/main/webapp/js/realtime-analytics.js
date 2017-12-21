@@ -645,10 +645,10 @@ realtimeAnalytics = {
                 console.log('WebSocket is not supported by this browser.');
             }
             if (ws) {
-                console.log('realtime socket open');
+
                 ws.onmessage = function (event) {
                     var data = event.data;
-                    console.log(data);
+                    console.log('in msg');
                     var dataPoint = JSON.parse(data).event.payloadData;
 
 
@@ -794,7 +794,14 @@ realtimeAnalytics = {
                     $("#realtimewindgustLastUpdated").html(lastUpdatedText);
                     updateGraphs();
                 };
+
             }
+            $('.card').click(function() {
+                updateGraphs();
+            });
+
+
+
         }
 
         function updateGraphs(){
@@ -843,4 +850,5 @@ realtimeAnalytics = {
             arr[i] = timeDifference(now, arrRef[i], true);
         }
     }
+
 };

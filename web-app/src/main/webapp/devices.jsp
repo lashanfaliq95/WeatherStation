@@ -228,14 +228,15 @@ function removeNav() {
         var devicesListing = $('#devices-listing');
 
         var lastKnownSuccess = function (data) {
-            var record = JSON.parse(data).records[1];
+            var record = JSON.parse(data).records[0];
             var temperature=null;
             var humidity=null;
             if (record) {
                 temperature = record.values.tempf;
                 humidity = record.values.humidity;
+
             }
-           //console.log(data);
+
             var myRow = "<tr><a href='#" + dev.deviceIdentifier + "'><td>" + dev.name
                 + "</td><td>"
                 + (temperature) + "</td><td>" + (humidity) + "</td><td>"
@@ -303,6 +304,7 @@ function removeNav() {
         var deviceDesc = $("#deviceDesc").val();
 
         var success = function (data) {
+            console.log(data);
             var config = {};
             config.deviceType = "weatherstation";
             config.deviceName = deviceName;

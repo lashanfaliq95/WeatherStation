@@ -830,8 +830,7 @@ function redirect(ele) {
         $('#'+ele.id).toggleClass('modal');
         $('div.card-chart').toggleClass('maxHeight');
         $('div.card').toggleClass('padzero');
-    historyGraphRefresh();
-    realtimeGraphRefresh();
+        historyGraphRefresh();
 
 
 
@@ -931,7 +930,6 @@ function redirect(ele) {
     function realtimeGraphRefresh(wsEndpoint) {
         realtimeAnalytics.initDashboardPageCharts(wsEndpoint);
     }
-
     function displayAlerts(wsEndpoint) {
         connect(wsEndpoint);
         var ws;
@@ -952,7 +950,7 @@ function redirect(ele) {
                 console.log('WebSocket is not supported by this browser.');
             }
             if (ws) {
-                ws.onmessage = function (event) {
+                ws.onmessage = function (event){
                     var data = event.data;
                     console.log(data);
                     var alert = JSON.parse(data).event.payloadData;
@@ -969,7 +967,7 @@ function redirect(ele) {
                             '</tr>';
                         realtimeAlerts.find('tbody').append(row);
                     }
-                };
+                }
             }
         }
 
