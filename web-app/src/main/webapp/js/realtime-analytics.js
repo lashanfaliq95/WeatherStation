@@ -594,9 +594,9 @@ realtimeAnalytics = {
         realtimeAnalytics.createLiFo(realtimelowbattSeries, 10);
 
         dataRealtimelowbattChart = {
-            labels: realtimebarominLabel,
+            labels: realtimelowbattLabel,
             series: [
-                realtimebarominSeries
+                realtimelowbattSeries
             ]
         };
 

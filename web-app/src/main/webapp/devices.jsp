@@ -10,7 +10,9 @@
     <link href="css/material-dashboard.css" rel="stylesheet" />
     <link href="css/font-awesome.min.css" rel="stylesheet">
     <link href="css/updates.css" rel="stylesheet">
-
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"
+          integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ=="
+          crossorigin=""/>
 </head>
 <body>
 <div class="wrapper">
@@ -41,6 +43,22 @@
                     <div class="col-md-12">
                         <div class="card card-plain">
                             <div class="card-header" data-background-color="blue">
+                                <div class="nav-tabs-wrapper">
+                                    <ul class="nav nav-tabs" data-tabs="tabs">
+                                        <li class="active" id="tableViewTab">
+                                            <a href="#tableview" data-toggle="tab">
+                                                <i class="material-icons">access_alarms</i> Table view
+                                                <div class="ripple-container"></div>
+                                            </a>
+                                        </li>
+                                        <li class="" id="mapViewTab">
+                                            <a href="#mapView" data-toggle="tab">
+                                                <i class="material-icons">map</i> Map view
+                                                <div class="ripple-container"></div>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
                                 <h4 class="title">Weather stations enrolled</h4>
                                 <p class="category">Below are the list of weather stations enrolled with the server</p>
                                 <table style="width:100%">
@@ -127,6 +145,8 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="tab-content">
+                                <div id="tableview" class="tab-pane fade in active">
                             <div class="card-content table-responsive">
                                 <table class="table table-hover" id="devices-listing">
                                     <thead>
@@ -146,6 +166,13 @@
                                 </table>
                                 <div id="nav"></div>
                             </div>
+                        </div>
+                                <div id="mapView" class="tab-pane fade in active">
+                                    <div id="mapid" style="width: 100%; height: 100%;"></div>
+
+
+                                </div>
+                    </div>
                         </div>
                     </div>
                 </div>
@@ -174,7 +201,30 @@
 <script src="js/material-kit.js" type="text/javascript"></script>
 <script src="js/bootstrap-notify.js" type="text/javascript"></script>
 <script src="js/material-dashboard.js" type="text/javascript"></script>
+<script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"
+        integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log=="
+        crossorigin=""></script>
 <script type="text/javascript">
+    //map begin
+
+    var mymap = L.map('mapid').setView([  7.8731, 80.7718], 10);
+
+    L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+        attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+        maxZoom: 18,
+        id: 'mapbox.streets',
+        accessToken: 'pk.eyJ1IjoibGFzaGFuIiwiYSI6ImNqYmc3dGVybTFlZ3UyeXF3cG8yNGxsdzMifQ.n3QEq0-g5tVFmsQxn3JZ-A'
+    }).addTo(mymap);
+
+    function addToMap(lat,long,devName,devId){
+        var marker = L.marker([lat, long]).addTo(mymap);
+        marker.bindPopup("<b id='weatherStation"+devId+"'>Device details</b><br>"+devName+"").openPopup();
+    }
+
+
+
+
+    //map end
 
  var devices=[];
 
@@ -223,11 +273,13 @@ function removeNav() {
 
 
     });
-
+    var templat= 7.8731;
+    var templong=80.7718;
     function getDevice(dev, index) {
         var devicesListing = $('#devices-listing');
 
         var lastKnownSuccess = function (data) {
+
             var record = JSON.parse(data).records[0];
             var temperature=null;
             var humidity=null;
@@ -247,9 +299,14 @@ function removeNav() {
                 + "</a></tr>";
             devicesListing.find('tbody').append(myRow);
             var newIndex = index + 1;
+
             if (devices.length > newIndex) {
                 getDevice(devices[newIndex], newIndex);
+                addToMap(templat,templong, dev.deviceIdentifier,dev.id);
+                templat+=0.01;
+                templong+=0.01;
             }
+
             //function to implement the regex search bar
 
             var $rows = $('#devices-listing tbody tr');
@@ -280,7 +337,7 @@ function removeNav() {
     function getAllDevices() {
         var success = function (data) {
             devices = JSON.parse(data).devices;
-            console.log(devices.length);
+
             var devicesListing = $('#devices-listing');
             if (devices && devices.length > 0) {
                 devicesListing.find('tbody').empty();
@@ -304,7 +361,7 @@ function removeNav() {
         var deviceDesc = $("#deviceDesc").val();
 
         var success = function (data) {
-            console.log(data);
+
             var config = {};
             config.deviceType = "weatherstation";
             config.deviceName = deviceName;
