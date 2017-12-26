@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/org.wso2.iot.locker.iml" filepath="$PROJECT_DIR$/org.wso2.iot.locker.iml" />
+      <module fileurl="file://$PROJECT_DIR$/WeatherStation.iml" filepath="$PROJECT_DIR$/WeatherStation.iml" />
       <module fileurl="file://$PROJECT_DIR$/agent/org.wso2.iot.locker.agent.iml" filepath="$PROJECT_DIR$/agent/org.wso2.iot.locker.agent.iml" />
       <module fileurl="file://$PROJECT_DIR$/analytics/org.wso2.iot.locker.analytics.iml" filepath="$PROJECT_DIR$/analytics/org.wso2.iot.locker.analytics.iml" />
       <module fileurl="file://$PROJECT_DIR$/web-app/org.wso2.iot.locker.portal.iml" filepath="$PROJECT_DIR$/web-app/org.wso2.iot.locker.portal.iml" />
