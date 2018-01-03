@@ -170,8 +170,6 @@
                         </div>
                                 <div id="mapView" class="tab-pane fade ">
                                     <div id="mapid" style="width: 100%; height: 100%;"></div>
-
-
                                 </div>
                     </div>
                         </div>
@@ -217,9 +215,9 @@
         accessToken: 'pk.eyJ1IjoibGFzaGFuIiwiYSI6ImNqYmc3dGVybTFlZ3UyeXF3cG8yNGxsdzMifQ.n3QEq0-g5tVFmsQxn3JZ-A'
     }).addTo(mymap);
 
-    function addToMap(lat,long,devName,devId,temp){
+    function addToMap(lat,long,devName,devId,temp,humidity,windDir){
         var marker = L.marker([lat, long]).addTo(mymap);
-        marker.bindPopup("<b id='weatherStation"+devId+"'>Device details</b><br>"+devName+"<br><i class=\"tiny material-icons\"> brightness_5</i>"+temp+"<br><button class=\"btn btn-primary btn-fab btn-fab-mini btn-round\" onclick=\"window.location.href='details.jsp?id="+devName+"'\"><i class=\"material-icons\">remove_red_eye</i> </button>",{minWidth:100}).openPopup();
+        marker.bindPopup("<b id='weatherStation"+devId+"'>Device details</b><br>"+devName+"<br><table><tr><td><i class=\"tiny material-icons\" >wb_sunny</i></td><td>"+temp+"</td></tr><tr><td><i class=\"tiny material-icons\">opacity</i></td><td>"+humidity+"</td></tr><tr><td><i class=\"tiny material-icons\" >call_made</i></td><td>"+windDir+"</td></tr><div style='margin-right:5px '><tr><td><button class=\"btn-primary btn-block\"   onclick=\"window.location.href='details.jsp?id="+devName+"'\"><i class=\"material-icons\">remove_red_eye</i> </button></td></tr></div></table>",{minWidth:100}).openPopup();
     }
 
 
@@ -230,7 +228,6 @@
  var devices=[];
 
  function paginate(val){
-
      //$('#devices-listing tr').toggleClass('paginate');
      var rowsShown = parseInt(val);
      var rowsTotal = devices.length;
@@ -281,9 +278,11 @@ function removeNav() {
             var record = JSON.parse(data).records[0];
             var temperature=null;
             var humidity=null;
+            var windDir=null;
             if (record) {
                 temperature = record.values.tempf;
                 humidity = record.values.humidity;
+                windDir=record.values.winddir;
 
             }
             var myRow = "<tr><a href='#" + dev.deviceIdentifier + "'><td>" + dev.name
@@ -296,10 +295,9 @@ function removeNav() {
                 + "</a></tr>";
             devicesListing.find('tbody').append(myRow);
             var newIndex = index + 1;
-            console.log('added device');
-            addToMap(templat,templong, dev.deviceIdentifier,dev.id,temperature);
-            console.log('index '+newIndex);
-            console.log('temp'+temperature);
+
+            addToMap(templat,templong, dev.deviceIdentifier,dev.id,temperature,humidity,windDir);
+
             templat+=0.01;
             templong+=0.01;
             if (devices.length > newIndex) {
