@@ -103,6 +103,7 @@
                                                            name="deviceDesc" id="deviceDesc"
                                                            class="form-control" />
                                                 </div>
+
                                             </form>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-default btn-simple"
@@ -167,7 +168,7 @@
                                 <div id="nav"></div>
                             </div>
                         </div>
-                                <div id="mapView" class="tab-pane fade in active">
+                                <div id="mapView" class="tab-pane fade ">
                                     <div id="mapid" style="width: 100%; height: 100%;"></div>
 
 
@@ -216,9 +217,9 @@
         accessToken: 'pk.eyJ1IjoibGFzaGFuIiwiYSI6ImNqYmc3dGVybTFlZ3UyeXF3cG8yNGxsdzMifQ.n3QEq0-g5tVFmsQxn3JZ-A'
     }).addTo(mymap);
 
-    function addToMap(lat,long,devName,devId){
+    function addToMap(lat,long,devName,devId,temp){
         var marker = L.marker([lat, long]).addTo(mymap);
-        marker.bindPopup("<b id='weatherStation"+devId+"'>Device details</b><br>"+devName+"").openPopup();
+        marker.bindPopup("<b id='weatherStation"+devId+"'>Device details</b><br>"+devName+"<br><i class=\"tiny material-icons\"> brightness_5</i>"+temp+"<br><button class=\"btn btn-primary btn-fab btn-fab-mini btn-round\" onclick=\"window.location.href='details.jsp?id="+devName+"'\"><i class=\"material-icons\">remove_red_eye</i> </button>",{minWidth:100}).openPopup();
     }
 
 
@@ -273,13 +274,10 @@ function removeNav() {
 
 
     });
-    var templat= 7.8731;
-    var templong=80.7718;
+
     function getDevice(dev, index) {
         var devicesListing = $('#devices-listing');
-
         var lastKnownSuccess = function (data) {
-
             var record = JSON.parse(data).records[0];
             var temperature=null;
             var humidity=null;
@@ -288,7 +286,6 @@ function removeNav() {
                 humidity = record.values.humidity;
 
             }
-
             var myRow = "<tr><a href='#" + dev.deviceIdentifier + "'><td>" + dev.name
                 + "</td><td>"
                 + (temperature) + "</td><td>" + (humidity) + "</td><td>"
@@ -299,12 +296,15 @@ function removeNav() {
                 + "</a></tr>";
             devicesListing.find('tbody').append(myRow);
             var newIndex = index + 1;
-
+            console.log('added device');
+            addToMap(templat,templong, dev.deviceIdentifier,dev.id,temperature);
+            console.log('index '+newIndex);
+            console.log('temp'+temperature);
+            templat+=0.01;
+            templong+=0.01;
             if (devices.length > newIndex) {
                 getDevice(devices[newIndex], newIndex);
-                addToMap(templat,templong, dev.deviceIdentifier,dev.id);
-                templat+=0.01;
-                templong+=0.01;
+
             }
 
             //function to implement the regex search bar
@@ -333,7 +333,8 @@ function removeNav() {
 
         });
     }
-
+    var templat= 7.8731;
+    var templong=80.7718;
     function getAllDevices() {
         var success = function (data) {
             devices = JSON.parse(data).devices;

@@ -80,14 +80,13 @@ html {
 
 .searchbox_1{
     background-color: #fffbf8;
-    padding:13px;
     width:250px;
     margin-top: 30px;
-    margin-left:5px;
+    margin-left:10px;
     -webkit-box-sizing:border-box;
     -moz-box-sizing:border-box;
     box-sizing:border-box;
-    border-radius:6px;
+
     -webkit-box-shadow:
             0 2px 4px 0 rgba(72, 72, 72, 0.83),
             0 10px 15px 0 rgba(126, 126, 126, 0.12),
@@ -105,12 +104,12 @@ html {
             0 2px 4px 2px rgba(255, 255, 255, 0.83) inset;
 }
 .search_1{
-    width:230px;
+    margin-left: 5px;
+    width:240px;
     height:30px;
-    padding-left:15px;
     border-radius:6px;
     border:none;
-    color:#0F0D0D;;
+    color:#0F0D0D;
     font-weight:500;
     background-color:#E2EFF7;;
     -webkit-box-shadow:
@@ -194,6 +193,7 @@ html {
     height: 100%;
 }
 
-#devices-listing tr{
-
+.popuprow{
+    display: inline-flex;
+    vertical-align: middle;
 }
