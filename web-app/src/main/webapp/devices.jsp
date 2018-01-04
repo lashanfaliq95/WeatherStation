@@ -297,7 +297,25 @@
      });
      $('#paginate').modal('hide');//hide popup after adding a device
  }
+////////////////////
+    $('#nav').bootpag({
+        total: 9,
+        page: 5,
+        maxVisible: 6,
+        href: "#pro-page-{{number}}",
+        leaps: false,
+        next: 'next',
+        prev: null
+    }).on('page', function(event, num){
 
+        //$('#devices-listing').find('tbody').append(rows.slice((num-1)*10,(num*10)+1));
+        $('#devices-listing tbody tr').hide();
+        $('#devices-listing tbody tr').slice((num-1)*10,(num*10)+1).show();
+    });
+
+
+
+    ///////////////////////
 function removeNav() {
     $('#devices-listing tbody tr').show();
     $('#devices-listing tbody tr').css('opacity','0.0').hide().slice(0, devices.length).css('display','table-row').animate({opacity:1}, 300);
@@ -316,7 +334,7 @@ function removeNav() {
 
 
     });
-
+var rows=[];
     function getDevice(dev, index,lat,long) {
         var devicesListing = $('#devices-listing');
         var lastKnownSuccess = function (data) {
@@ -343,6 +361,7 @@ function removeNav() {
                 + "<i class=\"material-icons\">remove_red_eye</i>"
                 + "</button></td>"
                 + "</a></tr>";
+            rows.push(myRow);
             devicesListing.find('tbody').append(myRow);
 
 
@@ -366,7 +385,7 @@ function removeNav() {
 
             var $rows = $('#devices-listing tbody tr');
             $('#search').keyup(function() {
-                removeNav();
+                
                 var val = '^(?=.*\\b' + $.trim($(this).val()).split(/\s+/).join('\\b)(?=.*\\b') + ').*$',
                     reg = RegExp(val, 'i'),
                     text;
@@ -388,7 +407,6 @@ function removeNav() {
 
         });
     }
-    
     function getAllDevices() {
         var success = function (data) {
             devices = JSON.parse(data).devices;
