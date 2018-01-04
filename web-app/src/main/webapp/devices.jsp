@@ -45,13 +45,13 @@
                             <div class="card-header" data-background-color="blue">
                                 <div class="nav-tabs-wrapper">
                                     <ul class="nav nav-tabs" data-tabs="tabs">
-                                        <li class="active" id="tableViewTab">
+                                        <li class="" id="tableViewTab">
                                             <a href="#tableview" data-toggle="tab">
                                                 <i class="material-icons">access_alarms</i> Table view
                                                 <div class="ripple-container"></div>
                                             </a>
                                         </li>
-                                        <li class="" id="mapViewTab">
+                                        <li class="active" id="mapViewTab">
                                             <a href="#mapView" data-toggle="tab">
                                                 <i class="material-icons">map</i> Map view
                                                 <div class="ripple-container"></div>
@@ -103,6 +103,8 @@
                                                            name="deviceDesc" id="deviceDesc"
                                                            class="form-control" />
                                                 </div>
+                                                <div id="inputMapId"></div>
+
 
                                             </form>
                                             <div class="modal-footer">
@@ -147,7 +149,7 @@
                                 </div>
                             </div>
                             <div class="tab-content">
-                                <div id="tableview" class="tab-pane fade in active">
+                                <div id="tableview" class="tab-pane fade">
                             <div class="card-content table-responsive">
                                 <table class="table table-hover" id="devices-listing">
                                     <thead>
@@ -168,7 +170,7 @@
                                 <div id="nav"></div>
                             </div>
                         </div>
-                                <div id="mapView" class="tab-pane fade ">
+                                <div id="mapView" class="tab-pane fade in active">
                                     <div id="mapid" style="width: 100%; height: 100%;"></div>
                                 </div>
                     </div>
@@ -224,7 +226,45 @@
 
 
     //map end
+//input map
+    var map = L.map('inputMapId').setView([6.9271, 79.8612], 7);
 
+    L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    var popup = L.popup();
+    var lat;
+    var lng;
+
+    // generates popup and assigns latitude and longitude values to variables
+    function onMapClick(e) {
+        popup
+            .setLatLng(e.latlng)
+            .setContent("Location with coordinates " + e.latlng.toString() + " is selected")
+            .openOn(map);
+        lat = e.latlng.lat;
+        lng = e.latlng.lng;
+
+        latValue(lat);
+        lngValue(lng);
+
+    }
+
+    // returns value of latitude
+    function latValue(lat) {
+        console.log(lat);
+        return lat;
+    }
+
+    // returns value of longitude
+    function lngValue(lng) {
+        console.log(lng);
+        return lng;
+    }
+
+    map.on('click', onMapClick);
+    //end
  var devices=[];
 
  function paginate(val){
@@ -272,14 +312,18 @@ function removeNav() {
 
     });
 
-    function getDevice(dev, index) {
+    function getDevice(dev, index,lat,long) {
         var devicesListing = $('#devices-listing');
         var lastKnownSuccess = function (data) {
+
             var record = JSON.parse(data).records[0];
+
             var temperature=null;
             var humidity=null;
             var windDir=null;
+
             if (record) {
+
                 temperature = record.values.tempf;
                 humidity = record.values.humidity;
                 windDir=record.values.winddir;
@@ -296,13 +340,11 @@ function removeNav() {
             devicesListing.find('tbody').append(myRow);
             var newIndex = index + 1;
 
-            addToMap(templat,templong, dev.deviceIdentifier,dev.id,temperature,humidity,windDir);
+            addToMap(lat,long, dev.deviceIdentifier,dev.id,temperature,humidity,windDir);
 
-            templat+=0.01;
-            templong+=0.01;
+          
             if (devices.length > newIndex) {
-                getDevice(devices[newIndex], newIndex);
-
+                getDevice(devices[newIndex], newIndex,devices[newIndex].properties[0].value,devices[newIndex].properties[1].value);
             }
 
             //function to implement the regex search bar
@@ -337,10 +379,13 @@ function removeNav() {
         var success = function (data) {
             devices = JSON.parse(data).devices;
 
+            console.log(devices[24].properties[0].value);
             var devicesListing = $('#devices-listing');
             if (devices && devices.length > 0) {
+
+
                 devicesListing.find('tbody').empty();
-                getDevice(devices[0], 0);
+                getDevice(devices[0], 0,devices[0].properties[0].value,devices[0].properties[1].value);
             } else {
                 var myRow = "<tr><td colspan=\"6\" style=\"padding-top: 30px;\"><strong>No Devices Found</strong></td></tr>";
                 devicesListing.find('tbody').replaceWith(myRow);
@@ -359,6 +404,7 @@ function removeNav() {
         var deviceName = $("#deviceName").val();
         var deviceDesc = $("#deviceDesc").val();
 
+
         var success = function (data) {
 
             var config = {};
@@ -367,6 +413,7 @@ function removeNav() {
             config.deviceId = deviceId;
 
             var configSuccess = function (data) {
+
                 var appResult = JSON.parse(data);
 
                 config.clientId = appResult.clientId;
@@ -395,14 +442,14 @@ function removeNav() {
                 success: configSuccess
             });
         };
-
+       console.log('lat'+lat+'long'+lng);
         var payload = "{\n"
             + "\"name\": \"" + deviceName + "\",\n"
             + "\"deviceIdentifier\": \"" + deviceId + "\",\n"
             + "\"description\": \"" + deviceDesc + "\",\n"
             + "\"type\": \"weatherstation\",\n"
             + "\"enrolmentInfo\": {\"status\": \"ACTIVE\", \"ownership\": \"BYOD\"},\n"
-            + "\"properties\": []\n"
+            + "\"properties\": [{name: \"latitude\", value:\"" + lat + "\"}, {name: \"longitude\", value: \"" + lng + "\"}]\n"
             + "}";
         $.ajax({
             type: "POST",
@@ -412,5 +459,5 @@ function removeNav() {
         });
     }
 </script>
-
 </html>
+

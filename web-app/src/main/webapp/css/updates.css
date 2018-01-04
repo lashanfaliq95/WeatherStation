@@ -197,3 +197,13 @@ html {
     display: inline-flex;
     vertical-align: middle;
 }
+#inputMapId{
+    width: 90%;
+    height: 30%;
+}
+
+#mapid{
+    width: 90%;
+    height: 70%;
+}
+
