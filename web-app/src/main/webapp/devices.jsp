@@ -202,6 +202,7 @@
 <script src="js/material-kit.js" type="text/javascript"></script>
 <script src="js/bootstrap-notify.js" type="text/javascript"></script>
 <script src="js/material-dashboard.js" type="text/javascript"></script>
+<script type="text/javascript" src="js/libs/jquery.bootpag.js"></script>
 <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"
         integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log=="
         crossorigin=""></script>
@@ -218,8 +219,12 @@
     }).addTo(mymap);
 
     function addToMap(lat,long,devName,devId,temp,humidity,windDir){
+
+            console.log(devName+' lat'+lat+" long"+long);
+
         var marker = L.marker([lat, long]).addTo(mymap);
         marker.bindPopup("<b id='weatherStation"+devId+"'>Device details</b><br>"+devName+"<br><table><tr><td><i class=\"tiny material-icons\" >wb_sunny</i></td><td>"+temp+"</td></tr><tr><td><i class=\"tiny material-icons\">opacity</i></td><td>"+humidity+"</td></tr><tr><td><i class=\"tiny material-icons\" >call_made</i></td><td>"+windDir+"</td></tr><div style='margin-right:5px '><tr><td><button class=\"btn-primary btn-block\"   onclick=\"window.location.href='details.jsp?id="+devName+"'\"><i class=\"material-icons\">remove_red_eye</i> </button></td></tr></div></table>",{minWidth:100}).openPopup();
+
     }
 
 
@@ -329,6 +334,7 @@ function removeNav() {
                 windDir=record.values.winddir;
 
             }
+
             var myRow = "<tr><a href='#" + dev.deviceIdentifier + "'><td>" + dev.name
                 + "</td><td>"
                 + (temperature) + "</td><td>" + (humidity) + "</td><td>"
@@ -338,12 +344,17 @@ function removeNav() {
                 + "</button></td>"
                 + "</a></tr>";
             devicesListing.find('tbody').append(myRow);
+
+
+
             var newIndex = index + 1;
-
-            addToMap(lat,long, dev.deviceIdentifier,dev.id,temperature,humidity,windDir);
-
-          
             if (devices.length > newIndex) {
+                if((lat==null || lat==="undefined" ) || (long==null || lat==="undefined")){
+                    console.log('undefined lat'+lat+' long '+long);
+                }
+                else{
+                    addToMap(lat,long, dev.deviceIdentifier,dev.id,temperature,humidity,windDir);
+                }
                 getDevice(devices[newIndex], newIndex,devices[newIndex].properties[0].value,devices[newIndex].properties[1].value);
             }
 
@@ -379,13 +390,14 @@ function removeNav() {
         var success = function (data) {
             devices = JSON.parse(data).devices;
 
-            console.log(devices[24].properties[0].value);
+            console.log(data);
             var devicesListing = $('#devices-listing');
             if (devices && devices.length > 0) {
 
 
                 devicesListing.find('tbody').empty();
-                getDevice(devices[0], 0,devices[0].properties[0].value,devices[0].properties[1].value);
+                getDevice(devices[14], 14,devices[14].properties[0].value,devices[14].properties[1].value);
+
             } else {
                 var myRow = "<tr><td colspan=\"6\" style=\"padding-top: 30px;\"><strong>No Devices Found</strong></td></tr>";
                 devicesListing.find('tbody').replaceWith(myRow);
