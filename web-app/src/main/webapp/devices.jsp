@@ -346,15 +346,19 @@ function removeNav() {
             devicesListing.find('tbody').append(myRow);
 
 
-
+//if location is given add it to the map
+            if((lat==null || lat==="undefined" ) || (long==null || lat==="undefined")){
+                console.log('undefined lat'+lat+' long '+long);
+            }
+            else{
+                console.log('device added'+dev.deviceIdentifier);
+                addToMap(lat,long, dev.deviceIdentifier,dev.id,temperature,humidity,windDir);
+            }
             var newIndex = index + 1;
+
+
             if (devices.length > newIndex) {
-                if((lat==null || lat==="undefined" ) || (long==null || lat==="undefined")){
-                    console.log('undefined lat'+lat+' long '+long);
-                }
-                else{
-                    addToMap(lat,long, dev.deviceIdentifier,dev.id,temperature,humidity,windDir);
-                }
+
                 getDevice(devices[newIndex], newIndex,devices[newIndex].properties[0].value,devices[newIndex].properties[1].value);
             }
 
@@ -384,8 +388,7 @@ function removeNav() {
 
         });
     }
-    var templat= 7.8731;
-    var templong=80.7718;
+    
     function getAllDevices() {
         var success = function (data) {
             devices = JSON.parse(data).devices;
