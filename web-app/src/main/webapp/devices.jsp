@@ -45,14 +45,14 @@
                             <div class="card-header" data-background-color="blue">
                                 <div class="nav-tabs-wrapper">
                                     <ul class="nav nav-tabs" data-tabs="tabs">
-                                        <li class="" id="tableViewTab">
+                                        <li class="active" id="tableViewTab">
                                             <a href="#tableview" data-toggle="tab">
                                                 <i class="material-icons">access_alarms</i> Table view
                                                 <div class="ripple-container"></div>
                                             </a>
                                         </li>
-                                        <li class="active" id="mapViewTab">
-                                            <a href="#mapView" data-toggle="tab">
+                                        <li class="" id="mapViewTab">
+                                            <a href="#mapView" data-toggle="tab" >
                                                 <i class="material-icons">map</i> Map view
                                                 <div class="ripple-container"></div>
                                             </a>
@@ -65,11 +65,6 @@
                                     <tr>
                                         <th><button class="btn btn-white" data-toggle="modal" data-target="#newDeviceModal">Add
                                             Weather station
-                                        </button></th>
-                                        <th><button class="btn btn-white pull-right"   data-toggle="modal" data-target="#paginate">Paginate
-                                        </button></th>
-                                        <th><button class="btn btn-white" onclick="getAllDevices(),removeNav();">
-                                            <i class="material-icons">refresh</i>Refresh Table
                                         </button></th>
                                     </tr>
                                 </table>
@@ -141,7 +136,7 @@
                                                         data-dismiss="modal">Close
                                                 </button>
                                                 <button type="button" class="btn btn-info btn-simple"
-                                                        onclick="removeNav();paginate(document.getElementById('paginateNum').value)">Paginate
+                                                        onclick="paginate(document.getElementById('paginateNum').value)">Paginate
                                                 </button>
                                             </div>
                                         </div>
@@ -149,7 +144,7 @@
                                 </div>
                             </div>
                             <div class="tab-content">
-                                <div id="tableview" class="tab-pane fade">
+                                <div id="tableview" class="tab-pane fade in active">
                             <div class="card-content table-responsive">
                                 <table class="table table-hover" id="devices-listing">
                                     <thead>
@@ -170,8 +165,8 @@
                                 <div id="nav"></div>
                             </div>
                         </div>
-                                <div id="mapView" class="tab-pane fade in active">
-                                    <div id="mapid" style="width: 100%; height: 100%;"></div>
+                                <div id="mapView" class="tab-pane fade  ">
+                                    <div id="mapid" style="width: 100%; height:100%;"></div>
                                 </div>
                     </div>
                         </div>
@@ -209,30 +204,21 @@
 <script type="text/javascript">
     //map begin
 
-    var mymap = L.map('mapid').setView([  7.8731, 80.7718], 10);
-
+    var mymap = L.map('mapid').setView([7.65655, 80.77148], 8);
     L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
         attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
         maxZoom: 18,
         id: 'mapbox.streets',
         accessToken: 'pk.eyJ1IjoibGFzaGFuIiwiYSI6ImNqYmc3dGVybTFlZ3UyeXF3cG8yNGxsdzMifQ.n3QEq0-g5tVFmsQxn3JZ-A'
     }).addTo(mymap);
-
     function addToMap(lat,long,devName,devId,temp,humidity,windDir){
-
-            console.log(devName+' lat'+lat+" long"+long);
-
         var marker = L.marker([lat, long]).addTo(mymap);
-        marker.bindPopup("<b id='weatherStation"+devId+"'>Device details</b><br>"+devName+"<br><table><tr><td><i class=\"tiny material-icons\" >wb_sunny</i></td><td>"+temp+"</td></tr><tr><td><i class=\"tiny material-icons\">opacity</i></td><td>"+humidity+"</td></tr><tr><td><i class=\"tiny material-icons\" >call_made</i></td><td>"+windDir+"</td></tr><div style='margin-right:5px '><tr><td><button class=\"btn-primary btn-block\"   onclick=\"window.location.href='details.jsp?id="+devName+"'\"><i class=\"material-icons\">remove_red_eye</i> </button></td></tr></div></table>",{minWidth:100}).openPopup();
+        marker.bindPopup("<b id='weatherStation"+devId+"'>Device details</b><br>"+devName+"<br><table><tr><td><i class=\"tiny material-icons\" >wb_sunny</i></td><td>"+temp+"</td></tr><tr><td><i class=\"tiny material-icons\">opacity</i></td><td>"+humidity+"</td></tr><tr><td><i class=\"tiny material-icons\" >call_made</i></td><td>"+windDir+"</td></tr><div style='margin-right:5px '><tr><td><button class=\"btn-primary btn-block\"   onclick=\"window.location.href='details.jsp?id="+devName+"'\"><i class=\"material-icons\">remove_red_eye</i> </button></td></tr></div></table>",{minWidth:100});
 
     }
-
-
-
-
     //map end
 //input map
-    var map = L.map('inputMapId').setView([6.9271, 79.8612], 7);
+    var map = L.map('inputMapId').setView([7.65655, 80.77148], 7);
 
     L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -271,6 +257,7 @@
     map.on('click', onMapClick);
     //end
  var devices=[];
+    var rows=[];
 
  function paginate(val){
      //$('#devices-listing tr').toggleClass('paginate');
@@ -297,44 +284,23 @@
      });
      $('#paginate').modal('hide');//hide popup after adding a device
  }
-////////////////////
-    $('#nav').bootpag({
-        total: 9,
-        page: 5,
-        maxVisible: 6,
-        href: "#pro-page-{{number}}",
-        leaps: false,
-        next: 'next',
-        prev: null
-    }).on('page', function(event, num){
-
-        //$('#devices-listing').find('tbody').append(rows.slice((num-1)*10,(num*10)+1));
-        $('#devices-listing tbody tr').hide();
-        $('#devices-listing tbody tr').slice((num-1)*10,(num*10)+1).show();
-    });
-
-
-
-    ///////////////////////
-function removeNav() {
-    $('#devices-listing tbody tr').show();
-    $('#devices-listing tbody tr').css('opacity','0.0').hide().slice(0, devices.length).css('display','table-row').animate({opacity:1}, 300);
-     var myNode = document.getElementById("nav");
-    while (myNode.firstChild) {
-        myNode.removeChild(myNode.firstChild);
-    }
-}
-
-
     $(document).ready(function () {
-        // Javascript method's body can be found in assets/js/demos.js
-        //demo.initDashboardPageCharts();
         getAllDevices();
-
-
-
     });
-var rows=[];
+
+
+
+    $("a[href='#mapView']").on('shown.bs.tab', function(e) {
+        mymap.invalidateSize();
+    });
+
+    $('#newDeviceModal').on('show.bs.modal', function(){
+        setTimeout(function() {
+            map.invalidateSize();
+        }, 200);
+    });
+
+
     function getDevice(dev, index,lat,long) {
         var devicesListing = $('#devices-listing');
         var lastKnownSuccess = function (data) {
@@ -364,6 +330,7 @@ var rows=[];
             rows.push(myRow);
             devicesListing.find('tbody').append(myRow);
 
+            $('#devices-listing tbody tr').slice(10,rows.length+1).hide();
 
 //if location is given add it to the map
             if((lat==null || lat==="undefined" ) || (long==null || lat==="undefined")){
@@ -385,7 +352,7 @@ var rows=[];
 
             var $rows = $('#devices-listing tbody tr');
             $('#search').keyup(function() {
-                
+
                 var val = '^(?=.*\\b' + $.trim($(this).val()).split(/\s+/).join('\\b)(?=.*\\b') + ').*$',
                     reg = RegExp(val, 'i'),
                     text;
@@ -393,7 +360,11 @@ var rows=[];
                 $rows.show().filter(function() {
                     text = $(this).text().replace(/\s+/g, ' ');
                     return !reg.test(text);
+                    $('#devices-listing tbody tr').slice(10,rows.length+1).hide();
                 }).hide();});
+            $('#devices-listing tbody tr').slice(10,rows.length+1).hide();
+
+
 
         };
         $.ajax({
@@ -407,11 +378,28 @@ var rows=[];
 
         });
     }
+    var deviceCount;
     function getAllDevices() {
         var success = function (data) {
             devices = JSON.parse(data).devices;
+            deviceCount=JSON.parse(data).count;
+            console.log(deviceCount);
 
-            console.log(data);
+            $('#nav').bootpag({
+                total: Math.ceil(deviceCount/10),
+                page: 1,
+                maxVisible: 6,
+                href: "#pro-page-{{number}}",
+                leaps: false,
+                next: 'next',
+                prev: null
+            }).on('page', function(event, num){
+                //$('#devices-listing').find('tbody').append(rows.slice((num-1)*10,(num*10)+1));
+                $('#devices-listing tbody tr').hide();
+                $('#devices-listing tbody tr').slice((num-1)*10,(num*10)).show();
+            });
+
+            console.log(deviceCount);
             var devicesListing = $('#devices-listing');
             if (devices && devices.length > 0) {
 
