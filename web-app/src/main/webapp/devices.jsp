@@ -15,27 +15,24 @@
 </head>
 <body>
 <div class="wrapper">
-
     <div class="sidebar" data-color="blue" data-image="images/login_bg2.jpg">
-        <!--
-    Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
-
-    Tip 2: you can also add an image using data-image tag
--->
         <div class="logo">
             <a href="#" class="simple-text">
                 <strong>Weather</strong>Station
             </a>
         </div>
-
         <div class="sidebar-wrapper">
-            <form class="searchbox_1" action="">
-                <input type="search" id="search" class="search_1" placeholder="Search by device name"/>
-            </form>
+            <%--<form class="searchbox_1" action="">--%>
+                <%--<input type="search" id="search" class="search_1" placeholder="Search by device name"/>--%>
+            <%--</form>--%>
+                <div class="form-group label-floating is-empty" style="margin-top: 30px;margin-right: 10px;margin-left: 10px ">
+                    <label class="control-label">Search Device</label>
+                    <input type="search" id="search" class="form-control">
+                    <span class="material-input"></span></div>
         </div>
     </div>
-    <div class="main-withoutSidebar">
 
+    <div class="main-withoutSidebar">
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
@@ -114,8 +111,6 @@
                                                            class="form-control"/>
                                                 </div>
                                                 <div id="inputMapId"></div>
-
-
                                             </form>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-default btn-simple"
@@ -166,13 +161,10 @@
                     <a href="https://wso2.com/iot">WSO2 Inc.</a>
                 </p>
             </div>
-
-
         </div>
-
     </div>
-
 </div>
+
 </body>
 <script src="js/jquery.min.js" type="text/javascript"></script>
 <script src="js/bootstrap.min.js" type="text/javascript"></script>
@@ -187,7 +179,7 @@
         integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log=="
         crossorigin=""></script>
 <script type="text/javascript">
-    //map begin
+    //initialising map view
     var mymap = L.map('mapid').setView([7.65655, 80.77148], 8);
     L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
         attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
@@ -196,33 +188,23 @@
         accessToken: 'pk.eyJ1IjoibGFzaGFuIiwiYSI6ImNqYmc3dGVybTFlZ3UyeXF3cG8yNGxsdzMifQ.n3QEq0-g5tVFmsQxn3JZ-A'
     }).addTo(mymap);
 
+    //add devices to map as markers
     function addToMap(lat, long, devName, devId, temp, humidity, windDir) {
         var marker = L.marker([lat, long]).addTo(mymap);
         marker.bindPopup("<b id='weatherStation" + devId + "'>Device details</b><br>" + devName + "<br><table><tr><td><i class=\"tiny material-icons\" >wb_sunny</i></td><td>" + temp + "</td></tr><tr><td><i class=\"tiny material-icons\">opacity</i></td><td>" + humidity + "</td></tr><tr><td><i class=\"tiny material-icons\" >call_made</i></td><td>" + windDir + "</td></tr><div style='margin-right:5px '><tr><td><button class=\"btn-primary btn-block\"   onclick=\"window.location.href='details.jsp?id=" + devName + "'\"><i class=\"material-icons\">remove_red_eye</i> </button></td></tr></div></table>", {minWidth: 100});
 
     }
-//adding the legend
-    var legend = L.control({position: 'topright'});
 
+    //adding the legend
+    var legend = L.control({position: 'topright'});
     legend.onAdd = function (map) {
         var div = L.DomUtil.create('div', 'info legend');
-//            names = ['Temperature','Humidity','Wind Direction'];
-//            labels = ['<i class="tiny material-icons" >wb_sunny</i>','<i class="tiny material-icons">opacity</i>','<i class="tiny material-icons" >call_made</i>'];
-
-        // loop through our density intervals and generate a label with a colored square for each interval
-//        for (var i = 0; i < names.length; i++) {
-//            div.innerHTML +=
-//                '<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
-//                grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
-//        }
-
-            div.innerHTML +='<table><tr><td><i class=\"tiny material-icons\" >wb_sunny</i></td><td>Temperature</td></tr><tr><td><i class=\"tiny material-icons\">opacity</i></td><td> Humidity </td></tr><tr><td><i class=\"tiny material-icons\" >call_made</i></td><td>Wind Direction</td></tr></table>';
+        div.innerHTML += '<table><tr><td><i class=\"tiny material-icons\" >wb_sunny</i></td><td>Temperature</td></tr><tr><td><i class=\"tiny material-icons\">opacity</i></td><td> Humidity </td></tr><tr><td><i class=\"tiny material-icons\" >call_made</i></td><td>Wind Direction</td></tr></table>';
         return div;
     };
-
     legend.addTo(mymap);
-    //map end
-    //input map
+
+    //initialising input map
     var map = L.map('inputMapId').setView([7.65655, 80.77148], 7);
 
     L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
@@ -260,7 +242,8 @@
     }
 
     map.on('click', onMapClick);
-    //end
+
+
     var devices = [];
     var rows = [];
 
@@ -268,7 +251,7 @@
         getAllDevices();
     });
 
-
+    //fixed the issue with map not rendering in tabbed view and pop up model
     $("a[href='#mapView']").on('shown.bs.tab', function (e) {
         mymap.invalidateSize();
     });
@@ -291,7 +274,6 @@
             var windDir = null;
 
             if (record) {
-
                 temperature = record.values.tempf;
                 humidity = record.values.humidity;
                 windDir = record.values.winddir;
@@ -309,26 +291,23 @@
             rows.push(myRow);
             devicesListing.find('tbody').append(myRow);
 
+            //to fix the issue of paginate when the page loads initially
             $('#devices-listing tbody tr').slice(10, rows.length + 1).hide();
 
-//if location is given add it to the map
+            //To fix the issue of adding null or undefined values to map
             if ((lat == null || lat === "undefined" ) || (long == null || lat === "undefined")) {
                 console.log('undefined lat' + lat + ' long ' + long);
             }
             else {
-
                 addToMap(lat, long, dev.deviceIdentifier, dev.id, temperature, humidity, windDir);
             }
+
             var newIndex = index + 1;
-
-
             if (devices.length > newIndex) {
-
                 getDevice(devices[newIndex], newIndex, devices[newIndex].properties[0].value, devices[newIndex].properties[1].value);
             }
 
             //function to implement the regex search bar
-
             var $rows = $('#devices-listing tbody tr');
             $('#search').keyup(function () {
 
@@ -341,10 +320,9 @@
                     return !reg.test(text);
                     $('#devices-listing tbody tr').slice(10, rows.length + 1).hide();
                 }).hide();
-
+                //check if all the inputs have been erased if so realod the page
                 if (this.value.length === 0) {
-                    console.log('in');
-                    location.reload();//reload page after adding device
+                    location.reload();
                 }
 
             });
@@ -362,12 +340,12 @@
     }
 
     var deviceCount;
-
     function getAllDevices() {
         var success = function (data) {
             devices = JSON.parse(data).devices;
-            deviceCount = JSON.parse(data).count;
+            deviceCount = JSON.parse(data).count;//find the number of devices
 
+            //used bootpag library to implement the pagination
             $('#nav').bootpag({
                 total: Math.ceil(deviceCount / 10),
                 page: 1,
@@ -381,14 +359,10 @@
                 $('#devices-listing tbody tr').slice((num - 1) * 10, (num * 10)).show();
             });
 
-            console.log(deviceCount);
             var devicesListing = $('#devices-listing');
             if (devices && devices.length > 0) {
-
-
                 devicesListing.find('tbody').empty();
                 getDevice(devices[14], 14, devices[14].properties[0].value, devices[14].properties[1].value);
-
             } else {
                 var myRow = "<tr><td colspan=\"6\" style=\"padding-top: 30px;\"><strong>No Devices Found</strong></td></tr>";
                 devicesListing.find('tbody').replaceWith(myRow);
@@ -407,16 +381,13 @@
         var deviceName = $("#deviceName").val();
         var deviceDesc = $("#deviceDesc").val();
 
-
         var success = function (data) {
-
             var config = {};
             config.deviceType = "weatherstation";
             config.deviceName = deviceName;
             config.deviceId = deviceId;
 
             var configSuccess = function (data) {
-
                 var appResult = JSON.parse(data);
 
                 config.clientId = appResult.clientId;

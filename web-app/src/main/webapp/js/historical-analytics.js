@@ -825,7 +825,24 @@ analyticsHistory = {
                 analyticsHistory.historicalUVSeries.push(UV);
 
 
-
+                analyticsHistory.historicalTemp.update();
+                analyticsHistory.historicalHumid.update();
+                analyticsHistory.historicalWindDir.update();
+                analyticsHistory.historicalDewptf.update();
+                analyticsHistory.historicalUV.update();
+                analyticsHistory.historicalWindChill.update();
+                analyticsHistory.historicalWindGust.update();
+                analyticsHistory.historicalWindSpeed.update();
+                analyticsHistory.historicalSolarRadiation.update();
+                analyticsHistory.historicalRaining.update();
+                analyticsHistory.historicalDailyRaining.update();
+                analyticsHistory.historicalWeeklyRaining.update();
+                analyticsHistory.historicalMonthlyRaining.update();
+                analyticsHistory.historicalYearlyRaining.update();
+                analyticsHistory.historicalBaromin.update();
+                analyticsHistory.historicalLowBatt.update();
+                analyticsHistory.historicalIndoorHumid.update();
+                analyticsHistory.historicalIndoorTemp.update();
 
 
             }

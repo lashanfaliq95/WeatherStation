@@ -648,10 +648,7 @@ realtimeAnalytics = {
 
                 ws.onmessage = function (event) {
                     var data = event.data;
-                    console.log('in msg');
                     var dataPoint = JSON.parse(data).event.payloadData;
-
-
                     var temperature = dataPoint.tempf;
                     var humidity = dataPoint.humidity;
                     var windDir=dataPoint.winddir;
@@ -796,6 +793,7 @@ realtimeAnalytics = {
                 };
 
             }
+            //refresh graphs on click on the chart
             $('.card').click(function() {
                 updateGraphs();
             });

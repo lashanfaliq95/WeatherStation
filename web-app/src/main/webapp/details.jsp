@@ -69,11 +69,11 @@
         result.append(line);
     }
 
-    JSONObject   device = new JSONObject(result.toString());
-    JSONObject  enrolmentInfo = device.getJSONObject("enrolmentInfo");
+    JSONObject device = new JSONObject(result.toString());
+    JSONObject enrolmentInfo = device.getJSONObject("enrolmentInfo");
     try {
 
-    }catch(JSONException e){
+    } catch (JSONException e) {
 %>
 Error occurred while fetching device info.
 <%
@@ -82,22 +82,22 @@ Error occurred while fetching device info.
 
 <html lang="en">
 
-
 <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <title>Real time weather data</title>
-    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
-    <meta name="viewport" content="width=device-width" />
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport'/>
+    <meta name="viewport" content="width=device-width"/>
     <!-- Bootstrap core CSS     -->
-    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/bootstrap.min.css" rel="stylesheet"/>
     <!--  Material Dashboard CSS    -->
-    <link href="css/material-dashboard.css?v=1.2.0" rel="stylesheet" />
-    <link href="css/updates.css" rel="stylesheet" />
+    <link href="css/material-dashboard.css?v=1.2.0" rel="stylesheet"/>
+    <link href="css/updates.css" rel="stylesheet"/>
     <!--     Fonts and icons     -->
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
-    <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons' rel='stylesheet' type='text/css'>
-    <link href="css/daterangepicker.css" rel="stylesheet" />
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons' rel='stylesheet'
+          type='text/css'>
+    <link href="css/daterangepicker.css" rel="stylesheet"/>
 
 </head>
 
@@ -108,20 +108,21 @@ Error occurred while fetching device info.
             <div class="card card-profile">
                 <div class="card-avatar">
                     <a href="#">
-                        <img class="img" src="images/weatherstationicon.jpg" />
+                        <img class="img" src="images/weatherstationicon.jpg"/>
                     </a>
                 </div>
-                <div class="content"> <div class="card-header" data-background-color="blue">
-                    <h6 class="category text-gray">ID: <%=device.getString("deviceIdentifier")%>
-                    </h6>
-                    <h4 class="card-title"><%=device.getString("name")%>
-                    </h4>
-                    <p >
-                        Owned by <%=enrolmentInfo.getString("owner")%>.
-                        Installed on <%=new Date(enrolmentInfo.getLong("dateOfEnrolment")).toString()%>.
-                        <%=device.getString("description")%>
-                    </p>
-                </div>
+                <div class="content">
+                    <div class="card-header" data-background-color="blue">
+                        <h6 class="category text-gray">ID: <%=device.getString("deviceIdentifier")%>
+                        </h6>
+                        <h4 class="card-title"><%=device.getString("name")%>
+                        </h4>
+                        <p>
+                            Owned by <%=enrolmentInfo.getString("owner")%>.
+                            Installed on <%=new Date(enrolmentInfo.getLong("dateOfEnrolment")).toString()%>.
+                            <%=device.getString("description")%>
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -167,9 +168,9 @@ Error occurred while fetching device info.
             <div class="row">
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="card card-stats">
-                        <div  class="card-header"
-                              data-background-color="red">
-                            <img  src="images/temperature-controlled.jpg" >
+                        <div class="card-header"
+                             data-background-color="red">
+                            <img src="images/temperature-controlled.jpg">
 
                         </div>
                         <div class="card-content">
@@ -186,7 +187,7 @@ Error occurred while fetching device info.
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="card card-stats">
                         <div class="card-header" data-background-color="none">
-                            <img  src="images/Humidity.png" >
+                            <img src="images/Humidity.png">
                         </div>
                         <div class="card-content">
                             <p class="category">Humidity</p>
@@ -202,7 +203,7 @@ Error occurred while fetching device info.
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="card card-stats">
                         <div class="card-header" data-background-color="blue">
-                            <img  src="images/images.jpeg" >
+                            <img src="images/images.jpeg">
                         </div>
                         <div class="card-content">
                             <p class="category">Wind Direction</p>
@@ -223,10 +224,10 @@ Error occurred while fetching device info.
                 <div class="tab-content">
                     <div id="realtime" class="tab-pane fade in active">
                         <div class="row">
-                            <div class="col-md-4" >
-                                <div class="card" id="temp"  style="cursor: pointer" onclick=redirect(this)>
-                                    <div class="card-header card-chart" data-background-color="red" >
-                                        <div class="ct-chart" id="RealTimeTempChart" >&nbsp;</div>
+                            <div class="col-md-4">
+                                <div class="card" id="temp" style="cursor: pointer" onclick=redirect(this)>
+                                    <div class="card-header card-chart" data-background-color="red">
+                                        <div class="ct-chart" id="RealTimeTempChart">&nbsp;</div>
                                     </div>
                                     <div class="card-content">
                                         <h4 class="title">Temperature</h4>
@@ -240,10 +241,10 @@ Error occurred while fetching device info.
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4" >
+                            <div class="col-md-4">
                                 <div class="card" id='humid' style="cursor: pointer" onclick=redirect(this)>
                                     <div class="card-header card-chart" data-background-color="blue">
-                                        <div class="ct-chart" id="RealTimeHumidityChart" ></div>
+                                        <div class="ct-chart" id="RealTimeHumidityChart"></div>
                                     </div>
                                     <div class="card-content">
                                         <h4 class="title">Humidity</h4>
@@ -260,7 +261,7 @@ Error occurred while fetching device info.
                             <div class="col-md-4">
                                 <div class="card" id='winddir' style="cursor: pointer" onclick=redirect(this)>
                                     <div class="card-header card-chart" data-background-color="green">
-                                        <div class="ct-chart" id="RealTimeWindDirChart" ></div>
+                                        <div class="ct-chart" id="RealTimeWindDirChart"></div>
                                     </div>
                                     <div class="card-content">
                                         <h4 class="title">Wind Direction</h4>
@@ -277,7 +278,7 @@ Error occurred while fetching device info.
                             <div class="col-md-4">
                                 <div class="card" id='windspeed' style="cursor: pointer" onclick=redirect(this)>
                                     <div class="card-header card-chart" data-background-color="purple">
-                                        <div class="ct-chart" id="RealTimeWindSpeedChart" ></div>
+                                        <div class="ct-chart" id="RealTimeWindSpeedChart"></div>
                                     </div>
                                     <div class="card-content">
                                         <h4 class="title">Wind Speed</h4>
@@ -294,7 +295,7 @@ Error occurred while fetching device info.
                             <div class="col-md-4">
                                 <div class="card" id='indoorTemp' style="cursor: pointer" onclick=redirect(this)>
                                     <div class="card-header card-chart" data-background-color="orange">
-                                        <div class="ct-chart" id="RealTimeIndoorTempChart" ></div>
+                                        <div class="ct-chart" id="RealTimeIndoorTempChart"></div>
                                     </div>
                                     <div class="card-content">
                                         <h4 class="title">Indoor Temperature</h4>
@@ -311,7 +312,7 @@ Error occurred while fetching device info.
                             <div class="col-md-4">
                                 <div class="card" id='indoorHumid' style="cursor: pointer" onclick=redirect(this)>
                                     <div class="card-header card-chart" data-background-color="yellow">
-                                        <div class="ct-chart" id="RealTimeIndoorHumidityChart" ></div>
+                                        <div class="ct-chart" id="RealTimeIndoorHumidityChart"></div>
                                     </div>
                                     <div class="card-content">
                                         <h4 class="title">Indoor Humidity</h4>
@@ -330,7 +331,7 @@ Error occurred while fetching device info.
                             <div class="col-md-4">
                                 <div class="card" id='windgust' style="cursor: pointer" onclick=redirect(this)>
                                     <div class="card-header card-chart" data-background-color="orange">
-                                        <div class="ct-chart" id="RealTimeWindGustChart" ></div>
+                                        <div class="ct-chart" id="RealTimeWindGustChart"></div>
                                     </div>
                                     <div class="card-content">
                                         <h4 class="title">Wind Gust</h4>
@@ -347,7 +348,7 @@ Error occurred while fetching device info.
                             <div class="col-md-4">
                                 <div class="card" id='dewpoint' style="cursor: pointer" onclick=redirect(this)>
                                     <div class="card-header card-chart" data-background-color="purple">
-                                        <div class="ct-chart" id="RealTimeDewPointChart" ></div>
+                                        <div class="ct-chart" id="RealTimeDewPointChart"></div>
                                     </div>
                                     <div class="card-content">
                                         <h4 class="title">Dew Point</h4>
@@ -364,7 +365,7 @@ Error occurred while fetching device info.
                             <div class="col-md-4">
                                 <div class="card" id='windchill' style="cursor: pointer" onclick=redirect(this)>
                                     <div class="card-header card-chart" data-background-color="red">
-                                        <div class="ct-chart" id="RealTimeWindChillChart" ></div>
+                                        <div class="ct-chart" id="RealTimeWindChillChart"></div>
                                     </div>
                                     <div class="card-content">
                                         <h4 class="title">Wind Chill</h4>
@@ -415,7 +416,7 @@ Error occurred while fetching device info.
                             <div class="col-md-4">
                                 <div class="card" id='lowbatt' style="cursor: pointer" onclick=redirect(this)>
                                     <div class="card-header card-chart" data-background-color="blue">
-                                        <div class="ct-chart" id="RealTimeLowbatChart" ></div>
+                                        <div class="ct-chart" id="RealTimeLowbatChart"></div>
                                     </div>
                                     <div class="card-content">
                                         <h4 class="title">Lowbatt</h4>
@@ -430,12 +431,11 @@ Error occurred while fetching device info.
                                 </div>
                             </div>
                         </div>
-
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="card" id='dailyraining' style="cursor: pointer" onclick=redirect(this)>
                                     <div class="card-header card-chart" data-background-color="green">
-                                        <div class="ct-chart" id="RealTimeDailyRainingChart" ></div>
+                                        <div class="ct-chart" id="RealTimeDailyRainingChart"></div>
                                     </div>
                                     <div class="card-content">
                                         <h4 class="title">Daily Raining</h4>
@@ -469,7 +469,7 @@ Error occurred while fetching device info.
                             <div class="col-md-4">
                                 <div class="card" id='monthlyraining' style="cursor: pointer" onclick=redirect(this)>
                                     <div class="card-header card-chart" data-background-color="orange">
-                                        <div class="ct-chart" id="RealTimeMonthlyRainingChart" ></div>
+                                        <div class="ct-chart" id="RealTimeMonthlyRainingChart"></div>
                                     </div>
                                     <div class="card-content">
                                         <h4 class="title">Monthly Raining</h4>
@@ -486,7 +486,7 @@ Error occurred while fetching device info.
                             <div class="col-md-4">
                                 <div class="card" id='yearlyraining' style="cursor: pointer" onclick=redirect(this)>
                                     <div class="card-header card-chart" data-background-color="purple">
-                                        <div class="ct-chart" id="RealTimeYearlyRainingChart" ></div>
+                                        <div class="ct-chart" id="RealTimeYearlyRainingChart"></div>
                                     </div>
                                     <div class="card-content">
                                         <h4 class="title">Yearly Raining</h4>
@@ -503,7 +503,7 @@ Error occurred while fetching device info.
                             <div class="col-md-4">
                                 <div class="card" id='solarradiation' style="cursor: pointer" onclick=redirect(this)>
                                     <div class="card-header card-chart" data-background-color="red">
-                                        <div class="ct-chart" id="RealTimeSolarRadiationChart" ></div>
+                                        <div class="ct-chart" id="RealTimeSolarRadiationChart"></div>
                                     </div>
                                     <div class="card-content">
                                         <h4 class="title">Solar Radiation</h4>
@@ -520,7 +520,7 @@ Error occurred while fetching device info.
                             <div class="col-md-4">
                                 <div class="card" id='uv' style="cursor: pointer" onclick=redirect(this)>
                                     <div class="card-header card-chart" data-background-color="blue">
-                                        <div class="ct-chart" id="RealTimeUltraVioletChart" ></div>
+                                        <div class="ct-chart" id="RealTimeUltraVioletChart"></div>
                                     </div>
                                     <div class="card-content">
                                         <h4 class="title">Ultra Violet</h4>
@@ -541,7 +541,7 @@ Error occurred while fetching device info.
                         <div style="margin-right: 10%; margin-left: 20%; ">
                             <h4>Select Date-range <input type="text" name="daterange" id="daterange"
                                                          value="01/01/2017 1:30 PM - 01/01/2017 2:00 PM"
-                                                         class="form-control" /></h4>
+                                                         class="form-control"/></h4>
 
                         </div>
                         <div class="row">
@@ -565,7 +565,7 @@ Error occurred while fetching device info.
                                     </div>
                                     <div class="card-content">
                                         <h4 class="title">Humidity</h4>
-                                        <p class="category"  id="historicalHumidAlert">
+                                        <p class="category" id="historicalHumidAlert">
                                                     <span class="text-success"><i
                                                             class="fa fa-long-arrow-up"></i> 5% </span> increase in
                                             Temperature.</p>
@@ -797,12 +797,9 @@ Error occurred while fetching device info.
                     </script>
                     <a href="https://wso2.com/iot">WSO2 Inc.</a>
                 </p>
-
             </footer>
+        </div>
     </div>
-
-
-</div>
 </div>
 </body>
 <!--   Core JS Files   -->
@@ -825,18 +822,16 @@ Error occurred while fetching device info.
 <script src="js/realtime-analytics.js"></script>
 
 <script type="text/javascript">
-
-function redirect(ele) {
-
-        $('#'+ele.id).toggleClass('modal');
+    //function to expand and refresh chart on click
+    function redirect(ele) {
+        $('#' + ele.id).toggleClass('modal');
         $('div.card-chart').toggleClass('maxHeight');
         $('div.card').toggleClass('padzero');
         historyGraphRefresh();
-}
+    }
 
     function datePickerCallback(startD, endD) {
         var eventsSuccess = function (data) {
-
             var records = JSON.parse(data);
             console.log(records);
             analyticsHistory.redrawGraphs(records);
@@ -886,6 +881,7 @@ function redirect(ele) {
 </script>
 <script type="text/javascript">
     var alerts = [];
+
     function timeDifference(current, previous, isShort) {
         var msPerMinute = 60 * 1000;
         var msPerHour = msPerMinute * 60;
@@ -927,10 +923,10 @@ function redirect(ele) {
     function realtimeGraphRefresh(wsEndpoint) {
         realtimeAnalytics.initDashboardPageCharts(wsEndpoint);
     }
+
     function displayAlerts(wsEndpoint) {
         connect(wsEndpoint);
         var ws;
-
         // close websocket when page is about to be unloaded
         // fixes broken pipe issue
         window.onbeforeunload = function () {
@@ -947,7 +943,7 @@ function redirect(ele) {
                 console.log('WebSocket is not supported by this browser.');
             }
             if (ws) {
-                ws.onmessage = function (event){
+                ws.onmessage = function (event) {
                     var data = event.data;
                     console.log(data);
                     var alert = JSON.parse(data).event.payloadData;
@@ -960,7 +956,7 @@ function redirect(ele) {
                     for (var i = 0; i < alerts.length; i++) {
                         var row = '<tr ' + (alerts[i].level === 'Warn' ? 'style="background-color: #faffd7">' : '>') +
                             '<td>' + new Date().toLocaleString() + '</td>' +
-                            '<td>'+alerts[i].message+'</td>' +
+                            '<td>' + alerts[i].message + '</td>' +
                             '</tr>';
                         realtimeAlerts.find('tbody').append(row);
                     }
