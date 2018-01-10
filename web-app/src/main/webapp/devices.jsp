@@ -22,16 +22,12 @@
             </a>
         </div>
         <div class="sidebar-wrapper">
-            <%--<form class="searchbox_1" action="">--%>
-                <%--<input type="search" id="search" class="search_1" placeholder="Search by device name"/>--%>
-            <%--</form>--%>
-                <div class="form-group label-floating is-empty" style="margin-top: 30px;margin-right: 10px;margin-left: 10px ">
+            <div class="form-group label-floating is-empty" style="margin-top: 30px;margin-right: 10px;margin-left: 10px ">
                     <label class="control-label">Search Device</label>
                     <input type="search" id="search" class="form-control">
                     <span class="material-input"></span></div>
         </div>
     </div>
-
     <div class="main-withoutSidebar">
         <div class="content">
             <div class="container-fluid">
