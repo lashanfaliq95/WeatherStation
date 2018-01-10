@@ -832,11 +832,7 @@ function redirect(ele) {
         $('div.card-chart').toggleClass('maxHeight');
         $('div.card').toggleClass('padzero');
         historyGraphRefresh();
-
-
-
 }
-
 
     function datePickerCallback(startD, endD) {
         var eventsSuccess = function (data) {
