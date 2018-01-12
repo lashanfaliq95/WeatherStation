@@ -135,20 +135,6 @@ html {
     height: auto;
 }
 
-.expandedChart {
-    width: 100%;
-    height: 100%;
-}
-
-.expanding-container {
-    width: 100%;
-    height: 100vh;
-    padding-right: 15px;
-    padding-left: 15px;
-    margin-right: auto;
-    margin-left: auto;
-}
-
 .card .card-header.card-chart.maxHeight {
     padding: 0;
     max-height: 90%;
@@ -174,6 +160,9 @@ html {
     height: 100%;
 }
 
+/*.ct-chart .expand{*/
+    /*min-height: 90%;*/
+/*}*/
 .popuprow {
     display: inline-flex;
     vertical-align: middle;

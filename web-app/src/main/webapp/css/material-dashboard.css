@@ -6,7 +6,7 @@
 
  * Product Page: http://www.creative-tim.com/product/material-dashboard
  * Copyright 2017 Creative Tim (http://www.creative-tim.com)
- * Licensesed under MIT (https://github.com/creativetimofficial/material-dashboard/blob/master/LICENSE.md)
+ * Licensed under MIT (https://github.com/creativetimofficial/material-dashboard/blob/master/LICENSE.md)
 
  =========================================================
 
@@ -929,8 +929,8 @@ h2.title {
 
 .main-panel {
     position: relative;
-    float: none;
-    width: 100%;
+    float: right;
+    width: calc(100% - 260px);
     -webkit-transition: all 0.33s cubic-bezier(0.685, 0.0473, 0.346, 1);
     -moz-transition: all 0.33s cubic-bezier(0.685, 0.0473, 0.346, 1);
     -o-transition: all 0.33s cubic-bezier(0.685, 0.0473, 0.346, 1);
@@ -940,7 +940,7 @@ h2.title {
 }
 
 .main-panel>.content {
-    margin-top: 300px;
+    margin-top: 70px;
     padding: 30px 15px;
     min-height: calc(100% - 123px);
 }
@@ -1200,7 +1200,7 @@ fieldset[disabled] .navbar .navbar-nav>li>a.btn.btn-default.active {
 .open>.navbar .navbar-nav>li>a.btn.btn-primary.dropdown-toggle,
 .open>.navbar .navbar-nav>li>a.btn.btn-primary.dropdown-toggle:focus,
 .open>.navbar .navbar-nav>li>a.btn.btn-primary.dropdown-toggle:hover {
-    background-color: #2B46B0;
+    background-color: #9c27b0;
     color: #FFFFFF;
 }
 
@@ -2452,18 +2452,18 @@ h6,
 }
 
 a {
-    color: #1593b0;
+    color: #9c27b0;
 }
 
 a:hover,
 a:focus {
-    color: #1a18c1;
+    color: #89229b;
     text-decoration: none;
 }
 
 a.text-info:hover,
 a.text-info:focus {
-    color: #00097b;
+    color: #00a5bb;
 }
 
 a .material-icons {
@@ -2833,14 +2833,14 @@ fieldset[disabled] .form-group .form-control {
 
 .form-group.is-focused .form-control {
     outline: none;
-    background-image: linear-gradient(#00097b, #00097b), linear-gradient(#D2D2D2, #D2D2D2);
+    background-image: linear-gradient(#9c27b0, #9c27b0), linear-gradient(#D2D2D2, #D2D2D2);
     background-size: 100% 2px, 100% 1px;
     box-shadow: none;
     transition-duration: 0.3s;
 }
 
 .form-group.is-focused .form-control .material-input:after {
-    background-color: #0047eb;
+    background-color: #9c27b0;
 }
 
 .form-group.is-focused.form-info .form-control {
@@ -2985,7 +2985,7 @@ label.control-label {
 
 .form-group {
     padding-bottom: 10px;
-    margin: 10px 0 0 0;
+    margin: 27px 0 0 0;
 }
 
 .form-group .form-control::-moz-placeholder {
@@ -3991,8 +3991,8 @@ fieldset[disabled] .form-group.is-focused .togglebutton label {
 .pagination>.active>span,
 .pagination>.active>span:focus,
 .pagination>.active>span:hover {
-    background-color: #1593b0;
-    border-color: #8ec1b8;
+    background-color: #9c27b0;
+    border-color: #9c27b0;
     color: #FFFFFF;
     box-shadow: 0 4px 5px 0 rgba(156, 39, 176, 0.14), 0 1px 10px 0 rgba(156, 39, 176, 0.12), 0 2px 4px -1px rgba(156, 39, 176, 0.2);
 }
@@ -5166,9 +5166,8 @@ footer .btn {
 
 .card .card-header.card-chart {
     padding: 0;
-    max-height: 18%;
+    min-height: 160px;
 }
-
 
 .card .card-header.card-chart+.content h4 {
     margin-top: 0;
@@ -5179,7 +5178,6 @@ footer .btn {
 }
 
 .card .card-header .ct-grid {
-    
     stroke: rgba(255, 255, 255, 0.2);
 }
 
@@ -5315,11 +5313,6 @@ footer .btn {
     box-shadow: 0 12px 20px -10px rgba(244, 67, 54, 0.28), 0 4px 20px 0px rgba(0, 0, 0, 0.12), 0 7px 8px -5px rgba(244, 67, 54, 0.2);
 }
 
-.card [data-background-color="yellow"] {
-    background: linear-gradient(60deg, #ffed00, #ffed00);
-    box-shadow: 0 7px 8px -5px rgba(255, 237, 89, 0.71), 0 4px 20px 0px rgba(0, 0, 0, 0.12), 0 7px 8px -5px rgba(255, 237, 89, 0.71);
-}
-
 .card [data-background-color] {
     color: #FFFFFF;
 }
@@ -5335,7 +5328,6 @@ footer .btn {
 .card-stats .card-header {
     float: left;
     text-align: center;
-    width: 30%;
 }
 
 .card-stats .card-header i {
@@ -5433,7 +5425,7 @@ footer .btn {
 }
 
 .nav-tabs {
-    background: #27a4b0;
+    background: #9c27b0;
     border: 0;
     border-radius: 3px;
     padding: 0 15px;

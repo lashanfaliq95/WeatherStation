@@ -20,64 +20,64 @@
 <%@include file="includes/authenticate.jsp" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
-    String id = request.getParameter("id");
-    if (id == null) {
-        response.sendRedirect("devices.jsp");
-        return;
-    }
+String id = request.getParameter("id");
+if (id == null) {
+response.sendRedirect("devices.jsp");
+return;
+}
 
-    String cookie = request.getHeader("Cookie");
+String cookie = request.getHeader("Cookie");
 
-    URI invokerURI = null;
-    try {
-        invokerURI = new URL(request.getScheme(),
-                request.getServerName(),
-                request.getServerPort(), request.getContextPath() + "/invoker/execute").toURI();
-    } catch (URISyntaxException e) {
-        e.printStackTrace();
-    }
-    HttpPost invokerEndpoint = new HttpPost(invokerURI);
-    invokerEndpoint.setHeader("Cookie", cookie);
+URI invokerURI = null;
+try {
+invokerURI = new URL(request.getScheme(),
+request.getServerName(),
+request.getServerPort(), request.getContextPath() + "/invoker/execute").toURI();
+} catch (URISyntaxException e) {
+e.printStackTrace();
+}
+HttpPost invokerEndpoint = new HttpPost(invokerURI);
+invokerEndpoint.setHeader("Cookie", cookie);
 
-    StringEntity entity = new StringEntity("uri=/devices/weatherstation/" + id + "&method=get",
-            ContentType.APPLICATION_FORM_URLENCODED);
-    invokerEndpoint.setEntity(entity);
+StringEntity entity = new StringEntity("uri=/devices/weatherstation/" + id + "&method=get",
+ContentType.APPLICATION_FORM_URLENCODED);
+invokerEndpoint.setEntity(entity);
 
-    SSLContextBuilder builder = new SSLContextBuilder();
-    builder.loadTrustMaterial(null, new TrustSelfSignedStrategy());
-    SSLConnectionSocketFactory sslsf = null;
-    try {
-        sslsf = new SSLConnectionSocketFactory(builder.build());
-    } catch (NoSuchAlgorithmException e) {
-        e.printStackTrace();
-    } catch (KeyManagementException e) {
-        e.printStackTrace();
-    }
-    CloseableHttpClient client = HttpClients.custom().setSSLSocketFactory(
-            sslsf).build();
-    HttpResponse invokerResponse = client.execute(invokerEndpoint);
+SSLContextBuilder builder = new SSLContextBuilder();
+builder.loadTrustMaterial(null, new TrustSelfSignedStrategy());
+SSLConnectionSocketFactory sslsf = null;
+try {
+sslsf = new SSLConnectionSocketFactory(builder.build());
+} catch (NoSuchAlgorithmException e) {
+e.printStackTrace();
+} catch (KeyManagementException e) {
+e.printStackTrace();
+}
+CloseableHttpClient client = HttpClients.custom().setSSLSocketFactory(
+sslsf).build();
+HttpResponse invokerResponse = client.execute(invokerEndpoint);
 
-    if (invokerResponse.getStatusLine().getStatusCode() == 401) {
-        return;
-    }
+if (invokerResponse.getStatusLine().getStatusCode() == 401) {
+return;
+}
 
-    BufferedReader rd = new BufferedReader(new InputStreamReader(invokerResponse.getEntity().getContent()));
+BufferedReader rd = new BufferedReader(new InputStreamReader(invokerResponse.getEntity().getContent()));
 
-    StringBuilder result = new StringBuilder();
-    String line = "";
-    while ((line = rd.readLine()) != null) {
-        result.append(line);
-    }
+StringBuilder result = new StringBuilder();
+String line = "";
+while ((line = rd.readLine()) != null) {
+result.append(line);
+}
 
-    JSONObject device = new JSONObject(result.toString());
-    JSONObject enrolmentInfo = device.getJSONObject("enrolmentInfo");
-    try {
+JSONObject device = new JSONObject(result.toString());
+JSONObject enrolmentInfo = device.getJSONObject("enrolmentInfo");
+try {
 
-    } catch (JSONException e) {
+} catch (JSONException e) {
 %>
 Error occurred while fetching device info.
 <%
-    }
+}
 %>
 
 <!doctype html>
@@ -129,7 +129,7 @@ Error occurred while fetching device info.
                     </a>
                 </li>
                 <li>
-                    <a href="Dashboard.html">
+                    <a href="Dashboard.jsp">
                         <i class="material-icons">dashboard</i>
                         <p>Dashboard</p>
                     </a>
@@ -831,7 +831,6 @@ Error occurred while fetching device info.
 <script src="js/material-dashboard.js?v=1.2.0"></script>
 <script src="js/historical-analytics.js"></script>
 <script src="js/realtime-analytics.js"></script>
-
 <script type="text/javascript">
     //function to expand and refresh chart on click
     function redirect(ele) {

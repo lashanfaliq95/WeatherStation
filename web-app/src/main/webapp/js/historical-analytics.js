@@ -588,6 +588,24 @@ analyticsHistory = {
     },
 
     redrawGraphs: function (events) {
+        analyticsHistory.historicalTemp.update();
+        analyticsHistory.historicalHumid.update();
+        analyticsHistory.historicalWindDir.update();
+        analyticsHistory.historicalDewptf.update();
+        analyticsHistory.historicalUV.update();
+        analyticsHistory.historicalWindChill.update();
+        analyticsHistory.historicalWindGust.update();
+        analyticsHistory.historicalWindSpeed.update();
+        analyticsHistory.historicalSolarRadiation.update();
+        analyticsHistory.historicalRaining.update();
+        analyticsHistory.historicalDailyRaining.update();
+        analyticsHistory.historicalWeeklyRaining.update();
+        analyticsHistory.historicalMonthlyRaining.update();
+        analyticsHistory.historicalYearlyRaining.update();
+        analyticsHistory.historicalBaromin.update();
+        analyticsHistory.historicalLowBatt.update();
+        analyticsHistory.historicalIndoorHumid.update();
+        analyticsHistory.historicalIndoorTemp.update();
         var sumTemp = 0;
         var sumHumid = 0;
         var sumWindDir=0;
@@ -607,6 +625,7 @@ analyticsHistory = {
         var sumBaromin=0;
         var sumLowBatt=0;
         if (events.count > 0) {
+            console.log('have records');
             var currentTime = new Date();
             analyticsHistory.historicalTempLabel.length = 0;
             analyticsHistory.historicalTempSeries.length = 0;
@@ -762,12 +781,6 @@ analyticsHistory = {
                      $("#historicalbarominLastUpdated").html("<span class=\"text-success\"><i class=\"fa fa-bolt\"></i> " + avgBaromin.toFixed(2) + " </span>average Baromin.");
                      $("#historicallowbattLastUpdated").html("<span class=\"text-success\"><i class=\"fa fa-bolt\"></i> " + avgLowBatt.toFixed(2) + " </span>average Low Batt.");
 
-
-
-
-
-
-
                 }
 
                 analyticsHistory.historicalTempLabel.push(sinceText);
@@ -848,6 +861,7 @@ analyticsHistory = {
             }
         } else {
             //if there is no records in this period display no records
+            console.log('no records');
             analyticsHistory.historicalTempLabel = ['0s'];
             analyticsHistory.historicalTempSeries = [0];
 
@@ -961,25 +975,9 @@ analyticsHistory = {
             });
 
         }
-        analyticsHistory.historicalTemp.update();
-        analyticsHistory.historicalHumid.update();
-        analyticsHistory.historicalWindDir.update();
-        analyticsHistory.historicalDewptf.update();
-        analyticsHistory.historicalUV.update();
-        analyticsHistory.historicalWindChill.update();
-        analyticsHistory.historicalWindGust.update();
-        analyticsHistory.historicalWindSpeed.update();
-        analyticsHistory.historicalSolarRadiation.update();
-        analyticsHistory.historicalRaining.update();
-        analyticsHistory.historicalDailyRaining.update();
-        analyticsHistory.historicalWeeklyRaining.update();
-        analyticsHistory.historicalMonthlyRaining.update();
-        analyticsHistory.historicalYearlyRaining.update();
-        analyticsHistory.historicalBaromin.update();
-        analyticsHistory.historicalLowBatt.update();
-        analyticsHistory.historicalIndoorHumid.update();
-        analyticsHistory.historicalIndoorTemp.update();
+
 
 
     }
+
 };
