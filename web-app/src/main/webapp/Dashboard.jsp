@@ -42,23 +42,29 @@
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                            <a href="details.jsp">
-                                <i class="material-icons">access_alarms</i>
-                                <p>RealTime Analytics</p>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="details.jspl">
+                            <a id="redirect">
                                 <i class="material-icons">history</i>
-                                <p>Historical Analytics</p>
+                                <p>Analytics</p>
                             </a>
                         </li>
-                        <li>
-                            <a href="#pablo" class="dropdown-toggle" data-toggle="dropdown">
+                        <li >
+                            <a href="./devices.jsp">
+                                <p style="font-weight: bold;"><i class="material-icons">list</i>Device List</p>
+                            </a>
+                        </li>
+                        <li class="dropdown pull-right">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="material-icons">person</i>
+                                <%--<span class="notification">5</span>--%>
                                 <p class="hidden-lg hidden-md">Profile</p>
                             </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="logout.jsp">Logout</a>
+                                </li>
+                            </ul>
                         </li>
+
 
                     </ul>
                 </div>
@@ -418,8 +424,10 @@
             $('div.card').toggleClass('padzero');
             realtimeGraphRefresh();
         }
-
-
+//get the id of the device
+    var id=localStorage.getItem("deviceId");
+    console.log(id);
+    document.getElementById("redirect").href="details.jsp?id="+id;
 </script>
 <script type="text/javascript">
     var alerts = [];
@@ -451,11 +459,11 @@
     $(document).ready(function () {
         $(document).ready(function () {
             var wsStatsEndpoint = "<%=pageContext.getServletContext().getInitParameter("websocketEndpoint")%>/secured-websocket/iot.per.device.stream.carbon.super.weatherstation/1.0.0?"
-            + "deviceId=puttalam&deviceType=weatherstation&websocketToken=<%=request.getSession(false).getAttribute(LoginController.ATTR_ACCESS_TOKEN)%>";
+            + "deviceId="+id+"&deviceType=weatherstation&websocketToken=<%=request.getSession(false).getAttribute(LoginController.ATTR_ACCESS_TOKEN)%>";
             realtimeGraphRefresh(wsStatsEndpoint);
 
             var wsAlertEndpoint = "<%=pageContext.getServletContext().getInitParameter("websocketEndpoint")%>/secured-websocket/iot.per.device.stream.carbon.super.weatherstation.alert/1.0.0?"
-            + "deviceId=puttalam&deviceType=weatherstation&websocketToken=<%=request.getSession(false).getAttribute(LoginController.ATTR_ACCESS_TOKEN)%>";
+            + "deviceId="+id+"&deviceType=weatherstation&websocketToken=<%=request.getSession(false).getAttribute(LoginController.ATTR_ACCESS_TOKEN)%>";
             displayAlerts(wsAlertEndpoint);
         });
     });

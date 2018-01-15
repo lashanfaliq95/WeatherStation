@@ -160,9 +160,9 @@ html {
     height: 100%;
 }
 
-/*.ct-chart .expand{*/
-    /*min-height: 90%;*/
-/*}*/
+.ct-chart{
+    height: 90%;
+}
 .popuprow {
     display: inline-flex;
     vertical-align: middle;
