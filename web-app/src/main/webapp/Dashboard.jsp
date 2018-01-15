@@ -43,8 +43,7 @@
                     <ul class="nav navbar-nav navbar-right">
                         <li>
                             <a id="redirect">
-                                <i class="material-icons">history</i>
-                                <p>Analytics</p>
+                                <p><i class="material-icons">history</i>Analytics</p>
                             </a>
                         </li>
                         <li >

@@ -139,8 +139,8 @@ Error occurred while fetching device info.
             </ul>
             <div class="card card-stats">
                 <div class="card-content">
-                    <p class="category">Temperature</p>
-                    <h3 class="title" id="devName">49/50
+                    <p class="category" id="devName"></p>
+                    <h3 class="title" id="devDetails">
                         <small>GB</small>
                     </h3>
                 </div>
@@ -161,6 +161,11 @@ Error occurred while fetching device info.
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
+                        <li >
+                            <a href="./devices.jsp">
+                                <p style="font-weight: bold;"><i class="material-icons">list</i>Device List</p>
+                            </a>
+                        </li>
                         <li class="dropdown pull-right">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="material-icons">person</i>
@@ -185,18 +190,16 @@ Error occurred while fetching device info.
                             <div class="col-lg-3 col-md-6 col-sm-6">
                                 <div class="card card-stats">
                                     <div class="card-header" data-background-color="orange">
-                                        <i class="material-icons">content_copy</i>
+                                        <i class="material-icons">brightness_low</i>
                                     </div>
                                     <div class="card-content">
                                         <p class="category">Temperature</p>
-                                        <h3 class="title" id="temperature">49/50
-                                            <small>GB</small>
+                                        <h3 class="title" id="temperature">Yet to be updated
                                         </h3>
                                     </div>
                                     <div class="card-footer">
                                         <div class="stats"  id="temperature_status_alert">
-                                            <i class="material-icons text-danger">warning</i>
-                                            <a href="#pablo">Get More Space...</a>
+                                            <i class="material-icons">update</i> Just Updated
                                         </div>
                                     </div>
                                 </div>
@@ -204,15 +207,15 @@ Error occurred while fetching device info.
                             <div class="col-lg-3 col-md-6 col-sm-6">
                                 <div class="card card-stats">
                                     <div class="card-header" data-background-color="green">
-                                        <i class="material-icons">store</i>
+                                        <i class="material-icons">invert_colors</i>
                                     </div>
                                     <div class="card-content">
-                                        <p class="category">Revenue</p>
-                                        <h3 class="title" id="humidity">$34,245</h3>
+                                        <p class="category">Humidity</p>
+                                        <h3 class="title" id="humidity">Yet to be updated</h3>
                                     </div>
                                     <div class="card-footer">
                                         <div class="stats" id="humidity_status_alert">
-                                            <i class="material-icons" >date_range</i> Last 24 Hours
+                                            <i class="material-icons">update</i> Just Updated
                                         </div>
                                     </div>
                                 </div>
@@ -220,15 +223,15 @@ Error occurred while fetching device info.
                             <div class="col-lg-3 col-md-6 col-sm-6">
                                 <div class="card card-stats">
                                     <div class="card-header" data-background-color="red">
-                                        <i class="material-icons">info_outline</i>
+                                        <i class="material-icons">zoom_out_map</i>
                                     </div>
                                     <div class="card-content">
-                                        <p class="category">Fixed Issues</p>
-                                        <h3 class="title" id="wind_status">75</h3>
+                                        <p class="category">Wind Direction</p>
+                                        <h3 class="title" id="wind_status">Yet to be updated</h3>
                                     </div>
                                     <div class="card-footer">
                                         <div class="stats" id="wind_status_alert">
-                                            <i class="material-icons">local_offer</i> Tracked from Github
+                                            <i class="material-icons">update</i> Just Updated
                                         </div>
                                     </div>
                                 </div>
@@ -236,11 +239,11 @@ Error occurred while fetching device info.
                             <div class="col-lg-3 col-md-6 col-sm-6">
                                 <div class="card card-stats">
                                     <div class="card-header" data-background-color="blue">
-                                        <i class="fa fa-twitter"></i>
+                                        <i class="material-icons">forward</i>
                                     </div>
                                     <div class="card-content">
-                                        <p class="category">Followers</p>
-                                        <h3 class="title" id="windspeed_status">+245</h3>
+                                        <p class="category">Wind Speed</p>
+                                        <h3 class="title" id="windspeed_status">Yet to be updated</h3>
                                     </div>
                                     <div class="card-footer">
                                         <div class="stats" id="windspeed_status_alert">
@@ -850,7 +853,7 @@ Error occurred while fetching device info.
     localStorage.setItem("deviceName","<%=device.getString("name")%>");
     localStorage.setItem("owner","<%=enrolmentInfo.getString("owner")%>");
     localStorage.setItem("date","<%=new Date(enrolmentInfo.getLong("dateOfEnrolment")).toString()%>");
-
+    document.getElementById("redirect").href="details.jsp?id="+id;
     function datePickerCallback(startD, endD) {
         var eventsSuccess = function (data) {
             var records = JSON.parse(data);
@@ -1013,6 +1016,7 @@ Error occurred while fetching device info.
         $("#wind_status").html(windDir);
 
         //wind speed
+        console.log(windSpeed);
         $("#windspeed_status").html(windSpeed);
 
     }
@@ -1028,7 +1032,7 @@ Error occurred while fetching device info.
             var temperature = record.values.tempf;
             var humidity = record.values.humidity;
             var windDir = record.values.winddir;
-            var windSpeed=record.values.windspeed;
+            var windSpeed=record.values.windspeedmph;
             updateStatusCards(sinceText, temperature, humidity, windDir,windSpeed);
         } else {
             //temperature status
