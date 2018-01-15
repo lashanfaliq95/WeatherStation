@@ -671,7 +671,7 @@ realtimeAnalytics = {
 
                     var currentTime = new Date();
                     var sinceText = timeDifference(currentTime, new Date(dataPoint.timeStamp), false) + " ago";
-                    updateStatusCards(sinceText,temperature, humidity, windDir);
+                    updateStatusCards(sinceText,temperature, humidity, windDir,windspeedmph);
 
                     var lastUpdatedTime = realtimeTempLabelRef[realtimeTempLabelRef.length - 1];
                     var lastUpdatedText = "<i class=\"material-icons\">access_time</i> updated "+timeDifference(currentTime, lastUpdatedTime)+" ago";

@@ -15,17 +15,18 @@
 </head>
 <body>
 <div class="wrapper">
-    <div class="sidebar" data-color="blue" data-image="images/login_bg2.jpg">
+    <div class="sidebar" data-color="purple" data-image="images/sidebar-1.jpg">
         <div class="logo">
             <a href="#" class="simple-text">
                 <strong>Weather</strong>Station
             </a>
         </div>
         <div class="sidebar-wrapper">
-            <div class="form-group label-floating is-empty" style="margin-top: 30px;margin-right: 10px;margin-left: 10px ">
-                    <label class="control-label">Search Device</label>
-                    <input type="search" id="search" class="form-control">
-                    <span class="material-input"></span></div>
+            <div class="form-group label-floating is-empty" id="hide"
+                 style="margin-top: 30px;margin-right: 10px;margin-left: 10px ">
+                <label class="control-label">Search Device</label>
+                <input type="search" id="search" class="form-control">
+                <span class="material-input"></span></div>
         </div>
     </div>
     <div class="main-withoutSidebar">
@@ -34,7 +35,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card card-plain">
-                            <div class="card-header" data-background-color="blue">
+                            <div class="card-header" data-background-color="purple">
                                 <div class="nav-tabs-wrapper">
                                     <ul class="nav nav-tabs" data-tabs="tabs">
                                         <li class="active" id="tableViewTab">
@@ -250,12 +251,16 @@
     //fixed the issue with map not rendering in tabbed view and pop up model
     $("a[href='#mapView']").on('shown.bs.tab', function (e) {
         mymap.invalidateSize();
+        $('#hide').hide();
     });
 
     $('#newDeviceModal').on('show.bs.modal', function () {
         setTimeout(function () {
             map.invalidateSize();
         }, 200);
+    });
+    $("a[href='#tableview']").on('shown.bs.tab', function (e) {
+        $('#hide').show();
     });
 
 
@@ -336,6 +341,7 @@
     }
 
     var deviceCount;
+
     function getAllDevices() {
         var success = function (data) {
             devices = JSON.parse(data).devices;
