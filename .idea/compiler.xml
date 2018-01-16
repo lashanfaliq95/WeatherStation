@@ -7,6 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="org.wso2.iot.locker.portal" />
+        <module name="org.wso2.iot.weatherStation.portal" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -14,6 +15,10 @@
       <module name="org.wso2.iot.locker.agent" target="1.5" />
       <module name="org.wso2.iot.locker.analytics" target="1.5" />
       <module name="org.wso2.iot.locker.portal" target="1.8" />
+      <module name="org.wso2.iot.weatherStation.agent" target="1.5" />
+      <module name="org.wso2.iot.weatherStation.analytics" target="1.5" />
+      <module name="org.wso2.iot.weatherStation.portal" target="1.8" />
+      <module name="WeatherStation" target="1.5" />
     </bytecodeTargetLevel>
   </component>
 </project>

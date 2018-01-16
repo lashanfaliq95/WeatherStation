@@ -1,3 +1,20 @@
+<%--Copyright (c) 2018, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.--%>
+
+<%--WSO2 Inc. licenses this file to you under the Apache License,--%>
+<%--Version 2.0 (the "License"); you may not use this file except--%>
+<%--in compliance with the License.--%>
+<%--You may obtain a copy of the License at--%>
+
+<%--http://www.apache.org/licenses/LICENSE-2.0--%>
+
+<%--Unless required by applicable law or agreed to in writing,--%>
+<%--software distributed under the License is distributed on an--%>
+<%--"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY--%>
+<%--KIND, either express or implied. See the License for the--%>
+<%--specific language governing permissions and limitations--%>
+<%--under the License.--%>
+
+
 <%@include file="includes/authenticate.jsp" %>
 <html>
 <head>
@@ -175,7 +192,7 @@
         integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log=="
         crossorigin=""></script>
 <script type="text/javascript">
-    //initialising map view
+    //initialising the map view tab
     var mymap = L.map('mapid').setView([7.65655, 80.77148], 8);
     L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
         attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
@@ -183,13 +200,6 @@
         id: 'mapbox.streets',
         accessToken: 'pk.eyJ1IjoibGFzaGFuIiwiYSI6ImNqYmc3dGVybTFlZ3UyeXF3cG8yNGxsdzMifQ.n3QEq0-g5tVFmsQxn3JZ-A'
     }).addTo(mymap);
-
-    //add devices to map as markers
-    function addToMap(lat, long, devName, devId, temp, humidity, windDir) {
-        var marker = L.marker([lat, long]).addTo(mymap);
-        marker.bindPopup("<b id='weatherStation" + devId + "'>Device details</b><br>" + devName + "<br><table><tr><td><i class=\"tiny material-icons\" >wb_sunny</i></td><td>" + temp + "</td></tr><tr><td><i class=\"tiny material-icons\">opacity</i></td><td>" + humidity + "</td></tr><tr><td><i class=\"tiny material-icons\" >call_made</i></td><td>" + windDir + "</td></tr><div style='margin-right:5px '><tr><td><button class=\"btn-primary btn-block\"   onclick=\"window.location.href='details.jsp?id=" + devName + "'\"><i class=\"material-icons\">remove_red_eye</i> </button></td></tr></div></table>", {minWidth: 100});
-
-    }
 
     //adding the legend
     var legend = L.control({position: 'topright'});
@@ -200,7 +210,14 @@
     };
     legend.addTo(mymap);
 
-    //initialising input map
+    //add devices to map as markers
+    function addToMap(lat, long, devName, devId, temp, humidity, windDir) {
+        var marker = L.marker([lat, long]).addTo(mymap);
+        marker.bindPopup("<b id='weatherStation" + devId + "'>Device details</b><br>" + devName + "<br><table><tr><td><i class=\"tiny material-icons\" >wb_sunny</i></td><td>" + temp + "</td></tr><tr><td><i class=\"tiny material-icons\">opacity</i></td><td>" + humidity + "</td></tr><tr><td><i class=\"tiny material-icons\" >call_made</i></td><td>" + windDir + "</td></tr><div style='margin-right:5px '><tr><td><button class=\"btn-primary btn-block\"   onclick=\"window.location.href='details.jsp?id=" + devName + "'\"><i class=\"material-icons\">remove_red_eye</i> </button></td></tr></div></table>", {minWidth: 100});
+
+    }
+
+    //initialising the input map
     var map = L.map('inputMapId').setView([7.65655, 80.77148], 7);
 
     L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
@@ -211,7 +228,7 @@
     var lat;
     var lng;
 
-    // generates popup and assigns latitude and longitude values to variables
+    //generates popup and assigns latitude and longitude values to variables
     function onMapClick(e) {
         popup
             .setLatLng(e.latlng)
@@ -248,6 +265,7 @@
     });
 
     //fixed the issue with map not rendering in tabbed view and pop up model
+    //and hiding search bar in map view and showing search bar in table view
     $("a[href='#mapView']").on('shown.bs.tab', function (e) {
         mymap.invalidateSize();
         $('#hide').hide();
@@ -291,10 +309,10 @@
             rows.push(myRow);
             devicesListing.find('tbody').append(myRow);
 
-            //to fix the issue of paginate when the page loads initially
+            //to fix the issue of showing more than 10 rows when the page loads initially
             $('#devices-listing tbody tr').slice(10, rows.length + 1).hide();
 
-            //To fix the issue of adding null or undefined values to map
+            //To fix the issue of adding devices with null or undefined location values to map
             if ((lat == null || lat === "undefined" ) || (long == null || lat === "undefined")) {
                 console.log('undefined lat' + lat + ' long ' + long);
             }
@@ -310,6 +328,7 @@
             //function to implement the regex search bar
             var $rows = $('#devices-listing tbody tr');
             $('#search').keyup(function () {
+                //hide nav bar when search bar is used
                 $('#nav').hide();
                 var val = '^(?=.*\\b' + $.trim($(this).val()).split(/\s+/).join('\\b)(?=.*\\b') + ').*$',
                     reg = RegExp(val, 'i'),

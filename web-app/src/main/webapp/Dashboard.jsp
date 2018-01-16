@@ -1,3 +1,20 @@
+<%--Copyright (c) 2018, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.--%>
+
+<%--WSO2 Inc. licenses this file to you under the Apache License,--%>
+<%--Version 2.0 (the "License"); you may not use this file except--%>
+<%--in compliance with the License.--%>
+<%--You may obtain a copy of the License at--%>
+
+<%--http://www.apache.org/licenses/LICENSE-2.0--%>
+
+<%--Unless required by applicable law or agreed to in writing,--%>
+<%--software distributed under the License is distributed on an--%>
+<%--"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY--%>
+<%--KIND, either express or implied. See the License for the--%>
+<%--specific language governing permissions and limitations--%>
+<%--under the License.--%>
+
+
 <%@include file="includes/authenticate.jsp" %>
 
 <!doctype html>
@@ -5,7 +22,7 @@
 
 <head>
     <meta charset="utf-8"/>
-    <link rel="apple-touch-icon" sizes="76x76" href="imagesg/apple-icon.png"/>
+    <link rel="apple-touch-icon" sizes="76x76" href="images/apple-icon.png"/>
     <link rel="icon" type="image/png" href="images/favicon.png"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <title>Material Dashboard by Creative Tim</title>
@@ -324,29 +341,18 @@
 <!-- Material Dashboard javascript methods -->
 <script src="js/material-dashboard.js?v=1.2.0"></script>
 <script src="js/historical-analytics.js"></script>
-<script src="js/realtime-analytics.js"></script>
+<script src="js/realtime-analyticsDas.js"></script>
 <script src="js/bootstrap-datepicker.js" type="text/javascript"></script>
 <script src="js/moment.min.js" type="text/javascript"></script>
 <script src="js/daterangepicker.js" type="text/javascript"></script>
 <script type="text/javascript">
-    //function to expand and refresh chart on click
+    //function to expand chart on click
     function redirect(ele) {
         $('#' + ele.id).toggleClass('modal');
         $('div.card-chart').toggleClass('maxHeight');
         $('div.card').toggleClass('padzero');
         $('.ct-chart').toggleClass('fillcontent');
     }
-
-    //get the id of the device
-    var id = localStorage.getItem("deviceId");
-    var name = localStorage.getItem("deviceName");
-    console.log(id);
-    document.getElementById("redirect").href = "details.jsp?id=" + id;
-    document.getElementById("devName").innerHTML = name;
-
-</script>
-<script type="text/javascript">
-    var alerts = [];
 
     function timeDifference(current, previous, isShort) {
         var msPerMinute = 60 * 1000;
@@ -372,6 +378,16 @@
         }
     }
 
+    //get the device details from details.jsp
+    var id = localStorage.getItem("deviceId");
+    var name = localStorage.getItem("deviceName");
+    console.log(id);
+    document.getElementById("redirect").href = "details.jsp?id=" + id;
+    document.getElementById("devName").innerHTML = name;
+
+</script>
+<script type="text/javascript">
+    var alerts = [];
     $(document).ready(function () {
         $(document).ready(function () {
             var wsStatsEndpoint = "<%=pageContext.getServletContext().getInitParameter("websocketEndpoint")%>/secured-websocket/iot.per.device.stream.carbon.super.weatherstation/1.0.0?"
@@ -434,18 +450,6 @@
                 ws = null;
             }
         }
-    }
-
-    function updateStatusCards(sinceText, temperature, humidity, windDir) {
-
-        //temperature status
-        $("#temperature").html(temperature);
-
-        //humidity status
-        $("#humidity").html(humidity);
-
-        //metal status
-        $("#wind_status").html(windDir);
     }
 
 

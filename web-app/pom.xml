@@ -19,17 +19,17 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <parent>
-        <groupId>org.wso2.iot.locker</groupId>
-        <artifactId>org.wso2.iot.locker</artifactId>
+        <groupId>org.wso2.iot.weatherStation</groupId>
+        <artifactId>org.wso2.iot.weatherStation</artifactId>
         <version>1.0.0</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>org.wso2.iot.locker.portal</artifactId>
+    <artifactId>org.wso2.iot.weatherStation.portal</artifactId>
     <packaging>war</packaging>
     <version>1.0.0</version>
-    <name>WSO2 IoT Locker Web App</name>
+    <name>WSO2 IoT Weather Station Web App</name>
     <url>http://wso2.org</url>
 
     <dependencies>
@@ -63,7 +63,7 @@
     </dependencies>
 
     <build>
-        <finalName>locker-portal</finalName>
+        <finalName>weatherStation-portal</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

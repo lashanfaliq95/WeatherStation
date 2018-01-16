@@ -3,9 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/WeatherStation.iml" filepath="$PROJECT_DIR$/WeatherStation.iml" />
-      <module fileurl="file://$PROJECT_DIR$/agent/org.wso2.iot.locker.agent.iml" filepath="$PROJECT_DIR$/agent/org.wso2.iot.locker.agent.iml" />
-      <module fileurl="file://$PROJECT_DIR$/analytics/org.wso2.iot.locker.analytics.iml" filepath="$PROJECT_DIR$/analytics/org.wso2.iot.locker.analytics.iml" />
-      <module fileurl="file://$PROJECT_DIR$/web-app/org.wso2.iot.locker.portal.iml" filepath="$PROJECT_DIR$/web-app/org.wso2.iot.locker.portal.iml" />
+      <module fileurl="file://$PROJECT_DIR$/agent/org.wso2.iot.weatherStation.agent.iml" filepath="$PROJECT_DIR$/agent/org.wso2.iot.weatherStation.agent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/analytics/org.wso2.iot.weatherStation.analytics.iml" filepath="$PROJECT_DIR$/analytics/org.wso2.iot.weatherStation.analytics.iml" />
+      <module fileurl="file://$PROJECT_DIR$/web-app/org.wso2.iot.weatherStation.portal.iml" filepath="$PROJECT_DIR$/web-app/org.wso2.iot.weatherStation.portal.iml" />
     </modules>
   </component>
 </project>

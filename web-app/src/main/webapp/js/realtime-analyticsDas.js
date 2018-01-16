@@ -15,7 +15,6 @@
 * specific language governing permissions and limitations
 * under the License.
 */
-
 realtimeAnalytics = {
     initDashboardPageCharts: function (wsEndpoint) {
         /* ----------==========     Realtime Temperature Chart initialization    ==========---------- */
@@ -23,9 +22,9 @@ realtimeAnalytics = {
         var realtimeTempLabel = ['0s'];
         var realtimeTempSeries = [0];
 
-         realtimeAnalytics.createLiFo(realtimeTempLabelRef, 10);
-         realtimeAnalytics.createLiFo(realtimeTempLabel, 10);
-         realtimeAnalytics.createLiFo(realtimeTempSeries, 10);
+        realtimeAnalytics.createLiFo(realtimeTempLabelRef, 10);
+        realtimeAnalytics.createLiFo(realtimeTempLabel, 10);
+        realtimeAnalytics.createLiFo(realtimeTempSeries, 10);
 
         dataRealtimeTempChart = {
             labels: realtimeTempLabel,
@@ -688,9 +687,6 @@ realtimeAnalytics = {
 
 
                     var currentTime = new Date();
-                    var sinceText = timeDifference(currentTime, new Date(dataPoint.timeStamp), false) + " ago";
-                    updateStatusCards(sinceText,temperature, humidity, windDir,windspeedmph);
-
                     var lastUpdatedTime = realtimeTempLabelRef[realtimeTempLabelRef.length - 1];
                     var lastUpdatedText = "<i class=\"material-icons\">access_time</i> updated "+timeDifference(currentTime, lastUpdatedTime)+" ago";
 
@@ -811,6 +807,12 @@ realtimeAnalytics = {
                 };
 
             }
+            //refresh graphs on click on the chart
+            $('.card').click(function() {
+                updateGraphs();
+            });
+
+
 
         }
 

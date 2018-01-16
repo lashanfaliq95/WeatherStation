@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="org.wso2.iot.weatherStation.portal:war">
+    <output-path>$PROJECT_DIR$/web-app/target</output-path>
+    <root id="archive" name="weatherStation-portal.war">
+      <element id="artifact" artifact-name="org.wso2.iot.weatherStation.portal:war exploded" />
+    </root>
+  </artifact>
+</component>

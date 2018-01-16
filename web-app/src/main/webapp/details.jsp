@@ -1,3 +1,20 @@
+<%--Copyright (c) 2018, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.--%>
+
+<%--WSO2 Inc. licenses this file to you under the Apache License,--%>
+<%--Version 2.0 (the "License"); you may not use this file except--%>
+<%--in compliance with the License.--%>
+<%--You may obtain a copy of the License at--%>
+
+<%--http://www.apache.org/licenses/LICENSE-2.0--%>
+
+<%--Unless required by applicable law or agreed to in writing,--%>
+<%--software distributed under the License is distributed on an--%>
+<%--"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY--%>
+<%--KIND, either express or implied. See the License for the--%>
+<%--specific language governing permissions and limitations--%>
+<%--under the License.--%>
+
+
 <%@page import="org.apache.http.HttpResponse" %>
 <%@page import="org.apache.http.client.methods.HttpPost" %>
 <%@ page import="org.apache.http.conn.ssl.SSLConnectionSocketFactory" %>
@@ -17,8 +34,8 @@
 <%@ page import="java.security.NoSuchAlgorithmException" %>
 <%@ page import="java.security.KeyManagementException" %>
 <%@ page import="org.json.JSONException" %>
+<%@ page import="java.security.KeyStoreException" %>
 <%@include file="includes/authenticate.jsp" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     String id = request.getParameter("id");
     if (id == null) {
@@ -44,15 +61,18 @@
     invokerEndpoint.setEntity(entity);
 
     SSLContextBuilder builder = new SSLContextBuilder();
-    builder.loadTrustMaterial(null, new TrustSelfSignedStrategy());
+    try {
+        builder.loadTrustMaterial(null, new TrustSelfSignedStrategy());
+    } catch (NoSuchAlgorithmException | KeyStoreException e) {
+        e.printStackTrace();
+    }
     SSLConnectionSocketFactory sslsf = null;
     try {
         sslsf = new SSLConnectionSocketFactory(builder.build());
-    } catch (NoSuchAlgorithmException e) {
-        e.printStackTrace();
-    } catch (KeyManagementException e) {
+    } catch (NoSuchAlgorithmException | KeyManagementException e) {
         e.printStackTrace();
     }
+
     CloseableHttpClient client = HttpClients.custom().setSSLSocketFactory(
             sslsf).build();
     HttpResponse invokerResponse = client.execute(invokerEndpoint);
@@ -64,7 +84,7 @@
     BufferedReader rd = new BufferedReader(new InputStreamReader(invokerResponse.getEntity().getContent()));
 
     StringBuilder result = new StringBuilder();
-    String line = "";
+    String line;
     while ((line = rd.readLine()) != null) {
         result.append(line);
     }
@@ -560,8 +580,8 @@ Error occurred while fetching device info.
 
                     </div>
                     <div id="historical" class="tab-pane fade">
-                        <div style="margin-right: 10%; margin-left: 20%; ">
-                            <h4>Select Date-range <input type="text" name="daterange" id="daterange"
+                        <div style="margin-right:70%;margin-left:2%  ">
+                            <h4><strong>Select Date-range</strong> <input type="text" name="dateRange" id="dateRange"
                                                          value="01/01/2017 1:30 PM - 01/01/2017 2:00 PM"
                                                          class="form-control"/></h4>
 
@@ -841,7 +861,8 @@ Error occurred while fetching device info.
 <script src="js/moment.min.js" type="text/javascript"></script>
 <script src="js/daterangepicker.js" type="text/javascript"></script>
 <script type="text/javascript">
-    //function to expand and refresh chart on click
+
+    //set device details and send device details to dashboard.jsp
     localStorage.setItem("deviceId","<%=id%>");
     localStorage.setItem("deviceName","<%=device.getString("name")%>");
     localStorage.setItem("owner","<%=enrolmentInfo.getString("owner")%>");
@@ -874,7 +895,7 @@ Error occurred while fetching device info.
     };
 
     $(function () {
-        $('#daterange').daterangepicker({
+        $('#dateRange').daterangepicker({
             timePicker: true,
             timePickerIncrement: 30,
             locale: {
@@ -893,8 +914,8 @@ Error occurred while fetching device info.
         }, datePickerCallback);
 
         $(window).scroll(function () {
-            if ($('#daterange').length) {
-                $('#daterange').daterangepicker("close");
+            if ($('#dateRange').length) {
+                $('#dateRange').daterangepicker("close");
             }
         })
     });
@@ -937,6 +958,8 @@ Error occurred while fetching device info.
             displayAlerts(wsAlertEndpoint);
         });
     });
+
+    //refresh graphs on click
     document.getElementById("realtimeTab").addEventListener("click", realtimeGraphRefresh());
     document.getElementById("historicalTab").addEventListener("click", setTimeout(historyGraphRefresh,1000));
 
@@ -999,6 +1022,7 @@ Error occurred while fetching device info.
         datePickerCallback(start, end);
     }
 
+    //update the card details
     function updateStatusCards(sinceText, temperature, humidity, windDir,windSpeed) {
 
         //temperature status
@@ -1027,7 +1051,6 @@ Error occurred while fetching device info.
             var humidity = record.values.humidity;
             var windDir = record.values.winddir;
             var windSpeed=record.values.windspeedmph;
-            console.log('windspeed'+windSpeed);
             updateStatusCards(sinceText, temperature, humidity, windDir,windSpeed);
         } else {
             //temperature status

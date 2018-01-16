@@ -1,17 +1,34 @@
+<%--Copyright (c) 2018, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.--%>
+
+<%--WSO2 Inc. licenses this file to you under the Apache License,--%>
+<%--Version 2.0 (the "License"); you may not use this file except--%>
+<%--in compliance with the License.--%>
+<%--You may obtain a copy of the License at--%>
+
+<%--http://www.apache.org/licenses/LICENSE-2.0--%>
+
+<%--Unless required by applicable law or agreed to in writing,--%>
+<%--software distributed under the License is distributed on an--%>
+<%--"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY--%>
+<%--KIND, either express or implied. See the License for the--%>
+<%--specific language governing permissions and limitations--%>
+<%--under the License.--%>
+
+
 <%
     //Fix for "localhost" JSESSIONID cookie not sent issue
     //https://stackoverflow.com/questions/7346919/chrome-localhost-cookie-not-being-set
-    if(request.getHeader("Host").startsWith("localhost:")){
+    if (request.getHeader("Host").startsWith("localhost:")) {
         response.sendRedirect(request.getRequestURL().toString().replace("localhost", "127.0.0.1"));
         return;
     }
 %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
     <title>Login</title>
     <link href="css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="css/material-icons.css" rel="stylesheet" />
+    <link href="css/material-icons.css" rel="stylesheet"/>
     <link href="css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/material-kit.css"/>
 </head>
@@ -26,7 +43,8 @@
 </nav>
 
 <div class="wrapper">
-    <div class="header header-filter" style="background-image: url('images/windows_8_simple_background-wallpaper-2560x1600.jpg'); background-size: cover; background-position: top center;">
+    <div class="header header-filter"
+         style="background-size: cover; background: url('images/windows_8_simple_background-wallpaper-2560x1600.jpg') top center;">
         <div class="container">
             <div class="row">
                 <div class="col-sm-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
@@ -66,14 +84,14 @@
                                 </div>
                                 <!--To access pages devices.jsp and details.jsp directly after login in once -->
                                 <% if (request.getParameter("ret") != null) { %>
-                                <input type="hidden" name="ret" value="<%=request.getParameter("ret")%>" />
+                                <input type="hidden" name="ret" value="<%=request.getParameter("ret")%>"/>
                                 <% } %>
                                 <% if (request.getParameter("q") != null) { %>
-                                <input type="hidden" name="q" value="<%=request.getParameter("q")%>" />
+                                <input type="hidden" name="q" value="<%=request.getParameter("q")%>"/>
                                 <% } %>
                             </div>
                             <div class="footer text-center">
-                                <input type="submit" class="btn btn-simple btn-primary btn-lg" value="Login" />
+                                <input type="submit" class="btn btn-simple btn-primary btn-lg" value="Login"/>
                             </div>
                         </form>
                     </div>
