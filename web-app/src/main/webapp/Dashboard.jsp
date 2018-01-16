@@ -15,7 +15,6 @@
     <link href="css/bootstrap.min.css" rel="stylesheet"/>
     <!--  Material Dashboard CSS    -->
     <link href="css/material-dashboard.css?v=1.2.0" rel="stylesheet"/>
-    <link href="css/updates1.css" rel="stylesheet"/>
     <link href="css/updates.css" rel="stylesheet"/>
 
     <!--  CSS for Demo Purpose, don't include it in your project     -->

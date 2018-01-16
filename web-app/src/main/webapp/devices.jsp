@@ -1,5 +1,4 @@
 <%@include file="includes/authenticate.jsp" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>Weather station List</title>
@@ -15,7 +14,7 @@
 </head>
 <body>
 <div class="wrapper">
-    <div class="sidebar" data-color="purple" data-image="images/sidebar-1.jpg">
+    <div class="sidebar" data-color="blue" data-image="images/sidebar-1.jpg">
         <div class="logo">
             <a href="#" class="simple-text">
                 <strong>Weather</strong>Station
@@ -29,13 +28,13 @@
                 <span class="material-input"></span></div>
         </div>
     </div>
-    <div class="main-withoutSidebar">
+    <div class="main-panel">
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card card-plain">
-                            <div class="card-header" data-background-color="purple">
+                            <div class="card-header" data-background-color="blue">
                                 <div class="nav-tabs-wrapper">
                                     <ul class="nav nav-tabs" data-tabs="tabs">
                                         <li class="active" id="tableViewTab">
@@ -285,7 +284,7 @@
                 + "</td><td>"
                 + (temperature) + "</td><td>" + (humidity) + "</td><td>"
                 + dev.enrolmentInfo.owner + "</td><td>"
-                + "<button class=\"btn btn-primary btn-fab btn-fab-mini btn-round\" onclick=\"window.location.href='details.jsp?id=" + dev.deviceIdentifier + "'\">"
+                + "<button class=\"btn btn-primary btn-fab btn-fab-mini btn-round\"  style='color: #1b6d85' onclick=\"window.location.href='details.jsp?id=" + dev.deviceIdentifier + "'\">"
                 + "<i class=\"material-icons\">remove_red_eye</i>"
                 + "</button></td>"
                 + "</a></tr>";
@@ -311,7 +310,7 @@
             //function to implement the regex search bar
             var $rows = $('#devices-listing tbody tr');
             $('#search').keyup(function () {
-
+                $('#nav').hide();
                 var val = '^(?=.*\\b' + $.trim($(this).val()).split(/\s+/).join('\\b)(?=.*\\b') + ').*$',
                     reg = RegExp(val, 'i'),
                     text;
@@ -320,6 +319,7 @@
                     text = $(this).text().replace(/\s+/g, ' ');
                     return !reg.test(text);
                     $('#devices-listing tbody tr').slice(10, rows.length + 1).hide();
+
                 }).hide();
                 //check if all the inputs have been erased if so realod the page
                 if (this.value.length === 0) {
@@ -436,4 +436,3 @@
     }
 </script>
 </html>
-

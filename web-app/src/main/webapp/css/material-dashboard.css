@@ -902,7 +902,7 @@ h2.title {
 
 .sidebar[data-color="purple"] .nav li.active a,
 .off-canvas-sidebar[data-color="purple"] .nav li.active a {
-    background-color: #9c27b0;
+    background-color: #1a18c1;
     box-shadow: 0 12px 20px -10px rgba(156, 39, 176, 0.28), 0 4px 20px 0px rgba(0, 0, 0, 0.12), 0 7px 8px -5px rgba(156, 39, 176, 0.2);
 }
 
@@ -1200,7 +1200,7 @@ fieldset[disabled] .navbar .navbar-nav>li>a.btn.btn-default.active {
 .open>.navbar .navbar-nav>li>a.btn.btn-primary.dropdown-toggle,
 .open>.navbar .navbar-nav>li>a.btn.btn-primary.dropdown-toggle:focus,
 .open>.navbar .navbar-nav>li>a.btn.btn-primary.dropdown-toggle:hover {
-    background-color: #9c27b0;
+    background-color: rgba(52, 68, 235, 0.34);
     color: #FFFFFF;
 }
 
@@ -2452,12 +2452,12 @@ h6,
 }
 
 a {
-    color: #9c27b0;
+    color: rgba(21, 147, 176, 0.45);
 }
 
 a:hover,
 a:focus {
-    color: #89229b;
+    color: #0722eb;
     text-decoration: none;
 }
 
@@ -2759,7 +2759,7 @@ output {
 .form-control,
 .form-group .form-control {
     border: 0;
-    background-image: linear-gradient(#9c27b0, #9c27b0), linear-gradient(#D2D2D2, #D2D2D2);
+    background-image: linear-gradient(#0028c1, #0028c1), linear-gradient(#D2D2D2, #D2D2D2);
     background-size: 0 2px, 100% 1px;
     background-repeat: no-repeat;
     background-position: center bottom, center calc(100% - 1px);
@@ -2833,7 +2833,7 @@ fieldset[disabled] .form-group .form-control {
 
 .form-group.is-focused .form-control {
     outline: none;
-    background-image: linear-gradient(#9c27b0, #9c27b0), linear-gradient(#D2D2D2, #D2D2D2);
+    background-image: linear-gradient(#1a18c1, #1a18c1), linear-gradient(#D2D2D2, #D2D2D2);
     background-size: 100% 2px, 100% 1px;
     box-shadow: none;
     transition-duration: 0.3s;
@@ -3991,8 +3991,8 @@ fieldset[disabled] .form-group.is-focused .togglebutton label {
 .pagination>.active>span,
 .pagination>.active>span:focus,
 .pagination>.active>span:hover {
-    background-color: #9c27b0;
-    border-color: #9c27b0;
+    background-color: #1a18c1;
+    border-color: #00097b;
     color: #FFFFFF;
     box-shadow: 0 4px 5px 0 rgba(156, 39, 176, 0.14), 0 1px 10px 0 rgba(156, 39, 176, 0.12), 0 2px 4px -1px rgba(156, 39, 176, 0.2);
 }
@@ -5318,7 +5318,7 @@ footer .btn {
 }
 
 .card [data-background-color] a {
-    color: #FFFFFF;
+    color: #000000;
 }
 
 .card-stats .title {
@@ -5425,7 +5425,7 @@ footer .btn {
 }
 
 .nav-tabs {
-    background: #9c27b0;
+    background: #3b5998;
     border: 0;
     border-radius: 3px;
     padding: 0 15px;
