@@ -35,6 +35,7 @@
 <%@ page import="java.security.KeyManagementException" %>
 <%@ page import="org.json.JSONException" %>
 <%@ page import="java.security.KeyStoreException" %>
+<%@ page import="org.wso2.iot.weatherstation.portal.LoginController" %>
 <%@include file="includes/authenticate.jsp" %>
 <%
     String id = request.getParameter("id");
