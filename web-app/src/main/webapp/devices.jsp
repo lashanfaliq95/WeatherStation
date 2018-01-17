@@ -383,7 +383,7 @@
             var devicesListing = $('#devices-listing');
             if (devices && devices.length > 0) {
                 devicesListing.find('tbody').empty();
-                getDevice(devices[14], 14, devices[14].properties[0].value, devices[14].properties[1].value);
+                getDevice(devices[0], 0, devices[0].properties[0].value, devices[0].properties[1].value);
             } else {
                 var myRow = "<tr><td colspan=\"6\" style=\"padding-top: 30px;\"><strong>No Devices Found</strong></td></tr>";
                 devicesListing.find('tbody').replaceWith(myRow);
