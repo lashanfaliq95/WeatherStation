@@ -89,7 +89,7 @@ public class LoginController extends HttpServlet {
         //Generate client App to get client ID and client secret
         HttpPost apiRegEndpoint = new HttpPost(getServletContext().getInitParameter("apiRegistrationEndpoint"));
         apiRegEndpoint.setHeader("Authorization",
-                                 "Basic " + Base64.getEncoder().encodeToString((email + ":" + password).getBytes( "UTF8")));
+                "Basic " + Base64.getEncoder().encodeToString((email + ":" + password).getBytes("UTF8")));
         apiRegEndpoint.setHeader("Content-Type", ContentType.APPLICATION_JSON.toString());
         String jsonStr = "{\"applicationName\" : \"smartLock\", \"tags\" : [\"device_management\",\"device_agent\"]}";
         StringEntity apiRegPayload = new StringEntity(jsonStr, ContentType.APPLICATION_JSON);
@@ -120,11 +120,11 @@ public class LoginController extends HttpServlet {
                 String clientId = jClientAppResult.get("client_id").toString();
                 String clientSecret = jClientAppResult.get("client_secret").toString();
                 String encodedClientApp = Base64.getEncoder().encodeToString(
-                        (clientId + ":" + clientSecret).getBytes( "UTF8"));
+                        (clientId + ":" + clientSecret).getBytes("UTF8"));
                 HttpPost tokenEndpoint = new HttpPost(getServletContext().getInitParameter("tokenEndpoint"));
 
                 tokenEndpoint.setHeader("Authorization",
-                                        "Basic " + encodedClientApp);
+                        "Basic " + encodedClientApp);
                 tokenEndpoint.setHeader("Content-Type", ContentType.APPLICATION_FORM_URLENCODED.toString());
 
                 StringEntity tokenEPPayload = new StringEntity(
@@ -148,7 +148,7 @@ public class LoginController extends HttpServlet {
                 String scope = jTokenResult.get("scope").toString();
 
                 HttpSession session = req.getSession(false);
-                if(session == null)  session = req.getSession(true);
+                if (session == null) session = req.getSession(true);
                 session.setAttribute(ATTR_ACCESS_TOKEN, accessToken);
                 session.setAttribute(ATTR_REFRESH_TOKEN, refreshToken);
                 session.setAttribute(ATTR_ENCODED_CLIENT_APP, encodedClientApp);
@@ -156,8 +156,12 @@ public class LoginController extends HttpServlet {
                 log.debug("Access Token retrieved with scopes: " + scope);
                 String returnUri = req.getParameter("ret");
                 if (returnUri != null) {
-                    String queryStr = req.getParameter("q");
-                    resp.sendRedirect((queryStr != null) ? returnUri + "?" + URLDecoder.decode(queryStr, "UTF-8") : returnUri);
+
+//                    String queryStr = req.getParameter("q");
+//                    resp.sendRedirect((queryStr != null) ? (returnUri) + "?" + URLDecoder.decode(queryStr, "UTF-8") : (returnUri));
+                    //temp fix for error
+                    returnUri = null;
+                    resp.sendRedirect(req.getContextPath() + "/");
                 } else {
                     resp.sendRedirect(req.getContextPath() + "/");
                 }
@@ -188,7 +192,7 @@ public class LoginController extends HttpServlet {
         }
         HttpResponse response = client.execute(post);
         System.out.println("Response Code : "
-                                   + response.getStatusLine().getStatusCode());
+                + response.getStatusLine().getStatusCode());
 
         BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "UTF8"));
 
@@ -238,14 +242,13 @@ public class LoginController extends HttpServlet {
         int idxR = clean.indexOf('\r');
         int idxN = clean.indexOf('\n');
 
-        if(idxN >= 0 || idxR>=0){
-            if(idxN>idxR){
+        if (idxN >= 0 || idxR >= 0) {
+            if (idxN > idxR) {
                 //just cut off the part after the LF
-                clean = clean.substring(0,idxN-1);
-            }
-            else{
+                clean = clean.substring(0, idxN - 1);
+            } else {
                 //just cut off the part after the CR
-                clean = clean.substring(0,idxR-1);
+                clean = clean.substring(0, idxR - 1);
             }
         }
 
