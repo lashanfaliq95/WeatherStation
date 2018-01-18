@@ -78,7 +78,11 @@ public class LoginController extends HttpServlet {
         String password = req.getParameter("inputPassword");
 
         if (email == null || password == null) {
-            sendFailureRedirect(req, resp);
+            try {
+                sendFailureRedirect(req, resp);
+            } catch (EncodingException e) {
+                e.printStackTrace();
+            }
             return;
         }
 
@@ -100,7 +104,11 @@ public class LoginController extends HttpServlet {
             return;
         }
         if (clientAppResult == null) {
-            sendFailureRedirect(req, resp);
+            try {
+                sendFailureRedirect(req, resp);
+            } catch (EncodingException e) {
+                e.printStackTrace();
+            }
         }
 
         //Generate a token
@@ -155,11 +163,19 @@ public class LoginController extends HttpServlet {
                 }
             } catch (ParseException e) {
                 log.error(e.getMessage(), e);
-                sendFailureRedirect(req, resp);
+                try {
+                    sendFailureRedirect(req, resp);
+                } catch (EncodingException e1) {
+                    e1.printStackTrace();
+                }
             }
         } else {
             log.debug("Client app creation failed");
-            sendFailureRedirect(req, resp);
+            try {
+                sendFailureRedirect(req, resp);
+            } catch (EncodingException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -185,7 +201,7 @@ public class LoginController extends HttpServlet {
         return result.toString();
     }
 
-    private void sendFailureRedirect(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    private void sendFailureRedirect(HttpServletRequest req, HttpServletResponse resp) throws IOException, EncodingException {
         String referer = req.getHeader("referer");
         String redirect = (referer == null || referer.isEmpty()) ? req.getRequestURI() : referer;
         if (redirect.contains("?")) {
@@ -193,7 +209,7 @@ public class LoginController extends HttpServlet {
         } else {
             redirect += "?status=fail";
         }
-        resp.sendRedirect(redirect);
+        resp.sendRedirect(sanitize(redirect));
     }
 
     private CloseableHttpClient getHTTPClient() throws LoginException {

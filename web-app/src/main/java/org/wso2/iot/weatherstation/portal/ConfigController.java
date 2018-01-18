@@ -194,7 +194,7 @@ public class ConfigController extends HttpServlet {
             redirect += "?status=fail";
         }
 
-    resp.sendRedirect(redirect);
+    resp.sendRedirect(sanitize(redirect));
     }
 
     private CloseableHttpClient getHTTPClient() throws LoginException {
