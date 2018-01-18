@@ -156,7 +156,6 @@ public class LoginController extends HttpServlet {
                 log.debug("Access Token retrieved with scopes: " + scope);
                 String returnUri = req.getParameter("ret");
                 if (returnUri != null) {
-
 //                    String queryStr = req.getParameter("q");
 //                    resp.sendRedirect((queryStr != null) ? (returnUri) + "?" + URLDecoder.decode(queryStr, "UTF-8") : (returnUri));
                     //temp fix for error
