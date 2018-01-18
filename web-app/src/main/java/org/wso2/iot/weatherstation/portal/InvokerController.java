@@ -89,7 +89,7 @@ public class InvokerController extends HttpServlet {
         } else if ("DELETE".equalsIgnoreCase(method)) {
             executor = new HttpDelete(uri);
         } else {
-            resp.sendError(400, "Bad Request, method '" + method + "' not supported");
+            resp.sendError(400, "Bad Request, method not supported");
             return;
         }
 
@@ -119,7 +119,7 @@ public class InvokerController extends HttpServlet {
         }
 
         HttpResponse response = client.execute(executor);
-        BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
+        BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "UTF8"));
         StringBuilder resultBuffer = new StringBuilder();
         String line = "";
         while ((line = rd.readLine()) != null) {
@@ -133,6 +133,7 @@ public class InvokerController extends HttpServlet {
                 execute(executor, req, resp, --retryCount);
             }
         }
+        rd.close();
         return result;
     }
 
@@ -161,7 +162,7 @@ public class InvokerController extends HttpServlet {
         }
 
         HttpResponse response = client.execute(tokenEndpoint);
-        BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
+        BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "UTF8"));
         StringBuilder resultBuffer = new StringBuilder();
         String line = "";
         while ((line = rd.readLine()) != null) {
@@ -174,7 +175,7 @@ public class InvokerController extends HttpServlet {
                 JSONObject jTokenResult = (JSONObject) jsonParser.parse(tokenResult);
                 String refreshToken = jTokenResult.get("refresh_token").toString();
                 String accessToken = jTokenResult.get("access_token").toString();
-                String scope = jTokenResult.get("scope").toString();
+                //String scope = jTokenResult.get("scope").toString();
                 session.setAttribute(ATTR_ACCESS_TOKEN, accessToken);
                 session.setAttribute(ATTR_REFRESH_TOKEN, refreshToken);
             } catch (ParseException e) {
@@ -186,6 +187,7 @@ public class InvokerController extends HttpServlet {
                               response.getStatusLine().getStatusCode());
             resp.sendError(500, "Internal Server Error");
         }
+        rd.close();
     }
 
     private CloseableHttpClient getHTTPClient() throws LoginException {

@@ -46,7 +46,14 @@ import java.net.URLDecoder;
 import java.security.KeyManagementException;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.Base64;
+
+import org.owasp.esapi.Encoder;
+import org.owasp.esapi.Validator;
+import org.owasp.esapi.errors.EncodingException;
+import org.owasp.esapi.reference.DefaultEncoder;
+import org.owasp.esapi.reference.DefaultValidator;
 
 public class LoginController extends HttpServlet {
     private static final Log log = LogFactory.getLog(LoginController.class);
@@ -78,7 +85,7 @@ public class LoginController extends HttpServlet {
         //Generate client App to get client ID and client secret
         HttpPost apiRegEndpoint = new HttpPost(getServletContext().getInitParameter("apiRegistrationEndpoint"));
         apiRegEndpoint.setHeader("Authorization",
-                                 "Basic " + Base64.getEncoder().encodeToString((email + ":" + password).getBytes()));
+                                 "Basic " + Base64.getEncoder().encodeToString((email + ":" + password).getBytes( "UTF8")));
         apiRegEndpoint.setHeader("Content-Type", ContentType.APPLICATION_JSON.toString());
         String jsonStr = "{\"applicationName\" : \"smartLock\", \"tags\" : [\"device_management\",\"device_agent\"]}";
         StringEntity apiRegPayload = new StringEntity(jsonStr, ContentType.APPLICATION_JSON);
@@ -105,7 +112,7 @@ public class LoginController extends HttpServlet {
                 String clientId = jClientAppResult.get("client_id").toString();
                 String clientSecret = jClientAppResult.get("client_secret").toString();
                 String encodedClientApp = Base64.getEncoder().encodeToString(
-                        (clientId + ":" + clientSecret).getBytes());
+                        (clientId + ":" + clientSecret).getBytes( "UTF8"));
                 HttpPost tokenEndpoint = new HttpPost(getServletContext().getInitParameter("tokenEndpoint"));
 
                 tokenEndpoint.setHeader("Authorization",
@@ -167,13 +174,14 @@ public class LoginController extends HttpServlet {
         System.out.println("Response Code : "
                                    + response.getStatusLine().getStatusCode());
 
-        BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
+        BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "UTF8"));
 
         StringBuilder result = new StringBuilder();
         String line = "";
         while ((line = rd.readLine()) != null) {
             result.append(line);
         }
+        rd.close();
         return result.toString();
     }
 
@@ -200,5 +208,32 @@ public class LoginController extends HttpServlet {
             log.error(e.getMessage(), e);
             throw new LoginException("Error occurred while retrieving http client", e);
         }
+    }
+
+    String sanitize(String url) throws EncodingException {
+
+        Encoder encoder = new DefaultEncoder(new ArrayList<String>());
+        //first canonicalize
+        String clean = encoder.canonicalize(url).trim();
+        //then url decode
+        clean = encoder.decodeFromURL(clean);
+
+        //detect and remove any existent \r\n == %0D%0A == CRLF to prevent HTTP Response Splitting
+        int idxR = clean.indexOf('\r');
+        int idxN = clean.indexOf('\n');
+
+        if(idxN >= 0 || idxR>=0){
+            if(idxN>idxR){
+                //just cut off the part after the LF
+                clean = clean.substring(0,idxN-1);
+            }
+            else{
+                //just cut off the part after the CR
+                clean = clean.substring(0,idxR-1);
+            }
+        }
+
+        //re-encode again
+        return encoder.encodeForURL(clean);
     }
 }

@@ -45,7 +45,15 @@ import java.net.ConnectException;
 import java.security.KeyManagementException;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.Base64;
+
+import org.owasp.esapi.Encoder;
+import org.owasp.esapi.Validator;
+import org.owasp.esapi.errors.EncodingException;
+import org.owasp.esapi.reference.DefaultEncoder;
+import org.owasp.esapi.reference.DefaultValidator;
+
 
 import static org.wso2.iot.weatherstation.portal.LoginController.ADMIN_PASSWORD;
 import static org.wso2.iot.weatherstation.portal.LoginController.ADMIN_USERNAME;
@@ -73,8 +81,10 @@ public class ConfigController extends HttpServlet {
         HttpPost apiRegEndpoint = new HttpPost(getServletContext().getInitParameter("apiRegistrationEndpoint") +
                                                        "/tenants?tenantDomain=carbon" +
                                                        ".super&applicationName=locker_carbon.super");
+        if (session!=null){
         apiRegEndpoint.setHeader("Authorization",
                                  "Bearer " + session.getAttribute(ATTR_ACCESS_TOKEN));
+        }
         apiRegEndpoint.setHeader("Content-Type", ContentType.APPLICATION_JSON.toString());
         String jsonStr =
                 "{\"applicationName\" : \"locker_carbon.super\", \"tags\" : [\"device_agent\"], " +
@@ -91,7 +101,11 @@ public class ConfigController extends HttpServlet {
             return;
         }
         if (clientAppResult == null) {
-            sendFailureRedirect(req, resp);
+            try {
+                sendFailureRedirect(req, resp);
+            } catch (EncodingException e) {
+                e.printStackTrace();
+            }
         }
 
         //Generate a token
@@ -103,7 +117,7 @@ public class ConfigController extends HttpServlet {
                 String clientId = jClientAppResult.get("client_id").toString();
                 String clientSecret = jClientAppResult.get("client_secret").toString();
                 String encodedClientApp = Base64.getEncoder().encodeToString(
-                        (clientId + ":" + clientSecret).getBytes());
+                        (clientId + ":" + clientSecret).getBytes("UTF-8"));
                 HttpPost tokenEndpoint = new HttpPost(getServletContext().getInitParameter("tokenEndpoint"));
 
                 tokenEndpoint.setHeader("Authorization",
@@ -159,25 +173,28 @@ public class ConfigController extends HttpServlet {
         System.out.println("Response Code : "
                                    + response.getStatusLine().getStatusCode());
 
-        BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
+        BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "UTF8"));
 
         StringBuilder result = new StringBuilder();
         String line = "";
         while ((line = rd.readLine()) != null) {
             result.append(line);
         }
+        rd.close();
         return result.toString();
     }
 
-    private void sendFailureRedirect(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    private void sendFailureRedirect(HttpServletRequest req, HttpServletResponse resp) throws IOException, EncodingException {
         String referer = req.getHeader("referer");
+
         String redirect = (referer == null || referer.isEmpty()) ? req.getRequestURI() : referer;
         if (redirect.contains("?")) {
             redirect += "&status=fail";
         } else {
             redirect += "?status=fail";
         }
-        resp.sendRedirect(redirect);
+
+    resp.sendRedirect(redirect);
     }
 
     private CloseableHttpClient getHTTPClient() throws LoginException {
@@ -192,5 +209,31 @@ public class ConfigController extends HttpServlet {
             log.error(e.getMessage(), e);
             throw new LoginException("Error occurred while retrieving http client", e);
         }
+    }
+    String sanitize(String url) throws EncodingException {
+
+        Encoder encoder = new DefaultEncoder(new ArrayList<String>());
+        //first canonicalize
+        String clean = encoder.canonicalize(url).trim();
+        //then url decode
+        clean = encoder.decodeFromURL(clean);
+
+        //detect and remove any existent \r\n == %0D%0A == CRLF to prevent HTTP Response Splitting
+        int idxR = clean.indexOf('\r');
+        int idxN = clean.indexOf('\n');
+
+        if(idxN >= 0 || idxR>=0){
+            if(idxN>idxR){
+                //just cut off the part after the LF
+                clean = clean.substring(0,idxN-1);
+            }
+            else{
+                //just cut off the part after the CR
+                clean = clean.substring(0,idxR-1);
+            }
+        }
+
+        //re-encode again
+        return encoder.encodeForURL(clean);
     }
 }

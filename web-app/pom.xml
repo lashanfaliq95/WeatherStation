@@ -60,6 +60,14 @@
             <groupId>com.googlecode.json-simple</groupId>
             <artifactId>json-simple</artifactId>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.owasp.esapi/esapi -->
+        <dependency>
+            <groupId>org.owasp.esapi</groupId>
+            <artifactId>esapi</artifactId>
+            <version>2.1.0.1</version>
+        </dependency>
+
+
     </dependencies>
 
     <build>
