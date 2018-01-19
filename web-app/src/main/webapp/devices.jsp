@@ -19,15 +19,15 @@
 <html>
 <head>
     <title>Weather station List</title>
-
     <link href="css/bootstrap.min.css" rel="stylesheet"/>
     <link href="css/material-icons.css" rel="stylesheet"/>
     <link href="css/material-dashboard.css" rel="stylesheet"/>
     <link href="css/font-awesome.min.css" rel="stylesheet">
-    <link href="css/updates.css" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"
           integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ=="
           crossorigin=""/>
+    <link href="css/updates.css" rel="stylesheet"/>
+
 </head>
 <body>
 <div class="wrapper">
@@ -197,12 +197,14 @@
         crossorigin=""></script>
 <script type="text/javascript">
     //initialising the map view tab
+
     var mymap = L.map('mapid').setView([7.9, 80.56274], 8);
     L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
         attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
         maxZoom: 18,
         id: 'mapbox.streets',
-        accessToken: 'pk.eyJ1IjoibGFzaGFuIiwiYSI6ImNqYmc3dGVybTFlZ3UyeXF3cG8yNGxsdzMifQ.n3QEq0-g5tVFmsQxn3JZ-A'
+        accessToken: 'pk.eyJ1IjoibGFzaGFuIiwiYSI6ImNqYmc3dGVybTFlZ3UyeXF3cG8yNGxsdzMifQ.n3QEq0-g5tVFmsQxn3JZ-A',
+        closePopupOnClick: false,
     }).addTo(mymap);
 
     //adding the legend
@@ -219,6 +221,24 @@
         var marker = L.marker([lat, long]).addTo(mymap);
         marker.bindPopup("<b id='weatherStation" + devId + "'>Device details</b><br>" + devName + "<br><table><tr><td><i class=\"tiny material-icons\" >wb_sunny</i></td><td>" + temp + "</td></tr><tr><td><i class=\"tiny material-icons\">opacity</i></td><td>" + humidity + "</td></tr><tr><td><i class=\"tiny material-icons\" >call_made</i></td><td>" + windDir + "</td></tr><div style='margin-right:5px '><tr><td><button class=\"btn-primary btn-block\"   onclick=\"window.location.href='details.jsp?id=" + devName + "'\"><i class=\"material-icons\">remove_red_eye</i> </button></td></tr></div></table>", {minWidth: 100});
 
+    }
+    //add devices to map as popups
+    function addToMapPopoup(lat, long, devName, devId, temp, humidity, windDir) {
+        var popupLocation = new L.LatLng(lat, long);
+        if(temp==null){
+            temp=0;
+        }
+        if(humidity==null){
+            humidity=0;
+        }
+        if(windDir==null){
+            windDir=0;
+        }
+        var popupContent = "<div onclick=\"window.location.href='details.jsp?id=" + devName +"'\"><b id='weatherStation" + devId +"' >"+devName+"</b><br><table><tr><td><i class=\"tiny material-icons\" >wb_sunny</i></td><td>" + temp + "</td><td><i class=\"tiny material-icons\">opacity</i></td><td>" + humidity + "</td><td><i class=\"tiny material-icons\" >call_made</i></td><td>" + windDir + "</td></table></div>";
+        popup = new L.Popup({maxWidth: "auto",autoPan:false,closeButton:false,closeOnClick:false});
+        popup.setLatLng(popupLocation);
+        popup.setContent(popupContent);
+        mymap.addLayer(popup);
     }
 
     //initialising the input map
@@ -271,6 +291,7 @@
     //fixed the issue with map not rendering in tabbed view and pop up model
     //and hiding search bar in map view and showing search bar in table view
     $("a[href='#mapView']").on('shown.bs.tab', function (e) {
+       // mymap.panTo(new L.LatLng(7.9, 80.56274));
         mymap.invalidateSize();
         $('#hide').hide();
     });
@@ -321,7 +342,7 @@
                 console.log('undefined lat' + lat + ' long ' + long);
             }
             else {
-                addToMap(lat, long, dev.deviceIdentifier, dev.id, temperature, humidity, windDir);
+                addToMapPopoup(lat, long, dev.deviceIdentifier, dev.id, temperature, humidity, windDir);
             }
 
             var newIndex = index + 1;

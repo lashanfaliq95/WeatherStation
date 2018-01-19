@@ -36,6 +36,7 @@
 <%@ page import="org.json.JSONException" %>
 <%@ page import="java.security.KeyStoreException" %>
 <%@ page import="org.wso2.iot.weatherstation.portal.LoginController" %>
+<%@ page import="org.json.JSONArray" %>
 <%@include file="includes/authenticate.jsp" %>
 <%
     String id = request.getParameter("id");
@@ -92,7 +93,16 @@
 
     JSONObject device = new JSONObject(result.toString());
     JSONObject enrolmentInfo = device.getJSONObject("enrolmentInfo");
+    JSONObject lat=(JSONObject)device.getJSONArray("properties").get(0);
+    JSONObject lon=(JSONObject)device.getJSONArray("properties").get(1);
+    String latVal=lat.getString("value");
+    String lonVal=lon.getString("value");
+
+
+   // int lat1=lat.value;
+
     try {
+       // JSONObject properties = device.getJSONObject("properties");
 
     } catch (JSONException e) {
 %>
@@ -864,10 +874,12 @@ Error occurred while fetching device info.
 <script type="text/javascript">
 
     //set device details and send device details to dashboard.jsp
+
     localStorage.setItem("deviceId","<%=id%>");
     localStorage.setItem("deviceName","<%=device.getString("name")%>");
     localStorage.setItem("owner","<%=enrolmentInfo.getString("owner")%>");
     localStorage.setItem("date","<%=new Date(enrolmentInfo.getLong("dateOfEnrolment")).toString()%>");
+  console.log("<%=lat.getString("value")%>");
     document.getElementById("devName").innerHTML="<%=device.getString("name")%>";
     document.getElementById("devDetails").innerHTML="Owned by "+"<%=enrolmentInfo.getString("owner")%>"+" and enrolled on "+"<%=new Date(enrolmentInfo.getLong("dateOfEnrolment")).toString()%>";
 

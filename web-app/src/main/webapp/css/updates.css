@@ -77,4 +77,16 @@
     height: 40%;
 }
 
+.leaflet-popup-content{
+    margin: 5px 5px;
+    cursor: pointer;
+    width: -webkit-fill-available;
+}
+.leaflet-popup-tip-container{
+    display: none;
+}
 
+.leaflet-popup-content-wrapper{
+
+    text-align: center;
+}
