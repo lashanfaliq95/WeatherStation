@@ -46,7 +46,8 @@
         </div>
     </div>
     <div class="main-panel">
-        <div class="content">
+
+        <div class="content" style="margin-top:5px ; padding: 0 0">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-12">
@@ -80,10 +81,13 @@
                                         </li>
                                     </ul>
                                 </div>
-                                <h4 class="title">Weather stations enrolled</h4>
-                                <p class="category">Below are the list of weather stations enrolled with the server</p>
+
                                 <table style="width:100%">
                                     <tr>
+                                        <th>
+                                            <h4 class="title">Weather stations enrolled</h4>
+                                            <p class="category">Below are the list of weather stations enrolled with the server</p>
+                                        </th>
                                         <th>
                                             <button class="btn btn-white" data-toggle="modal"
                                                     data-target="#newDeviceModal">Add
@@ -160,7 +164,7 @@
                                     </div>
                                 </div>
                                 <div id="mapView" class="tab-pane fade  ">
-                                    <div id="mapid" style="width: 100%; height:100%;"></div>
+                                    <div id="mapid" style="width: 100%; height:80%;"></div>
                                 </div>
                             </div>
                         </div>
@@ -193,7 +197,7 @@
         crossorigin=""></script>
 <script type="text/javascript">
     //initialising the map view tab
-    var mymap = L.map('mapid').setView([7.65655, 80.77148], 8);
+    var mymap = L.map('mapid').setView([7.9, 80.56274], 8);
     L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
         attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
         maxZoom: 18,
