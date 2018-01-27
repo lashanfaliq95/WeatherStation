@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <title>Weather Station details</title>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport'/>
+    <meta name="viewport" content="width=device-width"/>
+    <!-- Bootstrap core CSS     -->
+    <link href="css/bootstrap.min.css" rel="stylesheet"/>
+    <!--  Material Dashboard CSS    -->
+    <link href="css/material-dashboard.css?v=1.2.0" rel="stylesheet"/>
+    <!-- For the date range picker in hisorical tab     -->
+    <link href="css/daterangepicker.css" rel="stylesheet"/>
+    <!--     Fonts and icons     -->
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons' rel='stylesheet'
+          type='text/css'>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"
+          integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ=="
+          crossorigin=""/>
+
+    <!-- Custom styles for this template -->
+    <link href="css/simple-sidebar.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div id="wrapper" class="toggled">
+
+    <!-- Sidebar -->
+    <div id="sidebar-wrapper" class="sidebar" data-color="purple" data-image="images/sidebar-1.jpg">
+        <!--
+    Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
+
+    Tip 2: you can also add an image using data-image tag
+-->
+        <div class="logo">
+            <a class="simple-text" id="devName">
+                Weather Station
+            </a>
+        </div>
+        <div class="sidebar-wrapper">
+            <ul class="nav">
+                <li class="active" id="realtimeTab">
+                    <a href="#realtime" data-toggle="tab">
+                        <i class="material-icons">access_alarms</i> Realtime
+                        <div class="ripple-container"></div>
+                    </a>
+                </li>
+                <li class="" id="historicalTab">
+                    <a href="#historical" data-toggle="tab">
+                        <i class="material-icons">history</i> Historical
+                        <div class="ripple-container"></div>
+                    </a>
+                </li>
+                <li>
+                    <a href="Dashboard.jsp">
+                        <i class="material-icons">dashboard</i>
+                        <p>Dashboard</p>
+                    </a>
+                </li>
+            </ul>
+            <footer>
+                <div class="card card-stats " style="margin-bottom: 10px">
+                    <div class="card-content">
+                        <h3 class="title" id="devNam">
+                        </h3>
+                        <p class="category" id="devDetails"></p>
+                    </div>
+                </div>
+            </footer>
+            <div id="mapid" style="width: 100%; height:50%;"></div>
+
+        </div>
+
+    </div>
+    <!-- /#sidebar-wrapper -->
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper" class="main-panel">
+        <nav class="navbar navbar-transparent navbar-absolute">
+            <div class="container-fluid">
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="./devices.jsp">
+                                <p><i class="material-icons">list</i>Device List</p>
+                            </a>
+                        </li>
+                        <li class="dropdown pull-right">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="material-icons">person</i>
+                                <%--<span class="notification">5</span>--%>
+                                <p class="hidden-lg hidden-md">Profile</p>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="logout.jsp">Logout</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="content">
+            <div class="container-fluid">
+                <div class="tab-content">
+                    <div id="realtime" class="tab-pane fade in active">
+                        <div class="row" id="statusCards">
+                            <div class="col-lg-3 col-md-6 col-sm-6">
+                                <div class="card card-stats">
+                                    <div class="card-header" data-background-color="orange">
+                                        <i class="material-icons">brightness_low</i>
+                                    </div>
+                                    <div class="card-content">
+                                        <p class="category">Temperature</p>
+                                        <h3 class="title" id="temperature">Yet to be updated
+                                        </h3>
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="stats" id="temperature_status_alert">
+                                            <i class="material-icons">update</i> Just Updated
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6 col-sm-6">
+                                <div class="card card-stats">
+                                    <div class="card-header" data-background-color="green">
+                                        <i class="material-icons">invert_colors</i>
+                                    </div>
+                                    <div class="card-content">
+                                        <p class="category">Humidity</p>
+                                        <h3 class="title" id="humidity">Yet to be updated</h3>
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="stats" id="humidity_status_alert">
+                                            <i class="material-icons">update</i> Just Updated
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6 col-sm-6">
+                                <div class="card card-stats">
+                                    <div class="card-header" data-background-color="red">
+                                        <i class="material-icons">zoom_out_map</i>
+                                    </div>
+                                    <div class="card-content">
+                                        <p class="category">Wind Direction</p>
+                                        <h3 class="title" id="wind_status">Yet to be updated</h3>
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="stats" id="wind_status_alert">
+                                            <i class="material-icons">update</i> Just Updated
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6 col-sm-6">
+                                <div class="card card-stats">
+                                    <div class="card-header" data-background-color="blue">
+                                        <i class="material-icons">forward</i>
+                                    </div>
+                                    <div class="card-content">
+                                        <p class="category">Wind Speed</p>
+                                        <h3 class="title" id="windspeed_status">Yet to be updated</h3>
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="stats" id="windspeed_status_alert">
+                                            <i class="material-icons">update</i> Just Updated
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="card" id="temp">
+                                    <div class="card-header card-chart" data-background-color="red">
+                                        <div class="ct-chart" id="RealTimeTempChart"></div>
+                                    </div>
+                                    <div class="card-content">
+                                        <h4 class="title">Temperature</h4>
+                                        <p class="category">
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="stats" id="realtimeTempLastUpdated">
+                                            <i class="material-icons">access_time</i> Yet to be updated
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card" id='humid'>
+                                    <div class="card-header card-chart" data-background-color="blue">
+                                        <div class="ct-chart" id="RealTimeHumidityChart"></div>
+                                    </div>
+                                    <div class="card-content">
+                                        <h4 class="title">Humidity</h4>
+                                        <p class="category">
+
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="stats" id="realtimeHumidLastUpdated">
+                                            <i class="material-icons">access_time</i> Yet to be updated
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card" id='winddir'>
+                                    <div class="card-header card-chart" data-background-color="green">
+                                        <div class="ct-chart" id="RealTimeWindDirChart"></div>
+                                    </div>
+                                    <div class="card-content">
+                                        <h4 class="title">Wind Direction</h4>
+                                        <p class="category">
+
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="stats" id="realtimeWindDirLastUpdated">
+                                            <i class="material-icons">access_time</i> Yet to be updated
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card" id='windspeed'>
+                                    <div class="card-header card-chart" data-background-color="purple">
+                                        <div class="ct-chart" id="RealTimeWindSpeedChart"></div>
+                                    </div>
+                                    <div class="card-content">
+                                        <h4 class="title">Wind Speed</h4>
+                                        <p class="category">
+
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="stats" id="realtimewindspeedmphLastUpdated">
+                                            <i class="material-icons">access_time</i> Yet to be updated
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card" id='indoorTemp'>
+                                    <div class="card-header card-chart" data-background-color="orange">
+                                        <div class="ct-chart" id="RealTimeIndoorTempChart"></div>
+                                    </div>
+                                    <div class="card-content">
+                                        <h4 class="title">Indoor Temperature</h4>
+                                        <p class="category">
+
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="stats" id="realtimeindoortempLastUpdated">
+                                            <i class="material-icons">access_time</i> Yet to be updated
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card" id='indoorHumid'>
+                                    <div class="card-header card-chart" data-background-color="yellow">
+                                        <div class="ct-chart" id="RealTimeIndoorHumidityChart"></div>
+                                    </div>
+                                    <div class="card-content">
+                                        <h4 class="title">Indoor Humidity</h4>
+                                        <p class="category">
+
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="stats" id="realtimeindoorhumidLastUpdated">
+                                            <i class="material-icons">access_time</i> Yet to be updated
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="card" id='windgust'>
+                                    <div class="card-header card-chart" data-background-color="orange">
+                                        <div class="ct-chart" id="RealTimeWindGustChart"></div>
+                                    </div>
+                                    <div class="card-content">
+                                        <h4 class="title">Wind Gust</h4>
+                                        <p class="category">
+
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="stats" id="realtimewindgustLastUpdated">
+                                            <i class="material-icons">access_time</i> Yet to be updated
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card" id='dewpoint'>
+                                    <div class="card-header card-chart" data-background-color="purple">
+                                        <div class="ct-chart" id="RealTimeDewPointChart"></div>
+                                    </div>
+                                    <div class="card-content">
+                                        <h4 class="title">Dew Point</h4>
+                                        <p class="category">
+
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="stats" id="realtimedewptfLastUpdated">
+                                            <i class="material-icons">access_time</i> Yet to be updated
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card" id='windchill'>
+                                    <div class="card-header card-chart" data-background-color="red">
+                                        <div class="ct-chart" id="RealTimeWindChillChart"></div>
+                                    </div>
+                                    <div class="card-content">
+                                        <h4 class="title">Wind Chill</h4>
+                                        <p class="category">
+
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="stats" id="realtimewindchillfLastUpdated">
+                                            <i class="material-icons">access_time</i> Yet to be updated
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card" id='raining'>
+                                    <div class="card-header card-chart" data-background-color="yellow">
+                                        <div class="ct-chart" id="RealTimeRainingChart"></div>
+                                    </div>
+                                    <div class="card-content">
+                                        <h4 class="title">Raining</h4>
+                                        <p class="category">
+
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="stats" id="realtimerainingLastUpdated">
+                                            <i class="material-icons">access_time</i> Yet to be updated
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card" id='baromin'>
+                                    <div class="card-header card-chart" data-background-color="green">
+                                        <div class="ct-chart" id="RealTimeBarominChart"></div>
+                                    </div>
+                                    <div class="card-content">
+                                        <h4 class="title">Baromin</h4>
+                                        <p class="category">
+
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="stats" id="realtimebarominLastUpdated">
+                                            <i class="material-icons">access_time</i> Yet to be updated
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card" id='lowbatt'>
+                                    <div class="card-header card-chart" data-background-color="blue">
+                                        <div class="ct-chart" id="RealTimeLowbatChart"></div>
+                                    </div>
+                                    <div class="card-content">
+                                        <h4 class="title">Lowbatt</h4>
+                                        <p class="category">
+
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="stats" id="realtimelowbattLastUpdated">
+                                            <i class="material-icons">access_time</i> Yet to be updated
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="card" id='dailyraining'>
+                                    <div class="card-header card-chart" data-background-color="green">
+                                        <div class="ct-chart" id="RealTimeDailyRainingChart"></div>
+                                    </div>
+                                    <div class="card-content">
+                                        <h4 class="title">Daily Raining</h4>
+                                        <p class="category">
+
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="stats" id="realtimedailyrainingLastUpdated">
+                                            <i class="material-icons">access_time</i> Yet to be updated
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card" id='weeklyraining'>
+                                    <div class="card-header card-chart" data-background-color="yellow">
+                                        <div class="ct-chart" id="RealTimeWeeklyRainingChart"></div>
+                                    </div>
+                                    <div class="card-content">
+                                        <h4 class="title">Weekly raining</h4>
+                                        <p class="category">
+
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="stats" id="realtimeweeklyrainingLastUpdated">
+                                            <i class="material-icons">access_time</i> Yet to be updated
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card" id='monthlyraining'>
+                                    <div class="card-header card-chart" data-background-color="orange">
+                                        <div class="ct-chart" id="RealTimeMonthlyRainingChart"></div>
+                                    </div>
+                                    <div class="card-content">
+                                        <h4 class="title">Monthly Raining</h4>
+                                        <p class="category">
+
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="stats" id="realtimemonthlyrainingLastUpdated">
+                                            <i class="material-icons">access_time</i> Yet to be updated
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card" id='yearlyraining'>
+                                    <div class="card-header card-chart" data-background-color="purple">
+                                        <div class="ct-chart" id="RealTimeYearlyRainingChart"></div>
+                                    </div>
+                                    <div class="card-content">
+                                        <h4 class="title">Yearly Raining</h4>
+                                        <p class="category">
+
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="stats" id="realtimeyearlyrainingLastUpdated">
+                                            <i class="material-icons">access_time</i> Yet to be updated
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card" id='solarradiation'>
+                                    <div class="card-header card-chart" data-background-color="red">
+                                        <div class="ct-chart" id="RealTimeSolarRadiationChart"></div>
+                                    </div>
+                                    <div class="card-content">
+                                        <h4 class="title">Solar Radiation</h4>
+                                        <p class="category">
+
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="stats" id="realtimesolarradiationLastUpdated">
+                                            <i class="material-icons">access_time</i> Yet to be updated
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card" id='uv'>
+                                    <div class="card-header card-chart" data-background-color="blue">
+                                        <div class="ct-chart" id="RealTimeUltraVioletChart"></div>
+                                    </div>
+                                    <div class="card-content">
+                                        <h4 class="title">Ultra Violet</h4>
+                                        <p class="category">
+
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="stats" id="realtimeuvLastUpdated">
+                                            <i class="material-icons">access_time</i> Yet to be updated
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div id="historical" class="tab-pane fade">
+                        <div style="margin-right:70%;margin-left:2%  ">
+                            <h4><strong>Select Date-range</strong> <input type="text" name="dateRange" id="dateRange"
+                                                                          value="01/01/2017 1:30 PM - 01/01/2017 2:00 PM"
+                                                                          class="form-control"/></h4>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="card" id='Htemp'>
+                                    <div class="card-header card-chart" data-background-color="red">
+                                        <div class="ct-chart" id="HistoricalTempChart"></div>
+                                    </div>
+                                    <div class="card-content">
+                                        <h4 class="title">Temperature</h4>
+                                        <p class="category" id="historicalTempAlert">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card" id='Hhumid'>
+                                    <div class="card-header card-chart" data-background-color="blue">
+                                        <div class="ct-chart" id="HistoricalHumidityChart"></div>
+                                    </div>
+                                    <div class="card-content">
+                                        <h4 class="title">Humidity</h4>
+                                        <p class="category" id="historicalHumidAlert">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card" id='Hwinddir'>
+                                    <div class="card-header card-chart" data-background-color="green">
+                                        <div class="ct-chart" id="HistoricalWindDirChart"></div>
+                                    </div>
+                                    <div class="card-content">
+                                        <h4 class="title">Wind Direction</h4>
+                                        <p class="category" id="historicalWindDirAlert">
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card" id='Hwindspeed'>
+                                    <div class="card-header card-chart" data-background-color="purple">
+                                        <div class="ct-chart" id="HistoricalWindSpeedChart"></div>
+                                    </div>
+                                    <div class="card-content">
+                                        <h4 class="title">Wind Speed</h4>
+                                        <p class="category" id="historicalwindspeedLastUpdated">
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card" id='Hitemp'>
+                                    <div class="card-header card-chart" data-background-color="orange">
+                                        <div class="ct-chart" id="HistoricalIndoorTempChart"></div>
+                                    </div>
+                                    <div class="card-content">
+                                        <h4 class="title">Indoor Temperature</h4>
+                                        <p class="category" id="historicalindoortempfLastUpdated">
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card" id='Hihumid'>
+                                    <div class="card-header card-chart" data-background-color="yellow">
+                                        <div class="ct-chart" id="HistoricalIndoorHumidityChart"></div>
+                                    </div>
+                                    <div class="card-content">
+                                        <h4 class="title">Indoor Humidity</h4>
+                                        <p class="category" id="historicalindoorhumidityLastUpdated">
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="card" id='Hwindgust'>
+                                    <div class="card-header card-chart" data-background-color="orange">
+                                        <div class="ct-chart" id="HistoricalWindGustChart"></div>
+                                    </div>
+                                    <div class="card-content">
+                                        <h4 class="title">Wind Gust</h4>
+                                        <p class="category" id="historicalwindgustLastUpdated">
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card" id='Hdewpoint'>
+                                    <div class="card-header card-chart" data-background-color="purple">
+                                        <div class="ct-chart" id="HistoricalDewPointChart"></div>
+                                    </div>
+                                    <div class="card-content">
+                                        <h4 class="title">Dew Point</h4>
+                                        <p class="category" id="historicaldewptfLastUpdated">
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card" id='Hwindchill'>
+                                    <div class="card-header card-chart" data-background-color="red">
+                                        <div class="ct-chart" id="HistoricalWindChillChart"></div>
+                                    </div>
+                                    <div class="card-content">
+                                        <h4 class="title">Wind Chill</h4>
+                                        <p class="category" id="historicalwindchillfLastUpdated">
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card" id='Hraining'>
+                                    <div class="card-header card-chart" data-background-color="yellow">
+                                        <div class="ct-chart" id="HistoricalRainingChart"></div>
+                                    </div>
+                                    <div class="card-content">
+                                        <h4 class="title">Raining</h4>
+                                        <p class="category" id="historicalrainingLastUpdated">
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card" id='Hbaromin'>
+                                    <div class="card-header card-chart" data-background-color="green">
+                                        <div class="ct-chart" id="HistoricalBarominChart"></div>
+                                    </div>
+                                    <div class="card-content">
+                                        <h4 class="title">Baromin</h4>
+                                        <p class="category" id="historicalbarominLastUpdated">
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card" id='Hlowbatt'>
+                                    <div class="card-header card-chart" data-background-color="blue">
+                                        <div class="ct-chart" id="HistoricalLowbatChart"></div>
+                                    </div>
+                                    <div class="card-content">
+                                        <h4 class="title">Lowbatt</h4>
+                                        <p class="category" id="historicallowbattLastUpdated">
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="card" id='Hdailyraining'>
+                                    <div class="card-header card-chart" data-background-color="green">
+                                        <div class="ct-chart" id="HistoricalDailyRainingChart"></div>
+                                    </div>
+                                    <div class="card-content">
+                                        <h4 class="title">Daily Raining</h4>
+                                        <p class="category" id="historicaldailyrainingLastUpdated">
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card" id='Hweeklyraining'>
+                                    <div class="card-header card-chart" data-background-color="yellow">
+                                        <div class="ct-chart" id="HistoricalWeeklyRainingChart"></div>
+                                    </div>
+                                    <div class="card-content">
+                                        <h4 class="title">Weekly raining</h4>
+                                        <p class="category" id="historicalweeklyrainingLastUpdated">
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card" id='Hmonthly raining'>
+                                    <div class="card-header card-chart" data-background-color="orange">
+                                        <div class="ct-chart" id="HistoricalMonthlyRainingChart"></div>
+                                    </div>
+                                    <div class="card-content">
+                                        <h4 class="title">Monthly Raining</h4>
+                                        <p class="category" id="historicalmonthlyrainingLastUpdated">
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card" id='Hyearlyraining'>
+                                    <div class="card-header card-chart" data-background-color="purple">
+                                        <div class="ct-chart" id="HistoricalYearlyRainingChart"></div>
+                                    </div>
+                                    <div class="card-content">
+                                        <h4 class="title">Yearly Raining</h4>
+                                        <p class="category" id="historicalyearlyrainingLastUpdated">
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card" id='Hsolarradiation'>
+                                    <div class="card-header card-chart" data-background-color="red">
+                                        <div class="ct-chart" id="HistoricalSolarRadiationChart"></div>
+                                    </div>
+                                    <div class="card-content">
+                                        <h4 class="title">Solar Radiation</h4>
+                                        <p class="category" id="historicalsolarradiationLastUpdated">
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card" id='Huv'>
+                                    <div class="card-header card-chart" data-background-color="blue">
+                                        <div class="ct-chart" id="HistoricalUltraVioletChart"></div>
+                                    </div>
+                                    <div class="card-content">
+                                        <h4 class="title">Ultra Violet</h4>
+                                        <p class="category" id="historicaluvLastUpdated">
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="#menu-toggle" class="btn btn-secondary" id="menu-toggle">Toggle Menu</a>
+
+                </div>
+            </div>
+        </div>
+        <footer class="footer">
+            <p class="copyright pull-right">
+                &copy;
+                <script>
+                    document.write(new Date().getFullYear())
+                </script>
+                <a href="https://wso2.com/iot">WSO2 Inc.</a>
+            </p>
+        </footer>
+    </div>
+    <!-- /#page-content-wrapper -->
+
+</div>
+<script src="js/jquery-3.2.1.min.js" type="text/javascript"></script>
+<script src="js/bootstrap.min.js" type="text/javascript"></script>
+<script src="js/material.min.js" type="text/javascript"></script>
+<!--  Charts Plugin -->
+<script src="js/chartist.min.js"></script>
+<!--  Dynamic Elements plugin -->
+<script src="js/arrive.min.js"></script>
+<!--  PerfectScrollbar Library -->
+<script src="js/perfect-scrollbar.jquery.min.js"></script>
+<!--  Notifications Plugin    -->
+<script src="js/bootstrap-notify.js"></script>
+<!-- Material Dashboard javascript methods -->
+<script src="js/material-dashboard.js?v=1.2.0"></script>
+<script src="js/historical-analytics.js"></script>
+<script src="js/realtime-analytics.js"></script>
+<script src="js/bootstrap-datepicker.js" type="text/javascript"></script>
+<script src="js/moment.min.js" type="text/javascript"></script>
+<script src="js/daterangepicker.js" type="text/javascript"></script>
+<script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"
+        integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log=="
+        crossorigin=""></script>
+t>
+
+<!-- Menu Toggle Script -->
+<script>
+    $("#menu-toggle").click(function (e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+       // $("#page-content-wrapper").html("<div class=\"content\"> <div class=\"container-fluid\"> <div class=\"row\"> <div class=\"col-sm-2\"> <div class=\"card\" id=\"temp\" style=\"cursor: pointer\" onclick=redirect(this)> <div class=\"card-header card-chart \" data-background-color=\"red\"> <div class=\"ct-chart ct-golden-section\" id=\"RealTimeTempChart\"></div> </div> <div class=\"card-content\"> <h4 class=\"title\">Temperature</h4> <p class=\"category\"> </div> </div> </div> <div class=\"col-sm-2\"> <div class=\"card\" id='humid' style=\"cursor: pointer\" onclick=redirect(this)> <div class=\"card-header card-chart\" data-background-color=\"blue\"> <div class=\"ct-chart ct-golden-section\" id=\"RealTimeHumidityChart\"></div> </div> <div class=\"card-content\"> <h4 class=\"title\">Humidity</h4> <p class=\"category\"> </div> </div> </div> <div class=\"col-sm-2\"> <div class=\"card\" id='winddir' style=\"cursor: pointer\" onclick=redirect(this)> <div class=\"card-header card-chart\" data-background-color=\"green\"> <div class=\"ct-chart ct-golden-section\" id=\"RealTimeWindDirChart\"></div> </div> <div class=\"card-content\"> <h4 class=\"title\">Wind Direction</h4> <p class=\"category\"> </div> </div> </div> <div class=\"col-sm-2\"> <div class=\"card\" id='windspeed' style=\"cursor: pointer\" onclick=redirect(this)> <div class=\"card-header card-chart\" data-background-color=\"purple\"> <div class=\"ct-chart ct-golden-section\" id=\"RealTimeWindSpeedChart\"></div> </div> <div class=\"card-content\"> <h4 class=\"title\">Wind Speed</h4> <p class=\"category\"> </div> </div> </div> <div class=\"col-sm-2\"> <div class=\"card\" id='indoorTemp' style=\"cursor: pointer\" onclick=redirect(this)> <div class=\"card-header card-chart\" data-background-color=\"orange\"> <div class=\"ct-chart ct-golden-section\" id=\"RealTimeIndoorTempChart\"></div> </div> <div class=\"card-content\"> <h4 class=\"title\">Indoor Temperature</h4> <p class=\"category\"> </div> </div> </div> <div class=\"col-sm-2\"> <div class=\"card\" id='indoorHumid' style=\"cursor: pointer\" onclick=redirect(this)> <div class=\"card-header card-chart\" data-background-color=\"yellow\"> <div class=\"ct-chart ct-golden-section\" id=\"RealTimeIndoorHumidityChart\"></div> </div> <div class=\"card-content\"> <h4 class=\"title\">Indoor Humidity</h4> <p class=\"category\"> </div> </div> </div> </div> <div class=\"row\"> <div class=\"col-sm-2\"> <div class=\"card\" id='windgust' style=\"cursor: pointer\" onclick=redirect(this)> <div class=\"card-header card-chart\" data-background-color=\"orange\"> <div class=\"ct-chart ct-golden-section\" id=\"RealTimeWindGustChart\"></div> </div> <div class=\"card-content\"> <h4 class=\"title\">Wind Gust</h4> <p class=\"category\"> </div> </div> </div> <div class=\"col-sm-2\"> <div class=\"card\" id='dewpoint' style=\"cursor: pointer\" onclick=redirect(this)> <div class=\"card-header card-chart\" data-background-color=\"purple\"> <div class=\"ct-chart ct-golden-section\" id=\"RealTimeDewPointChart\"></div> </div> <div class=\"card-content\"> <h4 class=\"title\">Dew Point</h4> <p class=\"category\"> </div> </div> </div> <div class=\"col-sm-2\"> <div class=\"card\" id='windchill' style=\"cursor: pointer\" onclick=redirect(this)> <div class=\"card-header card-chart\" data-background-color=\"red\"> <div class=\"ct-chart ct-golden-section\" id=\"RealTimeWindChillChart\"></div> </div> <div class=\"card-content\"> <h4 class=\"title\">Wind Chill</h4> <p class=\"category\"> </div> </div> </div> <div class=\"col-sm-2\"> <div class=\"card\" id='raining' style=\"cursor: pointer\" onclick=redirect(this)> <div class=\"card-header card-chart\" data-background-color=\"yellow\"> <div class=\"ct-chart ct-golden-section\" id=\"RealTimeRainingChart\"></div> </div> <div class=\"card-content\"> <h4 class=\"title\">Raining</h4> <p class=\"category\"> </div> </div> </div> <div class=\"col-sm-2\"> <div class=\"card\" id='baromin' style=\"cursor: pointer\" onclick=redirect(this)> <div class=\"card-header card-chart\" data-background-color=\"green\"> <div class=\"ct-chart ct-golden-section\" id=\"RealTimeBarominChart\"></div> </div> <div class=\"card-content\"> <h4 class=\"title\">Baromin</h4> <p class=\"category\"> </div> </div> </div> <div class=\"col-sm-2\"> <div class=\"card\" id='lowbatt' style=\"cursor: pointer\" onclick=redirect(this)> <div class=\"card-header card-chart\" data-background-color=\"blue\"> <div class=\"ct-chart ct-golden-section\" id=\"RealTimeLowbatChart\"></div> </div> <div class=\"card-content\"> <h4 class=\"title\">Lowbatt</h4> <p class=\"category\"> </div> </div> </div> </div> <div class=\"row\"> <div class=\"col-sm-2\"> <div class=\"card\" id='dailyraining' style=\"cursor: pointer\" onclick=redirect(this)> <div class=\"card-header card-chart\" data-background-color=\"green\"> <div class=\"ct-chart ct-golden-section\" id=\"RealTimeDailyRainingChart\"></div> </div> <div class=\"card-content\"> <h4 class=\"title\">Daily Raining</h4> <p class=\"category\"> </div> </div> </div> <div class=\"col-sm-2\"> <div class=\"card\" id='weeklyraining' style=\"cursor: pointer\" onclick=redirect(this)> <div class=\"card-header card-chart\" data-background-color=\"yellow\"> <div class=\"ct-chart ct-golden-section\" id=\"RealTimeWeeklyRainingChart\"></div> </div> <div class=\"card-content\"> <h4 class=\"title\">Weekly raining</h4> <p class=\"category\"> </div> </div> </div> <div class=\"col-sm-2\"> <div class=\"card\" id='monthlyraining' style=\"cursor: pointer\" onclick=redirect(this)> <div class=\"card-header card-chart\" data-background-color=\"orange\"> <div class=\"ct-chart ct-golden-section\" id=\"RealTimeMonthlyRainingChart\"></div> </div> <div class=\"card-content\"> <h4 class=\"title\">Monthly Raining</h4> <p class=\"category\"> </div> </div> </div> <div class=\"col-sm-2\"> <div class=\"card\" id='yearlyraining' style=\"cursor: pointer\" onclick=redirect(this)> <div class=\"card-header card-chart\" data-background-color=\"purple\"> <div class=\"ct-chart ct-golden-section\" id=\"RealTimeYearlyRainingChart\"></div> </div> <div class=\"card-content\"> <h4 class=\"title\">Yearly Raining</h4> <p class=\"category\"> </div> </div> </div> <div class=\"col-sm-2\"> <div class=\"card\" id='solarradiation' style=\"cursor: pointer\" onclick=redirect(this)> <div class=\"card-header card-chart\" data-background-color=\"red\"> <div class=\"ct-chart ct-golden-section\" id=\"RealTimeSolarRadiationChart\"></div> </div> <div class=\"card-content\"> <h4 class=\"title\">Solar Radiation</h4> <p class=\"category\"> </div> </div> </div> <div class=\"col-sm-2\"> <div class=\"card\" id='uv' style=\"cursor: pointer\" onclick=redirect(this)> <div class=\"card-header card-chart\" data-background-color=\"blue\"> <div class=\"ct-chart ct-golden-section\" id=\"RealTimeUltraVioletChart\"></div> </div> <div class=\"card-content\"> <h4 class=\"title\">Ultra Violet</h4> <p class=\"category\"> </div> </div> </div> </div> </div>   <a href=\"#menu-toggle\" class=\"btn btn-secondary\" id=\"menu-toggle\">Toggle Menu</a></div>");
+        $(".col-md-4").toggleClass("resize");
+        $("#statusCards").hide();
+
+    });
+
+</script>
+
+</body>
+
+</html>

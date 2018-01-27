@@ -90,3 +90,6 @@
 
     text-align: center;
 }
+.col-md-4.resize{
+    width: 16.66666667%;
+}
