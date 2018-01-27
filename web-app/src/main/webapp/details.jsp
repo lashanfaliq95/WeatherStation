@@ -133,11 +133,12 @@ Error occurred while fetching device info.
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"
           integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ=="
           crossorigin=""/>
+    <link href="css/simple-sidebar.css" rel="stylesheet">
 </head>
 
 <body>
-<div class="wrapper">
-    <div class="sidebar" data-color="purple" data-image="images/sidebar-1.jpg">
+<div id="wrapper" class="toggled">
+    <div id="sidebar-wrapper" class="sidebar" data-color="purple" data-image="images/sidebar-1.jpg">
         <!--
     Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
 
@@ -183,7 +184,8 @@ Error occurred while fetching device info.
         </div>
 
     </div>
-    <div class="main-panel">
+    <div id="page-content-wrapper" class="main-panel">
+
         <nav class="navbar navbar-transparent navbar-absolute">
             <div class="container-fluid">
                 <div class="collapse navbar-collapse">
@@ -213,7 +215,7 @@ Error occurred while fetching device info.
             <div class="container-fluid">
                 <div class="tab-content">
                     <div id="realtime" class="tab-pane fade in active">
-                        <div class="row">
+                        <div class="row" id="statusCards">
                             <div class="col-lg-3 col-md-6 col-sm-6">
                                 <div class="card card-stats">
                                     <div class="card-header" data-background-color="orange">
@@ -842,6 +844,7 @@ Error occurred while fetching device info.
 
                 </div>
             </div>
+            <a href="#menu-toggle" class="btn btn-secondary" id="menu-toggle">Toggle Menu</a>
         </div>
         <footer class="footer">
             <p class="copyright pull-right">
@@ -878,6 +881,14 @@ Error occurred while fetching device info.
         integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log=="
         crossorigin=""></script>
 <script type="text/javascript">
+    //menu toggle script
+    $("#menu-toggle").click(function (e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+        $(".col-md-4").toggleClass("resize");
+        $("#statusCards").hide();
+
+    });
 //creating the map
 
 var mymap = L.map('mapid').setView([7.9, 80.56274], 7);
