@@ -33,7 +33,7 @@
 <div class="wrapper">
     <div class="sidebar" data-color="blue" data-image="images/sidebar-1.jpg">
         <div class="logo">
-            <a href="#" class="simple-text">
+            <a href="./devices.jsp" class="simple-text">
                 <strong>Weather</strong>Station
             </a>
         </div>
@@ -43,6 +43,13 @@
                 <label class="control-label">Search Device</label>
                 <input type="search" id="search" class="form-control">
                 <span class="material-input"></span></div>
+            <p class="copyright" style="position: absolute;bottom:0;padding-left: 100px">
+                &copy;
+                <script>
+                    document.write(new Date().getFullYear())
+                </script>
+                <a href="https://wso2.com/iot">WSO2 Inc.</a>
+            </p>
         </div>
     </div>
     <div class="main-panel">
@@ -166,17 +173,14 @@
                                 <div id="mapView" class="tab-pane fade  ">
                                     <div id="mapid" style="width: 100%; height:80%;"></div>
                                 </div>
+
                             </div>
+
                         </div>
+
                     </div>
                 </div>
-                <p class="copyright pull-right">
-                    &copy;
-                    <script>
-                        document.write(new Date().getFullYear())
-                    </script>
-                    <a href="https://wso2.com/iot">WSO2 Inc.</a>
-                </p>
+
             </div>
         </div>
     </div>

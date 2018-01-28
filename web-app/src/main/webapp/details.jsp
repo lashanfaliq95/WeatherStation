@@ -144,9 +144,9 @@ Error occurred while fetching device info.
 
     Tip 2: you can also add an image using data-image tag
 -->
-        <div class="logo">
-            <a class="simple-text" id="devName">
-                Weather Station
+        <div class="logo list-inline" >
+            <a  href="./devices.jsp" class="simple-text" >
+                <strong>Weather</strong>Station
             </a>
         </div>
         <div class="sidebar-wrapper">
@@ -163,38 +163,42 @@ Error occurred while fetching device info.
                         <div class="ripple-container"></div>
                     </a>
                 </li>
-                <li >
-                    <a href="Dashboard.jsp">
-                        <i class="material-icons">dashboard</i>
-                        <p>Dashboard</p>
-                    </a>
-                </li>
             </ul>
-            <footer>
+
+
+
+            <div id="mapid" style="width: 100%; height:50%; "></div>
+
             <div class="card card-stats " style="margin-bottom: 10px">
                 <div class="card-content">
-                    <h3 class="title" id="devNam">
+                    <h3 class="title" id="devName">
                     </h3>
                     <p class="category" id="devDetails"></p>
                 </div>
             </div>
-            </footer>
-            <div id="mapid" style="width: 100%; height:50%;"></div>
-
+            <p class="copyright" style="position: absolute;bottom:0;padding-left: 100px">
+                &copy;
+                <script>
+                    document.write(new Date().getFullYear())
+                </script>
+                <a href="https://wso2.com/iot">WSO2 Inc.</a>
+            </p>
         </div>
+
 
     </div>
     <div id="page-content-wrapper" class="main-panel">
 
-        <nav class="navbar navbar-transparent navbar-absolute">
+        <nav class="navbar navbar-transparent">
             <div class="container-fluid">
                 <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav navbar-left">
+                    <li>
+                        <a href="#menu-toggle" class="btn btn-secondary" id="menu-toggle">Dashboard</a>
+
+                    </li>
+                    </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <li >
-                            <a href="./devices.jsp">
-                                <p ><i class="material-icons">list</i>Device List</p>
-                            </a>
-                        </li>
                         <li class="dropdown pull-right">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="material-icons">person</i>
@@ -844,17 +848,10 @@ Error occurred while fetching device info.
 
                 </div>
             </div>
-            <a href="#menu-toggle" class="btn btn-secondary" id="menu-toggle">Toggle Menu</a>
         </div>
-        <footer class="footer">
-            <p class="copyright pull-right">
-                &copy;
-                <script>
-                    document.write(new Date().getFullYear())
-                </script>
-                <a href="https://wso2.com/iot">WSO2 Inc.</a>
-            </p>
-        </footer>
+
+
+
     </div>
 </div>
 </body>
@@ -887,6 +884,7 @@ Error occurred while fetching device info.
         $("#wrapper").toggleClass("toggled");
         $(".col-md-4").toggleClass("resize");
         $("#statusCards").hide();
+        $(this).text("Analytics");
 
     });
 //creating the map
