@@ -149,14 +149,14 @@
                                 </div>
                             </div>
                             <div class="tab-content">
-                                <div id="tableview" class="tab-pane fade in active">
+                                <div id="tableview" class="tab-pane fade in active" style>
                                     <div class="card-content table-responsive">
-                                        <table class="table table-hover" id="devices-listing">
+                                        <table class="table table-hover" id="devices-listing" style="height: 100%">
                                             <thead>
                                             <th>Device Name</th>
                                             <th>Temperature</th>
                                             <th>Humidity</th>
-                                            <th>Owner</th>
+                                            <th>Wind Direction</th>
                                             <th></th>
                                             <th></th>
                                             <th></th>
@@ -195,6 +195,8 @@
 <script src="js/material-kit.js" type="text/javascript"></script>
 <script src="js/bootstrap-notify.js" type="text/javascript"></script>
 <script src="js/material-dashboard.js" type="text/javascript"></script>
+<script src="js/historical-analytics.js"></script>
+
 <script type="text/javascript" src="js/libs/jquery.bootpag.js"></script>
 <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"
         integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log=="
@@ -329,8 +331,8 @@
 
             var myRow = "<tr><a href='#" + dev.deviceIdentifier + "'><td>" + dev.name
                 + "</td><td>"
-                + (temperature) + "</td><td>" + (humidity) + "</td><td>"
-                + dev.enrolmentInfo.owner + "</td><td>"
+                + (temperature) + "<div class=\"col-md-4\"><div class=\"card\" id='Hwindspeed' ><div class=\"card-header card-chart\" data-background-color=\"purple\"><div class=\"ct-chart\" id=\"HistoricalWindSpeedChart\"></div></div><div class=\"card-content\"><h4 class=\"title\">Wind Speed</h4><p class=\"category\" id=\"historicalwindspeedLastUpdated\"></div></div></div>\n</td><td>" + (humidity) + "<div class=\"col-md-4\"><div class=\"card\" id='Hwindspeed' ><div class=\"card-header card-chart\" data-background-color=\"purple\"><div class=\"ct-chart\" id=\"HistoricalWindSpeedChart\"></div></div><div class=\"card-content\"><h4 class=\"title\">Wind Speed</h4><p class=\"category\" id=\"historicalwindspeedLastUpdated\"></div></div></div>\n</td><td>"
+                + (windDir) + "<div class=\"col-md-4\"><div class=\"card\" id='Hwindspeed' ><div class=\"card-header card-chart\" data-background-color=\"purple\"><div class=\"ct-chart\" id=\"HistoricalWindSpeedChart\"></div></div><div class=\"card-content\"><h4 class=\"title\">Wind Speed</h4><p class=\"category\" id=\"historicalwindspeedLastUpdated\"></div></div></div>\n</td><td>"
                 + "<button class=\"btn btn-primary btn-fab btn-fab-mini btn-round\"  style='color: #1b6d85' onclick=\"window.location.href='details.jsp?id=" + dev.deviceIdentifier + "'\">"
                 + "<i class=\"material-icons\">remove_red_eye</i>"
                 + "</button></td>"

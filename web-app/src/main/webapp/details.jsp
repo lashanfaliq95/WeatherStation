@@ -167,7 +167,7 @@ Error occurred while fetching device info.
 
 
 
-            <div id="mapid" style="width: 100%; height:50%; "></div>
+            <div id="mapid" style="width: 100%; height:50%; margin-top: 50px"></div>
 
             <div class="card card-stats " style="margin-bottom: 10px">
                 <div class="card-content">
