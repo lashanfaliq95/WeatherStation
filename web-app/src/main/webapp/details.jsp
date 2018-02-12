@@ -904,12 +904,10 @@ marker.bindPopup("<b><%=device.getString("name")%></b>").openPopup();
 
 
     //set device details and send device details to dashboard.jsp
-
     localStorage.setItem("deviceId","<%=id%>");
     localStorage.setItem("deviceName","<%=device.getString("name")%>");
     localStorage.setItem("owner","<%=enrolmentInfo.getString("owner")%>");
     localStorage.setItem("date","<%=new Date(enrolmentInfo.getLong("dateOfEnrolment")).toString()%>");
-  console.log("<%=lat.getString("value")%>");
     document.getElementById("devName").innerHTML="<%=device.getString("name")%>";
     document.getElementById("devDetails").innerHTML="Owned by "+"<%=enrolmentInfo.getString("owner")%>"+" and enrolled on "+"<%=new Date(enrolmentInfo.getLong("dateOfEnrolment")).toString()%>";
 
@@ -918,7 +916,6 @@ marker.bindPopup("<b><%=device.getString("name")%></b>").openPopup();
             var records = JSON.parse(data);
             console.log(records);
             analyticsHistory.redrawGraphs(records);
-
         };
 
         var index = 0;
