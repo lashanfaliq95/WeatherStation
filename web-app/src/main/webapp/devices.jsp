@@ -141,7 +141,7 @@
                                                         data-dismiss="modal">Close
                                                 </button>
                                                 <button type="button" class="btn btn-info btn-simple"
-                                                        onclick="addNewDevice()">Add
+                                                        onclick="addNewDevice();datePickerCallback();">Add
                                                 </button>
                                             </div>
                                         </div>
@@ -195,13 +195,57 @@
 <script src="js/material-kit.js" type="text/javascript"></script>
 <script src="js/bootstrap-notify.js" type="text/javascript"></script>
 <script src="js/material-dashboard.js" type="text/javascript"></script>
-<script src="js/historical-analytics.js"></script>
+<script src="js/chartist.min.js"></script>
 
 <script type="text/javascript" src="js/libs/jquery.bootpag.js"></script>
+
+<script src="js/moment.min.js" type="text/javascript"></script>
+<script src="js/daterangepicker.js" type="text/javascript"></script>
+<script src="js/historical-analytics.js"></script>
 <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"
         integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log=="
         crossorigin=""></script>
 <script type="text/javascript">
+    //loading charts
+
+
+    function datePickerCallback(){
+        var eventsSuccess = function (data) {
+            var records = JSON.parse(data);
+            console.log(records);
+            analyticsHistory.redrawGraphs(records);
+        };
+        var start = moment().subtract(1, 'days');
+        var end = moment();
+
+        var index = 0;
+        var length = 100;
+
+        $.ajax({
+            type: "POST",
+            url: "invoker/execute",
+            data: {
+                "uri": "/events/weatherstation/hambantota?offset=" + index + "&limit=" + length + "&from=" + new Date(
+                    start.format('YYYY-MM-DD H:mm:ss')).getTime() + "&to=" + new Date(
+                    end.format('YYYY-MM-DD H:mm:ss')).getTime(),
+                "method": "get"
+            },
+            success: eventsSuccess
+        });
+    };
+
+
+
+    function historyGraphRefresh() {
+        analyticsHistory.initDashboardPageCharts();
+        var start = moment().subtract(1, 'days');
+        var end = moment();
+        console.log('start'+ start);
+        console.log('end' + end);
+        datePickerCallback();
+        //datePickerCallback(1518329066607, 1518415466607);
+    }
+    setInterval(historyGraphRefresh, 5000);
     //initialising the map view tab
 
     var mymap = L.map('mapid').setView([7.9, 80.56274], 8);
@@ -292,6 +336,7 @@
 
     $(document).ready(function () {
         getAllDevices();
+        historyGraphRefresh();
     });
 
     //fixed the issue with map not rendering in tabbed view and pop up model
@@ -315,7 +360,7 @@
     function getDevice(dev, index, lat, long) {
         var devicesListing = $('#devices-listing');
         var lastKnownSuccess = function (data) {
-
+console.log(data);
             var record = JSON.parse(data).records[0];
 
             var temperature = null;
@@ -323,18 +368,16 @@
             var windDir = null;
 
             if (record) {
+
                 temperature = record.values.tempf;
                 humidity = record.values.humidity;
                 windDir = record.values.winddir;
 
             }
-            var myRow = "<tr><a href='#" + dev.deviceIdentifier + "'><td>" + dev.name
+            var myRow = "<tr onclick=\"window.location.href='details.jsp?id=" + dev.deviceIdentifier + "'\" style='cursor: pointer'><a href='#" + dev.deviceIdentifier + "'><td>" + dev.name
                 + "</td><td>"
-                + "<div class=\"card\" id='Hwindspeed' ><div class=\"card-header card-chart\" data-background-color=\"purple\" style=\"height: 90px;min-height: unset;\"><div class=\"ct-chart\" id=\"HistoricalWindSpeedChart\"></div></div><div class=\"card-content\"><h4 class=\"title\"> "+ (temperature)+"</h4><p class=\"category\" id=\"historicalwindspeedLastUpdated\"></div></div>\n</td><td><div class=\"card\" id='Hwindspeed' ><div class=\"card-header card-chart\" data-background-color=\"purple\" style=\"height: 90px;min-height: unset;\"><div class=\"ct-chart\" id=\"HistoricalWindSpeedChart\"></div></div><div class=\"card-content\"><h4 class=\"title\"> "+ (humidity)+"</h4><p class=\"category\" id=\"historicalwindspeedLastUpdated\"></div></div>\n</td><td>"
-                + "<div class=\"card\" id='Hwindspeed' ><div class=\"card-header card-chart\" data-background-color=\"purple\" style=\"height: 90px;min-height: unset;\"><div class=\"ct-chart\" id=\"HistoricalWindSpeedChart\"></div></div><div class=\"card-content\"><h4 class=\"title\"> "+ (windDir)+"</h4><p class=\"category\" id=\"historicalwindspeedLastUpdated\"></div></div>\n</td><td>"
-                + "<button class=\"btn btn-primary btn-fab btn-fab-mini btn-round\"  style='color: #1b6d85' onclick=\"window.location.href='details.jsp?id=" + dev.deviceIdentifier + "'\">"
-                + "<i class=\"material-icons\">remove_red_eye</i>"
-                + "</button></td>"
+                + "<div class=\"card\" id='Hwindspeed' ><div class=\"card-header card-chart\" data-background-color=\"purple\" style=\"height: 90px;min-height: unset;\"><div class=\"ct-chart\" id=\"HistoricalTempChart\"></div></div><div class=\"card-content\"><h4 class=\"title\"> "+ (temperature)+"</h4><p class=\"category\" id=\"historicalwindspeedLastUpdated\"></div></div>\n</td><td><div class=\"card\" id='Hwindspeed' ><div class=\"card-header card-chart\" data-background-color=\"purple\" style=\"height: 90px;min-height: unset;\"><div class=\"ct-chart\" id=\"HistoricalHumidityChart\"></div></div><div class=\"card-content\"><h4 class=\"title\"> "+ (humidity)+"</h4><p class=\"category\" id=\"historicalwindspeedLastUpdated\"></div></div>\n</td><td>"
+                + "<div class=\"card\" id='Hwindspeed' ><div class=\"card-header card-chart\" data-background-color=\"purple\" style=\"height: 90px;min-height: unset;\"><div class=\"ct-chart\" id=\"HistoricalWindDirChart\"></div></div><div class=\"card-content\"><h4 class=\"title\"> "+ (windDir)+"</h4><p class=\"category\" id=\"historicalwindspeedLastUpdated\"></div></div>\n</td>"
                 + "</a></tr>";
             rows.push(myRow);
             devicesListing.find('tbody').append(myRow);
@@ -377,6 +420,7 @@
 
             });
         };
+        console.log(devices[index].deviceIdentifier);
         $.ajax({
             type: "POST",
             url: "invoker/execute",

@@ -808,7 +808,7 @@ realtimeAnalytics = {
 
             }
             //refresh graphs on click on the chart
-            $('.card').click(function() {
+            $('.card').click(function(){
                 updateGraphs();
             });
 
@@ -835,8 +835,6 @@ realtimeAnalytics = {
             realtimeindoorHumid.update();
             realtimebaromin.update();
             realtimelowbatt.update()
-
-
         }
 
         function disconnect() {

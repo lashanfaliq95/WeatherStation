@@ -812,6 +812,16 @@ realtimeAnalytics = {
 
             }
 
+            //refresh graphs on click on the chart
+            $('.card').click(function() {
+                updateGraphs();
+            });
+
+            $("#menu-toggle").click(function () {
+                updateGraphs();
+            });
+
+
         }
 
         function updateGraphs(){
