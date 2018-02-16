@@ -238,11 +238,6 @@
 
     function historyGraphRefresh() {
         analyticsHistory.initDashboardPageCharts();
-        var start = moment().subtract(1, 'days');
-        var end = moment();
-        console.log('start'+ start);
-        console.log('end' + end);
-        datePickerCallback();
         //datePickerCallback(1518329066607, 1518415466607);
     }
     setInterval(historyGraphRefresh, 5000);
@@ -360,7 +355,9 @@
     function getDevice(dev, index, lat, long) {
         var devicesListing = $('#devices-listing');
         var lastKnownSuccess = function (data) {
-console.log(data);
+            var records = JSON.parse(data);
+            analyticsHistory.redrawGraphs(records);
+console.log('data last known '+data);
             var record = JSON.parse(data).records[0];
 
             var temperature = null;
@@ -376,8 +373,8 @@ console.log(data);
             }
             var myRow = "<tr onclick=\"window.location.href='details.jsp?id=" + dev.deviceIdentifier + "'\" style='cursor: pointer'><a href='#" + dev.deviceIdentifier + "'><td>" + dev.name
                 + "</td><td>"
-                + "<div class=\"card\" id='Hwindspeed' ><div class=\"card-header card-chart\" data-background-color=\"purple\" style=\"height: 90px;min-height: unset;\"><div class=\"ct-chart\" id=\"HistoricalTempChart\"></div></div><div class=\"card-content\"><h4 class=\"title\"> "+ (temperature)+"</h4><p class=\"category\" id=\"historicalwindspeedLastUpdated\"></div></div>\n</td><td><div class=\"card\" id='Hwindspeed' ><div class=\"card-header card-chart\" data-background-color=\"purple\" style=\"height: 90px;min-height: unset;\"><div class=\"ct-chart\" id=\"HistoricalHumidityChart\"></div></div><div class=\"card-content\"><h4 class=\"title\"> "+ (humidity)+"</h4><p class=\"category\" id=\"historicalwindspeedLastUpdated\"></div></div>\n</td><td>"
-                + "<div class=\"card\" id='Hwindspeed' ><div class=\"card-header card-chart\" data-background-color=\"purple\" style=\"height: 90px;min-height: unset;\"><div class=\"ct-chart\" id=\"HistoricalWindDirChart\"></div></div><div class=\"card-content\"><h4 class=\"title\"> "+ (windDir)+"</h4><p class=\"category\" id=\"historicalwindspeedLastUpdated\"></div></div>\n</td>"
+                + "<div class=\"card\"><div class=\"card-header card-chart\" data-background-color=\"purple\" style=\"height: 90px;min-height: unset;\"><div class=\"ct-chart\" id=\"HistoricalTempChart\"></div></div><div class=\"card-content\"><h4 class=\"title\"> "+ (temperature)+"</h4><p class=\"category\" id=\"historicalTempAlert\"></div></div>\n</td><td><div class=\"card\"><div class=\"card-header card-chart\" data-background-color=\"purple\" style=\"height: 90px;min-height: unset;\"><div class=\"ct-chart\" id=\"HistoricalHumidityChart\"></div></div><div class=\"card-content\"><h4 class=\"title\"> "+ (humidity)+"</h4><p class=\"category\" id=\"historicalHumidAlert\"></div></div>\n</td><td>"
+                + "<div class=\"card\"><div class=\"card-header card-chart\" data-background-color=\"purple\" style=\"height: 90px;min-height: unset;\"><div class=\"ct-chart\" id=\"HistoricalWindDirChart\"></div></div><div class=\"card-content\"><h4 class=\"title\"> "+ (windDir)+"</h4><p class=\"category\" id=\"historicalWindDirAlert\"></div></div>\n</td>"
                 + "</a></tr>";
             rows.push(myRow);
             devicesListing.find('tbody').append(myRow);

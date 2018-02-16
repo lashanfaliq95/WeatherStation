@@ -16,7 +16,8 @@
 * under the License.
 */
 
-analyticsHistory = {
+analyticsHistory= {
+
     historicalTempLabel: ['0s'],
     historicalTempSeries: [0],
     historicalHumidLabel: ['0s'],

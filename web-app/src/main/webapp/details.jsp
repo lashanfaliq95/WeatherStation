@@ -948,8 +948,9 @@ marker.bindPopup("<b><%=device.getString("name")%></b>").openPopup();
 
     function datePickerCallback(startD, endD) {
         var eventsSuccess = function (data) {
+            console.log('data'+data);
             var records = JSON.parse(data);
-            console.log(records);
+            console.log('data re'+records);
             analyticsHistory.redrawGraphs(records);
         };
 
