@@ -240,7 +240,7 @@ Error occurred while fetching device info.
                                 </div>
                             </div>
                             <div class="col-lg-3 col-md-6 col-sm-6">
-                                <div class="card card-stats" onclick=redirect(this)>
+                                <div class="card card-stats">
                                     <div class="card-header" data-background-color="green">
                                         <i class="material-icons">invert_colors</i>
                                     </div>
@@ -306,6 +306,40 @@ Error occurred while fetching device info.
                                 </div>
                             </div>
                             <div class="col-md-4">
+                                <div class="card" id='indoorTemp' onclick=redirect(this)>
+                                    <div class="card-header card-chart" data-background-color="orange">
+                                        <div class="ct-chart" id="RealTimeIndoorTempChart"></div>
+                                    </div>
+                                    <div class="card-content">
+                                        <h4 class="title">Indoor Temperature</h4>
+                                        <p class="category">
+
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="stats" id="realtimeindoortempLastUpdated">
+                                            <i class="material-icons">access_time</i> Yet to be updated
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card" id='dewpoint' onclick=redirect(this)>
+                                    <div class="card-header card-chart" data-background-color="purple">
+                                        <div class="ct-chart" id="RealTimeDewPointChart"></div>
+                                    </div>
+                                    <div class="card-content">
+                                        <h4 class="title">Dew Point</h4>
+                                        <p class="category">
+
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="stats" id="realtimedewptfLastUpdated">
+                                            <i class="material-icons">access_time</i> Yet to be updated
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
                                 <div class="card" id='humid' onclick=redirect(this) >
                                     <div class="card-header card-chart" data-background-color="blue">
                                         <div class="ct-chart" id="RealTimeHumidityChart"></div>
@@ -322,6 +356,43 @@ Error occurred while fetching device info.
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-md-4">
+                                <div class="card" id='indoorHumid' onclick=redirect(this)>
+                                    <div class="card-header card-chart" data-background-color="yellow">
+                                        <div class="ct-chart" id="RealTimeIndoorHumidityChart"></div>
+                                    </div>
+                                    <div class="card-content">
+                                        <h4 class="title">Indoor Humidity</h4>
+                                        <p class="category">
+
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="stats" id="realtimeindoorhumidLastUpdated">
+                                            <i class="material-icons">access_time</i> Yet to be updated
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card" id='baromin' onclick=redirect(this)>
+                                    <div class="card-header card-chart" data-background-color="green">
+                                        <div class="ct-chart" id="RealTimeBarominChart"></div>
+                                    </div>
+                                    <div class="card-content">
+                                        <h4 class="title">Baromin</h4>
+                                        <p class="category">
+
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="stats" id="realtimebarominLastUpdated">
+                                            <i class="material-icons">access_time</i> Yet to be updated
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row">
                             <div class="col-md-4">
                                 <div class="card" id='winddir' onclick=redirect(this)>
                                     <div class="card-header card-chart" data-background-color="green">
@@ -357,42 +428,6 @@ Error occurred while fetching device info.
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <div class="card" id='indoorTemp' onclick=redirect(this)>
-                                    <div class="card-header card-chart" data-background-color="orange">
-                                        <div class="ct-chart" id="RealTimeIndoorTempChart"></div>
-                                    </div>
-                                    <div class="card-content">
-                                        <h4 class="title">Indoor Temperature</h4>
-                                        <p class="category">
-
-                                    </div>
-                                    <div class="card-footer">
-                                        <div class="stats" id="realtimeindoortempLastUpdated">
-                                            <i class="material-icons">access_time</i> Yet to be updated
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="card" id='indoorHumid' onclick=redirect(this)>
-                                    <div class="card-header card-chart" data-background-color="yellow">
-                                        <div class="ct-chart" id="RealTimeIndoorHumidityChart"></div>
-                                    </div>
-                                    <div class="card-content">
-                                        <h4 class="title">Indoor Humidity</h4>
-                                        <p class="category">
-
-                                    </div>
-                                    <div class="card-footer">
-                                        <div class="stats" id="realtimeindoorhumidLastUpdated">
-                                            <i class="material-icons">access_time</i> Yet to be updated
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
                                 <div class="card" id='windgust' onclick=redirect(this)>
                                     <div class="card-header card-chart" data-background-color="orange">
                                         <div class="ct-chart" id="RealTimeWindGustChart"></div>
@@ -404,23 +439,6 @@ Error occurred while fetching device info.
                                     </div>
                                     <div class="card-footer">
                                         <div class="stats" id="realtimewindgustLastUpdated">
-                                            <i class="material-icons">access_time</i> Yet to be updated
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="card" id='dewpoint' onclick=redirect(this)>
-                                    <div class="card-header card-chart" data-background-color="purple">
-                                        <div class="ct-chart" id="RealTimeDewPointChart"></div>
-                                    </div>
-                                    <div class="card-content">
-                                        <h4 class="title">Dew Point</h4>
-                                        <p class="category">
-
-                                    </div>
-                                    <div class="card-footer">
-                                        <div class="stats" id="realtimedewptfLastUpdated">
                                             <i class="material-icons">access_time</i> Yet to be updated
                                         </div>
                                     </div>
@@ -444,6 +462,42 @@ Error occurred while fetching device info.
                                 </div>
                             </div>
                             <div class="col-md-4">
+                                <div class="card" id='solarradiation' onclick=redirect(this)>
+                                    <div class="card-header card-chart" data-background-color="red">
+                                        <div class="ct-chart" id="RealTimeSolarRadiationChart"></div>
+                                    </div>
+                                    <div class="card-content">
+                                        <h4 class="title">Solar Radiation</h4>
+                                        <p class="category">
+
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="stats" id="realtimesolarradiationLastUpdated">
+                                            <i class="material-icons">access_time</i> Yet to be updated
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card" id='uv' onclick=redirect(this)>
+                                    <div class="card-header card-chart" data-background-color="blue">
+                                        <div class="ct-chart" id="RealTimeUltraVioletChart"></div>
+                                    </div>
+                                    <div class="card-content">
+                                        <h4 class="title">Ultra Violet</h4>
+                                        <p class="category">
+
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="stats" id="realtimeuvLastUpdated">
+                                            <i class="material-icons">access_time</i> Yet to be updated
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
                                 <div class="card" id='raining' onclick=redirect(this)>
                                     <div class="card-header card-chart" data-background-color="yellow">
                                         <div class="ct-chart" id="RealTimeRainingChart"></div>
@@ -460,42 +514,6 @@ Error occurred while fetching device info.
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4">
-                                <div class="card" id='baromin' onclick=redirect(this)>
-                                    <div class="card-header card-chart" data-background-color="green">
-                                        <div class="ct-chart" id="RealTimeBarominChart"></div>
-                                    </div>
-                                    <div class="card-content">
-                                        <h4 class="title">Baromin</h4>
-                                        <p class="category">
-
-                                    </div>
-                                    <div class="card-footer">
-                                        <div class="stats" id="realtimebarominLastUpdated">
-                                            <i class="material-icons">access_time</i> Yet to be updated
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="card" id='lowbatt' onclick=redirect(this)>
-                                    <div class="card-header card-chart" data-background-color="blue">
-                                        <div class="ct-chart" id="RealTimeLowbatChart"></div>
-                                    </div>
-                                    <div class="card-content">
-                                        <h4 class="title">Lowbatt</h4>
-                                        <p class="category">
-
-                                    </div>
-                                    <div class="card-footer">
-                                        <div class="stats" id="realtimelowbattLastUpdated">
-                                            <i class="material-icons">access_time</i> Yet to be updated
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
                             <div class="col-md-4">
                                 <div class="card" id='dailyraining' onclick=redirect(this)>
                                     <div class="card-header card-chart" data-background-color="green">
@@ -559,40 +577,6 @@ Error occurred while fetching device info.
                                     </div>
                                     <div class="card-footer">
                                         <div class="stats" id="realtimeyearlyrainingLastUpdated">
-                                            <i class="material-icons">access_time</i> Yet to be updated
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="card" id='solarradiation' onclick=redirect(this)>
-                                    <div class="card-header card-chart" data-background-color="red">
-                                        <div class="ct-chart" id="RealTimeSolarRadiationChart"></div>
-                                    </div>
-                                    <div class="card-content">
-                                        <h4 class="title">Solar Radiation</h4>
-                                        <p class="category">
-
-                                    </div>
-                                    <div class="card-footer">
-                                        <div class="stats" id="realtimesolarradiationLastUpdated">
-                                            <i class="material-icons">access_time</i> Yet to be updated
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="card" id='uv' onclick=redirect(this)>
-                                    <div class="card-header card-chart" data-background-color="blue">
-                                        <div class="ct-chart" id="RealTimeUltraVioletChart"></div>
-                                    </div>
-                                    <div class="card-content">
-                                        <h4 class="title">Ultra Violet</h4>
-                                        <p class="category">
-
-                                    </div>
-                                    <div class="card-footer">
-                                        <div class="stats" id="realtimeuvLastUpdated">
                                             <i class="material-icons">access_time</i> Yet to be updated
                                         </div>
                                     </div>

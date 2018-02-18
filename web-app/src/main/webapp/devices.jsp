@@ -209,31 +209,6 @@
     //loading charts
 
 
-    function datePickerCallback(){
-        var eventsSuccess = function (data) {
-            var records = JSON.parse(data);
-            console.log(records);
-            analyticsHistory.redrawGraphs(records);
-        };
-        var start = moment().subtract(1, 'days');
-        var end = moment();
-
-        var index = 0;
-        var length = 100;
-
-        $.ajax({
-            type: "POST",
-            url: "invoker/execute",
-            data: {
-                "uri": "/events/weatherstation/hambantota?offset=" + index + "&limit=" + length + "&from=" + new Date(
-                    start.format('YYYY-MM-DD H:mm:ss')).getTime() + "&to=" + new Date(
-                    end.format('YYYY-MM-DD H:mm:ss')).getTime(),
-                "method": "get"
-            },
-            success: eventsSuccess
-        });
-    };
-
 
 
     function historyGraphRefresh() {
@@ -354,10 +329,12 @@
 
     function getDevice(dev, index, lat, long) {
         var devicesListing = $('#devices-listing');
+
+
         var lastKnownSuccess = function (data) {
             var records = JSON.parse(data);
-            analyticsHistory.redrawGraphs(records);
-console.log('data last known '+data);
+
+            console.log('data last known '+data);
             var record = JSON.parse(data).records[0];
 
             var temperature = null;
@@ -373,12 +350,13 @@ console.log('data last known '+data);
             }
             var myRow = "<tr onclick=\"window.location.href='details.jsp?id=" + dev.deviceIdentifier + "'\" style='cursor: pointer'><a href='#" + dev.deviceIdentifier + "'><td>" + dev.name
                 + "</td><td>"
-                + "<div class=\"card\"><div class=\"card-header card-chart\" data-background-color=\"purple\" style=\"height: 90px;min-height: unset;\"><div class=\"ct-chart\" id=\"HistoricalTempChart\"></div></div><div class=\"card-content\"><h4 class=\"title\"> "+ (temperature)+"</h4><p class=\"category\" id=\"historicalTempAlert\"></div></div>\n</td><td><div class=\"card\"><div class=\"card-header card-chart\" data-background-color=\"purple\" style=\"height: 90px;min-height: unset;\"><div class=\"ct-chart\" id=\"HistoricalHumidityChart\"></div></div><div class=\"card-content\"><h4 class=\"title\"> "+ (humidity)+"</h4><p class=\"category\" id=\"historicalHumidAlert\"></div></div>\n</td><td>"
-                + "<div class=\"card\"><div class=\"card-header card-chart\" data-background-color=\"purple\" style=\"height: 90px;min-height: unset;\"><div class=\"ct-chart\" id=\"HistoricalWindDirChart\"></div></div><div class=\"card-content\"><h4 class=\"title\"> "+ (windDir)+"</h4><p class=\"category\" id=\"historicalWindDirAlert\"></div></div>\n</td>"
+                + "<div class=\"card\"><div class=\"card-header card-chart\" data-background-color=\"red\" style=\"height: 90px;min-height: unset;\"><div class=\"ct-chart\" id=\"HistoricalTempChart"+dev.deviceIdentifier+"\"></div></div><div class=\"card-content\"><h4 class=\"title\"> "+ (temperature)+"</h4><p class=\"category\" id=\"historicalTempAlert"+dev.deviceIdentifier+"\"></div></div>\n</td><td><div class=\"card\"><div class=\"card-header card-chart\" data-background-color=\"orange\" style=\"height: 90px;min-height: unset;\"><div class=\"ct-chart\" id=\"HistoricalHumidityChart"+dev.deviceIdentifier+"\"></div></div><div class=\"card-content\"><h4 class=\"title\"> "+ (humidity)+"</h4><p class=\"category\" id=\"historicalHumidAlert"+dev.deviceIdentifier+"\"></div></div>\n</td><td>"
+                + "<div class=\"card\"><div class=\"card-header card-chart\" data-background-color=\"green\" style=\"height: 90px;min-height: unset;\"><div class=\"ct-chart\" id=\"HistoricalWindDirChart"+dev.deviceIdentifier+"\"></div></div><div class=\"card-content\"><h4 class=\"title\"> "+ (windDir)+"</h4><p class=\"category\" id=\"historicalWindDirAlert"+dev.deviceIdentifier+"\"></div></div>\n</td>"
                 + "</a></tr>";
             rows.push(myRow);
             devicesListing.find('tbody').append(myRow);
-
+            initDashboardPageCharts(dev.deviceIdentifier);
+            analyticsHistory.redrawGraphs(records);
             //to fix the issue of showing more than 10 rows when the page loads initially
             $('#devices-listing tbody tr').slice(10, rows.length + 1).hide();
 
@@ -430,6 +408,194 @@ console.log('data last known '+data);
         });
     }
 
+     function initDashboardPageCharts(deviceId) {
+        /* ----------==========     Historical Temperature Chart initialization    ==========---------- */
+        dataHistoricalTempChart = {
+            labels: analyticsHistory.historicalTempLabel,
+            series: [
+                analyticsHistory.historicalTempSeries
+            ]
+        };
+
+        optionsHistoricalTempChart = {
+            lineSmooth: Chartist.Interpolation.cardinal({
+                tension: 0
+            }),
+            showArea: true,
+            low: 0,
+            high: 50, // creative tim: we recommend you to set the high sa the biggest value + something for a better
+                      // look
+            chartPadding: {
+                top: 0,
+                right: 0,
+                bottom: 0,
+                left: 0
+            }
+        };
+
+        analyticsHistory.historicalTemp =
+            new Chartist.Line('#HistoricalTempChart'+deviceId, dataHistoricalTempChart, optionsHistoricalTempChart);
+        md.startAnimationForLineChart(analyticsHistory.historicalTemp);
+
+        /* ----------==========     Historical Humidity Chart initialization    ==========---------- */
+        dataHistoricalHumidChart = {
+            labels: analyticsHistory.historicalHumidLabel,
+            series: [
+                analyticsHistory.historicalHumidSeries
+            ]
+        };
+
+        optionsHistoricalHumidChart = {
+            lineSmooth: Chartist.Interpolation.cardinal({
+                tension: 0
+            }),
+            showArea: true,
+            low: 0,
+            high: 50, // creative tim: we recommend you to set the high sa the biggest value + something for a better
+                      // look
+            chartPadding: {
+                top: 0,
+                right: 0,
+                bottom: 0,
+                left: 0
+            }
+        };
+
+        analyticsHistory.historicalHumid =
+            new Chartist.Line('#HistoricalHumidityChart'+deviceId, dataHistoricalHumidChart, optionsHistoricalHumidChart);
+        md.startAnimationForLineChart(analyticsHistory.historicalHumid);
+
+        /* ----------==========     Historical Wind direction Chart initialization    ==========---------- */
+        dataHistoricalWindDirChart = {
+            labels: analyticsHistory.historicalWindDirLabel,
+            series: [
+                analyticsHistory.historicalWindDirSeries
+            ]
+        };
+
+        optionsHistoricalWindDirChart = {
+            lineSmooth: Chartist.Interpolation.cardinal({
+                tension: 0
+            }),
+            showArea: true,
+            low: 0,
+            high: 50, // creative tim: we recommend you to set the high sa the biggest value + something for a better
+                      // look
+            chartPadding: {
+                top: 0,
+                right: 0,
+                bottom: 0,
+                left: 0
+            }
+        };
+
+        analyticsHistory.historicalWindDir =
+            new Chartist.Line('#HistoricalWindDirChart'+deviceId, dataHistoricalWindDirChart, optionsHistoricalWindDirChart);
+        md.startAnimationForLineChart(analyticsHistory.historicalWindDir);
+
+
+    }
+
+    function redrawGraphs(events) {
+        analyticsHistory.historicalTemp.update();
+        analyticsHistory.historicalHumid.update();
+        analyticsHistory.historicalWindDir.update();
+
+        var sumTemp = 0;
+        var sumHumid = 0;
+        var sumWindDir=0;
+
+        if (events.count > 0) {
+            console.log('have records');
+            var currentTime = new Date();
+            analyticsHistory.historicalTempLabel.length = 0;
+            analyticsHistory.historicalTempSeries.length = 0;
+            analyticsHistory.historicalHumidLabel.length = 0;
+            analyticsHistory.historicalHumidSeries.length = 0;
+            analyticsHistory.historicalWindDirLabel.length = 0;
+            analyticsHistory.historicalWindDirSeries.length = 0;
+
+            for (var i = 0; i < events.records.length; i++) {
+
+                var record= events.records[i];
+
+               // var sinceText = analyticsHistory.timeDifference(currentTime, new Date(record.timestamp));
+                var dataPoint=record.values;
+                var temperature = dataPoint.tempf;
+                var humidity = dataPoint.humidity;
+                var windDir=dataPoint.winddir;
+
+
+                if (temperature)
+                    sumTemp += temperature;
+
+                if (humidity)
+                    sumHumid += humidity;
+
+                if (windDir)
+                    sumWindDir += windDir;
+
+
+                if (i === events.records.length - 1) {
+                    var avgHumid = sumHumid / events.records.length;
+                    var avgTemp = sumTemp / events.records.length;
+                    var avgWindDir = sumWindDir / events.records.length;
+
+                   // $("#historicalTempAlert").html("<span class=\"text-success\"><i class=\"fa fa-bolt\"></i> " + avgTemp.toFixed(2) + " </span>average Temperature.");
+                   // $("#historicalHumidAlert").html("<span class=\"text-success\"><i class=\"fa fa-bolt\"></i> " + avgHumid.toFixed(2) + " </span> average Humidity.");
+                   // $("#historicalWindDirAlert").html("<span class=\"text-success\"><i class=\"fa fa-bolt\"></i> " + avgWindDir.toFixed(2) + " </span> average wind Direction.");
+
+                }
+
+                //analyticsHistory.historicalTempLabel.push(sinceText);
+                analyticsHistory.historicalTempSeries.push(temperature);
+
+               // analyticsHistory.historicalHumidLabel.push(sinceText);
+                analyticsHistory.historicalHumidSeries.push(humidity);
+
+               // analyticsHistory.historicalWindDirLabel.push(sinceText);
+                analyticsHistory.historicalWindDirSeries.push(windDir);
+
+
+                analyticsHistory.historicalTemp.update();
+                analyticsHistory.historicalHumid.update();
+                analyticsHistory.historicalWindDir.update();
+
+
+
+            }
+        } else {
+            //if there is no records in this period display no records
+            console.log('no records');
+            analyticsHistory.historicalTempLabel = ['0s'];
+            analyticsHistory.historicalTempSeries = [0];
+
+            analyticsHistory.historicalTemp.update({
+                labels: analyticsHistory.historicalTempLabel,
+                series: [
+                    analyticsHistory.historicalTempSeries
+                ]
+            });
+            analyticsHistory.historicalHumid.update({
+                labels: analyticsHistory.historicalTempLabel,
+                series: [
+                    analyticsHistory.historicalTempSeries
+                ]
+            });
+            analyticsHistory.historicalWindDir.update({
+                labels: analyticsHistory.historicalTempLabel,
+                series: [
+                    analyticsHistory.historicalTempSeries
+                ]
+            });
+
+
+        }
+
+
+
+    }
+
     var deviceCount;
 
     function getAllDevices() {
@@ -467,6 +633,12 @@ console.log('data last known '+data);
             success: success
         });
     }
+
+
+
+
+
+
 
     function addNewDevice() {
         var deviceId = $("#deviceId").val();
