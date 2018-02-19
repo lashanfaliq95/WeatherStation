@@ -855,11 +855,11 @@ Error occurred while fetching device info.
 <script src="js/bootstrap-notify.js"></script>
 <!-- Material Dashboard javascript methods -->
 <script src="js/material-dashboard.js?v=1.2.0"></script>
-<script src="js/historical-analytics.js"></script>
 <script src="js/realtime-analytics.js"></script>
 <script src="js/bootstrap-datepicker.js" type="text/javascript"></script>
 <script src="js/moment.min.js" type="text/javascript"></script>
 <script src="js/daterangepicker.js" type="text/javascript"></script>
+<script src="js/historical-analytics.js"></script>
 <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"
         integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log=="
         crossorigin=""></script>
@@ -1095,7 +1095,6 @@ marker.bindPopup("<b><%=device.getString("name")%></b>").openPopup();
         $("#wind_status").html(windDir);
 
         //wind speed
-        console.log(windSpeed);
         $("#windspeed_status").html(windSpeed);
 
     }

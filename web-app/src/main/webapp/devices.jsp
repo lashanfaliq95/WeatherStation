@@ -201,7 +201,7 @@
 
 <script src="js/moment.min.js" type="text/javascript"></script>
 <script src="js/daterangepicker.js" type="text/javascript"></script>
-<script src="js/historical-analytics.js"></script>
+<script src="js/devicesCharts.js"></script>
 <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"
         integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log=="
         crossorigin=""></script>
@@ -212,10 +212,10 @@
 
 
     function historyGraphRefresh() {
-        analyticsHistory.initDashboardPageCharts();
+      // analyticsHistory.initDashboardPageCharts();
         //datePickerCallback(1518329066607, 1518415466607);
     }
-    setInterval(historyGraphRefresh, 5000);
+    setInterval(initDashboardPageCharts, 5000);
     //initialising the map view tab
 
     var mymap = L.map('mapid').setView([7.9, 80.56274], 8);
@@ -307,6 +307,7 @@
     $(document).ready(function () {
         getAllDevices();
         historyGraphRefresh();
+
     });
 
     //fixed the issue with map not rendering in tabbed view and pop up model
@@ -346,6 +347,7 @@
                 temperature = record.values.tempf;
                 humidity = record.values.humidity;
                 windDir = record.values.winddir;
+
 
             }
             var myRow = "<tr onclick=\"window.location.href='details.jsp?id=" + dev.deviceIdentifier + "'\" style='cursor: pointer'><a href='#" + dev.deviceIdentifier + "'><td>" + dev.name
@@ -400,7 +402,7 @@
             type: "POST",
             url: "invoker/execute",
             data: {
-                "uri": "/events/last-known/weatherstation/" + devices[index].deviceIdentifier,
+                "uri": "/events/recent-records/weatherstation/" + devices[index].deviceIdentifier+"?limit=5",
                 "method": "get"
             },
             success: lastKnownSuccess
@@ -408,7 +410,11 @@
         });
     }
 
+
+
      function initDashboardPageCharts(deviceId) {
+
+
         /* ----------==========     Historical Temperature Chart initialization    ==========---------- */
         dataHistoricalTempChart = {
             labels: analyticsHistory.historicalTempLabel,
@@ -496,106 +502,6 @@
 
     }
 
-    function redrawGraphs(events) {
-        analyticsHistory.historicalTemp.update();
-        analyticsHistory.historicalHumid.update();
-        analyticsHistory.historicalWindDir.update();
-
-        var sumTemp = 0;
-        var sumHumid = 0;
-        var sumWindDir=0;
-
-        if (events.count > 0) {
-            console.log('have records');
-            var currentTime = new Date();
-            analyticsHistory.historicalTempLabel.length = 0;
-            analyticsHistory.historicalTempSeries.length = 0;
-            analyticsHistory.historicalHumidLabel.length = 0;
-            analyticsHistory.historicalHumidSeries.length = 0;
-            analyticsHistory.historicalWindDirLabel.length = 0;
-            analyticsHistory.historicalWindDirSeries.length = 0;
-
-            for (var i = 0; i < events.records.length; i++) {
-
-                var record= events.records[i];
-
-               // var sinceText = analyticsHistory.timeDifference(currentTime, new Date(record.timestamp));
-                var dataPoint=record.values;
-                var temperature = dataPoint.tempf;
-                var humidity = dataPoint.humidity;
-                var windDir=dataPoint.winddir;
-
-
-                if (temperature)
-                    sumTemp += temperature;
-
-                if (humidity)
-                    sumHumid += humidity;
-
-                if (windDir)
-                    sumWindDir += windDir;
-
-
-                if (i === events.records.length - 1) {
-                    var avgHumid = sumHumid / events.records.length;
-                    var avgTemp = sumTemp / events.records.length;
-                    var avgWindDir = sumWindDir / events.records.length;
-
-                   // $("#historicalTempAlert").html("<span class=\"text-success\"><i class=\"fa fa-bolt\"></i> " + avgTemp.toFixed(2) + " </span>average Temperature.");
-                   // $("#historicalHumidAlert").html("<span class=\"text-success\"><i class=\"fa fa-bolt\"></i> " + avgHumid.toFixed(2) + " </span> average Humidity.");
-                   // $("#historicalWindDirAlert").html("<span class=\"text-success\"><i class=\"fa fa-bolt\"></i> " + avgWindDir.toFixed(2) + " </span> average wind Direction.");
-
-                }
-
-                //analyticsHistory.historicalTempLabel.push(sinceText);
-                analyticsHistory.historicalTempSeries.push(temperature);
-
-               // analyticsHistory.historicalHumidLabel.push(sinceText);
-                analyticsHistory.historicalHumidSeries.push(humidity);
-
-               // analyticsHistory.historicalWindDirLabel.push(sinceText);
-                analyticsHistory.historicalWindDirSeries.push(windDir);
-
-
-                analyticsHistory.historicalTemp.update();
-                analyticsHistory.historicalHumid.update();
-                analyticsHistory.historicalWindDir.update();
-
-
-
-            }
-        } else {
-            //if there is no records in this period display no records
-            console.log('no records');
-            analyticsHistory.historicalTempLabel = ['0s'];
-            analyticsHistory.historicalTempSeries = [0];
-
-            analyticsHistory.historicalTemp.update({
-                labels: analyticsHistory.historicalTempLabel,
-                series: [
-                    analyticsHistory.historicalTempSeries
-                ]
-            });
-            analyticsHistory.historicalHumid.update({
-                labels: analyticsHistory.historicalTempLabel,
-                series: [
-                    analyticsHistory.historicalTempSeries
-                ]
-            });
-            analyticsHistory.historicalWindDir.update({
-                labels: analyticsHistory.historicalTempLabel,
-                series: [
-                    analyticsHistory.historicalTempSeries
-                ]
-            });
-
-
-        }
-
-
-
-    }
-
     var deviceCount;
 
     function getAllDevices() {
@@ -633,6 +539,8 @@
             success: success
         });
     }
+
+
 
 
 

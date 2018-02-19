@@ -121,7 +121,7 @@ realtimeAnalytics = {
             }
         };
 
-        var realtimeWindDir = new Chartist.Line('#RealTimeWindDirChart', dataRealtimeWindDirChart, optionsRealtimeWindDirChart);
+        var realtimeWindDir = new Chartist.Pie('#RealTimeWindDirChart', dataRealtimeWindDirChart, optionsRealtimeWindDirChart);
         md.startAnimationForLineChart(realtimeWindDir);
 
         /* ----------==========     Realtime dew point forecast Chart initialization    ==========---------- */
