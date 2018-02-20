@@ -152,14 +152,14 @@ Error occurred while fetching device info.
             </a>
         </div>
         <div class="sidebar-wrapper">
-            <ul class="nav">
+            <ul class="nav" >
                 <li class="active" id="realtimeTab">
                     <a href="#realtime" data-toggle="tab">
                         <i class="material-icons">access_alarms</i> Realtime
                         <div class="ripple-container"></div>
                     </a>
                 </li>
-                <li class="" id="historicalTab">
+                <li class="" id="historicalTab" >
                     <a href="#historical" data-toggle="tab">
                         <i class="material-icons">history</i> Historical
                         <div class="ripple-container"></div>
@@ -605,43 +605,6 @@ Error occurred while fetching device info.
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <div class="card" id='Hhumid' >
-                                    <div class="card-header card-chart" data-background-color="blue">
-                                        <div class="ct-chart" id="HistoricalHumidityChart"></div>
-                                    </div>
-                                    <div class="card-content">
-                                        <h4 class="title">Humidity</h4>
-                                        <p class="category" id="historicalHumidAlert">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="card" id='Hwinddir' >
-                                    <div class="card-header card-chart" data-background-color="green">
-                                        <div class="ct-chart" id="HistoricalWindDirChart"></div>
-                                    </div>
-                                    <div class="card-content">
-                                        <h4 class="title">Wind Direction</h4>
-                                        <p class="category" id="historicalWindDirAlert">
-
-                                    </div>
-
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="card" id='Hwindspeed' >
-                                    <div class="card-header card-chart" data-background-color="purple">
-                                        <div class="ct-chart" id="HistoricalWindSpeedChart"></div>
-                                    </div>
-                                    <div class="card-content">
-                                        <h4 class="title">Wind Speed</h4>
-                                        <p class="category" id="historicalwindspeedLastUpdated">
-
-                                    </div>
-
-                                </div>
-                            </div>
-                            <div class="col-md-4">
                                 <div class="card" id='Hitemp' >
                                     <div class="card-header card-chart" data-background-color="orange">
                                         <div class="ct-chart" id="HistoricalIndoorTempChart"></div>
@@ -655,6 +618,19 @@ Error occurred while fetching device info.
                                 </div>
                             </div>
                             <div class="col-md-4">
+                                <div class="card" id='Hbaromin' >
+                                    <div class="card-header card-chart" data-background-color="green">
+                                        <div class="ct-chart" id="HistoricalBarominChart"></div>
+                                    </div>
+                                    <div class="card-content">
+                                        <h4 class="title">Baromin</h4>
+                                        <p class="category" id="historicalbarominLastUpdated">
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-md-4">
                                 <div class="card" id='Hihumid' >
                                     <div class="card-header card-chart" data-background-color="yellow">
                                         <div class="ct-chart" id="HistoricalIndoorHumidityChart"></div>
@@ -662,6 +638,30 @@ Error occurred while fetching device info.
                                     <div class="card-content">
                                         <h4 class="title">Indoor Humidity</h4>
                                         <p class="category" id="historicalindoorhumidityLastUpdated">
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card" id='Hhumid' >
+                                    <div class="card-header card-chart" data-background-color="blue">
+                                        <div class="ct-chart" id="HistoricalHumidityChart"></div>
+                                    </div>
+                                    <div class="card-content">
+                                        <h4 class="title">Humidity</h4>
+                                        <p class="category" id="historicalHumidAlert">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card" id='Hdewpoint' >
+                                    <div class="card-header card-chart" data-background-color="purple">
+                                        <div class="ct-chart" id="HistoricalDewPointChart"></div>
+                                    </div>
+                                    <div class="card-content">
+                                        <h4 class="title">Dew Point</h4>
+                                        <p class="category" id="historicaldewptfLastUpdated">
 
                                     </div>
 
@@ -683,19 +683,6 @@ Error occurred while fetching device info.
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <div class="card" id='Hdewpoint' >
-                                    <div class="card-header card-chart" data-background-color="purple">
-                                        <div class="ct-chart" id="HistoricalDewPointChart"></div>
-                                    </div>
-                                    <div class="card-content">
-                                        <h4 class="title">Dew Point</h4>
-                                        <p class="category" id="historicaldewptfLastUpdated">
-
-                                    </div>
-
-                                </div>
-                            </div>
-                            <div class="col-md-4">
                                 <div class="card" id='Hwindchill' >
                                     <div class="card-header card-chart" data-background-color="red">
                                         <div class="ct-chart" id="HistoricalWindChillChart"></div>
@@ -709,6 +696,23 @@ Error occurred while fetching device info.
                                 </div>
                             </div>
                             <div class="col-md-4">
+                                <div class="card" id='Hwindspeed' >
+                                    <div class="card-header card-chart" data-background-color="purple">
+                                        <div class="ct-chart" id="HistoricalWindSpeedChart"></div>
+                                    </div>
+                                    <div class="card-content">
+                                        <h4 class="title">Wind Speed</h4>
+                                        <p class="category" id="historicalwindspeedLastUpdated">
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4">
                                 <div class="card" id='Hraining' >
                                     <div class="card-header card-chart" data-background-color="yellow">
                                         <div class="ct-chart" id="HistoricalRainingChart"></div>
@@ -721,35 +725,6 @@ Error occurred while fetching device info.
 
                                 </div>
                             </div>
-                            <div class="col-md-4">
-                                <div class="card" id='Hbaromin' >
-                                    <div class="card-header card-chart" data-background-color="green">
-                                        <div class="ct-chart" id="HistoricalBarominChart"></div>
-                                    </div>
-                                    <div class="card-content">
-                                        <h4 class="title">Baromin</h4>
-                                        <p class="category" id="historicalbarominLastUpdated">
-
-                                    </div>
-
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="card" id='Hlowbatt' >
-                                    <div class="card-header card-chart" data-background-color="blue">
-                                        <div class="ct-chart" id="HistoricalLowbatChart"></div>
-                                    </div>
-                                    <div class="card-content">
-                                        <h4 class="title">Lowbatt</h4>
-                                        <p class="category" id="historicallowbattLastUpdated">
-
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
                             <div class="col-md-4">
                                 <div class="card" id='Hdailyraining' >
                                     <div class="card-header card-chart" data-background-color="green">
@@ -923,12 +898,17 @@ marker.bindPopup("<b><%=device.getString("name")%></b>").openPopup();
 
 
     //set device details and send device details to dashboard.jsp
-    localStorage.setItem("deviceId","<%=id%>");
-    localStorage.setItem("deviceName","<%=device.getString("name")%>");
-    localStorage.setItem("owner","<%=enrolmentInfo.getString("owner")%>");
-    localStorage.setItem("date","<%=new Date(enrolmentInfo.getLong("dateOfEnrolment")).toString()%>");
     document.getElementById("devName").innerHTML="<%=device.getString("name")%>";
     document.getElementById("devDetails").innerHTML="Owned by "+"<%=enrolmentInfo.getString("owner")%>"+" and enrolled on "+"<%=new Date(enrolmentInfo.getLong("dateOfEnrolment")).toString()%>";
+
+    //fix the issue of charts not rendering in historical tab
+    $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+        $(e.currentTarget.hash).find('.ct-chart').each(function(el, tab) {
+            tab.__chartist__.update();
+        });
+    });
+
+
 
     function datePickerCallback(startD, endD) {
         var eventsSuccess = function (data) {
@@ -1080,6 +1060,7 @@ marker.bindPopup("<b><%=device.getString("name")%></b>").openPopup();
         var start = moment().subtract(1, 'days');
         var end = moment();
         datePickerCallback(start, end);
+
     }
 
     //update the card details

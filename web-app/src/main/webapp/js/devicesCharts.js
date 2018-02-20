@@ -114,9 +114,6 @@ analyticsHistory= {
                 analyticsHistory.historicalWindDir.update();
 
 
-
-
-
             }
         } else {
             //if there is no records in this period display no records

@@ -52,8 +52,7 @@ analyticsHistory= {
     historicalIndoorHumidSeries: [0],
     historicalBarominLabel: ['0s'],
     historicalBarominSeries: [0],
-    historicalLowBattLabel: ['0s'],
-    historicalLowBattSeries: [0],
+
 
     historicalTemp: {},
     historicalHumid: {},
@@ -72,9 +71,10 @@ analyticsHistory= {
     historicalIndoorTemp :{},
     historicalIndoorHumid :{},
     historicalBaromin :{},
-    historicalLowBatt :{},
+
 
     initDashboardPageCharts: function () {
+
         /* ----------==========     Historical Temperature Chart initialization    ==========---------- */
         dataHistoricalTempChart = {
             labels: analyticsHistory.historicalTempLabel,
@@ -131,33 +131,6 @@ analyticsHistory= {
             new Chartist.Line('#HistoricalHumidityChart', dataHistoricalHumidChart, optionsHistoricalHumidChart);
         md.startAnimationForLineChart(analyticsHistory.historicalHumid);
 
-        /* ----------==========     Historical Wind direction Chart initialization    ==========---------- */
-        dataHistoricalWindDirChart = {
-            labels: analyticsHistory.historicalWindDirLabel,
-            series: [
-                analyticsHistory.historicalWindDirSeries
-            ]
-        };
-
-        optionsHistoricalWindDirChart = {
-            lineSmooth: Chartist.Interpolation.cardinal({
-                tension: 0
-            }),
-            showArea: true,
-            low: 0,
-            high: 50, // creative tim: we recommend you to set the high sa the biggest value + something for a better
-                      // look
-            chartPadding: {
-                top: 0,
-                right: 0,
-                bottom: 0,
-                left: 0
-            }
-        };
-
-        analyticsHistory.historicalWindDir =
-            new Chartist.Line('#HistoricalWindDirChart', dataHistoricalWindDirChart, optionsHistoricalWindDirChart);
-        md.startAnimationForLineChart(analyticsHistory.historicalWindDir);
 
         /* ----------==========     Historical Dew pointChart initialization    ==========---------- */
         dataHistoricalDewptfChart = {
@@ -550,33 +523,7 @@ analyticsHistory= {
         analyticsHistory.historicalBaromin =
             new Chartist.Line('#HistoricalBarominChart', dataHistoricalBarominChart, optionsHistoricalBarominChart);
         md.startAnimationForLineChart(analyticsHistory.historicalBaromin);
-        /* ----------==========     Historical Low Chart initialization    ==========---------- */
-        dataHistoricalLowBattChart = {
-            labels: analyticsHistory.historicalLowBattLabel,
-            series: [
-                analyticsHistory.historicalLowBattSeries
-            ]
-        };
 
-        optionsHistoricalLowBattChart = {
-            lineSmooth: Chartist.Interpolation.cardinal({
-                tension: 0
-            }),
-            showArea: true,
-            low: 0,
-            high: 50, // creative tim: we recommend you to set the high sa the biggest value + something for a better
-                      // look
-            chartPadding: {
-                top: 0,
-                right: 0,
-                bottom: 0,
-                left: 0
-            }
-        };
-
-        analyticsHistory.historicalLowBatt =
-            new Chartist.Line('#HistoricalLowbatChart', dataHistoricalLowBattChart, optionsHistoricalLowBattChart);
-        md.startAnimationForLineChart(analyticsHistory.historicalLowBatt);
 
 
 
@@ -606,10 +553,10 @@ analyticsHistory= {
         }
     },
 
+
     redrawGraphs: function (events) {
         analyticsHistory.historicalTemp.update();
         analyticsHistory.historicalHumid.update();
-        analyticsHistory.historicalWindDir.update();
         analyticsHistory.historicalDewptf.update();
         analyticsHistory.historicalUV.update();
         analyticsHistory.historicalWindChill.update();
@@ -650,8 +597,6 @@ analyticsHistory= {
             analyticsHistory.historicalTempSeries.length = 0;
             analyticsHistory.historicalHumidLabel.length = 0;
             analyticsHistory.historicalHumidSeries.length = 0;
-            analyticsHistory.historicalWindDirLabel.length = 0;
-            analyticsHistory.historicalWindDirSeries.length = 0;
             analyticsHistory.historicalDewptfLabel.length = 0;
             analyticsHistory.historicalDewptfSeries.length = 0;
             analyticsHistory.historicalWindSpeedLabel.length = 0;
@@ -678,8 +623,7 @@ analyticsHistory= {
             analyticsHistory.historicalIndoorTempSeries.length = 0;
             analyticsHistory.historicalBarominLabel.length = 0;
             analyticsHistory.historicalBarominSeries.length = 0;
-            analyticsHistory.historicalLowBattLabel.length = 0;
-            analyticsHistory.historicalLowBattSeries.length = 0;
+
 
 
 
@@ -783,7 +727,6 @@ analyticsHistory= {
                     var avgLowBatt=sumLowBatt/events.records.length;
                     $("#historicalTempAlert").html("<span class=\"text-success\"><i class=\"fa fa-bolt\"></i> " + avgTemp.toFixed(2) + " </span>average Temperature.");
                     $("#historicalHumidAlert").html("<span class=\"text-success\"><i class=\"fa fa-bolt\"></i> " + avgHumid.toFixed(2) + " </span> average Humidity.");
-                     $("#historicalWindDirAlert").html("<span class=\"text-success\"><i class=\"fa fa-bolt\"></i> " + avgWindDir.toFixed(2) + " </span> average wind Direction.");
                     $("#historicaldewptfLastUpdated").html("<span class=\"text-success\"><i class=\"fa fa-bolt\"></i> " + avgDewpltf.toFixed(2) + " </span>average Dew point forecast.");
                      $("#historicalwindspeedLastUpdated").html("<span class=\"text-success\"><i class=\"fa fa-bolt\"></i> " + avgWindSpeed.toFixed(2) + " </span>average Wind Speed.");
                      $("#historicalwindgustLastUpdated").html("<span class=\"text-success\"><i class=\"fa fa-bolt\"></i> " + avgWindGust.toFixed(2) + " </span>average Wind Gust.");
@@ -798,7 +741,7 @@ analyticsHistory= {
                      $("#historicalindoorhumidityLastUpdated").html("<span class=\"text-success\"><i class=\"fa fa-bolt\"></i> " + avgIndoorHumid.toFixed(2) + " </span>average Indoor humidity.");
                      $("#historicalindoortempfLastUpdated").html("<span class=\"text-success\"><i class=\"fa fa-bolt\"></i> " + avgIndoorTemp.toFixed(2) + " </span>average Indoor temperature.");
                      $("#historicalbarominLastUpdated").html("<span class=\"text-success\"><i class=\"fa fa-bolt\"></i> " + avgBaromin.toFixed(2) + " </span>average Baromin.");
-                     $("#historicallowbattLastUpdated").html("<span class=\"text-success\"><i class=\"fa fa-bolt\"></i> " + avgLowBatt.toFixed(2) + " </span>average Low Batt.");
+
 
                 }
 
@@ -810,9 +753,6 @@ analyticsHistory= {
 
                 analyticsHistory.historicalDewptfLabel.push(sinceText);
                 analyticsHistory.historicalDewptfSeries.push(dewptf);
-
-                analyticsHistory.historicalWindDirLabel.push(sinceText);
-                analyticsHistory.historicalWindDirSeries.push(windDir);
 
                 analyticsHistory.historicalWindChillLabel.push(sinceText);
                 analyticsHistory.historicalWindChillSeries.push(windchillf);
@@ -847,8 +787,6 @@ analyticsHistory= {
                 analyticsHistory.historicalBarominLabel.push(sinceText);
                 analyticsHistory.historicalBarominSeries.push(baromin);
 
-                analyticsHistory.historicalLowBattLabel.push(sinceText);
-                analyticsHistory.historicalLowBattSeries.push(lowbatt);
 
                 analyticsHistory.historicalSolarRadiationLabel.push(sinceText);
                 analyticsHistory.historicalSolarRadiationSeries.push(solarradiation);
@@ -859,7 +797,6 @@ analyticsHistory= {
 
                 analyticsHistory.historicalTemp.update();
                 analyticsHistory.historicalHumid.update();
-                analyticsHistory.historicalWindDir.update();
                 analyticsHistory.historicalDewptf.update();
                 analyticsHistory.historicalUV.update();
                 analyticsHistory.historicalWindChill.update();
@@ -891,12 +828,6 @@ analyticsHistory= {
                 ]
             });
             analyticsHistory.historicalHumid.update({
-                labels: analyticsHistory.historicalTempLabel,
-                series: [
-                    analyticsHistory.historicalTempSeries
-                ]
-            });
-            analyticsHistory.historicalWindDir.update({
                 labels: analyticsHistory.historicalTempLabel,
                 series: [
                     analyticsHistory.historicalTempSeries
@@ -969,12 +900,6 @@ analyticsHistory= {
                 ]
             });
             analyticsHistory.historicalBaromin.update({
-                labels: analyticsHistory.historicalTempLabel,
-                series: [
-                    analyticsHistory.historicalTempSeries
-                ]
-            });
-            analyticsHistory.historicalLowBatt.update({
                 labels: analyticsHistory.historicalTempLabel,
                 series: [
                     analyticsHistory.historicalTempSeries

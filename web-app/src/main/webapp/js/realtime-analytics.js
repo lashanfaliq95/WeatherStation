@@ -611,40 +611,6 @@ realtimeAnalytics = {
         var realtimebaromin = new Chartist.Line('#RealTimeBarominChart', dataRealtimebarominChart, optionsRealtimebarominChart);
         md.startAnimationForLineChart(realtimebaromin);
 
-        /* ----------==========     Realtime lowbatt Chart initialization    ==========---------- */
-        var realtimelowbattLabelRef = [new Date()];
-        var realtimelowbattLabel = ['0s'];
-        var realtimelowbattSeries = [0];
-
-        realtimeAnalytics.createLiFo(realtimelowbattLabelRef, 10);
-        realtimeAnalytics.createLiFo(realtimelowbattLabel, 10);
-        realtimeAnalytics.createLiFo(realtimelowbattSeries, 10);
-
-        dataRealtimelowbattChart = {
-            labels: realtimelowbattLabel,
-            series: [
-                realtimelowbattSeries
-            ]
-        };
-
-        optionsRealtimelowbattChart = {
-            lineSmooth: Chartist.Interpolation.cardinal({
-                tension: 0
-            }),
-            showArea: true,
-            low: 0,
-            high: 50, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
-            chartPadding: {
-                top: 0,
-                right: 0,
-                bottom: 0,
-                left: 0
-            }
-        };
-
-        var realtimelowbatt = new Chartist.Line('#RealTimeLowbatChart', dataRealtimelowbattChart, optionsRealtimelowbattChart);
-        md.startAnimationForLineChart(realtimelowbatt);
-
 
 
         if (wsEndpoint) {
@@ -805,12 +771,6 @@ realtimeAnalytics = {
                     realtimebarominSeries.push(baromin);
                     $("#realtimebarominLastUpdated").html(lastUpdatedText);
 
-                    realtimelowbattLabel.push('0s');
-                    realtimelowbattLabelRef.push(currentTime);
-                    realtimeAnalytics.calcTimeDiff(realtimelowbattLabel, realtimelowbattLabelRef);
-                    realtimelowbattSeries.push(lowbatt);
-                    $("#realtimelowbattLastUpdated").html(lastUpdatedText);
-
                     realtimewindgustmphLabel.push('0s');
                     realtimewindgustmphLabelRef.push(currentTime);
                     realtimeAnalytics.calcTimeDiff(realtimewindgustmphLabel, realtimewindgustmphLabelRef);
@@ -824,11 +784,14 @@ realtimeAnalytics = {
             //refresh graphs on click on the chart
             $('.card').click(function() {
                 updateGraphs();
+
             });
 
             $("#menu-toggle").click(function () {
                 updateGraphs();
             });
+
+
 
 
         }
@@ -851,8 +814,6 @@ realtimeAnalytics = {
             realtimeindoorTemp.update();
             realtimeindoorHumid.update();
             realtimebaromin.update();
-            realtimelowbatt.update()
-
 
         }
 
