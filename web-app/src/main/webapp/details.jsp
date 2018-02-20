@@ -24,7 +24,6 @@
 <%@ page import="org.apache.http.entity.StringEntity" %>
 <%@ page import="org.apache.http.impl.client.CloseableHttpClient" %>
 <%@ page import="org.apache.http.impl.client.HttpClients" %>
-<%@ page import="org.json.JSONException" %>
 <%@ page import="org.json.JSONObject" %>
 <%@ page import="java.io.BufferedReader" %>
 <%@ page import="java.io.InputStreamReader" %>
@@ -93,20 +92,7 @@
     JSONObject enrolmentInfo = device.getJSONObject("enrolmentInfo");
     JSONObject lat = (JSONObject) device.getJSONArray("properties").get(0);
     JSONObject lon = (JSONObject) device.getJSONArray("properties").get(1);
-    String latVal = lat.getString("value");
-    String lonVal = lon.getString("value");
 
-
-    // int lat1=lat.value;
-
-    try {
-        // JSONObject properties = device.getJSONObject("properties");
-
-    } catch (JSONException e) {
-%>
-Error occurred while fetching device info.
-<%
-    }
 %>
 
 <!doctype html>
@@ -870,7 +856,7 @@ Error occurred while fetching device info.
     //menu toggle script
     $("#menu-toggle").click(function (e) {
         e.preventDefault();
-        $(".ct-chart").toggleClass('ct-golden-section')
+        $(".ct-chart").toggleClass('ct-golden-section');
         $("#wrapper").toggleClass("toggled");
         $(".col-md-4").toggleClass("resize");
         toggleDiv("statusCards");
@@ -1024,7 +1010,7 @@ Error occurred while fetching device info.
             },
             success: eventsSuccess
         });
-    };
+    }
 
     $(function () {
         $('#dateRange').daterangepicker({
@@ -1052,32 +1038,8 @@ Error occurred while fetching device info.
         })
     });
 
-    function timeDifference(current, previous, isShort) {
-        var msPerMinute = 60 * 1000;
-        var msPerHour = msPerMinute * 60;
-        var msPerDay = msPerHour * 24;
-        var msPerMonth = msPerDay * 30;
-        var msPerYear = msPerDay * 365;
-
-        var elapsed = current - previous;
-
-        if (elapsed < msPerMinute) {
-            return Math.round(elapsed / 1000) + ' seconds ago';
-        } else if (elapsed < msPerHour) {
-            return Math.round(elapsed / msPerMinute) + ' minutes ago';
-        } else if (elapsed < msPerDay) {
-            return Math.round(elapsed / msPerHour) + ' hours ago';
-        } else if (elapsed < msPerMonth) {
-            return 'approximately ' + Math.round(elapsed / msPerDay) + ' days ago';
-        } else if (elapsed < msPerYear) {
-            return 'approximately ' + Math.round(elapsed / msPerMonth) + ' months ago';
-        } else {
-            return 'approximately ' + Math.round(elapsed / msPerYear) + ' years ago';
-        }
-    }
-
     //update the card details
-    function updateStatusCards(sinceText, temperature, humidity, windDir, windSpeed) {
+    function updateStatusCards(temperature, humidity, windDir, windSpeed) {
 
         //temperature status
         $("#temperature").html(temperature + "&#8457");
@@ -1098,12 +1060,11 @@ Error occurred while fetching device info.
 
         if (record) {
             lastKnown = record;
-            var sinceText = timeDifference(new Date(), new Date(record.timestamp), false) + " ago";
             var temperature = record.values.tempf;
             var humidity = record.values.humidity;
             var windDir = record.values.winddir;
             var windSpeed = record.values.windspeedmph;
-            updateStatusCards(sinceText, temperature, humidity, windDir, windSpeed);
+            updateStatusCards(temperature, humidity, windDir, windSpeed);
         } else {
             //temperature status
             $("#temperature").html("Unknown");
