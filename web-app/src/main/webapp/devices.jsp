@@ -636,7 +636,6 @@
             }).on('page', function (event, num) {
                 $('#devices-listing tbody tr').hide();
                 $('#devices-listing tbody tr').slice((num - 1) * 10, (num * 10)).show();
-                //solve the problem of charts not rendering on each page
                 $('.ct-chart').each(function(i, e) {
                     e.__chartist__.update();
                 });

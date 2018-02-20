@@ -791,9 +791,6 @@ realtimeAnalytics = {
                 updateGraphs();
             });
 
-
-
-
         }
 
         function updateGraphs(){

@@ -306,6 +306,23 @@ Error occurred while fetching device info.
                                 </div>
                             </div>
                             <div class="col-md-4">
+                                <div class="card" id='humid' onclick=redirect(this) >
+                                    <div class="card-header card-chart" data-background-color="blue">
+                                        <div class="ct-chart" id="RealTimeHumidityChart"></div>
+                                    </div>
+                                    <div class="card-content">
+                                        <h4 class="title">Humidity</h4>
+                                        <p class="category">
+
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="stats" id="realtimeHumidLastUpdated">
+                                            <i class="material-icons">access_time</i> Yet to be updated
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
                                 <div class="card" id='indoorTemp' onclick=redirect(this)>
                                     <div class="card-header card-chart" data-background-color="orange">
                                         <div class="ct-chart" id="RealTimeIndoorTempChart"></div>
@@ -339,23 +356,7 @@ Error occurred while fetching device info.
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4">
-                                <div class="card" id='humid' onclick=redirect(this) >
-                                    <div class="card-header card-chart" data-background-color="blue">
-                                        <div class="ct-chart" id="RealTimeHumidityChart"></div>
-                                    </div>
-                                    <div class="card-content">
-                                        <h4 class="title">Humidity</h4>
-                                        <p class="category">
 
-                                    </div>
-                                    <div class="card-footer">
-                                        <div class="stats" id="realtimeHumidLastUpdated">
-                                            <i class="material-icons">access_time</i> Yet to be updated
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                             <div class="col-md-4">
                                 <div class="card" id='indoorHumid' onclick=redirect(this)>
                                     <div class="card-header card-chart" data-background-color="yellow">
@@ -1057,9 +1058,7 @@ marker.bindPopup("<b><%=device.getString("name")%></b>").openPopup();
 
     function historyGraphRefresh() {
         analyticsHistory.initDashboardPageCharts();
-        var start = moment().subtract(1, 'days');
-        var end = moment();
-        datePickerCallback(start, end);
+
 
     }
 
