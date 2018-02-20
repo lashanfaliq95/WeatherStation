@@ -131,6 +131,34 @@ analyticsHistory= {
             new Chartist.Line('#HistoricalHumidityChart', dataHistoricalHumidChart, optionsHistoricalHumidChart);
         md.startAnimationForLineChart(analyticsHistory.historicalHumid);
 
+        /* ----------==========     Historical Wind Direction Chart initialization    ==========---------- */
+        dataHistoricalWindDirChart = {
+            labels: analyticsHistory.historicalWindDirLabel,
+            series: [
+                analyticsHistory.historicalWindDirSeries
+            ]
+        };
+
+        optionsHistoricalWindDirChart = {
+            lineSmooth: Chartist.Interpolation.cardinal({
+                tension: 0
+            }),
+            showArea: true,
+            low: 0,
+            high: 50, // creative tim: we recommend you to set the high sa the biggest value + something for a better
+                      // look
+            chartPadding: {
+                top: 0,
+                right: 0,
+                bottom: 0,
+                left: 0
+            }
+        };
+
+        analyticsHistory.historicalWindDir =
+            new Chartist.Line('#HistoricalWindDirChart', dataHistoricalWindDirChart, optionsHistoricalWindDirChart);
+        md.startAnimationForLineChart(analyticsHistory.historicalWindDir);
+
 
         /* ----------==========     Historical Dew pointChart initialization    ==========---------- */
         dataHistoricalDewptfChart = {
@@ -581,6 +609,8 @@ analyticsHistory= {
             analyticsHistory.historicalTempSeries.length = 0;
             analyticsHistory.historicalHumidLabel.length = 0;
             analyticsHistory.historicalHumidSeries.length = 0;
+            analyticsHistory.historicalWindDirLabel.length = 0;
+            analyticsHistory.historicalWindDirSeries.length = 0;
             analyticsHistory.historicalDewptfLabel.length = 0;
             analyticsHistory.historicalDewptfSeries.length = 0;
             analyticsHistory.historicalWindSpeedLabel.length = 0;
@@ -706,6 +736,7 @@ analyticsHistory= {
 
                     $("#historicalTempAlert").html("<span class=\"text-success\"><i class=\"fa fa-bolt\"></i> " + avgTemp.toFixed(2) + " </span>average Temperature.");
                     $("#historicalHumidAlert").html("<span class=\"text-success\"><i class=\"fa fa-bolt\"></i> " + avgHumid.toFixed(2) + " </span> average Humidity.");
+                    $("#historicalwindDirLastUpdated").html("<span class=\"text-success\"><i class=\"fa fa-bolt\"></i> " + avgWindDir.toFixed(2) + " </span> average Wind Direction.");
                     $("#historicaldewptfLastUpdated").html("<span class=\"text-success\"><i class=\"fa fa-bolt\"></i> " + avgDewpltf.toFixed(2) + " </span>average Dew point forecast.");
                      $("#historicalwindspeedLastUpdated").html("<span class=\"text-success\"><i class=\"fa fa-bolt\"></i> " + avgWindSpeed.toFixed(2) + " </span>average Wind Speed.");
                      $("#historicalwindgustLastUpdated").html("<span class=\"text-success\"><i class=\"fa fa-bolt\"></i> " + avgWindGust.toFixed(2) + " </span>average Wind Gust.");
@@ -726,6 +757,9 @@ analyticsHistory= {
 
                 analyticsHistory.historicalTempLabel.push(sinceText);
                 analyticsHistory.historicalTempSeries.push(temperature);
+
+                analyticsHistory.historicalWindDirLabel.push(sinceText);
+                analyticsHistory.historicalWindDirSeries.push(windDir);
 
                 analyticsHistory.historicalIndoorTempLabel.push(sinceText);
                 analyticsHistory.historicalIndoorTempSeries.push(indoortempf);
@@ -780,6 +814,7 @@ analyticsHistory= {
                 analyticsHistory.historicalHumid.update();
                 analyticsHistory.historicalDewptf.update();
                 analyticsHistory.historicalUV.update();
+                analyticsHistory.historicalWindDir.update();
                 analyticsHistory.historicalWindChill.update();
                 analyticsHistory.historicalWindGust.update();
                 analyticsHistory.historicalWindSpeed.update();
@@ -846,6 +881,12 @@ analyticsHistory= {
                 labels: analyticsHistory.historicalHumidLabel,
                 series: [
                     analyticsHistory.historicalHumidSeries
+                ]
+            });
+            analyticsHistory.historicalWindDir.update({
+                labels: analyticsHistory.historicalWindDirLabel,
+                series: [
+                    analyticsHistory.historicalWindDirSeries
                 ]
             });
             analyticsHistory.historicalDewptf.update({

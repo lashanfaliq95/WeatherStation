@@ -206,16 +206,7 @@
         integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log=="
         crossorigin=""></script>
 <script type="text/javascript">
-    //loading charts
 
-
-
-
-    function historyGraphRefresh() {
-      // analyticsHistory.initDashboardPageCharts();
-        //datePickerCallback(1518329066607, 1518415466607);
-    }
-    setInterval(initDashboardPageCharts, 5000);
     //initialising the map view tab
 
     var mymap = L.map('mapid').setView([7.9, 80.56274], 8);
@@ -254,7 +245,7 @@
         if(windDir==null){
             windDir=0;
         }
-        var popupContent = "<div onclick=\"window.location.href='details.jsp?id=" + devName +"'\"><b id='weatherStation" + devId +"' >"+devName+"</b><br><table><tr><td><i class=\"tiny material-icons\" >wb_sunny</i></td><td>" + temp + "</td><td><i class=\"tiny material-icons\">opacity</i></td><td>" + humidity + "</td><td><i class=\"tiny material-icons\" >call_made</i></td><td>" + windDir + "</td></table></div>";
+        var popupContent = "<div onclick=\"window.location.href='details.jsp?id=" + devName +"'\"><b id='weatherStation" + devId +"' >"+devName+"</b><br><table><tr><td><i class=\"tiny material-icons\" >wb_sunny</i></td><td>" + temp + "</td><td><i class=\"tiny material-icons\">opacity</i></td><td>" + humidity + "%</td><td><i class=\"tiny material-icons\" >call_made</i></td><td>" + windDir + "&#9900</td></table></div>";
         popup = new L.Popup({maxWidth: "auto",autoPan:false,closeButton:false,closeOnClick:false});
         popup.setLatLng(popupLocation);
         popup.setContent(popupContent);
@@ -350,11 +341,21 @@
 
 
             }
-            var myRow = "<tr onclick=\"window.location.href='details.jsp?id=" + dev.deviceIdentifier + "'\" style='cursor: pointer'><a href='#" + dev.deviceIdentifier + "'><td>" + dev.name
+            var myRow;
+            if(temperature == null || humidity==null || windDir==null){
+                 myRow = "<tr onclick=\"window.location.href='details.jsp?id=" + dev.deviceIdentifier + "'\" style='cursor: pointer'><a href='#" + dev.deviceIdentifier + "'><td>" + dev.name
+                    + "</td><td>"
+                    + "<div class=\"card\"><div class=\"card-header card-chart\" data-background-color=\"red\" style=\"height: 90px;min-height: unset;\"><div class=\"ct-chart\" id=\"HistoricalTempChart"+dev.deviceIdentifier+"\"></div></div><div class=\"card-content\"><h4 class=\"title\">N/A</h4><p class=\"category\" id=\"historicalTempAlert"+dev.deviceIdentifier+"\"></div></div>\n</td><td><div class=\"card\"><div class=\"card-header card-chart\" data-background-color=\"orange\" style=\"height: 90px;min-height: unset;\"><div class=\"ct-chart\" id=\"HistoricalHumidityChart"+dev.deviceIdentifier+"\"></div></div><div class=\"card-content\"><h4 class=\"title\">N/A</h4><p class=\"category\" id=\"historicalHumidAlert"+dev.deviceIdentifier+"\"></div></div>\n</td><td>"
+                    + "<div class=\"card\"><div class=\"card-header card-chart\" data-background-color=\"green\" style=\"height: 90px;min-height: unset;\"><div class=\"ct-chart\" id=\"HistoricalWindDirChart"+dev.deviceIdentifier+"\"></div></div><div class=\"card-content\"><h4 class=\"title\">N/A</h4><p class=\"category\" id=\"historicalWindDirAlert"+dev.deviceIdentifier+"\"></div></div>\n</td>"
+                    + "</a></tr>";
+
+            }
+            else{
+                  myRow = "<tr onclick=\"window.location.href='details.jsp?id=" + dev.deviceIdentifier + "'\" style='cursor: pointer'><a href='#" + dev.deviceIdentifier + "'><td>" + dev.name
                 + "</td><td>"
-                + "<div class=\"card\"><div class=\"card-header card-chart\" data-background-color=\"red\" style=\"height: 90px;min-height: unset;\"><div class=\"ct-chart\" id=\"HistoricalTempChart"+dev.deviceIdentifier+"\"></div></div><div class=\"card-content\"><h4 class=\"title\"> "+ (temperature)+"</h4><p class=\"category\" id=\"historicalTempAlert"+dev.deviceIdentifier+"\"></div></div>\n</td><td><div class=\"card\"><div class=\"card-header card-chart\" data-background-color=\"orange\" style=\"height: 90px;min-height: unset;\"><div class=\"ct-chart\" id=\"HistoricalHumidityChart"+dev.deviceIdentifier+"\"></div></div><div class=\"card-content\"><h4 class=\"title\"> "+ (humidity)+"</h4><p class=\"category\" id=\"historicalHumidAlert"+dev.deviceIdentifier+"\"></div></div>\n</td><td>"
-                + "<div class=\"card\"><div class=\"card-header card-chart\" data-background-color=\"green\" style=\"height: 90px;min-height: unset;\"><div class=\"ct-chart\" id=\"HistoricalWindDirChart"+dev.deviceIdentifier+"\"></div></div><div class=\"card-content\"><h4 class=\"title\"> "+ (windDir)+"</h4><p class=\"category\" id=\"historicalWindDirAlert"+dev.deviceIdentifier+"\"></div></div>\n</td>"
-                + "</a></tr>";
+                + "<div class=\"card\"><div class=\"card-header card-chart\" data-background-color=\"red\" style=\"height: 90px;min-height: unset;\"><div class=\"ct-chart\" id=\"HistoricalTempChart"+dev.deviceIdentifier+"\"></div></div><div class=\"card-content\"><h4 class=\"title\"> "+ (temperature) +"&#8457</h4><p class=\"category\" id=\"historicalTempAlert"+dev.deviceIdentifier+"\"></div></div>\n</td><td><div class=\"card\"><div class=\"card-header card-chart\" data-background-color=\"orange\" style=\"height: 90px;min-height: unset;\"><div class=\"ct-chart\" id=\"HistoricalHumidityChart"+dev.deviceIdentifier+"\"></div></div><div class=\"card-content\"><h4 class=\"title\"> "+ (humidity)+"%</h4><p class=\"category\" id=\"historicalHumidAlert"+dev.deviceIdentifier+"\"></div></div>\n</td><td>"
+                + "<div class=\"card\"><div class=\"card-header card-chart\" data-background-color=\"green\" style=\"height: 90px;min-height: unset;\"><div class=\"ct-chart\" id=\"HistoricalWindDirChart"+dev.deviceIdentifier+"\"></div></div><div class=\"card-content\"><h4 class=\"title\"> "+ (windDir)+"&#176</h4><p class=\"category\" id=\"historicalWindDirAlert"+dev.deviceIdentifier+"\"></div></div>\n</td>"
+                + "</a></tr>";}
             rows.push(myRow);
             devicesListing.find('tbody').append(myRow);
             initDashboardPageCharts(dev.deviceIdentifier);
@@ -380,6 +381,10 @@
             $('#search').keyup(function () {
                 //hide nav bar when search bar is used
                 $('#nav').hide();
+                //render graphs
+//                $('.ct-chart').each(function(i, e) {
+//                    e.__chartist__.update();
+//                });
                 var val = '^(?=.*\\b' + $.trim($(this).val()).split(/\s+/).join('\\b)(?=.*\\b') + ').*$',
                     reg = RegExp(val, 'i'),
                     text;
@@ -444,7 +449,7 @@
             }),
             showArea: true,
             low: 0,
-            high: 50, // creative tim: we recommend you to set the high sa the biggest value + something for a better
+            high: 120, // creative tim: we recommend you to set the high sa the biggest value + something for a better
                       // look
             chartPadding: {
                 top: 0,
@@ -472,7 +477,7 @@
             }),
             showArea: true,
             low: 0,
-            high: 50, // creative tim: we recommend you to set the high sa the biggest value + something for a better
+            high: 100, // creative tim: we recommend you to set the high sa the biggest value + something for a better
                       // look
             chartPadding: {
                 top: 0,
@@ -500,7 +505,7 @@
             }),
             showArea: true,
             low: 0,
-            high: 50, // creative tim: we recommend you to set the high sa the biggest value + something for a better
+            high: 360, // creative tim: we recommend you to set the high sa the biggest value + something for a better
                       // look
             chartPadding: {
                 top: 0,
@@ -558,10 +563,6 @@
             this["historicalWindDirLabel"+deviceId].length = 0;
             this["historicalWindDirSeries"+deviceId].length = 0;
 
-
-
-
-
             for (var i = 0; i < events.records.length; i++) {
 
                 var record= events.records[i];
@@ -582,9 +583,6 @@
                 if (windDir)
                     sumWindDir += windDir;
 
-
-
-
                 this["historicalTempLabel"+deviceId].push(sinceText);
                 this["historicalTempSeries"+deviceId].push(temperature);
 
@@ -593,8 +591,6 @@
 
                 this["historicalWindDirLabel"+deviceId].push(sinceText);
                 this["historicalWindDirSeries"+deviceId].push(windDir);
-
-
 
                 temp[deviceId].update();
                 humid[deviceId].update();

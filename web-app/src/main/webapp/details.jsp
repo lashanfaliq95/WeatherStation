@@ -295,7 +295,7 @@ Error occurred while fetching device info.
                                         <div class="ct-chart " id="RealTimeTempChart"></div>
                                     </div>
                                     <div class="card-content">
-                                        <h4 class="title">Temperature</h4>
+                                        <h4 class="title">Temperature&#8457</h4>
                                         <p class="category">
                                     </div>
                                     <div class="card-footer">
@@ -311,7 +311,7 @@ Error occurred while fetching device info.
                                         <div class="ct-chart" id="RealTimeHumidityChart"></div>
                                     </div>
                                     <div class="card-content">
-                                        <h4 class="title">Humidity</h4>
+                                        <h4 class="title">Humidity<b>%</b></h4>
                                         <p class="category">
 
                                     </div>
@@ -328,7 +328,7 @@ Error occurred while fetching device info.
                                         <div class="ct-chart" id="RealTimeIndoorTempChart"></div>
                                     </div>
                                     <div class="card-content">
-                                        <h4 class="title">Indoor Temperature</h4>
+                                        <h4 class="title">Indoor Temperature&#8457</h4>
                                         <p class="category">
 
                                     </div>
@@ -345,7 +345,7 @@ Error occurred while fetching device info.
                                         <div class="ct-chart" id="RealTimeDewPointChart"></div>
                                     </div>
                                     <div class="card-content">
-                                        <h4 class="title">Dew Point</h4>
+                                        <h4 class="title">Dew Point&#8457</h4>
                                         <p class="category">
 
                                     </div>
@@ -363,7 +363,7 @@ Error occurred while fetching device info.
                                         <div class="ct-chart" id="RealTimeIndoorHumidityChart"></div>
                                     </div>
                                     <div class="card-content">
-                                        <h4 class="title">Indoor Humidity</h4>
+                                        <h4 class="title">Indoor Humidity<b>%</b></h4>
                                         <p class="category">
 
                                     </div>
@@ -380,7 +380,7 @@ Error occurred while fetching device info.
                                         <div class="ct-chart" id="RealTimeBarominChart"></div>
                                     </div>
                                     <div class="card-content">
-                                        <h4 class="title">Baromin</h4>
+                                        <h4 class="title">Baromin<b> pascal</b></h4>
                                         <p class="category">
 
                                     </div>
@@ -400,7 +400,7 @@ Error occurred while fetching device info.
                                         <div class="ct-chart" id="RealTimeWindDirChart"></div>
                                     </div>
                                     <div class="card-content">
-                                        <h4 class="title">Wind Direction</h4>
+                                        <h4 class="title">Wind Direction&#176</h4>
                                         <p class="category">
 
                                     </div>
@@ -417,7 +417,7 @@ Error occurred while fetching device info.
                                         <div class="ct-chart" id="RealTimeWindSpeedChart"></div>
                                     </div>
                                     <div class="card-content">
-                                        <h4 class="title">Wind Speed</h4>
+                                        <h4 class="title">Wind Speed <b>mph</b></h4>
                                         <p class="category">
 
                                     </div>
@@ -434,7 +434,7 @@ Error occurred while fetching device info.
                                         <div class="ct-chart" id="RealTimeWindGustChart"></div>
                                     </div>
                                     <div class="card-content">
-                                        <h4 class="title">Wind Gust</h4>
+                                        <h4 class="title">Wind Gust <b>mph</b></h4>
                                         <p class="category">
 
                                     </div>
@@ -451,7 +451,7 @@ Error occurred while fetching device info.
                                         <div class="ct-chart" id="RealTimeWindChillChart"></div>
                                     </div>
                                     <div class="card-content">
-                                        <h4 class="title">Wind Chill</h4>
+                                        <h4 class="title">Wind Chill&#8457</h4>
                                         <p class="category">
 
                                     </div>
@@ -468,7 +468,7 @@ Error occurred while fetching device info.
                                         <div class="ct-chart" id="RealTimeSolarRadiationChart"></div>
                                     </div>
                                     <div class="card-content">
-                                        <h4 class="title">Solar Radiation</h4>
+                                        <h4 class="title">Solar Radiation <b>watt per square meter</b></h4>
                                         <p class="category">
 
                                     </div>
@@ -485,7 +485,7 @@ Error occurred while fetching device info.
                                         <div class="ct-chart" id="RealTimeUltraVioletChart"></div>
                                     </div>
                                     <div class="card-content">
-                                        <h4 class="title">Ultra Violet</h4>
+                                        <h4 class="title">Ultra Violet <b>milliwatts per square centimeter</b></h4>
                                         <p class="category">
 
                                     </div>
@@ -504,7 +504,7 @@ Error occurred while fetching device info.
                                         <div class="ct-chart" id="RealTimeRainingChart"></div>
                                     </div>
                                     <div class="card-content">
-                                        <h4 class="title">Raining</h4>
+                                        <h4 class="title">Raining <b>Mm per Hour</b></h4>
                                         <p class="category">
 
                                     </div>
@@ -521,7 +521,7 @@ Error occurred while fetching device info.
                                         <div class="ct-chart" id="RealTimeDailyRainingChart"></div>
                                     </div>
                                     <div class="card-content">
-                                        <h4 class="title">Daily Raining</h4>
+                                        <h4 class="title">Daily Raining <b>Mm per Day</b></h4>
                                         <p class="category">
 
                                     </div>
@@ -538,7 +538,7 @@ Error occurred while fetching device info.
                                         <div class="ct-chart" id="RealTimeWeeklyRainingChart"></div>
                                     </div>
                                     <div class="card-content">
-                                        <h4 class="title">Weekly raining</h4>
+                                        <h4 class="title">Weekly raining <b>Mm per Week</b></h4>
                                         <p class="category">
 
                                     </div>
@@ -555,7 +555,7 @@ Error occurred while fetching device info.
                                         <div class="ct-chart" id="RealTimeMonthlyRainingChart"></div>
                                     </div>
                                     <div class="card-content">
-                                        <h4 class="title">Monthly Raining</h4>
+                                        <h4 class="title">Monthly Raining <b>Mm per Month</b></h4>
                                         <p class="category">
 
                                     </div>
@@ -572,7 +572,7 @@ Error occurred while fetching device info.
                                         <div class="ct-chart" id="RealTimeYearlyRainingChart"></div>
                                     </div>
                                     <div class="card-content">
-                                        <h4 class="title">Yearly Raining</h4>
+                                        <h4 class="title">Yearly Raining <b>Mm per Year</b></h4>
                                         <p class="category">
 
                                     </div>
@@ -600,7 +600,7 @@ Error occurred while fetching device info.
                                         <div class="ct-chart" id="HistoricalTempChart"></div>
                                     </div>
                                     <div class="card-content">
-                                        <h4 class="title">Temperature</h4>
+                                        <h4 class="title">Temperature&#8457</h4>
                                         <p class="category" id="historicalTempAlert">
                                     </div>
                                 </div>
@@ -611,7 +611,7 @@ Error occurred while fetching device info.
                                         <div class="ct-chart" id="HistoricalIndoorTempChart"></div>
                                     </div>
                                     <div class="card-content">
-                                        <h4 class="title">Indoor Temperature</h4>
+                                        <h4 class="title">Indoor Temperature&#8457</h4>
                                         <p class="category" id="historicalindoortempfLastUpdated">
 
                                     </div>
@@ -624,7 +624,7 @@ Error occurred while fetching device info.
                                         <div class="ct-chart" id="HistoricalBarominChart"></div>
                                     </div>
                                     <div class="card-content">
-                                        <h4 class="title">Baromin</h4>
+                                        <h4 class="title">Baromin<b> pascal</b></h4>
                                         <p class="category" id="historicalbarominLastUpdated">
 
                                     </div>
@@ -637,7 +637,7 @@ Error occurred while fetching device info.
                                         <div class="ct-chart" id="HistoricalIndoorHumidityChart"></div>
                                     </div>
                                     <div class="card-content">
-                                        <h4 class="title">Indoor Humidity</h4>
+                                        <h4 class="title">Indoor Humidity<b>%</b></h4>
                                         <p class="category" id="historicalindoorhumidityLastUpdated">
 
                                     </div>
@@ -650,7 +650,7 @@ Error occurred while fetching device info.
                                         <div class="ct-chart" id="HistoricalHumidityChart"></div>
                                     </div>
                                     <div class="card-content">
-                                        <h4 class="title">Humidity</h4>
+                                        <h4 class="title">Humidity<b>%</b></h4>
                                         <p class="category" id="historicalHumidAlert">
                                     </div>
                                 </div>
@@ -661,7 +661,7 @@ Error occurred while fetching device info.
                                         <div class="ct-chart" id="HistoricalDewPointChart"></div>
                                     </div>
                                     <div class="card-content">
-                                        <h4 class="title">Dew Point</h4>
+                                        <h4 class="title">Dew Point&#8457</h4>
                                         <p class="category" id="historicaldewptfLastUpdated">
 
                                     </div>
@@ -676,7 +676,7 @@ Error occurred while fetching device info.
                                         <div class="ct-chart" id="HistoricalWindGustChart"></div>
                                     </div>
                                     <div class="card-content">
-                                        <h4 class="title">Wind Gust</h4>
+                                        <h4 class="title">Wind Gust <b>mph</b></h4>
                                         <p class="category" id="historicalwindgustLastUpdated">
 
                                     </div>
@@ -689,7 +689,7 @@ Error occurred while fetching device info.
                                         <div class="ct-chart" id="HistoricalWindChillChart"></div>
                                     </div>
                                     <div class="card-content">
-                                        <h4 class="title">Wind Chill</h4>
+                                        <h4 class="title">Wind Chill&#8457</h4>
                                         <p class="category" id="historicalwindchillfLastUpdated">
 
                                     </div>
@@ -702,8 +702,47 @@ Error occurred while fetching device info.
                                         <div class="ct-chart" id="HistoricalWindSpeedChart"></div>
                                     </div>
                                     <div class="card-content">
-                                        <h4 class="title">Wind Speed</h4>
+                                        <h4 class="title">Wind Speed <b>mph</b></h4>
                                         <p class="category" id="historicalwindspeedLastUpdated">
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card" id='Hwinddir' >
+                                    <div class="card-header card-chart" data-background-color="purple">
+                                        <div class="ct-chart" id="HistoricalWindDirChart"></div>
+                                    </div>
+                                    <div class="card-content">
+                                        <h4 class="title">Wind Direction&#176</h4>
+                                        <p class="category" id="historicalwindDirLastUpdated">
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card" id='Hsolarradiation' >
+                                    <div class="card-header card-chart" data-background-color="red">
+                                        <div class="ct-chart" id="HistoricalSolarRadiationChart"></div>
+                                    </div>
+                                    <div class="card-content">
+                                        <h4 class="title">Solar Radiation <b>watt per square meter</b></h4>
+                                        <p class="category" id="historicalsolarradiationLastUpdated">
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card" id='Huv' >
+                                    <div class="card-header card-chart" data-background-color="blue">
+                                        <div class="ct-chart" id="HistoricalUltraVioletChart"></div>
+                                    </div>
+                                    <div class="card-content">
+                                        <h4 class="title">Ultra Violet <b>milliwatts per square centimeter</b></h4>
+                                        <p class="category" id="historicaluvLastUpdated">
 
                                     </div>
 
@@ -719,7 +758,7 @@ Error occurred while fetching device info.
                                         <div class="ct-chart" id="HistoricalRainingChart"></div>
                                     </div>
                                     <div class="card-content">
-                                        <h4 class="title">Raining</h4>
+                                        <h4 class="title">Raining <b>Mm per Hour</b></h4>
                                         <p class="category" id="historicalrainingLastUpdated">
 
                                     </div>
@@ -732,7 +771,7 @@ Error occurred while fetching device info.
                                         <div class="ct-chart" id="HistoricalDailyRainingChart"></div>
                                     </div>
                                     <div class="card-content">
-                                        <h4 class="title">Daily Raining</h4>
+                                        <h4 class="title">Daily Raining <b>Mm per Day</b></h4>
                                         <p class="category" id="historicaldailyrainingLastUpdated">
 
                                     </div>
@@ -745,7 +784,7 @@ Error occurred while fetching device info.
                                         <div class="ct-chart" id="HistoricalWeeklyRainingChart"></div>
                                     </div>
                                     <div class="card-content">
-                                        <h4 class="title">Weekly raining</h4>
+                                        <h4 class="title">Weekly raining <b>Mm per Week</b></h4>
                                         <p class="category" id="historicalweeklyrainingLastUpdated">
 
                                     </div>
@@ -758,7 +797,7 @@ Error occurred while fetching device info.
                                         <div class="ct-chart" id="HistoricalMonthlyRainingChart"></div>
                                     </div>
                                     <div class="card-content">
-                                        <h4 class="title">Monthly Raining</h4>
+                                        <h4 class="title">Monthly Raining <b>Mm per Month</b></h4>
                                         <p class="category" id="historicalmonthlyrainingLastUpdated">
 
                                     </div>
@@ -771,39 +810,14 @@ Error occurred while fetching device info.
                                         <div class="ct-chart" id="HistoricalYearlyRainingChart"></div>
                                     </div>
                                     <div class="card-content">
-                                        <h4 class="title">Yearly Raining</h4>
+                                        <h4 class="title">Yearly Raining <b>Mm per Year</b></h4>
                                         <p class="category" id="historicalyearlyrainingLastUpdated">
 
                                     </div>
 
                                 </div>
                             </div>
-                            <div class="col-md-4">
-                                <div class="card" id='Hsolarradiation' >
-                                    <div class="card-header card-chart" data-background-color="red">
-                                        <div class="ct-chart" id="HistoricalSolarRadiationChart"></div>
-                                    </div>
-                                    <div class="card-content">
-                                        <h4 class="title">Solar Radiation</h4>
-                                        <p class="category" id="historicalsolarradiationLastUpdated">
 
-                                    </div>
-
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="card" id='Huv' >
-                                    <div class="card-header card-chart" data-background-color="blue">
-                                        <div class="ct-chart" id="HistoricalUltraVioletChart"></div>
-                                    </div>
-                                    <div class="card-content">
-                                        <h4 class="title">Ultra Violet</h4>
-                                        <p class="category" id="historicaluvLastUpdated">
-
-                                    </div>
-
-                                </div>
-                            </div>
                         </div>
                     </div>
 
@@ -1066,16 +1080,16 @@ marker.bindPopup("<b><%=device.getString("name")%></b>").openPopup();
     function updateStatusCards(sinceText, temperature, humidity, windDir,windSpeed) {
 
         //temperature status
-        $("#temperature").html(temperature);
+        $("#temperature").html(temperature+"&#8457");
 
         //humidity status
-        $("#humidity").html(humidity);
+        $("#humidity").html(humidity+"<b>%</b>");
 
         //wind status
-        $("#wind_status").html(windDir);
+        $("#wind_status").html(windDir+"&#176");
 
         //wind speed
-        $("#windspeed_status").html(windSpeed);
+        $("#windspeed_status").html(windSpeed+"<b> mph</b>");
 
     }
 
