@@ -117,7 +117,7 @@ analyticsHistory= {
             }),
             showArea: true,
             low: 0,
-            high: 50, // creative tim: we recommend you to set the high sa the biggest value + something for a better
+            high: 100, // creative tim: we recommend you to set the high sa the biggest value + something for a better
                       // look
             chartPadding: {
                 top: 0,
@@ -145,7 +145,7 @@ analyticsHistory= {
             }),
             showArea: true,
             low: 0,
-            high: 50, // creative tim: we recommend you to set the high sa the biggest value + something for a better
+            high: 360, // creative tim: we recommend you to set the high sa the biggest value + something for a better
                       // look
             chartPadding: {
                 top: 0,
@@ -174,7 +174,7 @@ analyticsHistory= {
             }),
             showArea: true,
             low: 0,
-            high: 50, // creative tim: we recommend you to set the high sa the biggest value + something for a better
+            high: 120, // creative tim: we recommend you to set the high sa the biggest value + something for a better
                       // look
             chartPadding: {
                 top: 0,
@@ -202,7 +202,7 @@ analyticsHistory= {
             }),
             showArea: true,
             low: 0,
-            high: 50, // creative tim: we recommend you to set the high sa the biggest value + something for a better
+            high: 120, // creative tim: we recommend you to set the high sa the biggest value + something for a better
                       // look
             chartPadding: {
                 top: 0,
@@ -230,7 +230,7 @@ analyticsHistory= {
             }),
             showArea: true,
             low: 0,
-            high: 50, // creative tim: we recommend you to set the high sa the biggest value + something for a better
+            high: 100, // creative tim: we recommend you to set the high sa the biggest value + something for a better
                       // look
             chartPadding: {
                 top: 0,
@@ -258,7 +258,7 @@ analyticsHistory= {
             }),
             showArea: true,
             low: 0,
-            high: 50, // creative tim: we recommend you to set the high sa the biggest value + something for a better
+            high: 100, // creative tim: we recommend you to set the high sa the biggest value + something for a better
                       // look
             chartPadding: {
                 top: 0,
@@ -286,7 +286,7 @@ analyticsHistory= {
             }),
             showArea: true,
             low: 0,
-            high: 50, // creative tim: we recommend you to set the high sa the biggest value + something for a better
+            high: 100, // creative tim: we recommend you to set the high sa the biggest value + something for a better
                       // look
             chartPadding: {
                 top: 0,
@@ -314,7 +314,7 @@ analyticsHistory= {
             }),
             showArea: true,
             low: 0,
-            high: 50, // creative tim: we recommend you to set the high sa the biggest value + something for a better
+            high: 100, // creative tim: we recommend you to set the high sa the biggest value + something for a better
                       // look
             chartPadding: {
                 top: 0,
@@ -342,7 +342,7 @@ analyticsHistory= {
             }),
             showArea: true,
             low: 0,
-            high: 50, // creative tim: we recommend you to set the high sa the biggest value + something for a better
+            high: 100, // creative tim: we recommend you to set the high sa the biggest value + something for a better
                       // look
             chartPadding: {
                 top: 0,
@@ -370,7 +370,7 @@ analyticsHistory= {
             }),
             showArea: true,
             low: 0,
-            high: 50, // creative tim: we recommend you to set the high sa the biggest value + something for a better
+            high: 100, // creative tim: we recommend you to set the high sa the biggest value + something for a better
                       // look
             chartPadding: {
                 top: 0,
@@ -398,7 +398,7 @@ analyticsHistory= {
             }),
             showArea: true,
             low: 0,
-            high: 50, // creative tim: we recommend you to set the high sa the biggest value + something for a better
+            high: 100, // creative tim: we recommend you to set the high sa the biggest value + something for a better
                       // look
             chartPadding: {
                 top: 0,
@@ -426,7 +426,7 @@ analyticsHistory= {
             }),
             showArea: true,
             low: 0,
-            high: 50, // creative tim: we recommend you to set the high sa the biggest value + something for a better
+            high: 100, // creative tim: we recommend you to set the high sa the biggest value + something for a better
                       // look
             chartPadding: {
                 top: 0,
@@ -454,7 +454,7 @@ analyticsHistory= {
             }),
             showArea: true,
             low: 0,
-            high: 50, // creative tim: we recommend you to set the high sa the biggest value + something for a better
+            high: 100, // creative tim: we recommend you to set the high sa the biggest value + something for a better
                       // look
             chartPadding: {
                 top: 0,
@@ -482,7 +482,7 @@ analyticsHistory= {
             }),
             showArea: true,
             low: 0,
-            high: 50, // creative tim: we recommend you to set the high sa the biggest value + something for a better
+            high: 120, // creative tim: we recommend you to set the high sa the biggest value + something for a better
                       // look
             chartPadding: {
                 top: 0,
@@ -510,7 +510,7 @@ analyticsHistory= {
             }),
             showArea: true,
             low: 0,
-            high: 50, // creative tim: we recommend you to set the high sa the biggest value + something for a better
+            high: 100, // creative tim: we recommend you to set the high sa the biggest value + something for a better
                       // look
             chartPadding: {
                 top: 0,
@@ -538,7 +538,7 @@ analyticsHistory= {
             }),
             showArea: true,
             low: 0,
-            high: 50, // creative tim: we recommend you to set the high sa the biggest value + something for a better
+            high: 100, // creative tim: we recommend you to set the high sa the biggest value + something for a better
                       // look
             chartPadding: {
                 top: 0,
@@ -603,7 +603,7 @@ analyticsHistory= {
         var sumBaromin=0;
         var sumLowBatt=0;
         if (events.count > 0) {
-            console.log('have records');
+
             var currentTime = new Date();
             analyticsHistory.historicalTempLabel.length = 0;
             analyticsHistory.historicalTempSeries.length = 0;
@@ -833,11 +833,8 @@ analyticsHistory= {
             }
         } else {
             //if there is no records in this period display no records
-
-            console.log('no records');
-
-           analyticsHistory.historicalTempLabel= ['0s'],
-               analyticsHistory.historicalTempSeries= [0],
+                analyticsHistory.historicalTempLabel= ['0s'],
+                analyticsHistory.historicalTempSeries= [0],
                 analyticsHistory.historicalHumidLabel= ['0s'],
                 analyticsHistory.historicalHumidSeries= [0],
                 analyticsHistory.historicalWindDirLabel= ['0s'],

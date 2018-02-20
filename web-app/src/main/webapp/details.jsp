@@ -24,19 +24,17 @@
 <%@ page import="org.apache.http.entity.StringEntity" %>
 <%@ page import="org.apache.http.impl.client.CloseableHttpClient" %>
 <%@ page import="org.apache.http.impl.client.HttpClients" %>
+<%@ page import="org.json.JSONException" %>
 <%@ page import="org.json.JSONObject" %>
 <%@ page import="java.io.BufferedReader" %>
 <%@ page import="java.io.InputStreamReader" %>
 <%@ page import="java.net.URI" %>
-<%@ page import="java.net.URL" %>
-<%@ page import="java.util.Date" %>
 <%@ page import="java.net.URISyntaxException" %>
-<%@ page import="java.security.NoSuchAlgorithmException" %>
+<%@ page import="java.net.URL" %>
 <%@ page import="java.security.KeyManagementException" %>
-<%@ page import="org.json.JSONException" %>
 <%@ page import="java.security.KeyStoreException" %>
-<%@ page import="org.wso2.iot.weatherstation.portal.LoginController" %>
-<%@ page import="org.json.JSONArray" %>
+<%@ page import="java.security.NoSuchAlgorithmException" %>
+<%@ page import="java.util.Date" %>
 <%@include file="includes/authenticate.jsp" %>
 <%
     String id = request.getParameter("id");
@@ -93,16 +91,16 @@
 
     JSONObject device = new JSONObject(result.toString());
     JSONObject enrolmentInfo = device.getJSONObject("enrolmentInfo");
-    JSONObject lat=(JSONObject)device.getJSONArray("properties").get(0);
-    JSONObject lon=(JSONObject)device.getJSONArray("properties").get(1);
-    String latVal=lat.getString("value");
-    String lonVal=lon.getString("value");
+    JSONObject lat = (JSONObject) device.getJSONArray("properties").get(0);
+    JSONObject lon = (JSONObject) device.getJSONArray("properties").get(1);
+    String latVal = lat.getString("value");
+    String lonVal = lon.getString("value");
 
 
-   // int lat1=lat.value;
+    // int lat1=lat.value;
 
     try {
-       // JSONObject properties = device.getJSONObject("properties");
+        // JSONObject properties = device.getJSONObject("properties");
 
     } catch (JSONException e) {
 %>
@@ -146,27 +144,26 @@ Error occurred while fetching device info.
 
     Tip 2: you can also add an image using data-image tag
 -->
-        <div class="logo list-inline" >
-            <a  href="./devices.jsp" class="simple-text" >
+        <div class="logo list-inline">
+            <a href="./devices.jsp" class="simple-text">
                 <strong>Weather</strong>Station
             </a>
         </div>
         <div class="sidebar-wrapper">
-            <ul class="nav" >
+            <ul class="nav">
                 <li class="active" id="realtimeTab">
                     <a href="#realtime" data-toggle="tab">
                         <i class="material-icons">access_alarms</i> Realtime
                         <div class="ripple-container"></div>
                     </a>
                 </li>
-                <li class="" id="historicalTab" >
+                <li class="" id="historicalTab">
                     <a href="#historical" data-toggle="tab">
                         <i class="material-icons">history</i> Historical
                         <div class="ripple-container"></div>
                     </a>
                 </li>
             </ul>
-
 
 
             <div id="mapid" style="width: 100%; height:50%; margin-top: 50px"></div>
@@ -195,10 +192,10 @@ Error occurred while fetching device info.
             <div class="container-fluid">
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-left">
-                    <li>
-                        <a href="#menu-toggle" class="btn btn-secondary" id="menu-toggle">Dashboard</a>
+                        <li>
+                            <a href="#menu-toggle" class="btn btn-secondary" id="menu-toggle">Dashboard</a>
 
-                    </li>
+                        </li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown pull-right">
@@ -233,7 +230,7 @@ Error occurred while fetching device info.
                                         </h3>
                                     </div>
                                     <div class="card-footer">
-                                        <div class="stats"  id="temperature_status_alert">
+                                        <div class="stats" id="temperature_status_alert">
                                             <i class="material-icons">update</i> Just Updated
                                         </div>
                                     </div>
@@ -306,7 +303,7 @@ Error occurred while fetching device info.
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <div class="card" id='humid' onclick=redirect(this) >
+                                <div class="card" id='humid' onclick=redirect(this)>
                                     <div class="card-header card-chart" data-background-color="blue">
                                         <div class="ct-chart" id="RealTimeHumidityChart"></div>
                                     </div>
@@ -412,7 +409,7 @@ Error occurred while fetching device info.
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <div class="card" id='windspeed' onclick=redirect(this) >
+                                <div class="card" id='windspeed' onclick=redirect(this)>
                                     <div class="card-header card-chart" data-background-color="purple">
                                         <div class="ct-chart" id="RealTimeWindSpeedChart"></div>
                                     </div>
@@ -589,13 +586,13 @@ Error occurred while fetching device info.
                     <div id="historical" class="tab-pane fade">
                         <div style="margin-right:70%;margin-left:2%  ">
                             <h4><strong>Select Date-range</strong> <input type="text" name="dateRange" id="dateRange"
-                                                         value="01/01/2017 1:30 PM - 01/01/2017 2:00 PM"
-                                                         class="form-control"/></h4>
+                                                                          value="01/01/2017 1:30 PM - 01/01/2017 2:00 PM"
+                                                                          class="form-control"/></h4>
 
                         </div>
                         <div class="row">
                             <div class="col-md-4">
-                                <div class="card" id='Htemp' >
+                                <div class="card" id='Htemp'>
                                     <div class="card-header card-chart" data-background-color="red">
                                         <div class="ct-chart" id="HistoricalTempChart"></div>
                                     </div>
@@ -606,7 +603,7 @@ Error occurred while fetching device info.
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <div class="card" id='Hitemp' >
+                                <div class="card" id='Hitemp'>
                                     <div class="card-header card-chart" data-background-color="orange">
                                         <div class="ct-chart" id="HistoricalIndoorTempChart"></div>
                                     </div>
@@ -619,7 +616,7 @@ Error occurred while fetching device info.
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <div class="card" id='Hbaromin' >
+                                <div class="card" id='Hbaromin'>
                                     <div class="card-header card-chart" data-background-color="green">
                                         <div class="ct-chart" id="HistoricalBarominChart"></div>
                                     </div>
@@ -631,8 +628,10 @@ Error occurred while fetching device info.
 
                                 </div>
                             </div>
+                        </div>
+                        <div class="row">
                             <div class="col-md-4">
-                                <div class="card" id='Hihumid' >
+                                <div class="card" id='Hihumid'>
                                     <div class="card-header card-chart" data-background-color="yellow">
                                         <div class="ct-chart" id="HistoricalIndoorHumidityChart"></div>
                                     </div>
@@ -645,7 +644,7 @@ Error occurred while fetching device info.
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <div class="card" id='Hhumid' >
+                                <div class="card" id='Hhumid'>
                                     <div class="card-header card-chart" data-background-color="blue">
                                         <div class="ct-chart" id="HistoricalHumidityChart"></div>
                                     </div>
@@ -656,7 +655,7 @@ Error occurred while fetching device info.
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <div class="card" id='Hdewpoint' >
+                                <div class="card" id='Hdewpoint'>
                                     <div class="card-header card-chart" data-background-color="purple">
                                         <div class="ct-chart" id="HistoricalDewPointChart"></div>
                                     </div>
@@ -671,7 +670,7 @@ Error occurred while fetching device info.
                         </div>
                         <div class="row">
                             <div class="col-md-4">
-                                <div class="card" id='Hwindgust' >
+                                <div class="card" id='Hwindgust'>
                                     <div class="card-header card-chart" data-background-color="orange">
                                         <div class="ct-chart" id="HistoricalWindGustChart"></div>
                                     </div>
@@ -684,7 +683,7 @@ Error occurred while fetching device info.
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <div class="card" id='Hwindchill' >
+                                <div class="card" id='Hwindchill'>
                                     <div class="card-header card-chart" data-background-color="red">
                                         <div class="ct-chart" id="HistoricalWindChillChart"></div>
                                     </div>
@@ -697,7 +696,7 @@ Error occurred while fetching device info.
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <div class="card" id='Hwindspeed' >
+                                <div class="card" id='Hwindspeed'>
                                     <div class="card-header card-chart" data-background-color="purple">
                                         <div class="ct-chart" id="HistoricalWindSpeedChart"></div>
                                     </div>
@@ -709,8 +708,10 @@ Error occurred while fetching device info.
 
                                 </div>
                             </div>
+                        </div>
+                        <div class="row">
                             <div class="col-md-4">
-                                <div class="card" id='Hwinddir' >
+                                <div class="card" id='Hwinddir'>
                                     <div class="card-header card-chart" data-background-color="purple">
                                         <div class="ct-chart" id="HistoricalWindDirChart"></div>
                                     </div>
@@ -723,7 +724,7 @@ Error occurred while fetching device info.
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <div class="card" id='Hsolarradiation' >
+                                <div class="card" id='Hsolarradiation'>
                                     <div class="card-header card-chart" data-background-color="red">
                                         <div class="ct-chart" id="HistoricalSolarRadiationChart"></div>
                                     </div>
@@ -736,7 +737,7 @@ Error occurred while fetching device info.
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <div class="card" id='Huv' >
+                                <div class="card" id='Huv'>
                                     <div class="card-header card-chart" data-background-color="blue">
                                         <div class="ct-chart" id="HistoricalUltraVioletChart"></div>
                                     </div>
@@ -753,7 +754,7 @@ Error occurred while fetching device info.
 
                         <div class="row">
                             <div class="col-md-4">
-                                <div class="card" id='Hraining' >
+                                <div class="card" id='Hraining'>
                                     <div class="card-header card-chart" data-background-color="yellow">
                                         <div class="ct-chart" id="HistoricalRainingChart"></div>
                                     </div>
@@ -766,7 +767,7 @@ Error occurred while fetching device info.
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <div class="card" id='Hdailyraining' >
+                                <div class="card" id='Hdailyraining'>
                                     <div class="card-header card-chart" data-background-color="green">
                                         <div class="ct-chart" id="HistoricalDailyRainingChart"></div>
                                     </div>
@@ -779,7 +780,7 @@ Error occurred while fetching device info.
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <div class="card" id='Hweeklyraining' >
+                                <div class="card" id='Hweeklyraining'>
                                     <div class="card-header card-chart" data-background-color="yellow">
                                         <div class="ct-chart" id="HistoricalWeeklyRainingChart"></div>
                                     </div>
@@ -791,8 +792,10 @@ Error occurred while fetching device info.
 
                                 </div>
                             </div>
+                        </div>
+                        <div class="row">
                             <div class="col-md-4">
-                                <div class="card" id='Hmonthly raining' >
+                                <div class="card" id='Hmonthly raining'>
                                     <div class="card-header card-chart" data-background-color="orange">
                                         <div class="ct-chart" id="HistoricalMonthlyRainingChart"></div>
                                     </div>
@@ -805,7 +808,7 @@ Error occurred while fetching device info.
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <div class="card" id='Hyearlyraining' >
+                                <div class="card" id='Hyearlyraining'>
                                     <div class="card-header card-chart" data-background-color="purple">
                                         <div class="ct-chart" id="HistoricalYearlyRainingChart"></div>
                                     </div>
@@ -825,7 +828,6 @@ Error occurred while fetching device info.
                 </div>
             </div>
         </div>
-
 
 
     </div>
@@ -854,29 +856,14 @@ Error occurred while fetching device info.
         integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log=="
         crossorigin=""></script>
 <script type="text/javascript">
-    //function to expand charts
-    function redirect(ele){
+    //function to expand charts onclick
+    function redirect(ele) {
         var act = $("#wrapper").hasClass("toggled");
-    if(!act){
+        if (!act) {
             $('#' + ele.id).toggleClass('modal');
             $('div.card-chart').toggleClass('maxHeight');
             $('div.card').toggleClass('padzero');
             $('.ct-chart').toggleClass('fillcontent');
-        }
-    }
-    //toggle text
-    $.fn.extend({
-        toggleText: function(a, b){
-            return this.text(this.text() === b ? a : b);
-        }
-    });
-
-    function toggleDiv(divId) {
-        var x = document.getElementById(divId);
-        if (x.style.display === "none") {
-            x.style.display = "block";
-        } else {
-            x.style.display = "none";
         }
     }
 
@@ -896,40 +883,130 @@ Error occurred while fetching device info.
         $("#menu-toggle").show();
     });
 
-//creating the map
 
-var mymap = L.map('mapid').setView([7.9, 80.56274], 7);
-L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
-    maxZoom: 18,
-    id: 'mapbox.streets',
-    accessToken: 'pk.eyJ1IjoibGFzaGFuIiwiYSI6ImNqYmc3dGVybTFlZ3UyeXF3cG8yNGxsdzMifQ.n3QEq0-g5tVFmsQxn3JZ-A',
-    maxWidth:200,
-    maxHeight:200
-}).addTo(mymap);
+    $.fn.extend({
+        toggleText: function (a, b) {
+            return this.text(this.text() === b ? a : b);
+        }
+    });
 
-var marker = L.marker([<%=lat.getString("value")%>, <%=lon.getString("value")%>]).addTo(mymap);
-marker.bindPopup("<b><%=device.getString("name")%></b>").openPopup();
+    function toggleDiv(divId) {
+        var x = document.getElementById(divId);
+        if (x.style.display === "none") {
+            x.style.display = "block";
+        } else {
+            x.style.display = "none";
+        }
+    }
+
+
+
+    //intialising and setting the map
+    var mymap = L.map('mapid').setView([7.9, 80.56274], 7);
+    L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+        attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+        maxZoom: 18,
+        id: 'mapbox.streets',
+        accessToken: 'pk.eyJ1IjoibGFzaGFuIiwiYSI6ImNqYmc3dGVybTFlZ3UyeXF3cG8yNGxsdzMifQ.n3QEq0-g5tVFmsQxn3JZ-A',
+        maxWidth: 200,
+        maxHeight: 200
+    }).addTo(mymap);
+
+    var marker = L.marker([<%=lat.getString("value")%>, <%=lon.getString("value")%>]).addTo(mymap);
+    marker.bindPopup("<b><%=device.getString("name")%></b>").openPopup();
 
 
     //set device details and send device details to dashboard.jsp
-    document.getElementById("devName").innerHTML="<%=device.getString("name")%>";
-    document.getElementById("devDetails").innerHTML="Owned by "+"<%=enrolmentInfo.getString("owner")%>"+" and enrolled on "+"<%=new Date(enrolmentInfo.getLong("dateOfEnrolment")).toString()%>";
+    document.getElementById("devName").innerHTML = "<%=device.getString("name")%>";
+    document.getElementById("devDetails").innerHTML = "Owned by " + "<%=enrolmentInfo.getString("owner")%>" + " and enrolled on " + "<%=new Date(enrolmentInfo.getLong("dateOfEnrolment")).toString()%>";
+
+</script>
+<script type="text/javascript">
+    var alerts = [];
+    var lastKnown = {};
+
+    //refresh graphs on click
+    document.getElementById("realtimeTab").addEventListener("click", realtimeGraphRefresh());
+    document.getElementById("historicalTab").addEventListener("click", historyGraphRefresh);
+
+    function realtimeGraphRefresh(wsEndpoint) {
+        realtimeAnalytics.initDashboardPageCharts(wsEndpoint);
+    }
+
+    function historyGraphRefresh() {
+        analyticsHistory.initDashboardPageCharts();
+    }
 
     //fix the issue of charts not rendering in historical tab
     $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-        $(e.currentTarget.hash).find('.ct-chart').each(function(el, tab) {
+        $(e.currentTarget.hash).find('.ct-chart').each(function (el, tab) {
             tab.__chartist__.update();
         });
     });
 
+    $(document).ready(function () {
+        $(document).ready(function () {
+            var wsStatsEndpoint = "<%=pageContext.getServletContext().getInitParameter("websocketEndpoint")%>/secured-websocket/iot.per.device.stream.carbon.super.weatherstation/1.0.0?"
+                + "deviceId=<%=id%>&deviceType=weatherstation&websocketToken=<%=request.getSession(false).getAttribute(LoginController.ATTR_ACCESS_TOKEN)%>";
+            realtimeGraphRefresh(wsStatsEndpoint);
+
+            var wsAlertEndpoint = "<%=pageContext.getServletContext().getInitParameter("websocketEndpoint")%>/secured-websocket/iot.per.device.stream.carbon.super.weatherstation.alert/1.0.0?"
+                + "deviceId=<%=id%>&deviceType=weatherstation&websocketToken=<%=request.getSession(false).getAttribute(LoginController.ATTR_ACCESS_TOKEN)%>";
+            displayAlerts(wsAlertEndpoint);
+        });
+    });
+
+    function displayAlerts(wsEndpoint) {
+        connect(wsEndpoint);
+        var ws;
+        // close websocket when page is about to be unloaded
+        // fixes broken pipe issue
+        window.onbeforeunload = function () {
+            disconnect();
+        };
+
+        //websocket connection
+        function connect(target) {
+            if ('WebSocket' in window) {
+                ws = new WebSocket(target);
+            } else if ('MozWebSocket' in window) {
+                ws = new MozWebSocket(target);
+            } else {
+                console.log('WebSocket is not supported by this browser.');
+            }
+            if (ws) {
+                ws.onmessage = function (event) {
+                    var data = event.data;
+                    var alert = JSON.parse(data).event.payloadData;
+                    alerts.unshift(alert);
+                    if (alerts.length > 5) {
+                        alerts = alerts.slice(0, -1);
+                    }
+                    var realtimeAlerts = $('#realtime_alerts');
+                    realtimeAlerts.find('tbody').empty();
+                    for (var i = 0; i < alerts.length; i++) {
+                        var row = '<tr ' + (alerts[i].level === 'Warn' ? 'style="background-color: #faffd7">' : '>') +
+                            '<td>' + new Date().toLocaleString() + '</td>' +
+                            '<td>' + alerts[i].message + '</td>' +
+                            '</tr>';
+                        realtimeAlerts.find('tbody').append(row);
+                    }
+                }
+            }
+        }
+
+        function disconnect() {
+            if (ws != null) {
+                ws.close();
+                ws = null;
+            }
+        }
+    }
 
 
     function datePickerCallback(startD, endD) {
         var eventsSuccess = function (data) {
-            console.log('data'+data);
             var records = JSON.parse(data);
-            console.log('data re'+records);
             analyticsHistory.redrawGraphs(records);
         };
 
@@ -974,9 +1051,6 @@ marker.bindPopup("<b><%=device.getString("name")%></b>").openPopup();
             }
         })
     });
-</script>
-<script type="text/javascript">
-    var alerts = [];
 
     function timeDifference(current, previous, isShort) {
         var msPerMinute = 60 * 1000;
@@ -1002,98 +1076,23 @@ marker.bindPopup("<b><%=device.getString("name")%></b>").openPopup();
         }
     }
 
-    $(document).ready(function () {
-        $(document).ready(function () {
-            var wsStatsEndpoint = "<%=pageContext.getServletContext().getInitParameter("websocketEndpoint")%>/secured-websocket/iot.per.device.stream.carbon.super.weatherstation/1.0.0?"
-                + "deviceId=<%=id%>&deviceType=weatherstation&websocketToken=<%=request.getSession(false).getAttribute(LoginController.ATTR_ACCESS_TOKEN)%>";
-            realtimeGraphRefresh(wsStatsEndpoint);
-
-            var wsAlertEndpoint = "<%=pageContext.getServletContext().getInitParameter("websocketEndpoint")%>/secured-websocket/iot.per.device.stream.carbon.super.weatherstation.alert/1.0.0?"
-                + "deviceId=<%=id%>&deviceType=weatherstation&websocketToken=<%=request.getSession(false).getAttribute(LoginController.ATTR_ACCESS_TOKEN)%>";
-            displayAlerts(wsAlertEndpoint);
-        });
-    });
-
-    //refresh graphs on click
-    document.getElementById("realtimeTab").addEventListener("click", realtimeGraphRefresh());
-    document.getElementById("historicalTab").addEventListener("click", setTimeout(historyGraphRefresh,1000));
-
-    function realtimeGraphRefresh(wsEndpoint) {
-        realtimeAnalytics.initDashboardPageCharts(wsEndpoint);
-    }
-
-    function displayAlerts(wsEndpoint) {
-        connect(wsEndpoint);
-        var ws;
-        // close websocket when page is about to be unloaded
-        // fixes broken pipe issue
-        window.onbeforeunload = function () {
-            disconnect();
-        };
-
-        //websocket connection
-        function connect(target) {
-            if ('WebSocket' in window) {
-                ws = new WebSocket(target);
-            } else if ('MozWebSocket' in window) {
-                ws = new MozWebSocket(target);
-            } else {
-                console.log('WebSocket is not supported by this browser.');
-            }
-            if (ws) {
-                ws.onmessage = function (event) {
-                    var data = event.data;
-                    console.log(data);
-                    var alert = JSON.parse(data).event.payloadData;
-                    alerts.unshift(alert);
-                    if (alerts.length > 5) {
-                        alerts = alerts.slice(0, -1);
-                    }
-                    var realtimeAlerts = $('#realtime_alerts');
-                    realtimeAlerts.find('tbody').empty();
-                    for (var i = 0; i < alerts.length; i++) {
-                        var row = '<tr ' + (alerts[i].level === 'Warn' ? 'style="background-color: #faffd7">' : '>') +
-                            '<td>' + new Date().toLocaleString() + '</td>' +
-                            '<td>' + alerts[i].message + '</td>' +
-                            '</tr>';
-                        realtimeAlerts.find('tbody').append(row);
-                    }
-                }
-            }
-        }
-
-        function disconnect() {
-            if (ws != null) {
-                ws.close();
-                ws = null;
-            }
-        }
-    }
-
-    function historyGraphRefresh() {
-        analyticsHistory.initDashboardPageCharts();
-
-
-    }
-
     //update the card details
-    function updateStatusCards(sinceText, temperature, humidity, windDir,windSpeed) {
+    function updateStatusCards(sinceText, temperature, humidity, windDir, windSpeed) {
 
         //temperature status
-        $("#temperature").html(temperature+"&#8457");
+        $("#temperature").html(temperature + "&#8457");
 
         //humidity status
-        $("#humidity").html(humidity+"<b>%</b>");
+        $("#humidity").html(humidity + "<b>%</b>");
 
         //wind status
-        $("#wind_status").html(windDir+"&#176");
+        $("#wind_status").html(windDir + "&#176");
 
         //wind speed
-        $("#windspeed_status").html(windSpeed+"<b> mph</b>");
+        $("#windspeed_status").html(windSpeed + "<b> mph</b>");
 
     }
 
-    var lastKnown = {};
     var lastKnownSuccess = function (data) {
         var record = JSON.parse(data).records[0];
 
@@ -1103,8 +1102,8 @@ marker.bindPopup("<b><%=device.getString("name")%></b>").openPopup();
             var temperature = record.values.tempf;
             var humidity = record.values.humidity;
             var windDir = record.values.winddir;
-            var windSpeed=record.values.windspeedmph;
-            updateStatusCards(sinceText, temperature, humidity, windDir,windSpeed);
+            var windSpeed = record.values.windspeedmph;
+            updateStatusCards(sinceText, temperature, humidity, windDir, windSpeed);
         } else {
             //temperature status
             $("#temperature").html("Unknown");
@@ -1132,6 +1131,8 @@ marker.bindPopup("<b><%=device.getString("name")%></b>").openPopup();
         },
         success: lastKnownSuccess
     });
+
+
 </script>
 
 </html>
