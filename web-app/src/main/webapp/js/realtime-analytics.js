@@ -658,7 +658,6 @@ realtimeAnalytics = {
                     var indoortempf=dataPoint.indoortempf;
                     var indoorhumidity=dataPoint.indoorhumidity;
                     var baromin=dataPoint.baromin;
-                    var lowbatt=dataPoint.lowbatt;
 
 
                     var currentTime = new Date();

@@ -862,6 +862,7 @@
         toggleDiv("statusCards");
         $(this).toggleText('Dashboard', 'Analytics');
     });
+
     $("#historicalTab").click(function () {
         $("#menu-toggle").hide();
     });
@@ -941,6 +942,31 @@
             displayAlerts(wsAlertEndpoint);
         });
     });
+
+    function timeDifference(current, previous, isshort) {
+        var msPerMinute = 60 * 1000;
+        var msPerHour = msPerMinute * 60;
+        var msPerDay = msPerHour * 24;
+        var msPerMonth = msPerDay * 30;
+        var msPerYear = msPerDay * 365;
+
+        var elapsed = current - previous;
+
+        if (elapsed < msPerMinute) {
+            return Math.round(elapsed / 1000) + ' seconds ago';
+        } else if (elapsed < msPerHour) {
+            return Math.round(elapsed / msPerMinute) + ' minutes ago';
+        } else if (elapsed < msPerDay) {
+            return Math.round(elapsed / msPerHour) + ' hours ago';
+        } else if (elapsed < msPerMonth) {
+            return Math.round(elapsed / msPerDay) + ' days ago';
+        } else if (elapsed < msPerYear) {
+            return Math.round(elapsed / msPerMonth) + ' months ago';
+        } else {
+            return Math.round(elapsed / msPerYear) + ' years ago';
+        }
+    }
+
 
     function displayAlerts(wsEndpoint) {
         connect(wsEndpoint);
@@ -1031,15 +1057,15 @@
             }
         }, datePickerCallback);
 
-        $(window).scroll(function () {
-            if ($('#dateRange').length) {
-                $('#dateRange').daterangepicker("close");
-            }
-        })
+//        $(window).scroll(function () {
+//            if ($('#dateRange').length) {
+//                $('#dateRange').daterangepicker("close");
+//            }
+//        })
     });
 
     //update the card details
-    function updateStatusCards(temperature, humidity, windDir, windSpeed) {
+    function updateStatusCards(sincetext, temperature, humidity, windDir, windSpeed) {
 
         //temperature status
         $("#temperature").html(temperature + "&#8457");
@@ -1060,11 +1086,12 @@
 
         if (record) {
             lastKnown = record;
+            var sinceText = timeDifference(new Date(), new Date(record.timestamp), false) + " ago";
             var temperature = record.values.tempf;
             var humidity = record.values.humidity;
             var windDir = record.values.winddir;
             var windSpeed = record.values.windspeedmph;
-            updateStatusCards(temperature, humidity, windDir, windSpeed);
+            updateStatusCards(sinceText, temperature, humidity, windDir, windSpeed);
         } else {
             //temperature status
             $("#temperature").html("Unknown");
