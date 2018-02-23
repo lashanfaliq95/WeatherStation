@@ -897,8 +897,6 @@
 
     }
 
-
-
     //menu toggle script
     $("#menu-toggle").click(function (e) {
         e.preventDefault();
@@ -910,8 +908,6 @@
         $('#icon').toggleClass('fa fa-angle-double-left fa fa-angle-double-right');
         setTimeout(analyticsHistory.updateGraphs, 250);
 
-        //$(".his").toggleClass("setHistorical");
-        // $(this).toggleText('<i class="large material-icons">arrow_forward</i>', '<i class="large material-icons">arrow_backward</i>');
     });
 
     $("#historicalTab").click(function () {
@@ -1121,11 +1117,6 @@
             }
         }, datePickerCallback);
 
-//        $(window).scroll(function () {
-//            if ($('#dateRange').length) {
-//                $('#dateRange').daterangepicker("close");
-//            }
-//        })
     });
 
     //update the card details

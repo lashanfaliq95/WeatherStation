@@ -334,7 +334,6 @@
         var devicesListing = $('#devices-listing');
 
         var lastKnownSuccess = function (data) {
-            console.log('data' + data);
             var records = JSON.parse(data);
             var record = JSON.parse(data).records[0];
 
@@ -433,7 +432,6 @@
 
     function getAllDevices() {
         var success = function (data) {
-            console.log(data);
             devices = JSON.parse(data).devices;
             deviceCount = JSON.parse(data).count;//find the number of devices
 
