@@ -88,8 +88,8 @@ analyticsHistory= {
                 tension: 0
             }),
             showArea: true,
-            low: 0,
-            high: 120, // creative tim: we recommend you to set the high sa the biggest value + something for a better
+            low: -50,
+            high: 50, // creative tim: we recommend you to set the high sa the biggest value + something for a better
                       // look
             chartPadding: {
                 top: 0,
@@ -173,8 +173,8 @@ analyticsHistory= {
                 tension: 0
             }),
             showArea: true,
-            low: 0,
-            high: 120, // creative tim: we recommend you to set the high sa the biggest value + something for a better
+            low: -50,
+            high: 50, // creative tim: we recommend you to set the high sa the biggest value + something for a better
                       // look
             chartPadding: {
                 top: 0,
@@ -201,8 +201,8 @@ analyticsHistory= {
                 tension: 0
             }),
             showArea: true,
-            low: 0,
-            high: 120, // creative tim: we recommend you to set the high sa the biggest value + something for a better
+            low: -50,
+            high: 50, // creative tim: we recommend you to set the high sa the biggest value + something for a better
                       // look
             chartPadding: {
                 top: 0,
@@ -481,8 +481,8 @@ analyticsHistory= {
                 tension: 0
             }),
             showArea: true,
-            low: 0,
-            high: 120, // creative tim: we recommend you to set the high sa the biggest value + something for a better
+            low: -50,
+            high: 50, // creative tim: we recommend you to set the high sa the biggest value + something for a better
                       // look
             chartPadding: {
                 top: 0,
@@ -581,6 +581,26 @@ analyticsHistory= {
         }
     },
 
+    updateGraphs: function () {
+        analyticsHistory.historicalTemp.update();
+        analyticsHistory.historicalHumid.update();
+        analyticsHistory.historicalDewptf.update();
+        analyticsHistory.historicalUV.update();
+        analyticsHistory.historicalWindDir.update();
+        analyticsHistory.historicalWindChill.update();
+        analyticsHistory.historicalWindGust.update();
+        analyticsHistory.historicalWindSpeed.update();
+        analyticsHistory.historicalSolarRadiation.update();
+        analyticsHistory.historicalRaining.update();
+        analyticsHistory.historicalDailyRaining.update();
+        analyticsHistory.historicalWeeklyRaining.update();
+        analyticsHistory.historicalMonthlyRaining.update();
+        analyticsHistory.historicalYearlyRaining.update();
+        analyticsHistory.historicalBaromin.update();
+        //analyticsHistory.historicalLowBatt.update();
+        analyticsHistory.historicalIndoorHumid.update();
+        analyticsHistory.historicalIndoorTemp.update();
+    },
 
     redrawGraphs: function (events) {
 
@@ -645,10 +665,13 @@ analyticsHistory= {
                 var sinceText = analyticsHistory.timeDifference(currentTime, new Date(record.timestamp));
                 var dataPoint=record.values;
                 var temperature = dataPoint.tempf;
+                temperature = ((temperature - 32) * 5) / 9;
                 var humidity = dataPoint.humidity;
                 var windDir=dataPoint.winddir;
                 var dewptf=dataPoint.dewptf;
+                dewptf = ((dewptf - 32) * 5) / 9;
                 var windchillf=dataPoint.windchillf;
+                windchillf = ((windchillf - 32) * 5) / 9;
                 var windspeedmph=dataPoint.windspeedmph;
                 var windgustmph=dataPoint.windgustmph;
                 var rainin=dataPoint.rainin;
@@ -659,9 +682,9 @@ analyticsHistory= {
                 var solarradiation=dataPoint.solarradiation;
                 var UV=dataPoint.UV;
                 var indoortempf=dataPoint.indoortempf;
+                indoortempf = ((indoortempf - 32) * 5) / 9;
                 var indoorhumidity=dataPoint.indoorhumidity;
                 var baromin=dataPoint.baromin;
-
 
                 if (temperature)
                     sumTemp += temperature;
@@ -976,7 +999,8 @@ analyticsHistory= {
         }
 
 
+    },
 
-    }
+
 
 };

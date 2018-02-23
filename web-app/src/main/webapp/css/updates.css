@@ -75,6 +75,8 @@
 #inputMapId {
     width: 90%;
     height: 40%;
+    margin-left: 27px;
+    margin-top: 5px;
 }
 
 .leaflet-popup-content{
@@ -92,6 +94,28 @@
 }
 .col-md-4.resize{
     width: 16.66666667%;
+}
+
+.setheight {
+    height: 160px;
+}
+
+.setHistorical {
+    height: 230px;
+}
+
+.menubutton {
+
+    height: 2.5em;
+
+    display: inline-block;
+
+    margin-left: 20px;
+
+}
+
+.ct-chart {
+    cursor: pointer;
 }
 
 

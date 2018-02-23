@@ -38,7 +38,7 @@
 <%
     String id = request.getParameter("id");
     if (id == null) {
-        response.sendRedirect("devices.jsp");
+        //  response.sendRedirect("devices.jsp");
         return;
     }
 
@@ -117,6 +117,7 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"
           integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ=="
           crossorigin=""/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="css/updates.css" rel="stylesheet"/>
 
     <link href="css/simple-sidebar.css" rel="stylesheet">
@@ -132,7 +133,7 @@
 -->
         <div class="logo list-inline">
             <a href="./devices.jsp" class="simple-text">
-                <strong>Weather</strong>Station
+                <strong>Weather</strong>Portal
             </a>
         </div>
         <div class="sidebar-wrapper">
@@ -172,17 +173,21 @@
 
 
     </div>
-    <div id="page-content-wrapper" class="main-panel">
+    <div id="page-content-wrapper" class="main-panel" style="padding-top: 2px;">
 
-        <nav class="navbar navbar-transparent">
+        <nav class="navbar navbar-transparent"
+             style="padding-top: 2px;padding-bottom: 2px;text-align: center;line-height: 50px; font-size: 30px;">
             <div class="container-fluid">
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-left">
                         <li>
-                            <a href="#menu-toggle" class="btn btn-secondary" id="menu-toggle">Dashboard</a>
-
+                            <a href="#menu-toggle" id="menu-toggle" style="width: 100px"> <i id="icon"
+                                                                                             class="fa fa-angle-double-left"
+                                                                                             style="font-size:36px"></i></a>
                         </li>
                     </ul>
+                    <strong><%=device.getString("name")%>
+                    </strong> Weather Station Statistics
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown pull-right">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -200,7 +205,17 @@
                 </div>
             </div>
         </nav>
-        <div class="content">
+        <div class="content" style="padding-top: 2px;">
+            <div id="daterangebar" style="margin-left:35%;margin-top: -4px">
+                <div class="menubutton">
+                    <h4 style="margin-top: -4px"><strong id="dateR" style=" font-size: 20px;">Date-range</strong></h4>
+                </div>
+                <div class="menubutton" style="width: 440px;margin-top: -4px;">
+                    <h4><input type="text" name="dateRange" id="dateRange" style="padding-left: 15px; font-size: 20px;"
+                               value="01/01/2018 1:30 PM - 01/01/2018 2:00 PM"
+                               class="form-control"/></h4></div>
+
+            </div>
             <div class="container-fluid">
                 <div class="tab-content">
                     <div id="realtime" class="tab-pane fade in active">
@@ -275,10 +290,10 @@
                             <div class="col-md-4">
                                 <div class="card" id="temp" onclick=redirect(this)>
                                     <div class="card-header card-chart" data-background-color="red">
-                                        <div class="ct-chart " id="RealTimeTempChart"></div>
+                                        <div class="ct-chart ct-golden-section setheight" id="RealTimeTempChart"></div>
                                     </div>
                                     <div class="card-content">
-                                        <h4 class="title">Temperature&#8457</h4>
+                                        <h4 class="title">Temperature&#8451</h4>
                                         <p class="category">
                                     </div>
                                     <div class="card-footer">
@@ -290,8 +305,9 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="card" id='humid' onclick=redirect(this)>
-                                    <div class="card-header card-chart" data-background-color="blue">
-                                        <div class="ct-chart" id="RealTimeHumidityChart"></div>
+                                    <div class="card-header card-chart " data-background-color="blue">
+                                        <div class="ct-chart ct-golden-section setheight"
+                                             id="RealTimeHumidityChart"></div>
                                     </div>
                                     <div class="card-content">
                                         <h4 class="title">Humidity<b>%</b></h4>
@@ -308,10 +324,11 @@
                             <div class="col-md-4">
                                 <div class="card" id='indoorTemp' onclick=redirect(this)>
                                     <div class="card-header card-chart" data-background-color="orange">
-                                        <div class="ct-chart" id="RealTimeIndoorTempChart"></div>
+                                        <div class="ct-chart ct-golden-section setheight"
+                                             id="RealTimeIndoorTempChart"></div>
                                     </div>
                                     <div class="card-content">
-                                        <h4 class="title">Indoor Temperature&#8457</h4>
+                                        <h4 class="title">Indoor Temperature&#8451</h4>
                                         <p class="category">
 
                                     </div>
@@ -325,10 +342,11 @@
                             <div class="col-md-4">
                                 <div class="card" id='dewpoint' onclick=redirect(this)>
                                     <div class="card-header card-chart" data-background-color="purple">
-                                        <div class="ct-chart" id="RealTimeDewPointChart"></div>
+                                        <div class="ct-chart ct-golden-section setheight"
+                                             id="RealTimeDewPointChart"></div>
                                     </div>
                                     <div class="card-content">
-                                        <h4 class="title">Dew Point&#8457</h4>
+                                        <h4 class="title">Dew Point&#8451</h4>
                                         <p class="category">
 
                                     </div>
@@ -343,7 +361,8 @@
                             <div class="col-md-4">
                                 <div class="card" id='indoorHumid' onclick=redirect(this)>
                                     <div class="card-header card-chart" data-background-color="yellow">
-                                        <div class="ct-chart" id="RealTimeIndoorHumidityChart"></div>
+                                        <div class="ct-chart ct-golden-section setheight"
+                                             id="RealTimeIndoorHumidityChart"></div>
                                     </div>
                                     <div class="card-content">
                                         <h4 class="title">Indoor Humidity<b>%</b></h4>
@@ -360,7 +379,8 @@
                             <div class="col-md-4">
                                 <div class="card" id='baromin' onclick=redirect(this)>
                                     <div class="card-header card-chart" data-background-color="green">
-                                        <div class="ct-chart" id="RealTimeBarominChart"></div>
+                                        <div class="ct-chart ct-golden-section setheight"
+                                             id="RealTimeBarominChart"></div>
                                     </div>
                                     <div class="card-content">
                                         <h4 class="title">Baromin<b> pascal</b></h4>
@@ -380,7 +400,8 @@
                             <div class="col-md-4">
                                 <div class="card" id='winddir' onclick=redirect(this)>
                                     <div class="card-header card-chart" data-background-color="green">
-                                        <div class="ct-chart" id="RealTimeWindDirChart"></div>
+                                        <div class="ct-chart ct-golden-section setheight"
+                                             id="RealTimeWindDirChart"></div>
                                     </div>
                                     <div class="card-content">
                                         <h4 class="title">Wind Direction&#176</h4>
@@ -397,7 +418,8 @@
                             <div class="col-md-4">
                                 <div class="card" id='windspeed' onclick=redirect(this)>
                                     <div class="card-header card-chart" data-background-color="purple">
-                                        <div class="ct-chart" id="RealTimeWindSpeedChart"></div>
+                                        <div class="ct-chart ct-golden-section setheight"
+                                             id="RealTimeWindSpeedChart"></div>
                                     </div>
                                     <div class="card-content">
                                         <h4 class="title">Wind Speed <b>mph</b></h4>
@@ -414,7 +436,8 @@
                             <div class="col-md-4">
                                 <div class="card" id='windgust' onclick=redirect(this)>
                                     <div class="card-header card-chart" data-background-color="orange">
-                                        <div class="ct-chart" id="RealTimeWindGustChart"></div>
+                                        <div class="ct-chart ct-golden-section setheight"
+                                             id="RealTimeWindGustChart"></div>
                                     </div>
                                     <div class="card-content">
                                         <h4 class="title">Wind Gust <b>mph</b></h4>
@@ -431,10 +454,11 @@
                             <div class="col-md-4">
                                 <div class="card" id='windchill' onclick=redirect(this)>
                                     <div class="card-header card-chart" data-background-color="red">
-                                        <div class="ct-chart" id="RealTimeWindChillChart"></div>
+                                        <div class="ct-chart ct-golden-section setheight"
+                                             id="RealTimeWindChillChart"></div>
                                     </div>
                                     <div class="card-content">
-                                        <h4 class="title">Wind Chill&#8457</h4>
+                                        <h4 class="title">Wind Chill&#8451</h4>
                                         <p class="category">
 
                                     </div>
@@ -448,7 +472,8 @@
                             <div class="col-md-4">
                                 <div class="card" id='solarradiation' onclick=redirect(this)>
                                     <div class="card-header card-chart" data-background-color="red">
-                                        <div class="ct-chart" id="RealTimeSolarRadiationChart"></div>
+                                        <div class="ct-chart ct-golden-section setheight"
+                                             id="RealTimeSolarRadiationChart"></div>
                                     </div>
                                     <div class="card-content">
                                         <h4 class="title">Solar Radiation <b>watt per square meter</b></h4>
@@ -465,7 +490,8 @@
                             <div class="col-md-4">
                                 <div class="card" id='uv' onclick=redirect(this)>
                                     <div class="card-header card-chart" data-background-color="blue">
-                                        <div class="ct-chart" id="RealTimeUltraVioletChart"></div>
+                                        <div class="ct-chart ct-golden-section setheight"
+                                             id="RealTimeUltraVioletChart"></div>
                                     </div>
                                     <div class="card-content">
                                         <h4 class="title">Ultra Violet <b>milliwatts per square centimeter</b></h4>
@@ -484,7 +510,8 @@
                             <div class="col-md-4">
                                 <div class="card" id='raining' onclick=redirect(this)>
                                     <div class="card-header card-chart" data-background-color="yellow">
-                                        <div class="ct-chart" id="RealTimeRainingChart"></div>
+                                        <div class="ct-chart ct-golden-section setheight"
+                                             id="RealTimeRainingChart"></div>
                                     </div>
                                     <div class="card-content">
                                         <h4 class="title">Raining <b>Mm per Hour</b></h4>
@@ -501,7 +528,8 @@
                             <div class="col-md-4">
                                 <div class="card" id='dailyraining' onclick=redirect(this)>
                                     <div class="card-header card-chart" data-background-color="green">
-                                        <div class="ct-chart" id="RealTimeDailyRainingChart"></div>
+                                        <div class="ct-chart ct-golden-section setheight"
+                                             id="RealTimeDailyRainingChart"></div>
                                     </div>
                                     <div class="card-content">
                                         <h4 class="title">Daily Raining <b>Mm per Day</b></h4>
@@ -518,7 +546,8 @@
                             <div class="col-md-4">
                                 <div class="card" id='weeklyraining' onclick=redirect(this)>
                                     <div class="card-header card-chart" data-background-color="yellow">
-                                        <div class="ct-chart" id="RealTimeWeeklyRainingChart"></div>
+                                        <div class="ct-chart ct-golden-section setheight"
+                                             id="RealTimeWeeklyRainingChart"></div>
                                     </div>
                                     <div class="card-content">
                                         <h4 class="title">Weekly raining <b>Mm per Week</b></h4>
@@ -535,7 +564,8 @@
                             <div class="col-md-4">
                                 <div class="card" id='monthlyraining' onclick=redirect(this)>
                                     <div class="card-header card-chart" data-background-color="orange">
-                                        <div class="ct-chart" id="RealTimeMonthlyRainingChart"></div>
+                                        <div class="ct-chart ct-golden-section setheight"
+                                             id="RealTimeMonthlyRainingChart"></div>
                                     </div>
                                     <div class="card-content">
                                         <h4 class="title">Monthly Raining <b>Mm per Month</b></h4>
@@ -552,7 +582,8 @@
                             <div class="col-md-4">
                                 <div class="card" id='yearlyraining' onclick=redirect(this)>
                                     <div class="card-header card-chart" data-background-color="purple">
-                                        <div class="ct-chart" id="RealTimeYearlyRainingChart"></div>
+                                        <div class="ct-chart ct-golden-section setheight"
+                                             id="RealTimeYearlyRainingChart"></div>
                                     </div>
                                     <div class="card-content">
                                         <h4 class="title">Yearly Raining <b>Mm per Year</b></h4>
@@ -570,31 +601,28 @@
 
                     </div>
                     <div id="historical" class="tab-pane fade">
-                        <div style="margin-right:70%;margin-left:2%  ">
-                            <h4><strong>Select Date-range</strong> <input type="text" name="dateRange" id="dateRange"
-                                                                          value="01/01/2017 1:30 PM - 01/01/2017 2:00 PM"
-                                                                          class="form-control"/></h4>
-
-                        </div>
                         <div class="row">
                             <div class="col-md-4">
-                                <div class="card" id='Htemp'>
+                                <div class="card his setHistorical" id='Htemp' onclick=redirect(this)>
                                     <div class="card-header card-chart" data-background-color="red">
-                                        <div class="ct-chart" id="HistoricalTempChart"></div>
+                                        <div class="ct-chart ct-golden-section setheight"
+                                             id="HistoricalTempChart"></div>
                                     </div>
                                     <div class="card-content">
-                                        <h4 class="title">Temperature&#8457</h4>
+                                        <h4 class="title">Temperature&#8451</h4>
                                         <p class="category" id="historicalTempAlert">
                                     </div>
+
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <div class="card" id='Hitemp'>
+                                <div class="card his setHistorical" id='Hitemp' onclick=redirect(this)>
                                     <div class="card-header card-chart" data-background-color="orange">
-                                        <div class="ct-chart" id="HistoricalIndoorTempChart"></div>
+                                        <div class="ct-chart ct-golden-section setheight"
+                                             id="HistoricalIndoorTempChart"></div>
                                     </div>
                                     <div class="card-content">
-                                        <h4 class="title">Indoor Temperature&#8457</h4>
+                                        <h4 class="title">Indoor Temperature&#8451</h4>
                                         <p class="category" id="historicalindoortempfLastUpdated">
 
                                     </div>
@@ -602,9 +630,10 @@
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <div class="card" id='Hbaromin'>
+                                <div class="card his setHistorical" id='Hbaromin' onclick=redirect(this)>
                                     <div class="card-header card-chart" data-background-color="green">
-                                        <div class="ct-chart" id="HistoricalBarominChart"></div>
+                                        <div class="ct-chart ct-golden-section setheight"
+                                             id="HistoricalBarominChart"></div>
                                     </div>
                                     <div class="card-content">
                                         <h4 class="title">Baromin<b> pascal</b></h4>
@@ -614,12 +643,11 @@
 
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
                             <div class="col-md-4">
-                                <div class="card" id='Hihumid'>
+                                <div class="card his setHistorical" id='Hihumid' onclick=redirect(this)>
                                     <div class="card-header card-chart" data-background-color="yellow">
-                                        <div class="ct-chart" id="HistoricalIndoorHumidityChart"></div>
+                                        <div class="ct-chart ct-golden-section setheight"
+                                             id="HistoricalIndoorHumidityChart"></div>
                                     </div>
                                     <div class="card-content">
                                         <h4 class="title">Indoor Humidity<b>%</b></h4>
@@ -630,9 +658,10 @@
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <div class="card" id='Hhumid'>
+                                <div class="card his setHistorical" id='Hhumid' onclick=redirect(this)>
                                     <div class="card-header card-chart" data-background-color="blue">
-                                        <div class="ct-chart" id="HistoricalHumidityChart"></div>
+                                        <div class="ct-chart ct-golden-section setheight"
+                                             id="HistoricalHumidityChart"></div>
                                     </div>
                                     <div class="card-content">
                                         <h4 class="title">Humidity<b>%</b></h4>
@@ -641,12 +670,13 @@
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <div class="card" id='Hdewpoint'>
+                                <div class="card his setHistorical" id='Hdewpoint' onclick=redirect(this)>
                                     <div class="card-header card-chart" data-background-color="purple">
-                                        <div class="ct-chart" id="HistoricalDewPointChart"></div>
+                                        <div class="ct-chart ct-golden-section setheight"
+                                             id="HistoricalDewPointChart"></div>
                                     </div>
                                     <div class="card-content">
-                                        <h4 class="title">Dew Point&#8457</h4>
+                                        <h4 class="title">Dew Point&#8451</h4>
                                         <p class="category" id="historicaldewptfLastUpdated">
 
                                     </div>
@@ -656,9 +686,10 @@
                         </div>
                         <div class="row">
                             <div class="col-md-4">
-                                <div class="card" id='Hwindgust'>
+                                <div class="card his setHistorical" id='Hwindgust'>
                                     <div class="card-header card-chart" data-background-color="orange">
-                                        <div class="ct-chart" id="HistoricalWindGustChart"></div>
+                                        <div class="ct-chart ct-golden-section setheight"
+                                             id="HistoricalWindGustChart"></div>
                                     </div>
                                     <div class="card-content">
                                         <h4 class="title">Wind Gust <b>mph</b></h4>
@@ -669,12 +700,13 @@
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <div class="card" id='Hwindchill'>
+                                <div class="card his setHistorical" id='Hwindchill' onclick=redirect(this)>
                                     <div class="card-header card-chart" data-background-color="red">
-                                        <div class="ct-chart" id="HistoricalWindChillChart"></div>
+                                        <div class="ct-chart ct-golden-section setheight"
+                                             id="HistoricalWindChillChart"></div>
                                     </div>
                                     <div class="card-content">
-                                        <h4 class="title">Wind Chill&#8457</h4>
+                                        <h4 class="title">Wind Chill&#8451</h4>
                                         <p class="category" id="historicalwindchillfLastUpdated">
 
                                     </div>
@@ -682,9 +714,10 @@
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <div class="card" id='Hwindspeed'>
+                                <div class="card his setHistorical" id='Hwindspeed' onclick=redirect(this)>
                                     <div class="card-header card-chart" data-background-color="purple">
-                                        <div class="ct-chart" id="HistoricalWindSpeedChart"></div>
+                                        <div class="ct-chart ct-golden-section setheight"
+                                             id="HistoricalWindSpeedChart"></div>
                                     </div>
                                     <div class="card-content">
                                         <h4 class="title">Wind Speed <b>mph</b></h4>
@@ -694,12 +727,11 @@
 
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
                             <div class="col-md-4">
-                                <div class="card" id='Hwinddir'>
+                                <div class="card his setHistorical" id='Hwinddir' onclick=redirect(this)>
                                     <div class="card-header card-chart" data-background-color="purple">
-                                        <div class="ct-chart" id="HistoricalWindDirChart"></div>
+                                        <div class="ct-chart ct-golden-section setheight"
+                                             id="HistoricalWindDirChart"></div>
                                     </div>
                                     <div class="card-content">
                                         <h4 class="title">Wind Direction&#176</h4>
@@ -710,9 +742,10 @@
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <div class="card" id='Hsolarradiation'>
+                                <div class="card his setHistorical" id='Hsolarradiation' onclick=redirect(this)>
                                     <div class="card-header card-chart" data-background-color="red">
-                                        <div class="ct-chart" id="HistoricalSolarRadiationChart"></div>
+                                        <div class="ct-chart ct-golden-section setheight"
+                                             id="HistoricalSolarRadiationChart"></div>
                                     </div>
                                     <div class="card-content">
                                         <h4 class="title">Solar Radiation <b>watt per square meter</b></h4>
@@ -723,9 +756,10 @@
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <div class="card" id='Huv'>
+                                <div class="card his setHistorical" id='Huv' onclick=redirect(this)>
                                     <div class="card-header card-chart" data-background-color="blue">
-                                        <div class="ct-chart" id="HistoricalUltraVioletChart"></div>
+                                        <div class="ct-chart ct-golden-section setheight"
+                                             id="HistoricalUltraVioletChart"></div>
                                     </div>
                                     <div class="card-content">
                                         <h4 class="title">Ultra Violet <b>milliwatts per square centimeter</b></h4>
@@ -740,9 +774,10 @@
 
                         <div class="row">
                             <div class="col-md-4">
-                                <div class="card" id='Hraining'>
+                                <div class="card his setHistorical" id='Hraining' onclick=redirect(this)>
                                     <div class="card-header card-chart" data-background-color="yellow">
-                                        <div class="ct-chart" id="HistoricalRainingChart"></div>
+                                        <div class="ct-chart ct-golden-section setheight"
+                                             id="HistoricalRainingChart"></div>
                                     </div>
                                     <div class="card-content">
                                         <h4 class="title">Raining <b>Mm per Hour</b></h4>
@@ -753,9 +788,10 @@
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <div class="card" id='Hdailyraining'>
+                                <div class="card his setHistorical" id='Hdailyraining' onclick=redirect(this)>
                                     <div class="card-header card-chart" data-background-color="green">
-                                        <div class="ct-chart" id="HistoricalDailyRainingChart"></div>
+                                        <div class="ct-chart ct-golden-section setheight"
+                                             id="HistoricalDailyRainingChart"></div>
                                     </div>
                                     <div class="card-content">
                                         <h4 class="title">Daily Raining <b>Mm per Day</b></h4>
@@ -766,9 +802,10 @@
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <div class="card" id='Hweeklyraining'>
+                                <div class="card his setHistorical" id='Hweeklyraining' onclick=redirect(this)>
                                     <div class="card-header card-chart" data-background-color="yellow">
-                                        <div class="ct-chart" id="HistoricalWeeklyRainingChart"></div>
+                                        <div class="ct-chart ct-golden-section setheight"
+                                             id="HistoricalWeeklyRainingChart"></div>
                                     </div>
                                     <div class="card-content">
                                         <h4 class="title">Weekly raining <b>Mm per Week</b></h4>
@@ -778,12 +815,11 @@
 
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
                             <div class="col-md-4">
-                                <div class="card" id='Hmonthly raining'>
+                                <div class="card his setHistorical" id='Hmonthlyraining' onclick=redirect(this)>
                                     <div class="card-header card-chart" data-background-color="orange">
-                                        <div class="ct-chart" id="HistoricalMonthlyRainingChart"></div>
+                                        <div class="ct-chart ct-golden-section setheight"
+                                             id="HistoricalMonthlyRainingChart"></div>
                                     </div>
                                     <div class="card-content">
                                         <h4 class="title">Monthly Raining <b>Mm per Month</b></h4>
@@ -794,9 +830,10 @@
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <div class="card" id='Hyearlyraining'>
+                                <div class="card his setHistorical" id='Hyearlyraining' onclick=redirect(this)>
                                     <div class="card-header card-chart" data-background-color="purple">
-                                        <div class="ct-chart" id="HistoricalYearlyRainingChart"></div>
+                                        <div class="ct-chart ct-golden-section setheight"
+                                             id="HistoricalYearlyRainingChart"></div>
                                     </div>
                                     <div class="card-content">
                                         <h4 class="title">Yearly Raining <b>Mm per Year</b></h4>
@@ -843,37 +880,62 @@
         crossorigin=""></script>
 <script type="text/javascript">
     //function to expand charts onclick
+    $("#dateR").hide();
+    $('#daterangebar').hide();
+
     function redirect(ele) {
-        var act = $("#wrapper").hasClass("toggled");
+        var act = $(".col-md-4").hasClass("resize");
         if (!act) {
-            $('#' + ele.id).toggleClass('modal');
+            $(".his").toggleClass("setHistorical");
+        }
+        $('#' + ele.id).toggleClass('modal');
             $('div.card-chart').toggleClass('maxHeight');
             $('div.card').toggleClass('padzero');
             $('.ct-chart').toggleClass('fillcontent');
-        }
+        $('.ct-chart').toggleClass('setheight');
+        analyticsHistory.updateGraphs();
+
     }
+
+
 
     //menu toggle script
     $("#menu-toggle").click(function (e) {
         e.preventDefault();
-        $(".ct-chart").toggleClass('ct-golden-section');
+        // $(".ct-chart").toggleClass('ct-golden-section');
         $("#wrapper").toggleClass("toggled");
         $(".col-md-4").toggleClass("resize");
+        $(".his").toggleClass("setHistorical");
         toggleDiv("statusCards");
-        $(this).toggleText('Dashboard', 'Analytics');
+        $('#icon').toggleClass('fa fa-angle-double-left fa fa-angle-double-right');
+        setTimeout(analyticsHistory.updateGraphs, 250);
+
+        //$(".his").toggleClass("setHistorical");
+        // $(this).toggleText('<i class="large material-icons">arrow_forward</i>', '<i class="large material-icons">arrow_backward</i>');
     });
 
     $("#historicalTab").click(function () {
-        $("#menu-toggle").hide();
+        $("#dateR").show();
+        $("#daterangebar").show();
     });
+
     $("#realtimeTab").click(function () {
-        $("#menu-toggle").show();
+        $("#dateR").hide();
+        $("#daterangebar").hide();
     });
+
+    //    $("#historicalTab").click(function () {
+    //        $("#menu-toggle").hide();
+    //    });
+    //    $("#realtimeTab").click(function () {
+    //        $("#menu-toggle").show();
+    //    });
+
 
 
     $.fn.extend({
         toggleText: function (a, b) {
-            return this.text(this.text() === b ? a : b);
+            return this.html(this.html() === b ? a : b);
         }
     });
 
@@ -932,6 +994,8 @@
     });
 
     $(document).ready(function () {
+
+
         $(document).ready(function () {
             var wsStatsEndpoint = "<%=pageContext.getServletContext().getInitParameter("websocketEndpoint")%>/secured-websocket/iot.per.device.stream.carbon.super.weatherstation/1.0.0?"
                 + "deviceId=<%=id%>&deviceType=weatherstation&websocketToken=<%=request.getSession(false).getAttribute(LoginController.ATTR_ACCESS_TOKEN)%>";
@@ -1068,7 +1132,7 @@
     function updateStatusCards(sincetext, temperature, humidity, windDir, windSpeed) {
 
         //temperature status
-        $("#temperature").html(temperature + "&#8457");
+        $("#temperature").html(precise_round(temperature, 3) + "&#8451");
 
         //humidity status
         $("#humidity").html(humidity + "<b>%</b>");
@@ -1077,7 +1141,7 @@
         $("#wind_status").html(windDir + "&#176");
 
         //wind speed
-        $("#windspeed_status").html(windSpeed + "<b> mph</b>");
+        $("#windspeed_status").html(precise_round(windSpeed, 3) + "<b> mph</b>");
 
     }
 
@@ -1088,6 +1152,7 @@
             lastKnown = record;
             var sinceText = timeDifference(new Date(), new Date(record.timestamp), false) + " ago";
             var temperature = record.values.tempf;
+            temperature = ((temperature - 32) * 5) / 9;
             var humidity = record.values.humidity;
             var windDir = record.values.winddir;
             var windSpeed = record.values.windspeedmph;
@@ -1119,6 +1184,11 @@
         },
         success: lastKnownSuccess
     });
+
+    function precise_round(num, decimals) {
+        var t = Math.pow(10, decimals);
+        return (Math.round((num * t) + (decimals > 0 ? 1 : 0) * (Math.sign(num) * (10 / Math.pow(100, decimals)))) / t).toFixed(decimals);
+    }
 
 
 </script>

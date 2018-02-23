@@ -34,7 +34,7 @@
     <div class="sidebar" data-color="blue" data-image="images/sidebar-1.jpg">
         <div class="logo">
             <a href="./devices.jsp" class="simple-text">
-                <strong>Weather</strong>Station
+                <strong>Weather</strong>Portal
             </a>
         </div>
         <div class="sidebar-wrapper">
@@ -92,11 +92,10 @@
                                 <table style="width:100%">
                                     <tr>
                                         <th>
-                                            <h4 class="title">Weather stations enrolled</h4>
-                                            <p class="category">Below are the list of weather stations enrolled with the
-                                                server</p>
+                                            <h4 class="title" style="font-size: 30px; padding-left: 10px;">Weather
+                                                stations enrolled</h4>
                                         </th>
-                                        <th>
+                                        <th style="text-align: center">
                                             <button class="btn btn-white" data-toggle="modal"
                                                     data-target="#newDeviceModal">Add
                                                 Weather station
@@ -142,7 +141,7 @@
                                                         data-dismiss="modal">Close
                                                 </button>
                                                 <button type="button" class="btn btn-info btn-simple"
-                                                        onclick="addNewDevice();datePickerCallback();">Add
+                                                        onclick="addNewDevice()">Add
                                                 </button>
                                             </div>
                                         </div>
@@ -258,7 +257,7 @@
         if (windDir == null) {
             windDir = 0;
         }
-        var popupContent = "<div onclick=\"window.location.href='details.jsp?id=" + devName + "'\"><b id='weatherStation" + devId + "' >" + devName + "</b><br><table><tr><td><i class=\"tiny material-icons\" >wb_sunny</i></td><td>" + temp + "</td><td><i class=\"tiny material-icons\">opacity</i></td><td>" + humidity + "%</td><td><i class=\"tiny material-icons\" >call_made</i></td><td>" + windDir + "&#9900</td></table></div>";
+        var popupContent = "<div onclick=\"window.location.href='details.jsp?id=" + devName + "'\"><b id='weatherStation" + devId + "' >" + devName + "</b><br><table><tr><td><i class=\"tiny material-icons\" >wb_sunny</i></td><td>" + precise_round(temp, 3) + "&#8451</td><td><i class=\"tiny material-icons\">opacity</i></td><td>" + humidity + "%</td><td><i class=\"tiny material-icons\" >call_made</i></td><td>" + windDir + "&#9900</td></table></div>";
         popup = new L.Popup({maxWidth: "auto", autoPan: false, closeButton: false, closeOnClick: false});
         popup.setLatLng(popupLocation);
         popup.setContent(popupContent);
@@ -335,6 +334,7 @@
         var devicesListing = $('#devices-listing');
 
         var lastKnownSuccess = function (data) {
+            console.log('data' + data);
             var records = JSON.parse(data);
             var record = JSON.parse(data).records[0];
 
@@ -344,13 +344,17 @@
 
             if (record) {
                 temperature = record.values.tempf;
+                //converting temperature to celcius
+                temperature = ((temperature - 32) * 5) / 9;
                 humidity = record.values.humidity;
                 windDir = record.values.winddir;
+
+
             }
 
             var myRow;
             if (temperature == null || humidity == null || windDir == null) {
-                myRow = "<tr onclick=\"window.location.href='details.jsp?id=" + dev.deviceIdentifier + "'\" style='cursor: pointer'><a href='#" + dev.deviceIdentifier + "'><td>" + dev.name
+                myRow = "<tr onclick=\"window.location.href='details.jsp?id=" + dev.deviceIdentifier + "'\" style='cursor: pointer'><a href='#" + dev.deviceIdentifier + "'><td><div class=\"card card-stats\" style='width: 75%'> <div class=\"card-header\" data-background-color=\"purple\"> <i class=\"material-icons\">beach_access</i> </div> <div class=\"card-content\"> <p class=\"category\">Station</p> <h3 class=\"title\" >" + dev.name + "</h3> </div> </div>\n"
                     + "</td><td>"
                     + "<div class=\"card\"><div class=\"card-header card-chart\" data-background-color=\"red\" style=\"height: 90px;min-height: unset;\"><div class=\"ct-chart\" id=\"HistoricalTempChart" + dev.deviceIdentifier + "\"></div></div><div class=\"card-content\"><h4 class=\"title\">N/A</h4><p class=\"category\" id=\"historicalTempAlert" + dev.deviceIdentifier + "\"></div></div>\n</td><td><div class=\"card\"><div class=\"card-header card-chart\" data-background-color=\"orange\" style=\"height: 90px;min-height: unset;\"><div class=\"ct-chart\" id=\"HistoricalHumidityChart" + dev.deviceIdentifier + "\"></div></div><div class=\"card-content\"><h4 class=\"title\">N/A</h4><p class=\"category\" id=\"historicalHumidAlert" + dev.deviceIdentifier + "\"></div></div>\n</td><td>"
                     + "<div class=\"card\"><div class=\"card-header card-chart\" data-background-color=\"green\" style=\"height: 90px;min-height: unset;\"><div class=\"ct-chart\" id=\"HistoricalWindDirChart" + dev.deviceIdentifier + "\"></div></div><div class=\"card-content\"><h4 class=\"title\">N/A</h4><p class=\"category\" id=\"historicalWindDirAlert" + dev.deviceIdentifier + "\"></div></div>\n</td>"
@@ -358,9 +362,9 @@
 
             }
             else {
-                myRow = "<tr onclick=\"window.location.href='details.jsp?id=" + dev.deviceIdentifier + "'\" style='cursor: pointer'><a href='#" + dev.deviceIdentifier + "'><td>" + dev.name
+                myRow = "<tr onclick=\"window.location.href='details.jsp?id=" + dev.deviceIdentifier + "'\" style='cursor: pointer'><a href='#" + dev.deviceIdentifier + "'><td><div class=\"card card-stats\" style='width: 75%'> <div class=\"card-header\" data-background-color=\"purple\"> <i class=\"material-icons\">beach_access</i> </div> <div class=\"card-content\"> <p class=\"category\">Station</p> <h3 class=\"title\" >" + dev.name + "</h3> </div> </div>\n"
                     + "</td><td>"
-                    + "<div class=\"card\"><div class=\"card-header card-chart\" data-background-color=\"red\" style=\"height: 90px;min-height: unset;\"><div class=\"ct-chart\" id=\"HistoricalTempChart" + dev.deviceIdentifier + "\"></div></div><div class=\"card-content\"><h4 class=\"title\"> " + (temperature) + "&#8457</h4><p class=\"category\" id=\"historicalTempAlert" + dev.deviceIdentifier + "\"></div></div>\n</td><td><div class=\"card\"><div class=\"card-header card-chart\" data-background-color=\"orange\" style=\"height: 90px;min-height: unset;\"><div class=\"ct-chart\" id=\"HistoricalHumidityChart" + dev.deviceIdentifier + "\"></div></div><div class=\"card-content\"><h4 class=\"title\"> " + (humidity) + "%</h4><p class=\"category\" id=\"historicalHumidAlert" + dev.deviceIdentifier + "\"></div></div>\n</td><td>"
+                    + "<div class=\"card\"><div class=\"card-header card-chart\" data-background-color=\"red\" style=\"height: 90px;min-height: unset;\"><div class=\"ct-chart\" id=\"HistoricalTempChart" + dev.deviceIdentifier + "\"></div></div><div class=\"card-content\"><h4 class=\"title\"> " + ( precise_round(temperature, 3)) + "&#8451</h4><p class=\"category\" id=\"historicalTempAlert" + dev.deviceIdentifier + "\"></div></div>\n</td><td><div class=\"card\"><div class=\"card-header card-chart\" data-background-color=\"orange\" style=\"height: 90px;min-height: unset;\"><div class=\"ct-chart\" id=\"HistoricalHumidityChart" + dev.deviceIdentifier + "\"></div></div><div class=\"card-content\"><h4 class=\"title\"> " + (humidity) + "%</h4><p class=\"category\" id=\"historicalHumidAlert" + dev.deviceIdentifier + "\"></div></div>\n</td><td>"
                     + "<div class=\"card\"><div class=\"card-header card-chart\" data-background-color=\"green\" style=\"height: 90px;min-height: unset;\"><div class=\"ct-chart\" id=\"HistoricalWindDirChart" + dev.deviceIdentifier + "\"></div></div><div class=\"card-content\"><h4 class=\"title\"> " + (windDir) + "&#176</h4><p class=\"category\" id=\"historicalWindDirAlert" + dev.deviceIdentifier + "\"></div></div>\n</td>"
                     + "</a></tr>";
             }
@@ -417,17 +421,19 @@
             type: "POST",
             url: "invoker/execute",
             data: {
-                "uri": "/events/recent-records/weatherstation/" + devices[index].deviceIdentifier + "?limit=5",
+                "uri": "/events/last-known/weatherstation/" + devices[index].deviceIdentifier + "?limit=5",
                 "method": "get"
             },
             success: lastKnownSuccess
 
         });
+
     }
 
 
     function getAllDevices() {
         var success = function (data) {
+            console.log(data);
             devices = JSON.parse(data).devices;
             deviceCount = JSON.parse(data).count;//find the number of devices
 
@@ -551,8 +557,8 @@
                 tension: 0
             }),
             showArea: true,
-            low: 0,
-            high: 120, // creative tim: we recommend you to set the high sa the biggest value + something for a better
+            low: -50,
+            high: 50, // creative tim: we recommend you to set the high sa the biggest value + something for a better
             // look
             chartPadding: {
                 top: 0,
@@ -673,9 +679,9 @@
                 var sinceText = timeDifference(currentTime, new Date(record.timestamp));
                 var dataPoint = record.values;
                 var temperature = dataPoint.tempf;
+                temperature = ((temperature - 32) * 5) / 9;
                 var humidity = dataPoint.humidity;
                 var windDir = dataPoint.winddir;
-
 
                 if (temperature)
                     sumTemp += temperature;
@@ -710,6 +716,11 @@
 
 
         }
+    }
+
+    function precise_round(num, decimals) {
+        var t = Math.pow(10, decimals);
+        return (Math.round((num * t) + (decimals > 0 ? 1 : 0) * (Math.sign(num) * (10 / Math.pow(100, decimals)))) / t).toFixed(decimals);
     }
 
 

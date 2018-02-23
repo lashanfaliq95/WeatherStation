@@ -41,8 +41,8 @@ realtimeAnalytics = {
             showArea: true,
             responsive:false,
             maintainAspectRatio : false,
-            low: 0,
-            high: 120, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
+            low: -50,
+            high: 50, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
             chartPadding: {
                 top: 0,
                 right: 0,
@@ -155,8 +155,8 @@ realtimeAnalytics = {
                 tension: 0
             }),
             showArea: true,
-            low: 0,
-            high: 120, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
+            low: -50,
+            high: 50, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
             chartPadding: {
                 top: 0,
                 right: 0,
@@ -189,8 +189,8 @@ realtimeAnalytics = {
                 tension: 0
             }),
             showArea: true,
-            low: 0,
-            high: 120, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
+            low: -50,
+            high: 50, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
             chartPadding: {
                 top: 0,
                 right: 0,
@@ -530,8 +530,8 @@ realtimeAnalytics = {
                 tension: 0
             }),
             showArea: true,
-            low: 0,
-            high:120, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
+            low: -50,
+            high: 50, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
             chartPadding: {
                 top: 0,
                 right: 0,
@@ -642,10 +642,13 @@ realtimeAnalytics = {
                     var data = event.data;
                     var dataPoint = JSON.parse(data).event.payloadData;
                     var temperature = dataPoint.tempf;
+                    temperature = ((temperature - 32) * 5) / 9;
                     var humidity = dataPoint.humidity;
                     var windDir=dataPoint.winddir;
                     var dewptf=dataPoint.dewptf;
+                    dewptf = ((dewptf - 32) * 5) / 9;
                     var windchillf=dataPoint.windchillf;
+                    windchillf = ((windchillf - 32) * 5) / 9;
                     var windspeedmph=dataPoint.windspeedmph;
                     var windgustmph=dataPoint.windgustmph;
                     var rainin=dataPoint.rainin;
@@ -656,9 +659,9 @@ realtimeAnalytics = {
                     var solarradiation=dataPoint.solarradiation;
                     var UV=dataPoint.UV;
                     var indoortempf=dataPoint.indoortempf;
+                    indoortempf = ((indoortempf - 32) * 5) / 9;
                     var indoorhumidity=dataPoint.indoorhumidity;
                     var baromin=dataPoint.baromin;
-
 
                     var currentTime = new Date();
                     var sinceText = timeDifference(currentTime, new Date(dataPoint.timeStamp), false) + " ago";
@@ -786,7 +789,7 @@ realtimeAnalytics = {
             });
 
             $("#menu-toggle").click(function () {
-                updateGraphs();
+                setTimeout(updateGraphs, 200);
             });
 
         }
@@ -834,6 +837,6 @@ realtimeAnalytics = {
         for (var i = 0; i < arr.length; i++) {
             arr[i] = timeDifference(now, arrRef[i], true);
         }
-    }
+    },
 
 };
