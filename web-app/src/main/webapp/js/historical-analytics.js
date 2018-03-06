@@ -658,7 +658,7 @@ analyticsHistory= {
             analyticsHistory.historicalBarominLabel.length = 0;
             analyticsHistory.historicalBarominSeries.length = 0;
 
-            for (var i = 0; i < events.records.length; i++) {
+            for (var i = events.records.length - 1; i >= 0; i--) {
                 var record= events.records[i];
 
                 var sinceText = analyticsHistory.timeDifference(currentTime, new Date(record.timestamp));
@@ -737,7 +737,7 @@ analyticsHistory= {
                     sumBaromin+=baromin;
 
 
-                if (i === events.records.length - 1) {
+                if (i === 0) {
                     var avgHumid = sumHumid / events.records.length;
                     var avgTemp = sumTemp / events.records.length;
                     var avgWindDir = sumWindDir / events.records.length;

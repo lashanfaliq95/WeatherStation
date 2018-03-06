@@ -692,7 +692,7 @@
             this["historicalWindDirLabel" + deviceId].length = 0;
             this["historicalWindDirSeries" + deviceId].length = 0;
 
-            for (var i = 0; i < events.records.length; i++) {
+            for (var i = events.records.length - 1; i >= 0; i--) {
 
                 var record = events.records[i];
 

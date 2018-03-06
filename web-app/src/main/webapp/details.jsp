@@ -30,9 +30,6 @@
 <%@ page import="java.net.URI" %>
 <%@ page import="java.net.URISyntaxException" %>
 <%@ page import="java.net.URL" %>
-<%@ page import="java.security.KeyManagementException" %>
-<%@ page import="java.security.KeyStoreException" %>
-<%@ page import="java.security.NoSuchAlgorithmException" %>
 <%@ page import="java.util.Date" %>
 <%@include file="includes/authenticate.jsp" %>
 <%
@@ -62,13 +59,13 @@
     SSLContextBuilder builder = new SSLContextBuilder();
     try {
         builder.loadTrustMaterial(null, new TrustSelfSignedStrategy());
-    } catch (NoSuchAlgorithmException | KeyStoreException e) {
+    } catch (Exception e) {
         e.printStackTrace();
     }
     SSLConnectionSocketFactory sslsf = null;
     try {
         sslsf = new SSLConnectionSocketFactory(builder.build());
-    } catch (NoSuchAlgorithmException | KeyManagementException e) {
+    } catch (Exception e) {
         e.printStackTrace();
     }
 
@@ -155,20 +152,21 @@
 
             <div id="mapid" style="width: 100%; height:50%; margin-top: 50px"></div>
 
-            <div class="card card-stats " style="margin-bottom: 10px">
+            <div class="card card-stats " style="margin-bottom: 100px">
                 <div class="card-content">
                     <h3 class="title" id="devName">
                     </h3>
                     <p class="category" id="devDetails"></p>
                 </div>
             </div>
-            <p class="copyright" style="position: absolute;bottom:0;padding-left: 100px">
+
+            <div style="margin-top: 10px;margin-left: 100px">
                 &copy;
                 <script>
                     document.write(new Date().getFullYear())
                 </script>
                 <a href="https://wso2.com/iot">WSO2 Inc.</a>
-            </p>
+            </div>
         </div>
 
 
@@ -471,7 +469,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="card" id='solarradiation' onclick=redirect(this)>
-                                    <div class="card-header card-chart" data-background-color="red">
+                                    <div class="card-header card-chart">
                                         <div class="ct-chart ct-golden-section setheight"
                                              id="RealTimeSolarRadiationChart"></div>
                                     </div>
@@ -509,7 +507,7 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="card" id='raining' onclick=redirect(this)>
-                                    <div class="card-header card-chart" data-background-color="yellow">
+                                    <div class="card-header card-chart" data-background-color="purple">
                                         <div class="ct-chart ct-golden-section setheight"
                                              id="RealTimeRainingChart"></div>
                                     </div>
@@ -545,7 +543,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="card" id='weeklyraining' onclick=redirect(this)>
-                                    <div class="card-header card-chart" data-background-color="yellow">
+                                    <div class="card-header card-chart" data-background-color="orange">
                                         <div class="ct-chart ct-golden-section setheight"
                                              id="RealTimeWeeklyRainingChart"></div>
                                     </div>
@@ -563,7 +561,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="card" id='monthlyraining' onclick=redirect(this)>
-                                    <div class="card-header card-chart" data-background-color="orange">
+                                    <div class="card-header card-chart">
                                         <div class="ct-chart ct-golden-section setheight"
                                              id="RealTimeMonthlyRainingChart"></div>
                                     </div>
@@ -581,7 +579,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="card" id='yearlyraining' onclick=redirect(this)>
-                                    <div class="card-header card-chart" data-background-color="purple">
+                                    <div class="card-header card-chart" data-background-color="blue">
                                         <div class="ct-chart ct-golden-section setheight"
                                              id="RealTimeYearlyRainingChart"></div>
                                     </div>
@@ -687,7 +685,7 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="card his setHistorical" id='Hwindgust'>
-                                    <div class="card-header card-chart" data-background-color="orange">
+                                    <div class="card-header card-chart" data-background-color="green">
                                         <div class="ct-chart ct-golden-section setheight"
                                              id="HistoricalWindGustChart"></div>
                                     </div>
@@ -715,7 +713,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="card his setHistorical" id='Hwindspeed' onclick=redirect(this)>
-                                    <div class="card-header card-chart" data-background-color="purple">
+                                    <div class="card-header card-chart" data-background-color="orange">
                                         <div class="ct-chart ct-golden-section setheight"
                                              id="HistoricalWindSpeedChart"></div>
                                     </div>
@@ -743,7 +741,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="card his setHistorical" id='Hsolarradiation' onclick=redirect(this)>
-                                    <div class="card-header card-chart" data-background-color="red">
+                                    <div class="card-header card-chart">
                                         <div class="ct-chart ct-golden-section setheight"
                                              id="HistoricalSolarRadiationChart"></div>
                                     </div>
@@ -775,7 +773,7 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="card his setHistorical" id='Hraining' onclick=redirect(this)>
-                                    <div class="card-header card-chart" data-background-color="yellow">
+                                    <div class="card-header card-chart" data-background-color="orange">
                                         <div class="ct-chart ct-golden-section setheight"
                                              id="HistoricalRainingChart"></div>
                                     </div>
@@ -817,7 +815,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="card his setHistorical" id='Hmonthlyraining' onclick=redirect(this)>
-                                    <div class="card-header card-chart" data-background-color="orange">
+                                    <div class="card-header card-chart" data-background-color="red">
                                         <div class="ct-chart ct-golden-section setheight"
                                              id="HistoricalMonthlyRainingChart"></div>
                                     </div>
@@ -937,7 +935,7 @@
     var mymap = L.map('mapid').setView([7.9, 80.56274], 7);
     L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
         attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
-        maxZoom: 18,
+        maxZoom: 7,
         id: 'mapbox.streets',
         accessToken: 'pk.eyJ1IjoibGFzaGFuIiwiYSI6ImNqYmc3dGVybTFlZ3UyeXF3cG8yNGxsdzMifQ.n3QEq0-g5tVFmsQxn3JZ-A',
         maxWidth: 200,
@@ -945,6 +943,7 @@
     }).addTo(mymap);
 
     var marker = L.marker([<%=lat.getString("value")%>, <%=lon.getString("value")%>]).addTo(mymap);
+    mymap.fitBounds([[<%=lat.getString("value")%>, <%=lon.getString("value")%>]]);
     marker.bindPopup("<b><%=device.getString("name")%></b>").openPopup();
 
 
