@@ -997,9 +997,9 @@
         var elapsed = current - previous;
 
         if (elapsed < msPerMinute) {
-            return Math.round(elapsed / 1000) + ' seconds ago';
+            return Math.round(elapsed / 1000) + ' sec ago';
         } else if (elapsed < msPerHour) {
-            return Math.round(elapsed / msPerMinute) + ' minutes ago';
+            return Math.round(elapsed / msPerMinute) + ' min ago';
         } else if (elapsed < msPerDay) {
             return Math.round(elapsed / msPerHour) + ' hours ago';
         } else if (elapsed < msPerMonth) {
@@ -1087,12 +1087,12 @@
             timePicker: true,
             timePickerIncrement: 30,
             locale: {
-                format: 'MM/DD/YYYY h:mm A'
+                format: 'DD/MM/YYYY h:mm A'
             },
             ranges: {
-                'Today': [moment(), moment()],
-                'Yesterday': [moment().subtract(1, 'days'),
-                    moment().subtract(1, 'days')],
+                'Today': [moment().startOf('day'), moment()],
+                'Yesterday': [moment().subtract(1, 'days').startOf('day'),
+                    moment().subtract(1, 'days').endOf('day')],
                 'Last 7 Days': [moment().subtract(6, 'days'), moment()],
                 'Last 30 Days': [moment().subtract(29, 'days'), moment()],
                 'This Month': [moment().startOf('month'), moment().endOf('month')],
