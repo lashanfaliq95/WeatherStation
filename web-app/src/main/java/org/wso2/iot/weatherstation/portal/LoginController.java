@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+ * Copyright (c) 2018, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
  *
  * WSO2 Inc. licenses this file to you under the Apache License,
  * Version 2.0 (the "License"); you may not use this file except
@@ -32,6 +32,9 @@ import org.apache.http.impl.client.HttpClients;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.owasp.esapi.Encoder;
+import org.owasp.esapi.errors.EncodingException;
+import org.owasp.esapi.reference.DefaultEncoder;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -42,30 +45,21 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.ConnectException;
-import java.net.URLDecoder;
 import java.security.KeyManagementException;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Base64;
 
-import org.owasp.esapi.Encoder;
-import org.owasp.esapi.Validator;
-import org.owasp.esapi.errors.EncodingException;
-import org.owasp.esapi.reference.DefaultEncoder;
-import org.owasp.esapi.reference.DefaultValidator;
-
 public class LoginController extends HttpServlet {
-    private static final Log log = LogFactory.getLog(LoginController.class);
-    static final String ADMIN_USERNAME = "admin";
-    static final String ADMIN_PASSWORD = "admin";
-
     public static final String ATTR_USER_NAME = "userName";
     public static final String ATTR_ACCESS_TOKEN = "accessToken";
     public static final String ATTR_REFRESH_TOKEN = "refreshToken";
     public static final String ATTR_ENCODED_CLIENT_APP = "encodedClientApp";
     public static final String ATTR_WEB_APP_SCOPES_LIST = "webappScopesList";
-
+    static final String ADMIN_USERNAME = "admin";
+    static final String ADMIN_PASSWORD = "admin";
+    private static final Log log = LogFactory.getLog(LoginController.class);
 
     @Override
     public void init() throws ServletException {

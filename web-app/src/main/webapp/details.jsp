@@ -887,9 +887,9 @@
             $(".his").toggleClass("setHistorical");
         }
         $('#' + ele.id).toggleClass('modal');
-            $('div.card-chart').toggleClass('maxHeight');
-            $('div.card').toggleClass('padzero');
-            $('.ct-chart').toggleClass('fillcontent');
+        $('div.card-chart').toggleClass('maxHeight');
+        $('div.card').toggleClass('padzero');
+        $('.ct-chart').toggleClass('fillcontent');
         $('.ct-chart').toggleClass('setheight');
         analyticsHistory.updateGraphs();
 
@@ -919,7 +919,6 @@
     });
 
 
-
     function toggleDiv(divId) {
         var x = document.getElementById(divId);
         if (x.style.display === "none") {
@@ -928,7 +927,6 @@
             x.style.display = "none";
         }
     }
-
 
 
     //intialising and setting the map

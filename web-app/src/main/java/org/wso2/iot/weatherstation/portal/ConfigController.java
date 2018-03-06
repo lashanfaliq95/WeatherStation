@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+ * Copyright (c) 2018, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
  *
  * WSO2 Inc. licenses this file to you under the Apache License,
  * Version 2.0 (the "License"); you may not use this file except
@@ -32,6 +32,9 @@ import org.apache.http.impl.client.HttpClients;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.owasp.esapi.Encoder;
+import org.owasp.esapi.errors.EncodingException;
+import org.owasp.esapi.reference.DefaultEncoder;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -48,23 +51,14 @@ import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Base64;
 
-import org.owasp.esapi.Encoder;
-import org.owasp.esapi.Validator;
-import org.owasp.esapi.errors.EncodingException;
-import org.owasp.esapi.reference.DefaultEncoder;
-import org.owasp.esapi.reference.DefaultValidator;
-
-
 import static org.wso2.iot.weatherstation.portal.LoginController.ADMIN_PASSWORD;
 import static org.wso2.iot.weatherstation.portal.LoginController.ADMIN_USERNAME;
 
 public class ConfigController extends HttpServlet {
-    private static final Log log = LogFactory.getLog(ConfigController.class);
-
     public static final String ATTR_ACCESS_TOKEN = "accessToken";
     public static final String ATTR_ENCODED_CLIENT_APP = "encodedClientApp";
-
     public static final String ATTR_AGENT_APP_SCOPES_LIST = "webappScopesList";
+    private static final Log log = LogFactory.getLog(ConfigController.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -73,17 +67,17 @@ public class ConfigController extends HttpServlet {
             resp.sendError(401, "Unauthorized, no logged in user found");
         }
         String deviceId = req.getParameter("deviceId");
-        if(deviceId == null){
+        if (deviceId == null) {
             resp.sendError(400, "Bad Request, device id not found");
         }
 
         //Generate client App
         HttpPost apiRegEndpoint = new HttpPost(getServletContext().getInitParameter("apiRegistrationEndpoint") +
-                                                       "/tenants?tenantDomain=carbon" +
-                                                       ".super&applicationName=locker_carbon.super");
-        if (session!=null){
-        apiRegEndpoint.setHeader("Authorization",
-                                 "Bearer " + session.getAttribute(ATTR_ACCESS_TOKEN));
+                "/tenants?tenantDomain=carbon" +
+                ".super&applicationName=locker_carbon.super");
+        if (session != null) {
+            apiRegEndpoint.setHeader("Authorization",
+                    "Bearer " + session.getAttribute(ATTR_ACCESS_TOKEN));
         }
         apiRegEndpoint.setHeader("Content-Type", ContentType.APPLICATION_JSON.toString());
         String jsonStr =
@@ -121,7 +115,7 @@ public class ConfigController extends HttpServlet {
                 HttpPost tokenEndpoint = new HttpPost(getServletContext().getInitParameter("tokenEndpoint"));
 
                 tokenEndpoint.setHeader("Authorization",
-                                        "Basic " + encodedClientApp);
+                        "Basic " + encodedClientApp);
                 tokenEndpoint.setHeader("Content-Type", ContentType.APPLICATION_FORM_URLENCODED.toString());
 
                 StringEntity tokenEPPayload = new StringEntity(
@@ -171,7 +165,7 @@ public class ConfigController extends HttpServlet {
         }
         HttpResponse response = client.execute(post);
         System.out.println("Response Code : "
-                                   + response.getStatusLine().getStatusCode());
+                + response.getStatusLine().getStatusCode());
 
         BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "UTF8"));
 
@@ -194,7 +188,7 @@ public class ConfigController extends HttpServlet {
             redirect += "?status=fail";
         }
 
-    resp.sendRedirect(sanitize(redirect));
+        resp.sendRedirect(sanitize(redirect));
     }
 
     private CloseableHttpClient getHTTPClient() throws LoginException {
@@ -210,6 +204,7 @@ public class ConfigController extends HttpServlet {
             throw new LoginException("Error occurred while retrieving http client", e);
         }
     }
+
     String sanitize(String url) throws EncodingException {
 
         Encoder encoder = new DefaultEncoder(new ArrayList<String>());
@@ -222,14 +217,13 @@ public class ConfigController extends HttpServlet {
         int idxR = clean.indexOf('\r');
         int idxN = clean.indexOf('\n');
 
-        if(idxN >= 0 || idxR>=0){
-            if(idxN>idxR){
+        if (idxN >= 0 || idxR >= 0) {
+            if (idxN > idxR) {
                 //just cut off the part after the LF
-                clean = clean.substring(0,idxN-1);
-            }
-            else{
+                clean = clean.substring(0, idxN - 1);
+            } else {
                 //just cut off the part after the CR
-                clean = clean.substring(0,idxR-1);
+                clean = clean.substring(0, idxR - 1);
             }
         }
 

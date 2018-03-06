@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+ * Copyright (c) 2018, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
  *
  * WSO2 Inc. licenses this file to you under the Apache License,
  * Version 2.0 (the "License"); you may not use this file except
@@ -21,11 +21,7 @@ package org.wso2.iot.weatherstation.portal;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.http.HttpResponse;
-import org.apache.http.client.methods.HttpDelete;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.client.methods.HttpPut;
-import org.apache.http.client.methods.HttpRequestBase;
+import org.apache.http.client.methods.*;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.conn.ssl.SSLContextBuilder;
 import org.apache.http.conn.ssl.TrustSelfSignedStrategy;
@@ -49,9 +45,7 @@ import java.security.KeyManagementException;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 
-import static org.wso2.iot.weatherstation.portal.LoginController.ATTR_ACCESS_TOKEN;
-import static org.wso2.iot.weatherstation.portal.LoginController.ATTR_ENCODED_CLIENT_APP;
-import static org.wso2.iot.weatherstation.portal.LoginController.ATTR_REFRESH_TOKEN;
+import static org.wso2.iot.weatherstation.portal.LoginController.*;
 
 public class InvokerController extends HttpServlet {
     private static final Log log = LogFactory.getLog(LoginController.class);
@@ -150,7 +144,7 @@ public class InvokerController extends HttpServlet {
 
         String encodedClientApp = req.getSession().getAttribute(ATTR_ENCODED_CLIENT_APP).toString();
         tokenEndpoint.setHeader("Authorization",
-                                "Basic " + encodedClientApp);
+                "Basic " + encodedClientApp);
         tokenEndpoint.setHeader("Content-Type", ContentType.APPLICATION_FORM_URLENCODED.toString());
 
         CloseableHttpClient client = null;
@@ -184,7 +178,7 @@ public class InvokerController extends HttpServlet {
             }
         } else {
             log.error("Error while parsing refresh token response, Token EP response : " +
-                              response.getStatusLine().getStatusCode());
+                    response.getStatusLine().getStatusCode());
             resp.sendError(500, "Internal Server Error");
         }
         rd.close();
