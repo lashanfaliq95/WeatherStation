@@ -234,7 +234,7 @@
     var legend = L.control({position: 'topright'});
     legend.onAdd = function (map) {
         var div = L.DomUtil.create('div', 'info legend');
-        div.innerHTML += '<table><tr><td><i class=\"tiny material-icons\" >wb_sunny</i></td><td>Temperature</td></tr><tr><td><i class=\"tiny material-icons\">opacity</i></td><td> Humidity </td></tr><tr><td><i class=\"tiny material-icons\" >call_made</i></td><td>Wind Direction</td></tr></table>';
+        div.innerHTML += '<table><tr><td style="width:auto"><i class=\"tiny material-icons\" >wb_sunny</i></td><td style="width:auto">Temperature</td></tr><tr><td style="width:auto"><i class=\"tiny material-icons\">opacity</i></td><td style="width:auto"> Humidity </td></tr><tr><td style="width:auto"><i class=\"tiny material-icons\" >call_made</i></td><td style="width:auto">Wind Direction</td></tr></table>';
         return div;
     };
     legend.addTo(mymap);

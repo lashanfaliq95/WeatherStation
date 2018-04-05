@@ -661,7 +661,7 @@ analyticsHistory= {
             for (var i = events.records.length - 1; i >= 0; i--) {
                 var record= events.records[i];
 
-                var sinceText = analyticsHistory.timeDifference(currentTime, new Date(record.timestamp));
+                var sinceText ;
                 var dataPoint=record.values;
                 var temperature = dataPoint.tempf;
                 temperature = ((temperature - 32) * 5) / 9;
@@ -777,6 +777,10 @@ analyticsHistory= {
 
                 }
 
+                sinceText=null;
+                if(i=== events.records.length - 1 || i===0 || i===Math.floor(events.records.length/2)){
+                    sinceText = analyticsHistory.timeDifference(currentTime, new Date(record.timestamp));
+                }
                 analyticsHistory.historicalTempLabel.push(sinceText);
                 analyticsHistory.historicalTempSeries.push(temperature);
 
